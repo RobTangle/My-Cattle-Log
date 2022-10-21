@@ -1,7 +1,8 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-    class User extends Model {
+    class User extends sequelize_1.Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -12,12 +13,25 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     User.init({
-        firstName: DataTypes.STRING,
-        lastName: DataTypes.STRING,
-        email: DataTypes.STRING
+        id: {
+            type: DataTypes.STRING,
+            primaryKey: true,
+            allowNull: false,
+        },
+        name: {
+            type: DataTypes.STRING(50),
+            allowNull: false,
+            validate: {
+                len: [1, 50],
+            },
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     }, {
         sequelize,
-        modelName: 'User',
+        modelName: "User",
     });
     return User;
 };
