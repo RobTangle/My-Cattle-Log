@@ -17,6 +17,26 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET BY ID_SENASA :
+router.get("/:id_senasa", async (req, res) => {
+  try {
+    const { id_senasa } = req.params;
+    const foundAnimal: IAnimal = await db.Animal.findByPk(id_senasa);
+    if (foundAnimal) {
+      return res.status(200).send(foundAnimal);
+    } else {
+      return res
+        .status(404)
+        .send({
+          error: `No se encontró ningún registro con el id '${id_senasa}'.`,
+        });
+    }
+  } catch (error: any) {
+    console.log(`Error en GET "/:id_senasa". ${error.message}`);
+    return res.status(400).send({ error: error.message });
+  }
+});
+
 // POST NEW ANIMAL :
 router.post("/", async (req, res) => {
   try {
