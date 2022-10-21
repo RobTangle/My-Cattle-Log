@@ -7,7 +7,7 @@ import {
   isValidSenasaId,
 } from "./generic-validators";
 
-export function checkNewAnimal(bodyFromReq: any): IAnimal {
+export function checkAnimal(bodyFromReq: any): IAnimal {
   try {
     console.log(`Checking New Animal...`);
     const checkedNewAnimal = {
