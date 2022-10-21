@@ -7,6 +7,9 @@ import {
   isValidSenasaId,
 } from "./generic-validators";
 
+// CHECK ANIMAL :
+// This function is the main function that validates the data recived in the request for a POST of a new animal or a PUT for updating an Animal.
+// It uses many other auxiliary functions to make sure all the data from the request is valid before trying to store a new instance of Animal in the Data Base.
 export function checkAnimal(bodyFromReq: any): IAnimal {
   try {
     console.log(`Checking New Animal...`);
