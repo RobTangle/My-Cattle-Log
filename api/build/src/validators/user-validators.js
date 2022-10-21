@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkEmail = exports.checkUser = void 0;
 const generic_validators_1 = require("./generic-validators");
-function checkUser(bodyFromReq) {
+function checkUser(idFromReq, nameFromReq, emailFromReq) {
     console.log(`Checking User...`);
     try {
         const checkedUser = {
-            id: checkUserId(bodyFromReq.id),
-            name: checkUserName(bodyFromReq.name),
-            email: checkEmail(bodyFromReq.email),
+            id: checkUserId(idFromReq),
+            name: checkUserName(nameFromReq),
+            email: checkEmail(emailFromReq),
         };
         return checkedUser;
     }
