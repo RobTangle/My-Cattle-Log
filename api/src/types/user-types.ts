@@ -3,3 +3,7 @@ export interface IUser {
   name?: string | undefined;
   email: string;
 }
+
+export interface IReqAuth {
+  sub: string;
+}
