@@ -1,12 +1,11 @@
 import db from "../../models";
-import { IAnimal, ITypeOfAnimal } from "../../types/animal-types";
-
+import { checkNewAnimal } from "../../validators/animal-validators";
 import { Router } from "express";
-
 const router = Router();
 
 // ------- RUTAS : ---------
 
+// GET ALL FROM ANIMALS :
 router.get("/", async (req, res) => {
   try {
     const allAnimalsFromDB = await db.Animal.findAll();
@@ -17,11 +16,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// POST NEW ANIMAL :
 router.post("/", async (req, res) => {
   try {
     console.log(`REQ.BODY = `);
     console.log(req.body);
-    return res.status(200).send({ msg: "POST recibido", body: req.body });
+    const validatedNewAnimal = checkNewAnimal(req.body);
+    const newAnimalCreated = await db.Animal.create(validatedNewAnimal);
+    return res.status(200).send({
+      msg: `Nuevo animal con id '${newAnimalCreated.id_senasa}' creado.`,
+      newAnimal: newAnimalCreated,
+    });
   } catch (error: any) {
     console.log(`Error en POST a "animal/". ${error.message}`);
     return res.send({ error: error.message });
