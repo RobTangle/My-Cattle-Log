@@ -12,8 +12,8 @@ import {
 // It uses many other auxiliary functions to make sure all the data from the request is valid before trying to store a new instance of Animal in the Data Base.
 export function checkAnimal(bodyFromReq: any): IAnimal {
   try {
-    console.log(`Checking New Animal...`);
-    const checkedNewAnimal = {
+    console.log(`Checking Animal...`);
+    const checkedAnimal = {
       id_senasa: checkId(bodyFromReq.id_senasa),
       type_of_animal: checkTypeOfAnimal(bodyFromReq.type_of_animal),
       weight_kg: checkWeight(bodyFromReq.weight_kg),
@@ -21,7 +21,7 @@ export function checkAnimal(bodyFromReq: any): IAnimal {
       device_type: checkDeviceType(bodyFromReq.device_type),
       device_number: checkDeviceNumber(bodyFromReq.device_number),
     };
-    return checkedNewAnimal;
+    return checkedAnimal;
   } catch (error: any) {
     console.log(`Error en fn checkNewAnimal. ${error.message}`);
     throw new Error(error.message);
