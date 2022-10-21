@@ -16,6 +16,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// POST NEW USER
 router.post("/", async (req, res) => {
   try {
     console.log(`REQ.BODY =`);
