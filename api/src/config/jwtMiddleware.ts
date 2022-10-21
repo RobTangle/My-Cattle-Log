@@ -8,7 +8,7 @@ const jwtCheck = jwt({
     jwksRequestsPerMinute: 15,
     jwksUri: "https://dev-nxuk8wmn.us.auth0.com/.well-known/jwks.json",
   }),
-  audience: "https://juka-production.up.railway.app/",
+  audience: "https://cattle-tracker.up.railway.app/", //A CAMBIAR
   issuer: "https://dev-nxuk8wmn.us.auth0.com/",
   algorithms: ["RS256"],
 });
