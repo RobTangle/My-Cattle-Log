@@ -27,6 +27,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(400).send({ error: error.message });
     }
 }));
+// POST NEW USER
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log(`REQ.BODY =`);

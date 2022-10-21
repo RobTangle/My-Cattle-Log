@@ -37,9 +37,7 @@ router.get("/:id_senasa", (req, res) => __awaiter(void 0, void 0, void 0, functi
             return res.status(200).send(foundAnimal);
         }
         else {
-            return res
-                .status(404)
-                .send({
+            return res.status(404).send({
                 error: `No se encontró ningún registro con el id '${id_senasa}'.`,
             });
         }
