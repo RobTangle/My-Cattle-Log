@@ -6,13 +6,17 @@ import {
   isStringBetween1And50CharsLong,
 } from "./generic-validators";
 
-export function checkUser(bodyFromReq: any): IUser {
+export function checkUser(
+  idFromReq: any,
+  nameFromReq: any,
+  emailFromReq: any
+): IUser {
   console.log(`Checking User...`);
   try {
     const checkedUser: IUser = {
-      id: checkUserId(bodyFromReq.id),
-      name: checkUserName(bodyFromReq.name),
-      email: checkEmail(bodyFromReq.email),
+      id: checkUserId(idFromReq),
+      name: checkUserName(nameFromReq),
+      email: checkEmail(emailFromReq),
     };
     return checkedUser;
   } catch (error: any) {
