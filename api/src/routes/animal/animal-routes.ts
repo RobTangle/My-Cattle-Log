@@ -25,11 +25,9 @@ router.get("/:id_senasa", async (req, res) => {
     if (foundAnimal) {
       return res.status(200).send(foundAnimal);
     } else {
-      return res
-        .status(404)
-        .send({
-          error: `No se encontró ningún registro con el id '${id_senasa}'.`,
-        });
+      return res.status(404).send({
+        error: `No se encontró ningún registro con el id '${id_senasa}'.`,
+      });
     }
   } catch (error: any) {
     console.log(`Error en GET "/:id_senasa". ${error.message}`);
