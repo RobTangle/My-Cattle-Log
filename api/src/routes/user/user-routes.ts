@@ -1,7 +1,9 @@
 import db from "../../models";
-import { IUser } from "../../types/user-types";
+import { IReqAuth, IUser } from "../../types/user-types";
 import { checkUser } from "../../validators/user-validators";
+import jwtCheck from "../../config/jwtMiddleware";
 import { Router } from "express";
+import { emailExistsInDataBase } from "./user-r-auxiliary";
 
 const router = Router();
 
@@ -17,11 +19,15 @@ router.get("/", async (req, res) => {
 });
 
 // POST NEW USER
-router.post("/", async (req, res) => {
+router.post("/", jwtCheck, async (req: any, res) => {
   try {
     console.log(`REQ.BODY =`);
     console.log(req.body);
-    const validatedUser = checkUser(req.body);
+    const reqAuth: IReqAuth = req.auth;
+    const userId = reqAuth.sub;
+    const { name, email } = req.body;
+    await emailExistsInDataBase(email);
+    const validatedUser: IUser = checkUser(userId, name, email);
     const newUser = await db.User.create(validatedUser);
     console.log(newUser.toJSON());
     return res.status(200).send(newUser);
