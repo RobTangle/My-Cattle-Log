@@ -1,5 +1,6 @@
 import db from "../../models";
-import { checkNewAnimal } from "../../validators/animal-validators";
+import { checkAnimal } from "../../validators/animal-validators";
+import { IAnimal } from "../../types/animal-types";
 import { Router } from "express";
 const router = Router();
 
@@ -21,8 +22,10 @@ router.post("/", async (req, res) => {
   try {
     console.log(`REQ.BODY = `);
     console.log(req.body);
-    const validatedNewAnimal = checkNewAnimal(req.body);
-    const newAnimalCreated = await db.Animal.create(validatedNewAnimal);
+    const validatedNewAnimal = checkAnimal(req.body);
+    const newAnimalCreated: IAnimal = await db.Animal.create(
+      validatedNewAnimal
+    );
     return res.status(200).send({
       msg: `Nuevo animal con id '${newAnimalCreated.id_senasa}' creado.`,
       newAnimal: newAnimalCreated,
@@ -30,6 +33,30 @@ router.post("/", async (req, res) => {
   } catch (error: any) {
     console.log(`Error en POST a "animal/". ${error.message}`);
     return res.send({ error: error.message });
+  }
+});
+
+// UPDATE ANIMAL :
+router.put("/", async (req, res) => {
+  try {
+    console.log(`REQ.BODY = `);
+    console.log(req.body);
+    const validatedAnimal: IAnimal = checkAnimal(req.body);
+    const updatedAnimal = await db.Animal.update(
+      { ...validatedAnimal },
+      {
+        where: {
+          id_senasa: validatedAnimal.id_senasa,
+        },
+      }
+    );
+    return res.send({
+      updated: Number(updatedAnimal[0]),
+      msg: `Cantidad de animales actualizados correctamente: ${updatedAnimal[0]}`,
+    });
+  } catch (error: any) {
+    console.log(`Error en PUT "/animal". ${error.message}`);
+    return res.status(400).send({ error: error.message });
   }
 });
 
