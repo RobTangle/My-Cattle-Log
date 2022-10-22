@@ -1,16 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv").config();
+const JWKS_URI = process.env.JWKS_URI;
+const JWT_ISSUER = process.env.JWT_ISSUER;
 const { expressjwt: jwt } = require("express-jwt");
 const jwks = require("jwks-rsa");
-const jwtCheck = jwt({
+var jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
         cache: true,
         rateLimit: true,
-        jwksRequestsPerMinute: 15,
-        jwksUri: "https://dev-nxuk8wmn.us.auth0.com/.well-known/jwks.json",
+        jwksRequestsPerMinute: 10,
+        jwksUri: JWKS_URI,
     }),
-    audience: "https://cattle-tracker.up.railway.app/",
-    issuer: "https://dev-nxuk8wmn.us.auth0.com/",
+    audience: "https://cattle-tracker-api.com",
+    issuer: JWT_ISSUER,
     algorithms: ["RS256"],
 });
 exports.default = jwtCheck;
