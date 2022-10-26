@@ -1,13 +1,11 @@
 import axios from "axios";
-import { URL } from "../../constants/urls";
-
-export const CREATE_NEW_ANIMAL = "CREATE_ANIMAL";
-export const SET_NEW_ANIMAL_TO_LOADING = "SET_NEW_ANIMAL_TO_LOADING";
+import { URL, POST_ANIMAL } from "../../constants/urls";
+import { SET_NEW_ANIMAL_TO_LOADING, CREATE_NEW_ANIMAL } from "./types";
 
 export const createNewAnimal = (obj) => {
   return async function (dispatch) {
     try {
-      let response = await axios.post(`${URL}animal`, obj);
+      let response = await axios.post(POST_ANIMAL, obj);
       return dispatch({ type: CREATE_NEW_ANIMAL, payload: response.data });
     } catch (error) {
       console.log(`Error en action createAnimal. ${error.message}`);

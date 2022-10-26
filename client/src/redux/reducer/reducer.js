@@ -1,7 +1,4 @@
-import {
-  CREATE_NEW_ANIMAL,
-  SET_NEW_ANIMAL_TO_LOADING,
-} from "../actions/actions";
+import { CREATE_NEW_ANIMAL, SET_NEW_ANIMAL_TO_LOADING } from "../actions/types";
 
 const initialState = {
   newAnimal: { pure: true },
