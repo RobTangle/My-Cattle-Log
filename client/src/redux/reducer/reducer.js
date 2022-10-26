@@ -1,4 +1,7 @@
-import { CREATE_NEW_ANIMAL } from "../actions/actions";
+import {
+  CREATE_NEW_ANIMAL,
+  SET_NEW_ANIMAL_TO_LOADING,
+} from "../actions/actions";
 
 const initialState = {
   newAnimal: { pure: true },
@@ -11,7 +14,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newAnimal: action.payload,
       };
-    case SET_NEWANIMAL_LOADING:
+    case SET_NEW_ANIMAL_TO_LOADING:
       return {
         ...state,
         newAnimal: action.payload,
