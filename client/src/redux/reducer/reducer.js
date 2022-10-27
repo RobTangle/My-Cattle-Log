@@ -1,4 +1,5 @@
 import {
+  CLEAN_NEW_ANIMAL,
   CREATE_NEW_ANIMAL,
   GET_ALL_ANIMALS,
   SET_NEW_ANIMAL_TO_LOADING,
@@ -25,6 +26,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userAnimals: action.payload,
+      };
+    case CLEAN_NEW_ANIMAL:
+      return {
+        ...state,
+        newAnimal: action.payload,
       };
     default:
       return state;
