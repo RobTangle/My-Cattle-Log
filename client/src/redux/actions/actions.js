@@ -1,6 +1,10 @@
 import axios from "axios";
 import { URL, POST_ANIMAL } from "../../constants/urls";
-import { SET_NEW_ANIMAL_TO_LOADING, CREATE_NEW_ANIMAL } from "./types";
+import {
+  SET_NEW_ANIMAL_TO_LOADING,
+  CREATE_NEW_ANIMAL,
+  GET_ALL_ANIMALS,
+} from "./types";
 
 export const createNewAnimal = (obj) => {
   return async function (dispatch) {
@@ -31,5 +35,17 @@ export const setNewAnimalToLoading = () => {
         payload: { error: error.message },
       });
     }
+  };
+};
+
+export const getAllAnimals = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(URL + "animal");
+      return dispatch({
+        type: GET_ALL_ANIMALS,
+        payload: response.data,
+      });
+    } catch (error) {}
   };
 };
