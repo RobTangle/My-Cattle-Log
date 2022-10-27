@@ -6,13 +6,25 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <Auth0Provider
+      domain="dev-4hixku625rb7v8m8.us.auth0.com"
+      clientId="8PW18rqeRhlkuTLpxgtEcLPwEKeO0qwG"
+      // redirectUri={window.location.origin}
+      redirectUri="http://localhost:3000/home"
+      useRefreshTokens={true}
+      cacheLocaltion="localstorage"
+      audience="https://cattle-tracker-api.com"
+      // scope="read:current_user update:current_user_metadata"
+    >
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Auth0Provider>
   </React.StrictMode>
 );
 

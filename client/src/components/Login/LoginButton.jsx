@@ -1,18 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { cleanNewAnimal } from "../../redux/actions/actions";
-import { NavBar } from "../NavBar/NavBar";
 import axios from "axios";
 import { USER_EXISTS } from "../../constants/urls";
-import { useNavigate } from "react-router-dom";
-export function Home() {
-  // const dispatch = useDispatch();
-  // React.useEffect(() => {
-  //   console.log(`Limpiando new animal...`);
-  //   dispatch(cleanNewAnimal());
-  // }, []);
-
+const LoginButton = () => {
   const {
     loginWithRedirect,
     user,
@@ -21,7 +12,6 @@ export function Home() {
     isLoading,
     logout,
   } = useAuth0();
-
   const navigate = useNavigate();
 
   const handleValidation = async (user, isAuthenticated) => {
@@ -37,26 +27,29 @@ export function Home() {
         });
         console.log(existe.data.msg);
 
+        if (existe.data.msg) {
+          navigate("/home");
+        }
         if (existe.data.msg === false) {
           navigate("/register");
         }
+        // } else if (existe.data.msg === "banned") {
+        //   localStorage.removeItem("token");
+        //   logout({ returnTo: "https://mascotapps.vercel.app/banned" });
+        // } else {
+        //   navigate("/register");
+        // }
       }
     } catch (error) {
       console.log(error);
-      console.log(`Regresando al "/" para que se pueda loguear`);
-      navigate("/");
     }
   };
 
-  React.useEffect(() => {
-    console.log(`useEffect de Home`);
-    handleValidation();
-  }, []);
+  if (!isLoading && isAuthenticated) {
+    handleValidation(user, isAuthenticated);
+  }
 
-  return (
-    <>
-      <NavBar />
-      <div>ESTE ES EL HOME! WELCOME!</div>
-    </>
-  );
-}
+  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+};
+
+export default LoginButton;

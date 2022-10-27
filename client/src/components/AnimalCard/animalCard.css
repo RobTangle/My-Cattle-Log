@@ -1,0 +1,6 @@
+.card {
+  height: 300px;
+  width: 300px;
+  background-color: rgba(0, 0, 0, 0.171);
+  color: orangered;
+}

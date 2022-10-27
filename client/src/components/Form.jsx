@@ -12,16 +12,20 @@ export function Form() {
     device_type: "",
     device_number: "",
   });
+
   const dispatch = useDispatch();
+  const accessToken = localStorage.getItem("tokenCattleTracker");
+  // HANDLE FUNCTIONS:
   function handleOnChange(e) {
     setLocalState({ ...localState, [e.target.name]: e.target.value });
   }
+
   function handleSubmit(e) {
     console.log(`handleSubmit invocado. localState: `, localState);
     e.preventDefault();
     //HACER JS VALIDATIONS...
     dispatch(actions.setNewAnimalToLoading());
-    dispatch(actions.createNewAnimal(localState));
+    dispatch(actions.createNewAnimal(localState, accessToken));
   }
   return (
     <div>
@@ -80,7 +84,7 @@ export function Form() {
             </div>
           </div>
         </fieldset>
-        <button>Submit new animal</button>
+        <button>Registrar animal</button>
       </form>
     </div>
   );

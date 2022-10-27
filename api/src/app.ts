@@ -14,6 +14,7 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
+// app.use(jwtCheck);
 // routes middlewares:
 app.use("/test", testRouter);
 app.use("/animal", animalRouter);
