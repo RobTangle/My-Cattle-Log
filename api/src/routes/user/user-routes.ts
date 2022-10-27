@@ -3,7 +3,10 @@ import { IReqAuth, IUser } from "../../types/user-types";
 import { checkUser } from "../../validators/user-validators";
 import jwtCheck from "../../config/jwtMiddleware";
 import { Router } from "express";
-import { emailExistsInDataBase } from "./user-r-auxiliary";
+import {
+  emailExistsInDataBase,
+  userIsRegisteredInDB,
+} from "./user-r-auxiliary";
 
 const router = Router();
 
@@ -19,7 +22,7 @@ router.get("/", async (req, res) => {
 });
 
 // POST NEW USER
-router.post("/", jwtCheck, async (req: any, res) => {
+router.post("/register", jwtCheck, async (req: any, res) => {
   try {
     console.log(`REQ.BODY =`);
     console.log(req.body);
@@ -33,6 +36,24 @@ router.post("/", jwtCheck, async (req: any, res) => {
     return res.status(200).send(newUser);
   } catch (error: any) {
     console.log(`Error en ruta POST "user/". ${error.message}`);
+    return res.status(400).send({ error: error.message });
+  }
+});
+
+router.get("/existsInDB", jwtCheck, async (req: any, res) => {
+  try {
+    const reqAuth: IReqAuth = req.auth;
+    const userId = reqAuth.sub;
+    const isUserRegisteredinDB = await userIsRegisteredInDB(userId);
+    if (isUserRegisteredinDB) {
+      return res.status(200).send({ msg: true });
+    }
+    if (!isUserRegisteredinDB) {
+      console.log(`Usuario no encontrado en la DB.`);
+      return res.status(200).send({ msg: false });
+    }
+  } catch (error: any) {
+    console.log(`Error en GET "/user/existsInDB. ${error.message}`);
     return res.status(400).send({ error: error.message });
   }
 });
