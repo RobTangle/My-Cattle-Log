@@ -6,11 +6,14 @@ import { getAllAnimals } from "../redux/actions/actions";
 export function CardContainer(props) {
   const userAnimalsState = useSelector((state) => state.userAnimals);
   const dispatch = useDispatch();
+  const tokenAccess = localStorage.getItem("tokenCattleTracker");
 
   React.useEffect(() => {
     console.log(`en el useEffect`);
-    dispatch(getAllAnimals());
-  }, []);
+    console.log(`TOKEN ACCESS = `);
+    console.log(tokenAccess);
+    dispatch(getAllAnimals(tokenAccess));
+  }, [dispatch]);
 
   return (
     <>
