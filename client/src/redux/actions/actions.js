@@ -9,6 +9,10 @@ export const createNewAnimal = (obj) => {
       return dispatch({ type: CREATE_NEW_ANIMAL, payload: response.data });
     } catch (error) {
       console.log(`Error en action createAnimal. ${error.message}`);
+      return dispatch({
+        type: CREATE_NEW_ANIMAL,
+        payload: { error: error.message },
+      });
     }
   };
 };
