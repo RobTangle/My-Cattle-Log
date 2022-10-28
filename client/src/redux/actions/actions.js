@@ -1,10 +1,16 @@
 import axios from "axios";
-import { URL, POST_ANIMAL, REGISTER_NEW_USER } from "../../constants/urls";
+import {
+  URL,
+  POST_ANIMAL,
+  REGISTER_NEW_USER,
+  SEARCH_QUERY,
+} from "../../constants/urls";
 import {
   SET_NEW_ANIMAL_TO_LOADING,
   CREATE_NEW_ANIMAL,
   GET_ALL_ANIMALS,
   CLEAN_NEW_ANIMAL,
+  SET_FETCHED_ANIMALS_TO_LOADING,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -68,20 +74,41 @@ export const getAllAnimals = (token) => {
   };
 };
 
-// export const regiterNewUser = (obj) => {
-//   try {
-//     return async function (dispatch) {
-//       const response = await axios.post(REGITER_NEW_USER, input, header(tokenAccess))
-//       if (response.status === 200) {
-//         alert("Has sido registrado correctamente! Esperamos que disfrutes de la app.")
-//       }
+export function searchQuery(value, token) {
+  return async function (dispatch) {
+    try {
+      console.log("disparando get a la query.");
+      console.log("value = ", value);
+      const response = await axios.get(
+        URL + `animal/search?value=${value}`,
+        header(token)
+      );
+      return dispatch({
+        type: SEARCH_QUERY,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: SEARCH_QUERY,
+        payload: { error: error.message },
+      });
+    }
+  };
+}
 
-//       return dispatch({
-//         type: REGITER_NEW_USER,
-//         payload:
-//       })
-//     }
-//   } catch (error) {
-
-//   }
-// }
+export function setFetchedAnimalsToLoading() {
+  return async function (dispatch) {
+    try {
+      console.log("Seting fetchedAnimals to loading...");
+      return dispatch({
+        type: SET_FETCHED_ANIMALS_TO_LOADING,
+        payload: { loading: true },
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_FETCHED_ANIMALS_TO_LOADING,
+        payload: { error: error.message },
+      });
+    }
+  };
+}
