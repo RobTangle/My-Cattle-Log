@@ -23,6 +23,7 @@ export function Modal(props) {
   function closeModal(e) {
     e.preventDefault();
     props.setShowValue(false);
+    dispatch(cleanNewAnimal());
   }
 
   return (
@@ -38,7 +39,7 @@ export function Modal(props) {
         {newAnimalState.error ? <div>{newAnimalState.error}</div> : null}
       </div>
       <div className="modal-footer">
-        <button onClick={closeModal}>Close</button>
+        <button onClick={closeModal}>Cerrar</button>
       </div>
     </div>
   );
