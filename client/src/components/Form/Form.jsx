@@ -4,7 +4,7 @@ import * as actions from "../../redux/actions/actions";
 import "./form.css";
 // import loadingGIF from "../assets";
 
-export function Form() {
+export function Form(props) {
   const [localState, setLocalState] = React.useState({
     id_senasa: "",
     type_of_animal: "",
@@ -96,6 +96,7 @@ export function Form() {
           </div>
 
           <button>Registrar animal</button>
+          <button onClick={props.closeModal}>Cerrar</button>
         </div>
         {/* </fieldset> */}
       </form>

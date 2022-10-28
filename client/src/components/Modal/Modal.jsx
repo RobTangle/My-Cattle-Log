@@ -27,19 +27,23 @@ export function Modal(props) {
   }
 
   return (
-    <div>
+    <div className="modal-container">
       <div>
-        {newAnimalState.pure ? <Form /> : null}
+        {newAnimalState.pure ? <Form closeModal={closeModal} /> : null}
         {newAnimalState.loading ? (
           <div>
             <img src={loading} alt="loading gif" />
           </div>
         ) : null}
-        {newAnimalState.newAnimal ? <div>{newAnimalState.msg} </div> : null}
-        {newAnimalState.error ? <div>{newAnimalState.error}</div> : null}
+        {newAnimalState.newAnimal ? (
+          <div className="modal-response">{newAnimalState.msg} </div>
+        ) : null}
+        {newAnimalState.error ? (
+          <div className="modal-response">{newAnimalState.error}</div>
+        ) : null}
       </div>
       <div className="modal-footer">
-        <button onClick={closeModal}>Cerrar</button>
+        <button onClick={closeModal}>X</button>
       </div>
     </div>
   );

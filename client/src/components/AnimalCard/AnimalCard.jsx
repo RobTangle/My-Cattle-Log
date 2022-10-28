@@ -48,7 +48,7 @@ export function AnimalCard(props) {
           value={props.animal?.id_senasa}
           onClick={handleDelete}
         >
-          X
+          Delete
         </button>
         <ModalEdit
           show={showValue}

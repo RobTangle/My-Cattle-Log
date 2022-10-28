@@ -4,17 +4,17 @@ import * as actions from "../../redux/actions/actions";
 import "./form.css";
 // import loadingGIF from "../assets";
 
-export function EditForm(animal) {
-  console.log(animal);
-  console.log("animal.animal.animal = ");
-  console.log(animal.animal.animal);
+export function FormEdit(props) {
+  console.log(props);
+  console.log("props.animal = ");
+  console.log(props.animal);
   const [localState, setLocalState] = React.useState({
-    id_senasa: animal.animal.animal.id_senasa,
-    type_of_animal: animal.animal.animal.type_of_animal,
-    weight_kg: animal.animal.animal.weight_kg,
-    name: animal.animal.animal.name,
-    device_type: animal.animal.animal.device_type,
-    device_number: animal.animal.animal.device_number,
+    id_senasa: props.animal.id_senasa,
+    type_of_animal: props.animal.type_of_animal,
+    weight_kg: props.animal.weight_kg,
+    name: props.animal.name,
+    device_type: props.animal.device_type,
+    device_number: props.animal.device_number,
   });
 
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export function EditForm(animal) {
     console.log(`handleSubmit invocado. localState: `, localState);
     e.preventDefault();
     //HACER JS VALIDATIONS...
-    dispatch(actions.setNewAnimalToLoading());
+    dispatch(actions.setUpdateAnimalToLoading());
     dispatch(actions.updateAnimal(localState, accessToken));
     setTimeout(() => {
       dispatch(actions.getAllAnimals(accessToken));
@@ -106,6 +106,7 @@ export function EditForm(animal) {
           </div>
 
           <button>Confirmar</button>
+          <button onClick={props.closeModal}>X</button>
         </div>
         {/* </fieldset> */}
       </form>
