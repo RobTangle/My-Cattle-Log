@@ -40,14 +40,48 @@
 }
 
 .modal-response-error {
-  background-color: rgba(247, 70, 70, 0.849);
-  padding: 50px;
-  border-radius: 10px;
-  width: 30vw;
-  height: 30vh;
+  background-color: rgba(255, 0, 0, 0.479);
+  width: fit-content;
+  height: fit-content;
+  /* position: fixed; */
+  left: 0;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  border-radius: 5px;
+}
+.modal-response-container {
+  width: 400px;
+  height: fit-content;
+  background-color: rgb(236, 231, 222);
+  margin: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
 }
+
+/* .error-msg-div {
+  background-color: rgba(255, 0, 0, 0.479);
+  width: fit-content;
+   position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  border-radius: 5px;
+} */
