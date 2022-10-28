@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Paginacion = ({
+export const Pagination = ({
   page,
   setPage,
   maxPages,
