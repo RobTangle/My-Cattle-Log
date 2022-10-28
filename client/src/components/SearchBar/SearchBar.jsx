@@ -4,6 +4,7 @@ import {
   searchQuery,
   setFetchedAnimalsToLoading,
 } from "../../redux/actions/actions";
+import "./searchBar.css";
 
 export function SearchBar() {
   const dispatch = useDispatch();
@@ -25,10 +26,11 @@ export function SearchBar() {
     dispatch(searchQuery(input.inputValue, accessToken));
   }
   return (
-    <div>
+    <div className="searchbar-container">
       <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="inputValue">Buscar por nombre o ID de SENASA: </label>
+        <label htmlFor="inputValue">Nombre / ID SENASA: </label>
         <input
+          className="searchbar-input"
           type="text"
           name="inputValue"
           value={input.inputValue}
