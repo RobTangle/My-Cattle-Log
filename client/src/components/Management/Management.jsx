@@ -4,6 +4,7 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import { Form } from "../Form/Form";
 import { Modal } from "../Modal/Modal";
 import "./management.css";
+import { FetchedAnimals } from "../FetchedAnimals/FetchedAnimals";
 
 export function Management() {
   const [showValue, setShowValue] = React.useState(false);
@@ -23,6 +24,10 @@ export function Management() {
         <div className="sb-cc-container">
           <div className="searchbar-div">
             <SearchBar />
+          </div>
+          {}
+          <div className="fetched-animals-container">
+            <FetchedAnimals />
           </div>
           <CardContainer />
         </div>

@@ -4,6 +4,7 @@ import { Form } from "../Form/Form";
 import loading from "../../assets/loading.gif";
 import { NavBar } from "../NavBar/NavBar";
 import { cleanNewAnimal } from "../../redux/actions/actions";
+import "./createNewAnimal.css";
 
 export function CreateNewAnimal() {
   const newAnimalState = useSelector((state) => state.newAnimal);
@@ -24,7 +25,9 @@ export function CreateNewAnimal() {
           </div>
         ) : null}
         {newAnimalState.newAnimal ? <div>{newAnimalState.msg} </div> : null}
-        {newAnimalState.error ? <div>{newAnimalState.error}</div> : null}
+        {newAnimalState.error ? (
+          <div className="error-msg-div">{newAnimalState.error}</div>
+        ) : null}
       </div>
     </div>
   );

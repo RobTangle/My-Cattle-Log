@@ -9,12 +9,17 @@ import {
   DELETED_ANIMAL,
   UPDATE_ANIMAL,
   CLEAN_UPDATE_ANIMAL,
+  SET_UPDATE_ANIMAL_TO_LOADING,
+  CLEAR_FETCHED_ANIMALS,
 } from "../actions/types";
 
 const initialState = {
   newAnimal: { pure: true },
   userAnimals: [],
-  fetchedAnimals: [],
+  fetchedAnimals: {
+    status: { pure: true },
+    result: [],
+  },
   deletedAnimal: { pure: true },
   updatedAnimal: { pure: true },
 };
@@ -51,6 +56,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         fetchedAnimals: action.payload,
       };
+    case CLEAR_FETCHED_ANIMALS:
+      return {
+        ...state,
+        fetchedAnimals: action.payload,
+      };
     case SET_USER_ANIMALS_TO_LOADING:
       return {
         ...state,
@@ -67,6 +77,11 @@ const rootReducer = (state = initialState, action) => {
         updatedAnimal: action.payload,
       };
     case CLEAN_UPDATE_ANIMAL:
+      return {
+        ...state,
+        updatedAnimal: action.payload,
+      };
+    case SET_UPDATE_ANIMAL_TO_LOADING:
       return {
         ...state,
         updatedAnimal: action.payload,

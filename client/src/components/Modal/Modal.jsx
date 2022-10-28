@@ -27,19 +27,33 @@ export function Modal(props) {
   }
 
   return (
-    <div>
+    <div className="modal-container">
       <div>
-        {newAnimalState.pure ? <Form /> : null}
+        {newAnimalState.pure ? <Form closeModal={closeModal} /> : null}
         {newAnimalState.loading ? (
           <div>
             <img src={loading} alt="loading gif" />
           </div>
         ) : null}
-        {newAnimalState.newAnimal ? <div>{newAnimalState.msg} </div> : null}
-        {newAnimalState.error ? <div>{newAnimalState.error}</div> : null}
+        {newAnimalState.newAnimal ? (
+          <div className="modal-response">{newAnimalState.msg} </div>
+        ) : null}
+        {newAnimalState.error ? (
+          <div className="modal-response-container">
+            <div className="modal-response-error">
+              {" "}
+              <p>Oops! Hubo un error: {newAnimalState.error} </p>{" "}
+              <p>
+                {" "}
+                Si es un error de conexión, por favor chequee que tiene una
+                correcta conexión a internet y vuelta a internarlo.
+              </p>
+            </div>
+          </div>
+        ) : null}
       </div>
       <div className="modal-footer">
-        <button onClick={closeModal}>Cerrar</button>
+        <button onClick={closeModal}>X</button>
       </div>
     </div>
   );

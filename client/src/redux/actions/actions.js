@@ -15,6 +15,8 @@ import {
   DELETED_ANIMAL,
   UPDATE_ANIMAL,
   CLEAN_UPDATE_ANIMAL,
+  SET_UPDATE_ANIMAL_TO_LOADING,
+  CLEAR_FETCHED_ANIMALS,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -25,9 +27,11 @@ export const createNewAnimal = (obj, token) => {
       return dispatch({ type: CREATE_NEW_ANIMAL, payload: response.data });
     } catch (error) {
       console.log(`Error en action createAnimal. ${error.message}`);
+      console.log(error);
+      console.log(error.response?.data?.error);
       return dispatch({
         type: CREATE_NEW_ANIMAL,
-        payload: { error: error.message },
+        payload: { error: error.response?.data?.error },
       });
     }
   };
@@ -143,12 +147,12 @@ export function searchQuery(value, token) {
       );
       return dispatch({
         type: SEARCH_QUERY,
-        payload: response.data,
+        payload: { result: [...response.data], status: { fetched: true } },
       });
     } catch (error) {
       return dispatch({
         type: SEARCH_QUERY,
-        payload: { error: error.message },
+        payload: { result: [], status: { error: error.message } },
       });
     }
   };
@@ -160,14 +164,28 @@ export function setFetchedAnimalsToLoading() {
       console.log("Seting fetchedAnimals to loading...");
       return dispatch({
         type: SET_FETCHED_ANIMALS_TO_LOADING,
-        payload: { loading: true },
+        payload: { status: { loading: true } },
       });
     } catch (error) {
       return dispatch({
         type: SET_FETCHED_ANIMALS_TO_LOADING,
-        payload: { error: error.message },
+        payload: { result: [], status: { error: error.message } },
       });
     }
+  };
+}
+
+export function clearFetchedAnimals() {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: CLEAR_FETCHED_ANIMALS,
+        payload: {
+          result: [],
+          status: { pure: true },
+        },
+      });
+    } catch (error) {}
   };
 }
 
@@ -189,5 +207,16 @@ export function deleteAnimal(id, token) {
         payload: { error: error.message },
       });
     }
+  };
+}
+
+export function setUpdateAnimalToLoading() {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: SET_UPDATE_ANIMAL_TO_LOADING,
+        payload: { loading: true },
+      });
+    } catch (error) {}
   };
 }
