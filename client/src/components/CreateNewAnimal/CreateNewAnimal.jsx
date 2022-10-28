@@ -25,7 +25,9 @@ export function CreateNewAnimal() {
           </div>
         ) : null}
         {newAnimalState.newAnimal ? <div>{newAnimalState.msg} </div> : null}
-        {newAnimalState.error ? <div>{newAnimalState.error}</div> : null}
+        {newAnimalState.error ? (
+          <div className="error-msg-div">{newAnimalState.error}</div>
+        ) : null}
       </div>
     </div>
   );
