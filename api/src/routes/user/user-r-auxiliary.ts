@@ -19,3 +19,18 @@ export async function emailExistsInDataBase(emailFromReq: any): Promise<void> {
     );
   }
 }
+
+export async function userIsRegisteredInDB(reqAuthSub: any): Promise<boolean> {
+  if (!reqAuthSub) {
+    throw new Error(`El req.auth.sub no puede ser falso.`);
+  }
+  if (typeof reqAuthSub !== "string") {
+    throw new Error(`El req.auth.sub debe ser un string`);
+  }
+  const foundUserInDB = await db.User.findByPk(reqAuthSub);
+  if (foundUserInDB) {
+    return true;
+  } else {
+    return false;
+  }
+}

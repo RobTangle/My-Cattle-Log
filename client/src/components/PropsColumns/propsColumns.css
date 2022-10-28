@@ -1,0 +1,30 @@
+.card {
+  height: auto;
+  width: auto;
+  background-color: rgba(22, 30, 77, 0.192);
+  color: black;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+/* .card {
+  height: auto;
+  width: auto;
+  background-color: rgba(22, 30, 77, 0.192);
+  color: black;
+  margin: 5px;
+} */
+
+.prop-id {
+  width: 160px;
+}
+
+.prop-type-animal,
+.prop-type-device,
+.prop-type-animal,
+.prop-device-type,
+.prop-device-number {
+  width: 65px;
+}

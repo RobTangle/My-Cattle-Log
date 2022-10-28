@@ -1,0 +1,14 @@
+.searchbar-input {
+  display: block;
+  width: 300px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.searchbar-container {
+  border-radius: 10px;
+  background-color: rgba(85, 163, 231, 0.397);
+  padding: 20px;
+  /* width:300px; */
+}
