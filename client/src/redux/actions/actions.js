@@ -11,6 +11,7 @@ import {
   GET_ALL_ANIMALS,
   CLEAN_NEW_ANIMAL,
   SET_FETCHED_ANIMALS_TO_LOADING,
+  SET_USER_ANIMALS_TO_LOADING,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -70,6 +71,26 @@ export const getAllAnimals = (token) => {
       });
     } catch (error) {
       console.log(`Error en action getAllAnimals. ${error.message}`);
+      return dispatch({
+        type: GET_ALL_ANIMALS,
+        payload: { error: error.message },
+      });
+    }
+  };
+};
+
+export const setUserAnimalsToLoading = () => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: SET_USER_ANIMALS_TO_LOADING,
+        payload: { loading: true },
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_USER_ANIMALS_TO_LOADING,
+        payload: { error: error.message },
+      });
     }
   };
 };
