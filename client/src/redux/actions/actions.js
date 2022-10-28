@@ -12,6 +12,7 @@ import {
   CLEAN_NEW_ANIMAL,
   SET_FETCHED_ANIMALS_TO_LOADING,
   SET_USER_ANIMALS_TO_LOADING,
+  DELETED_ANIMAL,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -128,6 +129,27 @@ export function setFetchedAnimalsToLoading() {
     } catch (error) {
       return dispatch({
         type: SET_FETCHED_ANIMALS_TO_LOADING,
+        payload: { error: error.message },
+      });
+    }
+  };
+}
+
+export function deleteAnimal(id, token) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        URL + "animal/delete/" + id,
+        header(token)
+      );
+      return dispatch({
+        type: DELETED_ANIMAL,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(`Error en action creator deleteAnimal`);
+      return dispatch({
+        type: DELETED_ANIMAL,
         payload: { error: error.message },
       });
     }
