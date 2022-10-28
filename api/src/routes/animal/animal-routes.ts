@@ -5,6 +5,7 @@ import jwtCheck from "../../config/jwtMiddleware";
 import { Router } from "express";
 import { IReqAuth } from "../../types/user-types";
 import { userIsRegisteredInDB } from "../user/user-r-auxiliary";
+import { Op } from "sequelize";
 const router = Router();
 
 // ------- RUTAS : ---------
@@ -27,8 +28,28 @@ router.get("/", jwtCheck, async (req: any, res) => {
   }
 });
 
+// SEARCH BY QUERY :
+router.get("/search", jwtCheck, async (req, res) => {
+  try {
+    console.log(`Buscando por query...`);
+    console.log(req.query);
+    let queryValue = req.query.value;
+    if (typeof queryValue === "string") {
+      queryValue.toLowerCase();
+    }
+    const searchedResults: IAnimal[] = await db.Animal.findAll({
+      where: {
+        [Op.or]: [{ id_senasa: queryValue }, { name: queryValue }],
+      },
+    });
+    return res.status(200).send(searchedResults);
+  } catch (error: any) {
+    return res.status(400).send({ error: error.message });
+  }
+});
+
 // GET BY ID_SENASA :
-router.get("/:id_senasa", jwtCheck, async (req: any, res) => {
+router.get("/id/:id_senasa", jwtCheck, async (req: any, res) => {
   try {
     const { id_senasa } = req.params;
     const reqAuth: IReqAuth = req.auth;
@@ -76,16 +97,19 @@ router.post("/", jwtCheck, async (req: any, res) => {
 });
 
 // UPDATE ANIMAL :
-router.put("/", async (req, res) => {
+router.put("/", jwtCheck, async (req: any, res) => {
   try {
     console.log(`REQ.BODY = `);
     console.log(req.body);
+    const reqAuth: IReqAuth = req.auth;
+    const userId = reqAuth.sub;
     const validatedAnimal: IAnimal = checkAnimal(req.body);
     const updatedAnimal = await db.Animal.update(
       { ...validatedAnimal },
       {
         where: {
           id_senasa: validatedAnimal.id_senasa,
+          UserId: userId,
         },
       }
     );
