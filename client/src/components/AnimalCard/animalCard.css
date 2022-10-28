@@ -1,6 +1,35 @@
 .card {
-  height: 300px;
-  width: 300px;
-  background-color: rgba(0, 0, 0, 0.171);
-  color: orangered;
+  height: auto;
+  width: auto;
+  background-color: rgba(22, 30, 77, 0.192);
+  color: black;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.prop-id {
+  width: 160px;
+}
+
+.prop-type-animal,
+.prop-type-device,
+.prop-type-animal,
+.prop-device-type,
+.prop-device-number {
+  width: 65px;
+}
+
+.btn-edit {
+  margin: 2px;
+  padding: 2px;
+}
+.btn-delete {
+  margin: 2px;
+  background-color: rgba(253, 4, 4, 0.322);
+  border-radius: 3px;
+}
+.btn-delete:hover {
+  background-color: rgba(255, 0, 0, 0.897);
 }
