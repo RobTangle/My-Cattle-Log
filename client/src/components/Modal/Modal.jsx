@@ -39,7 +39,17 @@ export function Modal(props) {
           <div className="modal-response">{newAnimalState.msg} </div>
         ) : null}
         {newAnimalState.error ? (
-          <div className="modal-response">{newAnimalState.error}</div>
+          <div className="modal-response-container">
+            <div className="modal-response-error">
+              {" "}
+              <p>Oops! Hubo un error: {newAnimalState.error} </p>{" "}
+              <p>
+                {" "}
+                Si es un error de conexión, por favor chequee que tiene una
+                correcta conexión a internet y vuelta a internarlo.
+              </p>
+            </div>
+          </div>
         ) : null}
       </div>
       <div className="modal-footer">
