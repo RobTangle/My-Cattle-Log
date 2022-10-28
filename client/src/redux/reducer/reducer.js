@@ -5,6 +5,7 @@ import {
   GET_ALL_ANIMALS,
   SET_NEW_ANIMAL_TO_LOADING,
   SET_FETCHED_ANIMALS_TO_LOADING,
+  SET_USER_ANIMALS_TO_LOADING,
 } from "../actions/types";
 
 const initialState = {
@@ -44,6 +45,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchedAnimals: action.payload,
+      };
+    case SET_USER_ANIMALS_TO_LOADING:
+      return {
+        ...state,
+        userAnimals: action.payload,
       };
     default:
       return state;
