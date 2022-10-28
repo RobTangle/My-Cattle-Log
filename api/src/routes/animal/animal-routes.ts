@@ -115,6 +115,8 @@ router.put("/", jwtCheck, async (req: any, res) => {
         },
       }
     );
+    console.log(`Animal actualizado. Retornando respuesta...`);
+
     return res.send({
       updated: Number(updatedAnimal[0]),
       msg: `Cantidad de animales actualizados correctamente: ${updatedAnimal[0]}`,
