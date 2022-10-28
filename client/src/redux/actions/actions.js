@@ -15,6 +15,7 @@ import {
   DELETED_ANIMAL,
   UPDATE_ANIMAL,
   CLEAN_UPDATE_ANIMAL,
+  SET_UPDATE_ANIMAL_TO_LOADING,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -189,5 +190,16 @@ export function deleteAnimal(id, token) {
         payload: { error: error.message },
       });
     }
+  };
+}
+
+export function setUpdateAnimalToLoading() {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: SET_UPDATE_ANIMAL_TO_LOADING,
+        payload: { loading: true },
+      });
+    } catch (error) {}
   };
 }

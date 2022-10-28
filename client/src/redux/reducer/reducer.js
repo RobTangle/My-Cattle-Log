@@ -9,6 +9,7 @@ import {
   DELETED_ANIMAL,
   UPDATE_ANIMAL,
   CLEAN_UPDATE_ANIMAL,
+  SET_UPDATE_ANIMAL_TO_LOADING,
 } from "../actions/types";
 
 const initialState = {
@@ -67,6 +68,11 @@ const rootReducer = (state = initialState, action) => {
         updatedAnimal: action.payload,
       };
     case CLEAN_UPDATE_ANIMAL:
+      return {
+        ...state,
+        updatedAnimal: action.payload,
+      };
+    case SET_UPDATE_ANIMAL_TO_LOADING:
       return {
         ...state,
         updatedAnimal: action.payload,
