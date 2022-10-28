@@ -42,6 +42,8 @@ router.get("/search", jwtCheck, async (req, res) => {
         [Op.or]: [{ id_senasa: queryValue }, { name: queryValue }],
       },
     });
+    console.log(`Largo de searchedResults = ${searchedResults?.length}`);
+
     return res.status(200).send(searchedResults);
   } catch (error: any) {
     return res.status(400).send({ error: error.message });
