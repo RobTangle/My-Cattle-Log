@@ -45,7 +45,9 @@ export function CardContainer(props) {
           </div>
         ) : null}
         {userAnimalsState.error ? (
-          <div>Oops! Hubo un error. {userAnimalsState.error}</div>
+          <div className="error-msg-div">
+            Oops! Hubo un error. {userAnimalsState.error}
+          </div>
         ) : null}
         <Pagination />
       </div>
