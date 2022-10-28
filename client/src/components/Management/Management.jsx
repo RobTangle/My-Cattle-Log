@@ -4,7 +4,7 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import { Form } from "../Form/Form";
 import { Modal } from "../Modal/Modal";
 import "./management.css";
-import { FetchedAnimals } from "../FetchedAnimals/FetchedAnimales";
+import { FetchedAnimals } from "../FetchedAnimals/FetchedAnimals";
 
 export function Management() {
   const [showValue, setShowValue] = React.useState(false);
