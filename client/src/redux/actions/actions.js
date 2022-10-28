@@ -13,6 +13,8 @@ import {
   SET_FETCHED_ANIMALS_TO_LOADING,
   SET_USER_ANIMALS_TO_LOADING,
   DELETED_ANIMAL,
+  UPDATE_ANIMAL,
+  CLEAN_UPDATE_ANIMAL,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -25,6 +27,40 @@ export const createNewAnimal = (obj, token) => {
       console.log(`Error en action createAnimal. ${error.message}`);
       return dispatch({
         type: CREATE_NEW_ANIMAL,
+        payload: { error: error.message },
+      });
+    }
+  };
+};
+
+export const updateAnimal = (obj, token) => {
+  return async function (dispatch) {
+    try {
+      const respuesta = await axios.put(URL + "animal/", obj, header(token));
+      return dispatch({
+        type: UPDATE_ANIMAL,
+        payload: respuesta.data,
+      });
+    } catch (error) {
+      console.log(`Error en updateAnimal creation creator. ${error.message}`);
+      dispatch({
+        type: UPDATE_ANIMAL,
+        payload: { error: error.message },
+      });
+    }
+  };
+};
+
+export const cleanUpdateAnimal = () => {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: CLEAN_UPDATE_ANIMAL,
+        payload: { pure: true },
+      });
+    } catch (error) {
+      dispatch({
+        type: CLEAN_UPDATE_ANIMAL,
         payload: { error: error.message },
       });
     }
