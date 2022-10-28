@@ -6,6 +6,7 @@ import { NavBar } from "../NavBar/NavBar";
 import axios from "axios";
 import { USER_EXISTS } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
+import { SearchBar } from "../SearchBar/SearchBar";
 export function Home() {
   // const dispatch = useDispatch();
   // React.useEffect(() => {
@@ -57,6 +58,7 @@ export function Home() {
     <>
       <NavBar />
       <div>ESTE ES EL HOME! WELCOME!</div>
+      <SearchBar />
     </>
   );
 }
