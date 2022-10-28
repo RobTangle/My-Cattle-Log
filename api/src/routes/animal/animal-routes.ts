@@ -123,4 +123,30 @@ router.put("/", jwtCheck, async (req: any, res) => {
   }
 });
 
+// DELETE ANIMAL :
+router.delete("/delete/:id_senasa", jwtCheck, async (req: any, res) => {
+  try {
+    console.log(`En delete por id...`);
+    const reqAuth: IReqAuth = req.auth;
+    const userId = reqAuth.sub;
+    const id_senasaFromParams = req.params.id_senasa;
+    if (!id_senasaFromParams) {
+      throw new Error(`El id de senasa no puede ser falso.`);
+    }
+    let deletedAnimal = await db.Animal.destroy({
+      where: {
+        id_senasa: id_senasaFromParams,
+      },
+    });
+    console.log(deletedAnimal);
+    return res.status(200).send({
+      msg: `${deletedAnimal} Animal destruido suavemente`,
+      deletedAnimal: deletedAnimal,
+    });
+  } catch (error: any) {
+    console.log(`Error en DELETE por id. ${error.message}`);
+    return res.status(400).send({ error: error.message });
+  }
+});
+
 export default router;
