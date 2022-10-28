@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   searchQuery,
   setFetchedAnimalsToLoading,
+  clearFetchedAnimals,
 } from "../../redux/actions/actions";
 import "./searchBar.css";
 
@@ -17,6 +18,11 @@ export function SearchBar() {
     setInput({
       [e.target.name]: e.target.value,
     });
+  }
+
+  function dispatchClearFetchedAnimals() {
+    console.log(`dispatching clearFetchedAnimals...`);
+    dispatch(clearFetchedAnimals());
   }
 
   function handleSubmit(e) {
@@ -39,6 +45,7 @@ export function SearchBar() {
         />
         <button>Buscar</button>
       </form>
+      <button onClick={dispatchClearFetchedAnimals}>Limpiar resultados </button>
     </div>
   );
 }
