@@ -6,6 +6,7 @@ import { Router } from "express";
 import { IReqAuth } from "../../types/user-types";
 import { userIsRegisteredInDB } from "../user/user-r-auxiliary";
 import { Op } from "sequelize";
+import { typesOfAnimalsToArray } from "./animal-r-auxiliary";
 const router = Router();
 
 // ------- RUTAS : ---------
@@ -151,6 +152,19 @@ router.delete("/delete/:id_senasa", jwtCheck, async (req: any, res) => {
     });
   } catch (error: any) {
     console.log(`Error en DELETE por id. ${error.message}`);
+    return res.status(400).send({ error: error.message });
+  }
+});
+
+// GET TYPES OF ANIMAL ACCEPTED :
+router.get("/typesAllowed", async (req, res) => {
+  try {
+    console.log(`Types of animals allowed: `);
+    let typesOfAnimalsArray = typesOfAnimalsToArray();
+    console.log(typesOfAnimalsArray);
+    return res.status(200).send(typesOfAnimalsArray);
+  } catch (error: any) {
+    console.log(`Error en GET 'animal/typesAllowed. ${error.message}`);
     return res.status(400).send({ error: error.message });
   }
 });
