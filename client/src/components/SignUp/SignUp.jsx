@@ -6,6 +6,7 @@ import { header } from "../../constants/token";
 import axios from "axios";
 import { REGISTER_NEW_USER } from "../../constants/urls";
 import OkSVG from "../../assets/icons8-ok.svg";
+import errorSign from "../../assets/error-sign-2.png";
 
 export const SignUp = () => {
   const tokenAccess = localStorage.getItem("tokenCattleTracker");
@@ -17,15 +18,17 @@ export const SignUp = () => {
     email: `${user?.email}`,
   });
 
-  const [welcome, setWelcome] = useState(false);
-
+  const [welcome, setWelcome] = useState({
+    status: false,
+    error: false,
+    msg: "",
+  });
   const navigate = useNavigate();
 
   function goToHome() {
     navigate("/home");
   }
 
-  let errorOnSubmit = "";
   // HANDLE SUBMIT:
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,24 +39,16 @@ export const SignUp = () => {
         header(tokenAccess)
       );
       if (response.status === 200) {
-        setWelcome(true);
+        setWelcome({ status: true });
         console.log(`Response.status === 200... `);
-        return (
-          <div className="submit-OK">
-            <img src={OkSVG} alt="ok message" />
-            <h2>
-              Usuario creado exitosamente. Graciar por usar Cattle Tracker.
-            </h2>
-            <button onClick={goToHome}>Continuar al home</button>
-          </div>
-        );
       }
     } catch (error) {
-      errorOnSubmit = error?.response?.data?.error;
-      console.log(errorOnSubmit);
-      console.log(error);
-      setWelcome(errorOnSubmit);
-      console.log("welcomeState = ", welcome);
+      // console.log(error);
+      setWelcome({
+        status: false,
+        error: true,
+        msg: error?.response?.data?.error,
+      });
       console.log(`Error en handleSubmit de SignUp. ${error.message}`);
     }
   };
@@ -101,17 +96,18 @@ export const SignUp = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-      {welcome === true && (
+      {welcome.status === true && (
         <div className="submit-OK">
           <img src={OkSVG} alt="ok message" />
           <h2>Usuario creado exitosamente. Graciar por usar Cattle Tracker.</h2>
           <button onClick={goToHome}>Continuar al home</button>
         </div>
       )}
-      {welcome !== true && welcome !== false && (
+      {welcome.error && (
         <div className="submit-error">
+          <img src={errorSign} alt="Error sign" />
           <h2>Hubo un error al intentar registrarte en la data base.</h2>
-          <p> {welcome}</p>
+          <p> {welcome.msg}</p>
         </div>
       )}
     </>
