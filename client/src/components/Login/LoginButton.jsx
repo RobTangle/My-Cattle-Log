@@ -49,7 +49,14 @@ const LoginButton = () => {
     handleValidation(user, isAuthenticated);
   }
 
-  return <button className="bg-green px-8 py-2 text-white font-bold rounded-sm my-5" onClick={() => loginWithRedirect()}>Log In</button>;
+  return (
+    <button
+      className="bg-green px-8 py-2 text-white font-bold rounded-sm my-5 border border-transparent border-1 hover:bg-transparent hover:text-green  hover:border-green  transition duration-300"
+      onClick={() => loginWithRedirect()}
+    >
+      Log In
+    </button>
+  );
 };
 
 export default LoginButton;

@@ -8,10 +8,14 @@ export function LandingPage() {
         <h1 className="text-3xl text-center text-green font-semibold">
           Bienvenido a Cattle Log
         </h1>
+        <div className="w-full h-[200px]">
+
         <img
+          className="w-full h-full object-cover object-center"
           src="https://res.cloudinary.com/dfbxjt69z/image/upload/v1667055963/cattle/ve-removebg-preview_kp8zjn.png"
           alt="logo"
-        />
+          />
+          </div>
         <h3 className="text-gray">
           Cattle Log es una nueva plataforma para la ganadería del futuro, que
           permite digitalizar el campo, donde podrás registrar tus animales, sus
