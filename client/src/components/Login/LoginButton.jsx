@@ -37,14 +37,9 @@ const LoginButton = () => {
           console.log(`Usuario no existe en la DB. Navigate to "/register"`);
           navigate("/register");
         }
-        // } else if (existe.data.msg === "banned") {
-        //   localStorage.removeItem("token");
-        //   logout({ returnTo: "https://mascotapps.vercel.app/banned" });
-        // } else {
-        //   navigate("/register");
-        // }
       }
     } catch (error) {
+      console.log(`Error en el Login Button`);
       console.log(error);
     }
   };
