@@ -49,7 +49,7 @@ export const updateAnimal = (obj, token) => {
       console.log(`Error en updateAnimal creation creator. ${error.message}`);
       dispatch({
         type: UPDATE_ANIMAL,
-        payload: { error: error.message },
+        payload: { error: "Error: " + error.response?.data?.error },
       });
     }
   };

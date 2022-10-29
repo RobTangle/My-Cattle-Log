@@ -91,7 +91,9 @@ router.post("/", jwtCheck, async (req: any, res) => {
     const newAnimalCreated = await db.Animal.create(validatedNewAnimal);
     await newAnimalCreated.setUser(userId);
     console.log(`nuevo animal creado y asociado al usuario con id ${userId}`);
-    return res.status(200).send(newAnimalCreated);
+    return res
+      .status(200)
+      .send({ msg: "Animal creado correctamente.", animal: newAnimalCreated });
   } catch (error: any) {
     console.log(`Error en POST 'user/'. ${error.message}`);
     return res.status(400).send({ error: error.message });

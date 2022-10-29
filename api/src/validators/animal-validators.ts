@@ -5,6 +5,7 @@ import {
   isStringBetween1AndXCharsLong,
   isStringXCharsLong,
   isValidSenasaId,
+  isValidURLImage,
 } from "./generic-validators";
 
 // CHECK ANIMAL :
@@ -21,6 +22,9 @@ export function checkAnimal(bodyFromReq: any): IAnimal {
       name: checkName(bodyFromReq.name),
       device_type: checkDeviceType(bodyFromReq.device_type),
       device_number: checkDeviceNumber(bodyFromReq.device_number),
+      image: checkImage(bodyFromReq.image),
+      comments: checkComments(bodyFromReq.comments),
+      birthday: checkBirthday(bodyFromReq.birthday),
     };
     return checkedAnimal;
   } catch (error: any) {
@@ -89,4 +93,39 @@ function checkName(argFromReq: any): string {
   } else {
     throw new Error(`The name "${argFromReq}" es invalid.`);
   }
+}
+
+// CHECK IMAGE :
+function checkImage(imageFromReq: any): string | undefined {
+  if (isFalsyArgument(imageFromReq)) {
+    return undefined;
+  }
+  if (isValidURLImage(imageFromReq)) {
+    return imageFromReq;
+  }
+  throw new Error(`La imagen ingresada '${imageFromReq}' no es válida.`);
+}
+
+// CHECK COMMENTS :
+function checkComments(commentsFromReq: any): string | undefined {
+  if (isFalsyArgument(commentsFromReq)) {
+    return undefined;
+  }
+  if (isStringBetween1AndXCharsLong(3000, commentsFromReq)) {
+    return commentsFromReq;
+  }
+  throw new Error(
+    `El comentario ingresado es inválido. Ingrese un valor falso, o un string entre 1 y 3000 caracteres.`
+  );
+}
+
+// CHECK BIRTHDAY :
+function checkBirthday(birthdayFromReq: any): string | undefined {
+  if (isFalsyArgument(birthdayFromReq)) {
+    return undefined;
+  }
+  if (isStringBetween1AndXCharsLong(10, birthdayFromReq)) {
+    return birthdayFromReq;
+  }
+  throw new Error(`Error al validar el birthday.`);
 }

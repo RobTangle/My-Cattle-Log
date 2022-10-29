@@ -124,3 +124,14 @@ export function isEmail(argumento: any): boolean {
   );
   return regex.test(argumento);
 }
+
+// IS VALID URL:
+export function isValidURLImage(argumento: any): boolean {
+  if (typeof argumento !== "string") {
+    return false;
+  }
+  return (
+    argumento.match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gim) !==
+    null
+  );
+}

@@ -15,6 +15,9 @@ export function FormEdit(props) {
     name: props.animal.name,
     device_type: props.animal.device_type,
     device_number: props.animal.device_number,
+    image: props.animal.image,
+    comments: props.animal.comments,
+    birthday: props.animal.birthday,
   });
 
   const dispatch = useDispatch();
@@ -34,6 +37,27 @@ export function FormEdit(props) {
       dispatch(actions.getAllAnimals(accessToken));
     }, 500);
   }
+
+  // UPLOAD PHOTOS/IMAGES TO CLOUDINARY:
+  const CLOUD_NAME = "imagenes";
+  const UPLOAD_PRESET = "dpxrr2uyq";
+
+  const upload = async (e) => {
+    const img = e.target.files[0];
+    const data = new FormData();
+    data.append("file", img);
+    data.append("upload_preset", CLOUD_NAME);
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${UPLOAD_PRESET}/image/upload`,
+      { method: "POST", body: data }
+    );
+    const dataNew = await response.json();
+    setLocalState({
+      ...localState,
+      image: dataNew.secure_url,
+    });
+    // reemplazar con un mensaje de éxito o la acción deseada
+  };
   return (
     <div className="form-modal">
       <h2>Editar animal...</h2>
@@ -56,6 +80,7 @@ export function FormEdit(props) {
           <div className="form-type-of-animal">
             <label htmlFor="type_of_animal">Tipo de animal *</label>
             <input
+              id="type_of_animal"
               type="text"
               name="type_of_animal"
               placeholder="Ej: Vaquillona / Novillo / Toro"
@@ -63,9 +88,14 @@ export function FormEdit(props) {
               value={localState.type_of_animal}
             />
           </div>
+          <div>
+            <label htmlFor="birthday">Fecha de nacimiento </label>
+            <input type="date" name="birthday" onChange={handleOnChange} />
+          </div>
           <div className="form-weight_kg">
             <label htmlFor="weight_kg">Peso</label>
             <input
+              id="weight_kg"
               type="number"
               name="weight_kg"
               placeholder="kilogramos, sin comas"
@@ -76,6 +106,7 @@ export function FormEdit(props) {
           <div className="form-name">
             <label htmlFor="name">Nombre *</label>
             <input
+              id="name"
               type="text"
               name="name"
               placeholder="nombre del animal"
@@ -86,6 +117,7 @@ export function FormEdit(props) {
           <div>
             <label htmlFor="device_type">Tipo de dispositivo * </label>
             <input
+              id="device_type"
               type="text"
               name="device_type"
               onChange={handleOnChange}
@@ -96,6 +128,7 @@ export function FormEdit(props) {
           <div>
             <label htmlFor="device_number">Número de dispositivo * </label>
             <input
+              id="device_number"
               type="text"
               name="device_number"
               onChange={handleOnChange}
@@ -104,7 +137,28 @@ export function FormEdit(props) {
               maxLength={8}
             />
           </div>
-
+          <div>
+            <label htmlFor="comments">Comentarios </label>
+            <textarea
+              id="comments"
+              type="textarea"
+              name="comments"
+              onChange={handleOnChange}
+              placeholder="comentarios"
+              value={localState.comments}
+              maxLength={3000}
+            />
+          </div>
+          <div>
+            <label htmlFor="photo">Imagen </label>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="image"
+              placeholder="Imagen"
+              onChange={upload}
+            ></input>
+          </div>
           <button>Confirmar</button>
           <button onClick={props.closeModal}>X</button>
         </div>

@@ -33,8 +33,11 @@ export function ModalEdit(props) {
           <FormEdit animal={props.animal} closeModal={closeModal} />
         ) : null}
         {updatedAnimal.loading ? (
-          <div>
+          <div className="modal-response">
             <img src={loading} alt="loading gif" />
+            <div>
+              <button onClick={closeModal}>X</button>
+            </div>
           </div>
         ) : null}
         {updatedAnimal.updated ? (
@@ -49,7 +52,7 @@ export function ModalEdit(props) {
           <div>Oops! {updatedAnimal.msg}</div>
         ) : null}
         {updatedAnimal.error ? (
-          <div className="modal-response-error">
+          <div className="modal-response">
             {updatedAnimal.error}{" "}
             <div>
               <button onClick={closeModal}>X</button>
@@ -57,9 +60,9 @@ export function ModalEdit(props) {
           </div>
         ) : null}
       </div>
-      <div className="modal-footer">
+      {/* <div className="modal-footer">
         <button onClick={closeModal}>X</button>
-      </div>
+      </div> */}
     </div>
   );
 }
