@@ -5,6 +5,8 @@ export interface IAnimal {
   name: string;
   device_type: string;
   device_number: string;
+  comments?: string;
+  image?: string;
 }
 
 export enum ITypeOfAnimal {

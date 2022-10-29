@@ -10,6 +10,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     name!: string;
     device_type!: string;
     device_number!: string;
+    comments?: string;
+    image?: string;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -55,6 +57,17 @@ module.exports = (sequelize: any, DataTypes: any) => {
         validate: {
           len: [8, 8],
         },
+      },
+      comments: {
+        type: DataTypes.STRING(3000),
+        allowNull: true,
+        validate: {
+          len: [1, 3000],
+        },
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {
