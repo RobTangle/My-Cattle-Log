@@ -49,7 +49,7 @@ const LoginButton = () => {
     handleValidation(user, isAuthenticated);
   }
 
-  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+  return <button className="bg-green px-8 py-2 text-white font-bold rounded-sm my-5" onClick={() => loginWithRedirect()}>Log In</button>;
 };
 
 export default LoginButton;
