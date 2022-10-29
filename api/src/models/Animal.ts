@@ -12,6 +12,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     device_number!: string;
     comments?: string;
     image?: string;
+    birthday?: string;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -30,7 +31,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false,
       },
       type_of_animal: {
-        type: DataTypes.ENUM("Novillo", "Toro", "Vaquillona"),
+        type: DataTypes.STRING,
+        // type: DataTypes.ENUM("Novillo", "Toro", "Vaquillona"),
         // cuidado acá! También existe el ITypeOfAnimal que se utiliza. Cambiar ambos juntos.
         // type: DataTypes.ENUM(ITypeOfAnimal),
         allowNull: false,
@@ -67,6 +69,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       image: {
         type: DataTypes.STRING,
+        allowNull: true,
+      },
+      birthday: {
+        type: DataTypes.DATEONLY,
         allowNull: true,
       },
     },

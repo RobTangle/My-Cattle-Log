@@ -7,6 +7,7 @@ export interface IAnimal {
   device_number: string;
   comments?: string;
   image?: string;
+  birthday?: string;
 }
 
 export enum ITypeOfAnimal {

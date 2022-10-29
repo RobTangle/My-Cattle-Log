@@ -24,6 +24,7 @@ export function checkAnimal(bodyFromReq: any): IAnimal {
       device_number: checkDeviceNumber(bodyFromReq.device_number),
       image: checkImage(bodyFromReq.image),
       comments: checkComments(bodyFromReq.comments),
+      birthday: checkBirthday(bodyFromReq.birthday),
     };
     return checkedAnimal;
   } catch (error: any) {
@@ -116,4 +117,15 @@ function checkComments(commentsFromReq: any): string | undefined {
   throw new Error(
     `El comentario ingresado es inválido. Ingrese un valor falso, o un string entre 1 y 3000 caracteres.`
   );
+}
+
+// CHECK BIRTHDAY :
+function checkBirthday(birthdayFromReq: any): string | undefined {
+  if (isFalsyArgument(birthdayFromReq)) {
+    return undefined;
+  }
+  if (isStringBetween1AndXCharsLong(10, birthdayFromReq)) {
+    return birthdayFromReq;
+  }
+  throw new Error(`Error al validar el birthday.`);
 }
