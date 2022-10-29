@@ -28,9 +28,13 @@ const LoginButton = () => {
         console.log(existe.data.msg);
 
         if (existe.data.msg) {
+          console.log(
+            "Usuario existe en la DB. Redireccionando/navigate a /home"
+          );
           navigate("/home");
         }
         if (existe.data.msg === false) {
+          console.log(`Usuario no existe en la DB. Navigate to "/register"`);
           navigate("/register");
         }
         // } else if (existe.data.msg === "banned") {
