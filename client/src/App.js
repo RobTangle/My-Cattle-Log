@@ -2,9 +2,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CreateNewAnimal } from "./components/CreateNewAnimal/CreateNewAnimal";
-import { LandingPage } from "./screens";
-import { NavBar } from "./components/NavBar/NavBar";
-import { CardContainer } from "./components/CardContainer/CardContainer";
+import { LandingPage } from "./views";
 import { Home } from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import { SignUp } from "./components/SignUp/SignUp";
