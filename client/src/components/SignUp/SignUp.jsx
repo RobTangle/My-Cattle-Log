@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { header } from "../../constants/token";
 import axios from "axios";
@@ -17,10 +17,15 @@ export const SignUp = () => {
     email: `${user?.email}`,
   });
 
-  const redirectToHome = () => {
-    Navigate("/home");
-  };
+  const [welcome, setWelcome] = useState(false);
 
+  const navigate = useNavigate();
+
+  function goToHome() {
+    navigate("/home");
+  }
+
+  let errorOnSubmit = "";
   // HANDLE SUBMIT:
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,17 +36,24 @@ export const SignUp = () => {
         header(tokenAccess)
       );
       if (response.status === 200) {
+        setWelcome(true);
+        console.log(`Response.status === 200... `);
         return (
           <div className="submit-OK">
             <img src={OkSVG} alt="ok message" />
             <h2>
               Usuario creado exitosamente. Graciar por usar Cattle Tracker.
             </h2>
-            <button onClick={redirectToHome}>Continuar al home</button>
+            <button onClick={goToHome}>Continuar al home</button>
           </div>
         );
       }
     } catch (error) {
+      errorOnSubmit = error?.response?.data?.error;
+      console.log(errorOnSubmit);
+      console.log(error);
+      setWelcome(errorOnSubmit);
+      console.log("welcomeState = ", welcome);
       console.log(`Error en handleSubmit de SignUp. ${error.message}`);
     }
   };
@@ -89,6 +101,19 @@ export const SignUp = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
+      {welcome === true && (
+        <div className="submit-OK">
+          <img src={OkSVG} alt="ok message" />
+          <h2>Usuario creado exitosamente. Graciar por usar Cattle Tracker.</h2>
+          <button onClick={goToHome}>Continuar al home</button>
+        </div>
+      )}
+      {welcome !== true && welcome !== false && (
+        <div className="submit-error">
+          <h2>Hubo un error al intentar registrarte en la data base.</h2>
+          <p> {welcome}</p>
+        </div>
+      )}
     </>
   );
 };
