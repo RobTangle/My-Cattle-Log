@@ -12,6 +12,9 @@ export function Form(props) {
     name: "",
     device_type: "",
     device_number: "",
+    image: "",
+    comments: "",
+    birthday: "",
   });
 
   const dispatch = useDispatch();
@@ -31,6 +34,28 @@ export function Form(props) {
       dispatch(actions.getAllAnimals(accessToken));
     }, 500);
   }
+
+  // UPLOAD PHOTOS/IMAGES TO CLOUDINARY:
+  const CLOUD_NAME = "imagenes";
+  const UPLOAD_PRESET = "dpxrr2uyq";
+
+  const upload = async (e) => {
+    const img = e.target.files[0];
+    const data = new FormData();
+    data.append("file", img);
+    data.append("upload_preset", CLOUD_NAME);
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${UPLOAD_PRESET}/image/upload`,
+      { method: "POST", body: data }
+    );
+    const dataNew = await response.json();
+    setLocalState({
+      ...localState,
+      image: dataNew.secure_url,
+    });
+    // reemplazar con un mensaje de éxito o la acción deseada
+  };
+
   return (
     <div className="form-modal">
       <h2>Nuevo animal...</h2>
@@ -56,6 +81,10 @@ export function Form(props) {
               placeholder="Ej: Vaquillona / Novillo / Toro"
               onChange={handleOnChange}
             />
+          </div>
+          <div>
+            <label htmlFor="birthday">Fecha de nacimiento </label>
+            <input type="date" name="birthday" onChange={handleOnChange} />
           </div>
           <div className="form-weight_kg">
             <label htmlFor="weight_kg">Peso</label>
@@ -94,7 +123,28 @@ export function Form(props) {
               maxLength={8}
             />
           </div>
-
+          <div>
+            <label htmlFor="comments">Comentarios </label>
+            <textarea
+              id="comments"
+              type="textarea"
+              name="comments"
+              onChange={handleOnChange}
+              placeholder="comentarios"
+              value={localState.comments}
+              maxLength={3000}
+            />
+          </div>
+          <div>
+            <label htmlFor="photo">Imagen </label>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="image"
+              placeholder="Imagen"
+              onChange={upload}
+            ></input>
+          </div>
           <button>Registrar animal</button>
           <button onClick={props.closeModal}>Cerrar</button>
         </div>
