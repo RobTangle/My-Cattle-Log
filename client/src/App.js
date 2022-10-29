@@ -1,5 +1,3 @@
-
-import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CreateNewAnimal } from "./components/CreateNewAnimal/CreateNewAnimal";
 import { LandingPage } from "./views";
@@ -10,7 +8,7 @@ import { Management } from "./components/Management/Management";
 
 function App() {
   return (
-    <div className="App">
+    <div className="bg-white h-full w-full min-h-screen">
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
