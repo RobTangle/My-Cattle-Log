@@ -16,7 +16,7 @@ module.exports = {
       },
       backgroundImage: {
         landing:
-          "url('https://res.cloudinary.com/dfbxjt69z/image/upload/v1667056179/cattle/pexels-kat-smith-735968_x4lvyr.jpg')",
+          "url('https://res.cloudinary.com/dfbxjt69z/image/upload/v1667056183/cattle/pexels-pixabay-162240_akbobi.jpg')",
       },
       fontFamily: {
         sans: ["Helvetica", "system-ui", "sans-serif"],

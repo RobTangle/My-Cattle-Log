@@ -51,10 +51,10 @@ const LoginButton = () => {
 
   return (
     <button
-      className="bg-green px-8 py-2 text-white font-bold rounded-sm my-5 border border-transparent border-1 hover:bg-transparent hover:text-green  hover:border-green  transition duration-300"
+      className="bg-green px-8 py-2 text-white font-bold rounded-sm my-5 border border-transparent border-solid hover:bg-transparent hover:text-green  hover:border-green  transition duration-300 "
       onClick={() => loginWithRedirect()}
     >
-      Log In
+      Iniciar sesión
     </button>
   );
 };
