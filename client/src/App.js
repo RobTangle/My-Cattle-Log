@@ -8,7 +8,7 @@ import { Management } from "./components/Management/Management";
 
 function App() {
   return (
-    <div className="bg-white">
+    <div className="bg-white h-full w-full min-h-screen">
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
