@@ -1,6 +1,7 @@
 # Cattle-tracker
 
-Repository meant to be just a practice exercise through the creation of a simple full-stack cattle tracker app.
+Repository meant to be just a practice exercise through the creation of a simple CRUD full-stack app with OAuth2.0 incorporated. 
+ 
 
 ## How to run de front end:
 
