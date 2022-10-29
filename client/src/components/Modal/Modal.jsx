@@ -35,8 +35,13 @@ export function Modal(props) {
             <img src={loading} alt="loading gif" />
           </div>
         ) : null}
-        {newAnimalState.newAnimal ? (
-          <div className="modal-response">{newAnimalState.msg} </div>
+        {newAnimalState.msg ? (
+          <div className="modal-response">
+            {newAnimalState.msg}{" "}
+            <div>
+              <button onClick={closeModal}>X</button>
+            </div>
+          </div>
         ) : null}
         {newAnimalState.error ? (
           <div className="modal-response-container">
