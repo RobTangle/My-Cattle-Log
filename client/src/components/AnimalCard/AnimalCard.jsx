@@ -4,11 +4,13 @@ import { useDispatch } from "react-redux";
 import { getAllAnimals, deleteAnimal } from "../../redux/actions/actions";
 import "./animalCard.css";
 import { ModalEdit } from "../Modal/ModalEdit";
+import { Link } from "react-router-dom";
 
 export function AnimalCard(props) {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("tokenCattleTracker");
   const [showValue, setShowValue] = React.useState(false);
+
   function handleDelete(e) {
     // console.log(e);
     console.log(`Eliminando animal con id ${e.target.value}`);
@@ -20,6 +22,27 @@ export function AnimalCard(props) {
 
   function handleClickEdit(e) {
     console.log(`Editando animal con id ${e.target.value}`);
+  }
+
+  function handleDeleteWithPrompt(e) {
+    let confirmPrompt = prompt(
+      "Para confirmar la eliminación, escriba 'ELIMINAR'."
+    );
+    if (
+      confirmPrompt == "ELIMINAR" ||
+      confirmPrompt == "eliminar" ||
+      confirmPrompt == "Eliminar"
+    ) {
+      console.log(`Eliminando animal con id ${e.target.value}`);
+      const animal_id = e.target.value;
+      console.log(animal_id);
+      dispatch(deleteAnimal(animal_id, accessToken));
+      dispatch(getAllAnimals(accessToken));
+    } else {
+      console.log(
+        `No se ha eliminado al animal porque confirmPrompt == ${confirmPrompt}`
+      );
+    }
   }
 
   function showModal(e) {
@@ -36,6 +59,9 @@ export function AnimalCard(props) {
       <div className="prop-device-type">{props.animal?.device_type}</div>
       <div className="prop-device-number">{props.animal?.device_number}</div>
       <div className="prop-action">
+        <button className="btn-details" value={props.animal?.id_senasa}>
+          <Link to="/home/details">Detalles</Link>
+        </button>
         <button
           className="btn-edit"
           value={props.animal?.id_senasa}
@@ -46,7 +72,7 @@ export function AnimalCard(props) {
         <button
           className="btn-delete"
           value={props.animal?.id_senasa}
-          onClick={handleDelete}
+          onClick={handleDeleteWithPrompt}
         >
           Delete
         </button>
