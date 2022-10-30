@@ -56,13 +56,13 @@ export const SignUp = () => {
   //...validaciones con JS
 
   return (
-    <div className="px-3 py-5 flex flex-col items-center min-h-screen h-full max-w-7xl mx-auto">
-      <div className="bg-landing bg-cover bg-center w-full h-32 flex items-center justify-center mb-8">
-        <h1 className="text-green text-3xl text-center backdrop-grayscale-0 bg-white/60 py-1 px-2 md:px-8 md:py-3 rounded-sm ">
-          Bienvenido a Cattle Tracker
+    <div className="flex flex-col items-center min-h-screen h-full max-w-7xl mx-auto">
+      <div className="bg-landing bg-cover bg-center w-full h-52 flex items-center justify-center mb-8">
+        <h1 className="text-white font-bold font-sans text-2xl text-center px-5 uppercase drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:text-3xl">
+          Registra tu usuario en Cattle Log
         </h1>
       </div>
-      <p className="text-gray  text-justify mx-auto md:text-xl">
+      <p className="text-gray  text-justify  md:text-xl w-[90%] md:w-1/2 ">
         Es tu primera vez aquí, te pedimos que completes tu perfil para
         continuar y accede a todas las funcionalidades de la app!
       </p>{" "}
