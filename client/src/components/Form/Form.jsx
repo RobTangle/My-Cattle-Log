@@ -20,7 +20,14 @@ export function Form(props) {
   });
 
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(actions.getTypesOfAnimalsAllowed());
+  }, []);
+
+  const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
   const accessToken = localStorage.getItem("tokenCattleTracker");
+
   // HANDLE FUNCTIONS:
   function handleOnChange(e) {
     setLocalState({ ...localState, [e.target.name]: e.target.value });
@@ -83,6 +90,27 @@ export function Form(props) {
               placeholder="Ej: Vaquillona / Novillo / Toro"
               onChange={handleOnChange}
             />
+          </div>
+          <div>
+            {Array.isArray(typesOfAnimalsState) && (
+              <fieldset>
+                {" "}
+                <legend>Tipo de animal</legend>
+                {typesOfAnimalsState?.map((type) => (
+                  <div key={Math.random()}>
+                    <input
+                      type="radio"
+                      value={type}
+                      onChange={handleOnChange}
+                      name="type_of_animal"
+                      id={type}
+                      key={Math.random()}
+                    />
+                    <label htmlFor={type}>{type}</label>
+                  </div>
+                ))}
+              </fieldset>
+            )}
           </div>
           <div>
             <label htmlFor="birthday">Fecha de nacimiento </label>
