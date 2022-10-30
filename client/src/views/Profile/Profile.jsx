@@ -15,7 +15,7 @@ export const Profile = () => {
 
   React.useEffect(() => {
     dispatch(getUserInfo(token));
-  }, [dispatch, token, userInfoState]);
+  }, [dispatch, token]);
 
   function handleGoToLogin(e) {
     console.log(`handleGoToLogin disparada. Navegando a "/"...`);
@@ -27,7 +27,7 @@ export const Profile = () => {
   }
   console.log(user);
   console.log("userInfoState = ", userInfoState);
-  console.log(user);
+
   return (
     <div>
       <NavBar />
