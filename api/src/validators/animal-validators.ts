@@ -44,7 +44,7 @@ function checkDeviceType(argFromReq: any): string {
   if (isStringBetween1And50CharsLong(argFromReq)) {
     return argFromReq;
   } else {
-    throw new Error(`The device_type "${argFromReq}" is invalid.`);
+    throw new Error(`El tipo de dispositivo "${argFromReq}" es inválido.`);
   }
 }
 
@@ -53,7 +53,7 @@ function checkDeviceNumber(argFromReq: any): string {
   if (isStringXCharsLong(8, argFromReq)) {
     return argFromReq;
   } else {
-    throw new Error(`The device_number "${argFromReq}" is invalid.`);
+    throw new Error(`El código de dispositivo "${argFromReq}" es inválido.`);
   }
 }
 
@@ -62,7 +62,7 @@ function checkId(idFromReq: any): string {
   if (isValidSenasaId(idFromReq)) {
     return idFromReq;
   } else {
-    throw new Error(`The id_senasa "${idFromReq}" is invalid.`);
+    throw new Error(`El id "${idFromReq}" ingresado es inválido.`);
   }
 }
 
@@ -75,7 +75,7 @@ function checkTypeOfAnimal(argFromReq: any): ITypeOfAnimal {
   if (isValidTypeOfAnimal(argFromReq)) {
     return argFromReq;
   } else {
-    throw new Error(`The type_of_animal "${argFromReq}" is invalid.`);
+    throw new Error(`El tipo de animal "${argFromReq}" ingresado es inválido.`);
   }
 }
 
@@ -85,7 +85,7 @@ function checkBreedName(breedNameFromReq: any): string | undefined {
     return undefined;
   }
   if (isStringBetween1And50CharsLong(breedNameFromReq)) {
-    return breedNameFromReq;
+    return breedNameFromReq.toLowerCase();
   }
   throw new Error(
     `El valor ingresado como raza (breed name) no es válido. Ingrese una cadena de texto o deje el valor vacío.`
@@ -98,7 +98,7 @@ function checkLocation(locationFromReq: any): string | undefined {
     return undefined;
   }
   if (isStringBetween1And50CharsLong(locationFromReq)) {
-    return locationFromReq;
+    return locationFromReq.toLowerCase();
   }
   throw new Error(
     `El valor ingresado '${locationFromReq}' como location es inválido.`
