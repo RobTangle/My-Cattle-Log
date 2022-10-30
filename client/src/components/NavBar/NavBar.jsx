@@ -17,7 +17,7 @@ export function NavBar() {
   //eslint-disable-next-line
   const dispatch = useDispatch();
   const [openMenu, setOpenMenu] = useState(false);
-  const {isLoading, isAuthenticated} = useAuth0();
+  const { isLoading, isAuthenticated } = useAuth0();
 
   // React.useEffect(() => {
   //   console.log(`Limpiando new animal...`);
@@ -28,7 +28,7 @@ export function NavBar() {
   };
 
   return (
-    <div className="w-full h-full bg-white text-green font-semibold flex justify-around items-center mx-w-7xl mx-auto">
+    <div className="w-full h-full bg-white text-green font-semibold flex justify-around items-center mx-w-7xl mx-auto md:shadow-3xl ">
       <div className="md:hidden">
         {openMenu ? (
           <button
@@ -54,14 +54,16 @@ export function NavBar() {
           <NavbarLink path="/home/management" text="Administrar animales" />
           {!isLoading && isAuthenticated ? (
             <>
-            <NavbarLink path="/home/profile" text="Perfil" />
-          <div>
-            <LogoutButton />
-          </div>
+              <NavbarLink path="/home/profile" text="Perfil" />
+              <div>
+                <LogoutButton />
+              </div>
             </>
-          ) : (<>
-            <LoginButton />
-          </>)}
+          ) : (
+            <>
+              <LoginButton />
+            </>
+          )}
         </div>
       ) : null}
       <div className="hidden  md:flex md:w-full md:h-20 md:justify-around md:py-5 md:px-5 md:gap-8 md:bg-white md:text-gray">

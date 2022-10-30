@@ -31,7 +31,7 @@ export function SearchBar() {
     dispatch(searchQuery(input.inputValue, accessToken));
   }
   return (
-    <div className="w-full flex flex-col text-gray">
+    <div className="w-full flex flex-col text-gray px-3 py-5 my-5 bg-gray/10">
       <form
         action=""
         onSubmit={handleSubmit}
@@ -41,7 +41,7 @@ export function SearchBar() {
           Nombre / ID SENASA
         </label>
         <input
-          className=" mt-1  py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-green focus:ring-light_green block w-full rounded-md sm:text-sm focus:ring-1 mx-1 px-2"
+          className=" mt-1  py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-green focus:ring-light_green block w-full rounded-md sm:text-sm focus:ring-1  px-2"
           type="text"
           name="inputValue"
           value={input.inputValue}

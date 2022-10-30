@@ -24,6 +24,9 @@ module.exports = {
       fontFamily: {
         sans: ["Helvetica", "system-ui", "sans-serif"],
       },
+      boxShadow: {
+        "3xl": "0 4px 3px -2px rgba(153,147,147,0.58) ",
+      },
     },
   },
   plugins: [],
