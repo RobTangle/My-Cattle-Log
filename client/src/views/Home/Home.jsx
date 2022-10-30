@@ -113,28 +113,28 @@ export function Home() {
           le ayude a organizar sus registros de ganado!
         </p>
       </div>
-      <div className="w-full my-8 h-full">
-        <p className="text-4xl text-center my-12 text-gray">
+      <div className="w-full my-8 h-full cursor-pointer">
+        <p className="text-4xl text-center my-12 text-gray cursor-pointer">
           ¿Qué es Cattle Log?
         </p>
 
         <div className="flex flex-col  md:grid md:grid-cols-3 max-w-5xl mx-auto gap-3">
           <div className="h-52 w-full bg-green rounded-sm py-5 px-2  text-white hover:scale-[1.01] transition duration-500]">
-            <p className="text-2xl font-sans mb-3">Fácil de usar</p>
+            <p className="text-2xl font-sans mb-3 md:text-3xl">Fácil de usar</p>
             <p>
               ¿No eres experto en informática? No te preocupes, el programa es
               intuitivo y fácil de usar.
             </p>
           </div>
           <div className="h-52 w-full bg-green rounded-sm py-5 px-2  text-white hover:scale-[1.01] transition-all duration-500]">
-            <p className="text-2xl font-sans mb-3">Pruébalo</p>
+            <p className="text-2xl font-sans mb-3 md:text-3xl">Pruébalo</p>
             <p>
               ¡Es totalmente gratuito! No hay necesidad de pagar por un
               programa, comience a organizarse hoy!
             </p>
           </div>
           <div className="h-52 w-full bg-green rounded-sm py-5 px-2  text-white hover:scale-[1.01] transition-all duration-500]">
-            <p className="text-2xl font-sans mb-3">Ilimitado</p>
+            <p className="text-2xl font-sans mb-3 md:text-3xl">Ilimitado</p>
             <p>SIN límite en la cantidad de animales.</p>
           </div>
         </div>
