@@ -27,7 +27,7 @@ export function Form(props) {
 
   React.useEffect(() => {
     dispatch(actions.getTypesOfAnimalsAllowed());
-  }, []);
+  }, [ dispatch ]);
 
   const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
   const accessToken = localStorage.getItem("tokenCattleTracker");

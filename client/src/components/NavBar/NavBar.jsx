@@ -10,10 +10,14 @@ import LogoutButton from "../Logout/LogoutButton";
 import { BiMenu } from "react-icons/bi";
 import { VscClose } from "react-icons/vsc";
 import NavbarLink from "./NavbarLink";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "../Login/LoginButton";
 
 export function NavBar() {
+  //eslint-disable-next-line
   const dispatch = useDispatch();
   const [openMenu, setOpenMenu] = useState(false);
+  const {isLoading, isAuthenticated} = useAuth0();
 
   // React.useEffect(() => {
   //   console.log(`Limpiando new animal...`);
@@ -47,12 +51,17 @@ export function NavBar() {
       {openMenu ? (
         <div className="flex flex-col w-full h-screen z-30 pt-8 px-5 gap-3 absolute top-0 bg-white text-gray">
           <NavbarLink path="/home" text="Inicio" />
-          <NavbarLink path="/home/newAnimal" text="Agregar animal" />
           <NavbarLink path="/home/management" text="Administrar animales" />
-          <NavbarLink path="/home/profile" text="Perfil" />
+          {!isLoading && isAuthenticated ? (
+            <>
+            <NavbarLink path="/home/profile" text="Perfil" />
           <div>
             <LogoutButton />
           </div>
+            </>
+          ) : (<>
+            <LoginButton />
+          </>)}
         </div>
       ) : null}
       <div className="hidden  md:flex md:w-full md:h-20 md:justify-around md:py-5 md:px-5 md:gap-8 md:bg-white md:text-gray">
@@ -61,11 +70,7 @@ export function NavBar() {
           text="Inicio"
           divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
         />
-        <NavbarLink
-          path="/home/newAnimal"
-          divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
-          text="Agregar animal"
-        />
+
         <NavbarLink
           path="/home/management"
           divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "

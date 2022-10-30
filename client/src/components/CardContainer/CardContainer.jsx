@@ -1,7 +1,6 @@
 import React from "react";
 import { AnimalCard } from "../AnimalCard/AnimalCard";
 import { useDispatch, useSelector } from "react-redux";
-import { NavBar } from "../NavBar/NavBar";
 import {
   getAllAnimals,
   setUserAnimalsToLoading,
@@ -22,7 +21,7 @@ export function CardContainer(props) {
     console.log(tokenAccess);
     dispatch(setUserAnimalsToLoading());
     dispatch(getAllAnimals(tokenAccess));
-  }, [dispatch]);
+  }, [dispatch, tokenAccess]);
 
   return (
     <>

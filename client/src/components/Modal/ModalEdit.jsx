@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FormEdit } from "../Form/FormEdit";
 import loading from "../../assets/loading.gif";
-import { NavBar } from "../NavBar/NavBar";
 import { cleanUpdateAnimal } from "../../redux/actions/actions";
 
 import "./modal.css";

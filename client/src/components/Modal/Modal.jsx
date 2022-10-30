@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../Form/Form";
 import loading from "../../assets/loading.gif";
-import { NavBar } from "../NavBar/NavBar";
 import { cleanNewAnimal } from "../../redux/actions/actions";
 
 import "./modal.css";
@@ -14,7 +13,7 @@ export function Modal(props) {
   React.useEffect(() => {
     console.log(`Me desmontéo desmonté????`);
     dispatch(cleanNewAnimal());
-  }, []);
+  }, [ dispatch]);
 
   if (!props.show) {
     return null;
