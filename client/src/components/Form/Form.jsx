@@ -12,7 +12,9 @@ export function Form(props) {
     name: "",
     device_type: "",
     device_number: "",
-    image: "",
+    image_1: "",
+    image_2: "",
+    image_3: "",
     comments: "",
     birthday: "",
     is_pregnant: "",
@@ -60,7 +62,7 @@ export function Form(props) {
     const dataNew = await response.json();
     setLocalState({
       ...localState,
-      image: dataNew.secure_url,
+      [e.target.name]: dataNew.secure_url,
     });
     // reemplazar con un mensaje de éxito o la acción deseada
   };
@@ -98,17 +100,36 @@ export function Form(props) {
                 <legend>Tipo de animal</legend>
                 {typesOfAnimalsState?.map((type) => (
                   <div key={Math.random()}>
-                    <input
-                      type="radio"
-                      value={type}
-                      onChange={handleOnChange}
-                      name="type_of_animal"
-                      id={type}
-                      key={Math.random()}
-                    />
-                    <label htmlFor={type}>{type}</label>
+                    <label htmlFor={type} key={Math.random()}>
+                      <input
+                        type="radio"
+                        id={type}
+                        name="type_of_animal"
+                        value={`${type}`}
+                        onChange={handleOnChange}
+                      />
+                      {type}
+                    </label>
+                    <label htmlFor="">
+                      <input
+                        type="radio"
+                        name="type_of_animal"
+                        // onChange={handleOnChange}
+                      />
+                      Tester 2
+                    </label>
                   </div>
                 ))}
+                <div>
+                  <input
+                    type="radio"
+                    id="test"
+                    name="type_of_animal"
+                    value={typesOfAnimalsState[1]}
+                    onChange={handleOnChange}
+                  />{" "}
+                  <label htmlFor={typesOfAnimalsState[1]}>test</label>
+                </div>
               </fieldset>
             )}
           </div>
@@ -166,11 +187,31 @@ export function Form(props) {
             />
           </div>
           <div>
-            <label htmlFor="photo">Imagen </label>
+            <label htmlFor="photo">Imagen 1 </label>
             <input
               type="file"
               accept=".png, .jpg, .jpeg"
-              name="image"
+              name="image_1"
+              placeholder="Imagen"
+              onChange={upload}
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="photo">Imagen 2 </label>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="image_2"
+              placeholder="Imagen"
+              onChange={upload}
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="photo">Imagen 3 </label>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="image_3"
               placeholder="Imagen"
               onChange={upload}
             ></input>

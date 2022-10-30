@@ -11,7 +11,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
     device_type!: string;
     device_number!: string;
     comments?: string;
-    image?: string;
+    image_1?: string;
+    image_2?: string;
+    image_3?: string;
     birthday?: string;
     is_pregnant?: boolean;
     delivery_date?: string;
@@ -70,7 +72,15 @@ module.exports = (sequelize: any, DataTypes: any) => {
           len: [1, 3000],
         },
       },
-      image: {
+      image_1: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      image_2: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      image_3: {
         type: DataTypes.STRING,
         allowNull: true,
       },
