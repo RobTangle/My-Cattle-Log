@@ -18,6 +18,8 @@ export function checkAnimal(bodyFromReq: any): IAnimal {
     const checkedAnimal = {
       id_senasa: checkId(bodyFromReq.id_senasa),
       type_of_animal: checkTypeOfAnimal(bodyFromReq.type_of_animal),
+      breed_name: checkBreedName(bodyFromReq.breed_name),
+      location: checkLocation(bodyFromReq.location),
       weight_kg: checkWeight(bodyFromReq.weight_kg),
       name: checkName(bodyFromReq.name),
       device_type: checkDeviceType(bodyFromReq.device_type),
@@ -75,6 +77,32 @@ function checkTypeOfAnimal(argFromReq: any): ITypeOfAnimal {
   } else {
     throw new Error(`The type_of_animal "${argFromReq}" is invalid.`);
   }
+}
+
+// CHECK BREED NAME :
+function checkBreedName(breedNameFromReq: any): string | undefined {
+  if (isFalsyArgument(breedNameFromReq)) {
+    return undefined;
+  }
+  if (isStringBetween1And50CharsLong(breedNameFromReq)) {
+    return breedNameFromReq;
+  }
+  throw new Error(
+    `El valor ingresado como raza (breed name) no es válido. Ingrese una cadena de texto o deje el valor vacío.`
+  );
+}
+
+// CHECK LOCATION :
+function checkLocation(locationFromReq: any): string | undefined {
+  if (isFalsyArgument(locationFromReq)) {
+    return undefined;
+  }
+  if (isStringBetween1And50CharsLong(locationFromReq)) {
+    return locationFromReq;
+  }
+  throw new Error(
+    `El valor ingresado '${locationFromReq}' como location es inválido.`
+  );
 }
 
 // CHECK WEIGHT_KG :
