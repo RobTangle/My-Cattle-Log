@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CreateNewAnimal } from "./components/CreateNewAnimal/CreateNewAnimal";
-import { LandingPage } from "./views";
+import { LandingPage, SignUp } from "./views";
 import { Home } from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
-import { SignUp } from "./components/SignUp/SignUp";
+
 import { Management } from "./components/Management/Management";
 
 function App() {
