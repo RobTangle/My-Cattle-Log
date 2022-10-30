@@ -15,7 +15,7 @@ export const Profile = () => {
 
   React.useEffect(() => {
     dispatch(getUserInfo(token));
-  }, []);
+  }, [ dispatch, token]);
 
   function handleGoToLogin(e) {
     console.log(`handleGoToLogin disparada. Navegando a "/"...`);
