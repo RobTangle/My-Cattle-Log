@@ -2,15 +2,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { getAllAnimals, deleteAnimal } from "../../redux/actions/actions";
-import "./animalCard.css";
 import { ModalEdit } from "../Modal/ModalEdit";
 import { Link } from "react-router-dom";
+import { TbListDetails } from "react-icons/tb";
+import { BiEditAlt } from "react-icons/bi";
+import {MdDeleteOutline} from "react-icons/md";
 
-export function AnimalCard(props) {
+export function AnimalCard({animal}) {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("tokenCattleTracker");
   const [showValue, setShowValue] = React.useState(false);
-//eslint-disable-next-line
+  //eslint-disable-next-line
   function handleDelete(e) {
     // console.log(e);
     console.log(`Eliminando animal con id ${e.target.value}`);
@@ -19,7 +21,7 @@ export function AnimalCard(props) {
     dispatch(deleteAnimal(animal_id, accessToken));
     dispatch(getAllAnimals(accessToken));
   }
-//eslint-disable-next-line
+  //eslint-disable-next-line
   function handleClickEdit(e) {
     console.log(`Editando animal con id ${e.target.value}`);
   }
@@ -51,37 +53,27 @@ export function AnimalCard(props) {
   }
 
   return (
-    <div className="card">
-      <div className="prop-id"> {props.animal?.id_senasa}</div>
-      <div className="prop-type-animal">{props.animal?.type_of_animal}</div>
-      <div className="prop-weight"> {props.animal?.weight_kg}</div>
-      <div className="prop-name">{props.animal?.name}</div>
-      <div className="prop-device-type">{props.animal?.device_type}</div>
-      <div className="prop-device-number">{props.animal?.device_number}</div>
-      <div className="prop-action">
-        <button className="btn-details" value={props.animal?.id_senasa}>
-          <Link to="/home/details">Detalles</Link>
-        </button>
-        <button
-          className="btn-edit"
-          value={props.animal?.id_senasa}
-          onClick={showModal}
-        >
-          Edit
-        </button>
-        <button
-          className="btn-delete"
-          value={props.animal?.id_senasa}
-          onClick={handleDeleteWithPrompt}
-        >
-          Delete
-        </button>
-        <ModalEdit
-          show={showValue}
-          setShowValue={setShowValue}
-          animal={props.animal}
-        />
-      </div>
+    <div className="flex gap-3">
+      <button className="btn-details" value={animal?.id_senasa}>
+        <Link to="/home/details">
+          <TbListDetails />
+        </Link>
+      </button>
+      <button
+        className="btn-edit"
+        value={animal?.id_senasa}
+        onClick={showModal}
+      >
+        <BiEditAlt />
+      </button>
+      <button
+        className="btn-delete"
+        value={animal?.id_senasa}
+        onClick={handleDeleteWithPrompt}
+      >
+        <MdDeleteOutline/>
+      </button>
+      <ModalEdit show={showValue} setShowValue={setShowValue} animal={animal} />
     </div>
   );
 }
