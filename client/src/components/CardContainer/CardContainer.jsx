@@ -45,7 +45,6 @@ export function CardContainer(props) {
           Oops! Hubo un error. {userAnimalsState.error}
         </div>
       ) : null}
-      <Pagination />
     </div>
   );
 }

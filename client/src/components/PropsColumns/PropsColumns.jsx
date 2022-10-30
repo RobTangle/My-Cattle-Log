@@ -1,7 +1,16 @@
 import React from "react";
+import { useState } from "react";
 import { AnimalCard } from "../AnimalCard/AnimalCard";
+import { Pagination } from "../Pagination/Pagination";
 export function PropsColumns({ animals }) {
-  console.log(animals);
+  const [page, setPage] = useState(1);
+  const showPerPage = 4;
+  const lastOnPage = page * showPerPage;
+  const firstOnPage = lastOnPage - showPerPage;
+  const currentAnimals = animals.slice(firstOnPage, lastOnPage);
+  function pagination(pageNumber) {
+    setPage(pageNumber);
+  }
   return (
     <div className=" bg-white rounded-md w-full  ">
       <div className="  overflow-x-auto">
@@ -34,7 +43,7 @@ export function PropsColumns({ animals }) {
               </tr>
             </thead>
             <tbody className="text-gray">
-              {animals?.map((animal) => (
+              {currentAnimals?.map((animal) => (
                 <tr key={Math.random()} className="text-left">
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <div className="flex items-center">
@@ -79,6 +88,13 @@ export function PropsColumns({ animals }) {
               ))}{" "}
             </tbody>
           </table>
+          <Pagination
+            animals={animals?.length}
+            showPerPage={showPerPage}
+            page={page}
+            pagination={pagination}
+            setPage={setPage}
+          />
         </div>
       </div>
     </div>

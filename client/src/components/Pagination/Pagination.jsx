@@ -1,32 +1,25 @@
 import React from "react";
 
 export const Pagination = ({
+  animals,
+  showPerPage,
   page,
-  setPage,
-  maxPages,
-  animalsRendered,
-  quantity,
+  pagination,
 }) => {
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(animalsRendered?.length / quantity); i++) {
+
+  const total = animals && Math.ceil(animals / showPerPage);
+  for (let i = 1; i <= Math.ceil(total); i++) {
     pageNumbers.push(i);
   }
 
-  const nextPage = () => {
-    setPage(parseInt(page) + 1);
-  };
-
-  const previousPage = () => {
-    setPage(parseInt(page) - 1);
-  };
-
   return (
-    <div key={Math.random()} className="paginacion">
-      <div className="pagination-buttons">
+    <div key={Math.random()} className="flex flex-col items-center w-full">
+      <div className="flex">
         <button
-          className="svg-left"
-          disabled={page === 1 || page < 1}
-          onClick={previousPage}
+          className="bg-transparent border border-1  rounded text-black font-bold py-1 px-2"
+          onClick={page > 1 ? () => pagination(page - 1) : null}
+          hidden={page === 1 ? true : false}
         >
           <svg
             width="24px"
@@ -44,16 +37,25 @@ export const Pagination = ({
         {pageNumbers ? (
           <div className="page-number-buttons">
             {pageNumbers.map((n) => (
-              <div className="page-number" key={n}>
-                <button onClick={() => setPage(n)}> {n} </button>
-              </div>
+              <button
+                key={n}
+                className={
+                  page !== n
+                    ? "bg-transparent border border-1 border-green rounded text-black font-bold py-1 px-2"
+                    : "bg-green border border-1 border-green rounded text-gray-50 text-black font-bold py-1 px-2"
+                }
+                hidden={n >= page + 2 || n <= page - 2 ? true : false}
+                onClick={() => pagination(n)}
+              >
+                {n}
+              </button>
             ))}
           </div>
         ) : null}
         <button
-          className="svg-right"
-          disabled={page === Math.ceil(maxPages) || page > Math.ceil(maxPages)}
-          onClick={nextPage}
+          className="bg-transparent border border-1  rounded text-black font-bold py-1 px-2"
+          onClick={page < total ? () => pagination(page + 1) : null}
+          hidden={page === total ? true : false}
         >
           <svg
             width="24px"
@@ -68,12 +70,6 @@ export const Pagination = ({
             />
           </svg>
         </button>
-      </div>
-      <div>
-        <p>
-          {" "}
-          {page} of {Math.ceil(maxPages)}{" "}
-        </p>
       </div>
     </div>
   );
