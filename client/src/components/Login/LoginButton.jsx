@@ -10,7 +10,6 @@ const LoginButton = () => {
     isAuthenticated,
     getAccessTokenSilently,
     isLoading,
-    logout,
   } = useAuth0();
   const navigate = useNavigate();
 
@@ -25,13 +24,13 @@ const LoginButton = () => {
             Authorization: `Bearer ${claims}`,
           },
         });
-        console.log(existe.data.msg);
 
         if (existe.data.msg) {
           console.log(
             "Usuario existe en la DB. Redireccionando/navigate a /home"
           );
-          navigate("/home");
+          if (!isLoading && isAuthenticated) {
+           navigate("/home");}
         }
         if (existe.data.msg === false) {
           console.log(`Usuario no existe en la DB. Navigate to "/register"`);
