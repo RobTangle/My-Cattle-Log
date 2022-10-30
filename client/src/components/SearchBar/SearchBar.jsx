@@ -31,7 +31,7 @@ export function SearchBar() {
     dispatch(searchQuery(input.inputValue, accessToken));
   }
   return (
-    <div className="w-full flex flex-col text-gray px-3">
+    <div className="w-full flex flex-col text-gray px-3 py-5 my-5 bg-gray/10">
       <form
         action=""
         onSubmit={handleSubmit}

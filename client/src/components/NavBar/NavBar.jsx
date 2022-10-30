@@ -28,7 +28,7 @@ export function NavBar() {
   };
 
   return (
-    <div className="w-full h-full bg-white text-green font-semibold flex justify-around items-center mx-w-7xl mx-auto">
+    <div className="w-full h-full bg-white text-green font-semibold flex justify-around items-center mx-w-7xl mx-auto md:border md:border-b-4 md:border-green ">
       <div className="md:hidden">
         {openMenu ? (
           <button
