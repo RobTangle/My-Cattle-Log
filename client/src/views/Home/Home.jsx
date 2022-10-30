@@ -104,7 +104,7 @@ export function Home() {
   return (
     <div className="max-w-7xl mx-auto">
       <NavBar />
-      <div className="w-full mt-16 md:mt-3 h-44 md:h-72 bg-home bg-cover bg-center text-right flex flex-col justify-end px-5 py-3 items-end ">
+      <div className="w-full mt-16 md:mt-3 h-44 md:h-80 bg-home bg-cover bg-center text-right flex flex-col justify-end px-5 py-3 md:py-8 items-end ">
         <p className="text-white text-2xl font-semibold font-sans [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:text-4xl">
           Cattle Log{" "}
         </p>
