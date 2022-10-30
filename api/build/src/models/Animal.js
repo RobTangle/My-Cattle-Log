@@ -33,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         name: {
             type: DataTypes.STRING(200),
-            allowNull: false,
+            defaultValue: "Sin nombre",
+            allowNull: true,
             validate: {
                 len: [1, 200],
             },
@@ -61,6 +62,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
         birthday: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,
+        },
+        is_pregnant: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: true,
+        },
+        delivery_date: {
             type: DataTypes.DATEONLY,
             allowNull: true,
         },
