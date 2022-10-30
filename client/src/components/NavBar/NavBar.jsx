@@ -10,6 +10,7 @@ import { cleanNewAnimal } from "../../redux/actions/actions";
 import LogoutButton from "../Logout/LogoutButton";
 import { BiMenu } from "react-icons/bi";
 import { VscClose } from "react-icons/vsc";
+import NavbarLink from "./NavbarLink";
 
 export function NavBar() {
   const dispatch = useDispatch();
@@ -64,18 +65,10 @@ export function NavBar() {
         </div>
       ) : null}
       <div className="hidden  md:flex md:w-full md:h-20 md:justify-around md:py-5 md:px-5 md:gap-8 md:bg-white md:text-gray">
-        <div className="navbar-div">
-          <Link to="/home">Home</Link>
-        </div>
-        <div className="navbar-div">
-          <Link to="/home/newAnimal">Create new animal</Link>
-        </div>
-        <div className="navbar-div">
-          <Link to="/home/management">Animal Management</Link>
-        </div>
-        <div className="navbar-div">
-          <Link to="/home/profile">Profile</Link>
-        </div>
+        <NavbarLink path="/home" text="Inicio" />
+        <NavbarLink path="/home/newAnimal" text="Agregar animal" />
+        <NavbarLink path="/home/management" text="Administrar animales" />
+        <NavbarLink path="/home/profile" text="Perfil" />
         <div>
           <LogoutButton />
         </div>

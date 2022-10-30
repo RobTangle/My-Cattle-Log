@@ -11,7 +11,7 @@ export const LogoutButton = () => {
         logout({ returnTo: window.location.origin });
       }}
     >
-      Log Out
+      Cerrar sesión
     </button>
   );
 };
