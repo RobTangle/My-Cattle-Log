@@ -6,6 +6,7 @@ const generic_validators_1 = require("./generic-validators");
 // CHECK ANIMAL :
 // This function is the main function that validates the data recived in the request for a POST of a new animal or a PUT for updating an Animal.
 // It uses many other auxiliary functions to make sure all the data from the request is valid before trying to store a new instance of Animal in the Data Base.
+// This function not only checks de data, but algo parses de name by forcing an toLowerCase() so the names are saved in all lower cases for a couple of different reasons regarding speed, performance and better practices.
 function checkAnimal(bodyFromReq) {
     try {
         console.log(`Checking Animal...`);
@@ -16,6 +17,9 @@ function checkAnimal(bodyFromReq) {
             name: checkName(bodyFromReq.name),
             device_type: checkDeviceType(bodyFromReq.device_type),
             device_number: checkDeviceNumber(bodyFromReq.device_number),
+            image: checkImage(bodyFromReq.image),
+            comments: checkComments(bodyFromReq.comments),
+            birthday: checkBirthday(bodyFromReq.birthday),
         };
         return checkedAnimal;
     }
@@ -76,12 +80,42 @@ function checkWeight(argFromReq) {
     }
     throw new Error(`The weight_kg "${argFromReq}" is invalid.`);
 }
-// CHECK NAME:
+// CHECK NAME: (algo forces lower cases)
 function checkName(argFromReq) {
     if ((0, generic_validators_1.isStringBetween1AndXCharsLong)(200, argFromReq)) {
-        return argFromReq;
+        return argFromReq.toLowerCase();
     }
     else {
         throw new Error(`The name "${argFromReq}" es invalid.`);
     }
+}
+// CHECK IMAGE :
+function checkImage(imageFromReq) {
+    if ((0, generic_validators_1.isFalsyArgument)(imageFromReq)) {
+        return undefined;
+    }
+    if ((0, generic_validators_1.isValidURLImage)(imageFromReq)) {
+        return imageFromReq;
+    }
+    throw new Error(`La imagen ingresada '${imageFromReq}' no es válida.`);
+}
+// CHECK COMMENTS :
+function checkComments(commentsFromReq) {
+    if ((0, generic_validators_1.isFalsyArgument)(commentsFromReq)) {
+        return undefined;
+    }
+    if ((0, generic_validators_1.isStringBetween1AndXCharsLong)(3000, commentsFromReq)) {
+        return commentsFromReq;
+    }
+    throw new Error(`El comentario ingresado es inválido. Ingrese un valor falso, o un string entre 1 y 3000 caracteres.`);
+}
+// CHECK BIRTHDAY :
+function checkBirthday(birthdayFromReq) {
+    if ((0, generic_validators_1.isFalsyArgument)(birthdayFromReq)) {
+        return undefined;
+    }
+    if ((0, generic_validators_1.isStringBetween1AndXCharsLong)(10, birthdayFromReq)) {
+        return birthdayFromReq;
+    }
+    throw new Error(`Error al validar el birthday.`);
 }

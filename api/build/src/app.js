@@ -15,6 +15,7 @@ app.use(express_1.default.json());
 app.use(morgan("dev"));
 app.use((0, cors_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
+// app.use(jwtCheck);
 // routes middlewares:
 app.use("/test", test_1.default);
 app.use("/animal", animal_routes_1.default);

@@ -30,7 +30,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 }));
 // POST NEW USER
-router.post("/", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/register", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log(`REQ.BODY =`);
         console.log(req.body);
@@ -45,6 +45,24 @@ router.post("/", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, void 0
     }
     catch (error) {
         console.log(`Error en ruta POST "user/". ${error.message}`);
+        return res.status(400).send({ error: error.message });
+    }
+}));
+router.get("/existsInDB", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const reqAuth = req.auth;
+        const userId = reqAuth.sub;
+        const isUserRegisteredinDB = yield (0, user_r_auxiliary_1.userIsRegisteredInDB)(userId);
+        if (isUserRegisteredinDB) {
+            return res.status(200).send({ msg: true });
+        }
+        if (!isUserRegisteredinDB) {
+            console.log(`Usuario no encontrado en la DB.`);
+            return res.status(200).send({ msg: false });
+        }
+    }
+    catch (error) {
+        console.log(`Error en GET "/user/existsInDB. ${error.message}`);
         return res.status(400).send({ error: error.message });
     }
 }));

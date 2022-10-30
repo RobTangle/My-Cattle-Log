@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isEmail = exports.isTypeofNumber = exports.isValidSenasaId = exports.isUndefinedOrNull = exports.isFalsyArgument = exports.isStringBetween1AndXCharsLong = exports.isStringBetween1And50CharsLong = exports.isStringBetween1And101CharsLong = exports.isEmptyString = exports.isValidString = exports.isStringXCharsLong = exports.isString = void 0;
+exports.isValidURLImage = exports.isEmail = exports.isTypeofNumber = exports.isValidSenasaId = exports.isUndefinedOrNull = exports.isFalsyArgument = exports.isStringBetween1AndXCharsLong = exports.isStringBetween1And50CharsLong = exports.isStringBetween1And101CharsLong = exports.isEmptyString = exports.isValidString = exports.isStringXCharsLong = exports.isString = void 0;
 // IS STRING:
 function isString(argumento) {
     if (typeof argumento !== "string") {
@@ -124,3 +124,12 @@ function isEmail(argumento) {
     return regex.test(argumento);
 }
 exports.isEmail = isEmail;
+// IS VALID URL:
+function isValidURLImage(argumento) {
+    if (typeof argumento !== "string") {
+        return false;
+    }
+    return (argumento.match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gim) !==
+        null);
+}
+exports.isValidURLImage = isValidURLImage;

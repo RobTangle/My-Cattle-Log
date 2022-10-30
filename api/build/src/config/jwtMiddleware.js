@@ -3,16 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
 const JWKS_URI = process.env.JWKS_URI;
 const JWT_ISSUER = process.env.JWT_ISSUER;
+const JWT_AUDIENCE = process.env.JWT_AUDIENCE;
 const { expressjwt: jwt } = require("express-jwt");
 const jwks = require("jwks-rsa");
 var jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
         cache: true,
         rateLimit: true,
-        jwksRequestsPerMinute: 10,
+        jwksRequestsPerMinute: 15,
         jwksUri: JWKS_URI,
     }),
-    audience: "https://cattle-tracker-api.com",
+    audience: JWT_AUDIENCE,
     issuer: JWT_ISSUER,
     algorithms: ["RS256"],
 });
