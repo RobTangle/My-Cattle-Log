@@ -15,13 +15,8 @@ export function Home() {
   //   dispatch(cleanNewAnimal());
   // }, []);
 
-  const {
-    user,
-    isAuthenticated,
-    getAccessTokenSilently,
-    isLoading,
-    logout,
-  } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently, isLoading, logout } =
+    useAuth0();
 
   const navigate = useNavigate();
 
@@ -64,7 +59,7 @@ export function Home() {
       //Si no está autenticado, lo mando al landing para que haga el login.
       navigate("/");
     }
-  }, [isLoading]);
+  }, [isLoading, isAuthenticated]);
 
   async function handleValidation(user, isAuthenticated) {
     console.log("En handleValidation.");
@@ -109,7 +104,15 @@ export function Home() {
   return (
     <div className="max-w-7xl mx-auto">
       <NavBar />
-      <div>ESTE ES EL HOME! WELCOME!</div>
+      <div className="w-full mt-16 md:mt-3 h-44 md:h-60 bg-home bg-cover bg-center text-right flex flex-col justify-end px-5 py-3 items-end ">
+        <p className="text-white text-2xl font-semibold font-sans [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:text-4xl">
+          Cattle Log{" "}
+        </p>
+        <p className="text-white md:text-2xl font-semibold [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:w-3/4">
+          ¿Está utilizando papel y lápiz o Microsoft Excel? ¡Deje que Cattle Log
+          le ayude a organizar sus registros de ganado!
+        </p>
+      </div>
       <SearchBar />
     </div>
   );
