@@ -6,7 +6,9 @@ export interface IAnimal {
   device_type: string;
   device_number: string;
   comments?: string;
-  image?: string;
+  image_1?: string;
+  image_2?: string;
+  image_3?: string;
   birthday?: string;
   is_pregnant?: boolean;
   delivery_date?: string;
