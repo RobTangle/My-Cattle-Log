@@ -4,12 +4,14 @@ import {
   isFalsyArgument,
   isStringBetween1And101CharsLong,
   isStringBetween1And50CharsLong,
+  isValidURLImage,
 } from "./generic-validators";
 
 export function checkUser(
   idFromReq: any,
   nameFromReq: any,
-  emailFromReq: any
+  emailFromReq: any,
+  profile_img: any
 ): IUser {
   console.log(`Checking User...`);
   try {
@@ -17,6 +19,7 @@ export function checkUser(
       id: checkUserId(idFromReq),
       name: checkUserName(nameFromReq),
       email: checkEmail(emailFromReq),
+      profile_img: checkProfileImg(profile_img),
     };
     return checkedUser;
   } catch (error: any) {
@@ -34,6 +37,7 @@ function checkUserId(idFromReq: any): string {
   }
 }
 
+// CHECK USER NAME :
 function checkUserName(nameFromReq: any): string | undefined {
   if (isFalsyArgument(nameFromReq)) {
     return undefined;
@@ -45,10 +49,21 @@ function checkUserName(nameFromReq: any): string | undefined {
   }
 }
 
-//CHECK VALID EMAIL
+//CHECK VALID EMAIL :
 export function checkEmail(emailFromReq: any): string {
   if (isEmail(emailFromReq)) {
     return emailFromReq;
   }
   throw new Error(`El email ingresado "${emailFromReq}" no es válido.`);
+}
+
+// CHECK PROFILE IMAGE :
+export function checkProfileImg(profileImgFromReq: any): string | undefined {
+  if (isFalsyArgument(profileImgFromReq)) {
+    return undefined;
+  }
+  if (isValidURLImage(profileImgFromReq)) {
+    return profileImgFromReq;
+  }
+  throw new Error(`Error al validar profile image.`);
 }

@@ -4,6 +4,7 @@ import {
   POST_ANIMAL,
   REGISTER_NEW_USER,
   SEARCH_QUERY,
+  URL_GET_USER_INFO,
 } from "../../constants/urls";
 import {
   SET_NEW_ANIMAL_TO_LOADING,
@@ -17,6 +18,7 @@ import {
   CLEAN_UPDATE_ANIMAL,
   SET_UPDATE_ANIMAL_TO_LOADING,
   CLEAR_FETCHED_ANIMALS,
+  GET_USER_INFO,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -218,5 +220,23 @@ export function setUpdateAnimalToLoading() {
         payload: { loading: true },
       });
     } catch (error) {}
+  };
+}
+
+export function getUserInfo(token) {
+  return async function (dispatch) {
+    try {
+      let response = await axios.get(URL_GET_USER_INFO, header(token));
+
+      return dispatch({
+        type: GET_USER_INFO,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: GET_USER_INFO,
+        payload: { error: error.response?.data?.error },
+      });
+    }
   };
 }
