@@ -5,7 +5,7 @@ import {
   setFetchedAnimalsToLoading,
   clearFetchedAnimals,
 } from "../../redux/actions/actions";
-import "./searchBar.css";
+
 
 export function SearchBar() {
   const dispatch = useDispatch();

@@ -59,7 +59,7 @@ export function Home() {
       //Si no está autenticado, lo mando al landing para que haga el login.
       navigate("/");
     }
-  }, [isLoading, isAuthenticated]);
+  }, [isLoading, isAuthenticated, navigate, user]);
 
   async function handleValidation(user, isAuthenticated) {
     console.log("En handleValidation.");
@@ -104,7 +104,7 @@ export function Home() {
   return (
     <div className="max-w-7xl mx-auto">
       <NavBar />
-      <div className="w-full mt-16 md:mt-3 h-44 md:h-60 bg-home bg-cover bg-center text-right flex flex-col justify-end px-5 py-3 items-end ">
+      <div className="w-full mt-16 md:mt-3 h-44 md:h-72 bg-home bg-cover bg-center text-right flex flex-col justify-end px-5 py-3 items-end ">
         <p className="text-white text-2xl font-semibold font-sans [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:text-4xl">
           Cattle Log{" "}
         </p>
@@ -113,7 +113,32 @@ export function Home() {
           le ayude a organizar sus registros de ganado!
         </p>
       </div>
-      <SearchBar />
+      <div className="w-full my-8 h-full">
+        <p className="text-4xl text-center my-12 text-gray">
+          ¿Qué es Cattle Log?
+        </p>
+
+        <div className="flex flex-col  md:grid md:grid-cols-3 max-w-5xl mx-auto gap-3">
+          <div className="h-52 w-full bg-green rounded-sm py-5 px-2  text-white hover:scale-[1.01] transition duration-500]">
+            <p className="text-2xl font-sans mb-3">Fácil de usar</p>
+            <p>
+              ¿No eres experto en informática? No te preocupes, el programa es
+              intuitivo y fácil de usar.
+            </p>
+          </div>
+          <div className="h-52 w-full bg-green rounded-sm py-5 px-2  text-white hover:scale-[1.01] transition-all duration-500]">
+            <p className="text-2xl font-sans mb-3">Pruébalo</p>
+            <p>
+              ¡Es totalmente gratuito! No hay necesidad de pagar por un
+              programa, comience a organizarse hoy!
+            </p>
+          </div>
+          <div className="h-52 w-full bg-green rounded-sm py-5 px-2  text-white hover:scale-[1.01] transition-all duration-500]">
+            <p className="text-2xl font-sans mb-3">Ilimitado</p>
+            <p>SIN límite en la cantidad de animales.</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
