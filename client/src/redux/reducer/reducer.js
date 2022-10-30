@@ -12,6 +12,7 @@ import {
   SET_UPDATE_ANIMAL_TO_LOADING,
   CLEAR_FETCHED_ANIMALS,
   GET_USER_INFO,
+  GET_TYPES_OF_ANIMALS,
 } from "../actions/types";
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
   },
   deletedAnimal: { pure: true },
   updatedAnimal: { pure: true },
+  typesOfAnimals: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -92,6 +94,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userInfo: action.payload,
+      };
+    case GET_TYPES_OF_ANIMALS:
+      return {
+        ...state,
+        typesOfAnimals: action.payload,
       };
     default:
       return state;

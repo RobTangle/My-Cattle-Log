@@ -5,6 +5,7 @@ import {
   REGISTER_NEW_USER,
   SEARCH_QUERY,
   URL_GET_USER_INFO,
+  URL_GET_TYPES_OF_ANIMALS,
 } from "../../constants/urls";
 import {
   SET_NEW_ANIMAL_TO_LOADING,
@@ -19,6 +20,7 @@ import {
   SET_UPDATE_ANIMAL_TO_LOADING,
   CLEAR_FETCHED_ANIMALS,
   GET_USER_INFO,
+  GET_TYPES_OF_ANIMALS,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -236,6 +238,27 @@ export function getUserInfo(token) {
       return dispatch({
         type: GET_USER_INFO,
         payload: { error: error.response?.data?.error },
+      });
+    }
+  };
+}
+
+export function getTypesOfAnimalsAllowed() {
+  return async function (dispatch) {
+    try {
+      console.log("Buscando tipos de animales permitidos...");
+      const response = await axios.get(URL_GET_TYPES_OF_ANIMALS);
+      const typesOfAnimals = response.data;
+      console.log(`Tipos de animales permitidos: `, typesOfAnimals);
+      return dispatch({
+        type: GET_TYPES_OF_ANIMALS,
+        payload: typesOfAnimals,
+      });
+    } catch (error) {
+      console.log(error.message);
+      return dispatch({
+        type: GET_TYPES_OF_ANIMALS,
+        payload: { error: error?.response?.data?.error },
       });
     }
   };
