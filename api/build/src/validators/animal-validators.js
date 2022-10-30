@@ -20,6 +20,8 @@ function checkAnimal(bodyFromReq) {
             image: checkImage(bodyFromReq.image),
             comments: checkComments(bodyFromReq.comments),
             birthday: checkBirthday(bodyFromReq.birthday),
+            is_pregnant: checkIsPregnant(bodyFromReq.is_pregnant),
+            delivery_date: checkDeliveryDate(bodyFromReq.delivery_date),
         };
         return checkedAnimal;
     }
@@ -82,6 +84,9 @@ function checkWeight(argFromReq) {
 }
 // CHECK NAME: (algo forces lower cases)
 function checkName(argFromReq) {
+    if ((0, generic_validators_1.isFalsyArgument)(argFromReq)) {
+        return undefined;
+    }
     if ((0, generic_validators_1.isStringBetween1AndXCharsLong)(200, argFromReq)) {
         return argFromReq.toLowerCase();
     }
@@ -109,7 +114,7 @@ function checkComments(commentsFromReq) {
     }
     throw new Error(`El comentario ingresado es inválido. Ingrese un valor falso, o un string entre 1 y 3000 caracteres.`);
 }
-// CHECK BIRTHDAY :
+//! CHECK BIRTHDAY : (corregir validación de Date con librería externa)
 function checkBirthday(birthdayFromReq) {
     if ((0, generic_validators_1.isFalsyArgument)(birthdayFromReq)) {
         return undefined;
@@ -118,4 +123,24 @@ function checkBirthday(birthdayFromReq) {
         return birthdayFromReq;
     }
     throw new Error(`Error al validar el birthday.`);
+}
+// CHECK IS PREGNANT :
+function checkIsPregnant(isPregnantFromReq) {
+    if ((0, generic_validators_1.isFalsyArgument)(isPregnantFromReq)) {
+        return undefined;
+    }
+    if (isPregnantFromReq === true || isPregnantFromReq === false) {
+        return isPregnantFromReq;
+    }
+    throw new Error(`El dato ingresado como 'isPregnant' es inválido. Ingrese undefined | null, o un valor booleano.`);
+}
+//! CHECK DELIVERY DATE : (corregir validación de Date con librería externa)
+function checkDeliveryDate(deliveryDateFromReq) {
+    if ((0, generic_validators_1.isFalsyArgument)(deliveryDateFromReq)) {
+        return undefined;
+    }
+    if ((0, generic_validators_1.isStringBetween1AndXCharsLong)(10, deliveryDateFromReq)) {
+        return deliveryDateFromReq;
+    }
+    throw new Error(`La fecha de parto '${deliveryDateFromReq} no es válida.`);
 }

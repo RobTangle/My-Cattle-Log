@@ -7,12 +7,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
     id_senasa!: string;
     type_of_animal!: ITypeOfAnimal;
     weight_kg?: number;
-    name!: string;
+    name?: string;
     device_type!: string;
     device_number!: string;
     comments?: string;
     image?: string;
     birthday?: string;
+    is_pregnant?: boolean;
+    delivery_date?: string;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -44,7 +46,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       name: {
         type: DataTypes.STRING(200),
-        allowNull: false,
+        defaultValue: "Sin nombre",
+        allowNull: true,
         validate: {
           len: [1, 200],
         },
@@ -72,6 +75,15 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: true,
       },
       birthday: {
+        type: DataTypes.DATEONLY,
+        allowNull: true,
+      },
+      is_pregnant: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: true,
+      },
+      delivery_date: {
         type: DataTypes.DATEONLY,
         allowNull: true,
       },
