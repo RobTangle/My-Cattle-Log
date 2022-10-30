@@ -31,6 +31,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             unique: true,
         },
+        profile_img: {
+            type: DataTypes.STRING,
+            defaultValue: "https://thumbs.dreamstime.com/t/farmer-icon-badge-style-one-farm-collection-icon-can-be-used-ui-ux-farmer-icon-badge-style-one-farm-collection-124009969.jpg",
+            allowNull: true,
+        },
     }, {
         sequelize,
         modelName: "User",

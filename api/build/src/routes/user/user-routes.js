@@ -36,9 +36,9 @@ router.post("/register", jwtMiddleware_1.default, (req, res) => __awaiter(void 0
         console.log(req.body);
         const reqAuth = req.auth;
         const userId = reqAuth.sub;
-        const { name, email } = req.body;
+        const { name, email, profile_img } = req.body;
         yield (0, user_r_auxiliary_1.emailExistsInDataBase)(email);
-        const validatedUser = (0, user_validators_1.checkUser)(userId, name, email);
+        const validatedUser = (0, user_validators_1.checkUser)(userId, name, email, profile_img);
         const newUser = yield models_1.default.User.create(validatedUser);
         console.log(newUser.toJSON());
         return res.status(200).send(newUser);
@@ -63,6 +63,22 @@ router.get("/existsInDB", jwtMiddleware_1.default, (req, res) => __awaiter(void 
     }
     catch (error) {
         console.log(`Error en GET "/user/existsInDB. ${error.message}`);
+        return res.status(400).send({ error: error.message });
+    }
+}));
+router.get("/userInfo", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const reqAuth = req.auth;
+        const userId = reqAuth.sub;
+        // await throwErrorIfUserIsNotRegisteredInDB(userId);
+        const userInfo = yield models_1.default.User.findByPk(userId);
+        if (!userInfo) {
+            throw new Error(`El usuario con id '${userId}'no fue encontrado en la Data Base`);
+        }
+        return res.status(200).send(userInfo);
+    }
+    catch (error) {
+        console.log(`Error en 'user/userInfo'. ${error.message}`);
         return res.status(400).send({ error: error.message });
     }
 }));

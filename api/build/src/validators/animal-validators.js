@@ -31,7 +31,7 @@ function checkAnimal(bodyFromReq) {
     }
 }
 exports.checkAnimal = checkAnimal;
-// CHECK DEVICE_TYPE:
+// CHECK DEVICE_TYPE :
 function checkDeviceType(argFromReq) {
     if ((0, generic_validators_1.isStringBetween1And50CharsLong)(argFromReq)) {
         return argFromReq;
@@ -40,7 +40,7 @@ function checkDeviceType(argFromReq) {
         throw new Error(`The device_type "${argFromReq}" is invalid.`);
     }
 }
-// CHECK DEVICE_NUMBER:
+// CHECK DEVICE_NUMBER :
 function checkDeviceNumber(argFromReq) {
     if ((0, generic_validators_1.isStringXCharsLong)(8, argFromReq)) {
         return argFromReq;
@@ -49,7 +49,7 @@ function checkDeviceNumber(argFromReq) {
         throw new Error(`The device_number "${argFromReq}" is invalid.`);
     }
 }
-// CHECK ID_SENASA:
+// CHECK ID_SENASA :
 function checkId(idFromReq) {
     if ((0, generic_validators_1.isValidSenasaId)(idFromReq)) {
         return idFromReq;
@@ -71,7 +71,7 @@ function checkTypeOfAnimal(argFromReq) {
         throw new Error(`The type_of_animal "${argFromReq}" is invalid.`);
     }
 }
-// CHECK WEIGHT_KG:
+// CHECK WEIGHT_KG :
 function checkWeight(argFromReq) {
     if ((0, generic_validators_1.isFalsyArgument)(argFromReq)) {
         return undefined;
@@ -119,7 +119,7 @@ function checkBirthday(birthdayFromReq) {
     if ((0, generic_validators_1.isFalsyArgument)(birthdayFromReq)) {
         return undefined;
     }
-    if ((0, generic_validators_1.isStringBetween1AndXCharsLong)(10, birthdayFromReq)) {
+    if ((0, generic_validators_1.isStringXCharsLong)(10, birthdayFromReq)) {
         return birthdayFromReq;
     }
     throw new Error(`Error al validar el birthday.`);
@@ -139,7 +139,7 @@ function checkDeliveryDate(deliveryDateFromReq) {
     if ((0, generic_validators_1.isFalsyArgument)(deliveryDateFromReq)) {
         return undefined;
     }
-    if ((0, generic_validators_1.isStringBetween1AndXCharsLong)(10, deliveryDateFromReq)) {
+    if ((0, generic_validators_1.isStringXCharsLong)(10, deliveryDateFromReq)) {
         return deliveryDateFromReq;
     }
     throw new Error(`La fecha de parto '${deliveryDateFromReq} no es válida.`);
