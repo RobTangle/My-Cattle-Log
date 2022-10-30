@@ -4,7 +4,10 @@ import { IAnimal } from "../../types/animal-types";
 import jwtCheck from "../../config/jwtMiddleware";
 import { Router } from "express";
 import { IReqAuth } from "../../types/user-types";
-import { userIsRegisteredInDB } from "../user/user-r-auxiliary";
+import {
+  throwErrorIfUserIsNotRegisteredInDB,
+  userIsRegisteredInDB,
+} from "../user/user-r-auxiliary";
 import { Op } from "sequelize";
 import { typesOfAnimalsToArray } from "./animal-r-auxiliary";
 const router = Router();
@@ -30,17 +33,22 @@ router.get("/", jwtCheck, async (req: any, res) => {
 });
 
 // SEARCH BY QUERY :
-router.get("/search", jwtCheck, async (req, res) => {
+router.get("/search", jwtCheck, async (req: any, res) => {
   try {
     console.log(`Buscando por query...`);
     console.log(req.query);
     let queryValue = req.query.value;
+    const reqAuth: IReqAuth = req.auth;
+    const userId = reqAuth.sub;
+    await throwErrorIfUserIsNotRegisteredInDB(userId);
+
     if (typeof queryValue === "string") {
       queryValue.toLowerCase();
     }
     const searchedResults: IAnimal[] = await db.Animal.findAll({
       where: {
         [Op.or]: [{ id_senasa: queryValue }, { name: queryValue }],
+        UserId: userId,
       },
     });
     console.log(`Largo de searchedResults = ${searchedResults?.length}`);
@@ -82,10 +90,12 @@ router.post("/", jwtCheck, async (req: any, res) => {
   try {
     const reqAuth: IReqAuth = req.auth;
     const userId = reqAuth.sub;
-    let userIsRegistered = await userIsRegisteredInDB(userId);
-    if (userIsRegistered !== true) {
-      throw new Error(`No se encontró al usuario registrado en la DB`);
-    }
+    await throwErrorIfUserIsNotRegisteredInDB(userId);
+    // let userIsRegistered = await userIsRegisteredInDB(userId);
+    // if (userIsRegistered !== true) {
+    //   throw new Error(`No se encontró al usuario registrado en la DB`);
+    // }
+
     console.log(`REQ.BODY = `);
     console.log(req.body);
     const validatedNewAnimal = checkAnimal(req.body);
@@ -108,6 +118,13 @@ router.put("/", jwtCheck, async (req: any, res) => {
     console.log(req.body);
     const reqAuth: IReqAuth = req.auth;
     const userId = reqAuth.sub;
+
+    // let userIsRegistered = await userIsRegisteredInDB(userId);
+    // if (userIsRegistered !== true) {
+    //   throw new Error(`No se encontró al usuario registrado en la DB`);
+    // }
+    await throwErrorIfUserIsNotRegisteredInDB(userId);
+
     const validatedAnimal: IAnimal = checkAnimal(req.body);
     const updatedAnimal = await db.Animal.update(
       { ...validatedAnimal },
@@ -140,9 +157,11 @@ router.delete("/delete/:id_senasa", jwtCheck, async (req: any, res) => {
     if (!id_senasaFromParams) {
       throw new Error(`El id de senasa no puede ser falso.`);
     }
+    await throwErrorIfUserIsNotRegisteredInDB(userId);
     let deletedAnimal = await db.Animal.destroy({
       where: {
         id_senasa: id_senasaFromParams,
+        UserId: userId,
       },
     });
     console.log(deletedAnimal);
