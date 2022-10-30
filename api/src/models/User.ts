@@ -7,6 +7,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     id!: string;
     name?: string;
     email!: string;
+    profile_img?: string;
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -35,6 +36,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+      },
+      profile_img: {
+        type: DataTypes.STRING,
+        defaultValue:
+          "https://thumbs.dreamstime.com/t/farmer-icon-badge-style-one-farm-collection-icon-can-be-used-ui-ux-farmer-icon-badge-style-one-farm-collection-124009969.jpg",
+        allowNull: true,
       },
     },
     {
