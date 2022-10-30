@@ -6,6 +6,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
   class Animal extends Model<IAnimal> implements IAnimal {
     id_senasa!: string;
     type_of_animal!: ITypeOfAnimal;
+    breed_name?: string;
+    location?: string;
     weight_kg?: number;
     name?: string;
     device_type!: string;
@@ -40,6 +42,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
         // cuidado acá! También existe el ITypeOfAnimal que se utiliza. Cambiar ambos juntos.
         // type: DataTypes.ENUM(ITypeOfAnimal),
         allowNull: false,
+      },
+      breed_name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      location: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       weight_kg: {
         //peso en kilogramos

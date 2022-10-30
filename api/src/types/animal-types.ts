@@ -1,6 +1,8 @@
 export interface IAnimal {
   id_senasa: string;
   type_of_animal: ITypeOfAnimal;
+  breed_name?: string;
+  location?: string;
   weight_kg?: number;
   name?: string;
   device_type: string;
