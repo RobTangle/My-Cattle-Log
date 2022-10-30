@@ -107,10 +107,10 @@ export function Home() {
   }
 
   return (
-    <>
+    <div className="max-w-7xl mx-auto">
       <NavBar />
       <div>ESTE ES EL HOME! WELCOME!</div>
       <SearchBar />
-    </>
+    </div>
   );
 }
