@@ -26,6 +26,14 @@ module.exports = (sequelize, DataTypes) => {
             // type: DataTypes.ENUM(ITypeOfAnimal),
             allowNull: false,
         },
+        breed_name: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         weight_kg: {
             //peso en kilogramos
             type: DataTypes.INTEGER,
@@ -57,7 +65,15 @@ module.exports = (sequelize, DataTypes) => {
                 len: [1, 3000],
             },
         },
-        image: {
+        image_1: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        image_2: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        image_3: {
             type: DataTypes.STRING,
             allowNull: true,
         },
