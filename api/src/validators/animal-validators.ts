@@ -35,7 +35,7 @@ export function checkAnimal(bodyFromReq: any): IAnimal {
   }
 }
 
-// CHECK DEVICE_TYPE:
+// CHECK DEVICE_TYPE :
 function checkDeviceType(argFromReq: any): string {
   if (isStringBetween1And50CharsLong(argFromReq)) {
     return argFromReq;
@@ -44,7 +44,7 @@ function checkDeviceType(argFromReq: any): string {
   }
 }
 
-// CHECK DEVICE_NUMBER:
+// CHECK DEVICE_NUMBER :
 function checkDeviceNumber(argFromReq: any): string {
   if (isStringXCharsLong(8, argFromReq)) {
     return argFromReq;
@@ -53,7 +53,7 @@ function checkDeviceNumber(argFromReq: any): string {
   }
 }
 
-// CHECK ID_SENASA:
+// CHECK ID_SENASA :
 function checkId(idFromReq: any): string {
   if (isValidSenasaId(idFromReq)) {
     return idFromReq;
@@ -75,7 +75,7 @@ function checkTypeOfAnimal(argFromReq: any): ITypeOfAnimal {
   }
 }
 
-// CHECK WEIGHT_KG:
+// CHECK WEIGHT_KG :
 function checkWeight(argFromReq: any): number | undefined {
   if (isFalsyArgument(argFromReq)) {
     return undefined;
@@ -129,9 +129,10 @@ function checkBirthday(birthdayFromReq: any): string | undefined {
   if (isFalsyArgument(birthdayFromReq)) {
     return undefined;
   }
-  if (isStringBetween1AndXCharsLong(10, birthdayFromReq)) {
+  if (isStringXCharsLong(10, birthdayFromReq)) {
     return birthdayFromReq;
   }
+
   throw new Error(`Error al validar el birthday.`);
 }
 
@@ -153,7 +154,7 @@ function checkDeliveryDate(deliveryDateFromReq: any): string | undefined {
   if (isFalsyArgument(deliveryDateFromReq)) {
     return undefined;
   }
-  if (isStringBetween1AndXCharsLong(10, deliveryDateFromReq)) {
+  if (isStringXCharsLong(10, deliveryDateFromReq)) {
     return deliveryDateFromReq;
   }
   throw new Error(`La fecha de parto '${deliveryDateFromReq} no es válida.`);
