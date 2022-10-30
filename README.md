@@ -18,10 +18,14 @@ Create a new database called "Cattle_Tracker_DB" with postgres or in the /api/sr
 After having the Database prepared to be synced, in the directory /api run the following commands: 
 
 *If you haven't installed the packages yet, run:
+
 npm install
+
 npm run dev
 
+
 *If you already installed the packages with the command "npm install", now type the following command to run de back-end:
+
 npm run dev
 
 
