@@ -16,7 +16,7 @@ root.render(
       // redirectUri={window.location.origin}
       redirectUri="http://localhost:3000/home"
       useRefreshTokens={true}
-      cacheLocaltion="localstorage"
+      cacheLocation="localstorage"
       audience="https://cattle-tracker-api.com"
       // scope="read:current_user update:current_user_metadata"
     >
