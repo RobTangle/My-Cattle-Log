@@ -114,7 +114,7 @@ export const getAllAnimals = (token) => {
       console.log(`Error en action getAllAnimals. ${error.message}`);
       return dispatch({
         type: GET_ALL_ANIMALS,
-        payload: { error: error.message },
+        payload: { error: error.response?.data?.error },
       });
     }
   };
@@ -152,7 +152,7 @@ export function searchQuery(value, token) {
     } catch (error) {
       return dispatch({
         type: SEARCH_QUERY,
-        payload: { result: [], status: { error: error.message } },
+        payload: { result: [], status: { error: error.response?.data?.error } },
       });
     }
   };
