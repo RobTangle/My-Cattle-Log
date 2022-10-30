@@ -1,4 +1,4 @@
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { getAllAnimals, deleteAnimal } from "../../redux/actions/actions";
@@ -10,7 +10,7 @@ export function AnimalCard(props) {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("tokenCattleTracker");
   const [showValue, setShowValue] = React.useState(false);
-
+//eslint-disable-next-line
   function handleDelete(e) {
     // console.log(e);
     console.log(`Eliminando animal con id ${e.target.value}`);
@@ -19,7 +19,7 @@ export function AnimalCard(props) {
     dispatch(deleteAnimal(animal_id, accessToken));
     dispatch(getAllAnimals(accessToken));
   }
-
+//eslint-disable-next-line
   function handleClickEdit(e) {
     console.log(`Editando animal con id ${e.target.value}`);
   }
@@ -29,9 +29,9 @@ export function AnimalCard(props) {
       "Para confirmar la eliminación, escriba 'ELIMINAR'."
     );
     if (
-      confirmPrompt == "ELIMINAR" ||
-      confirmPrompt == "eliminar" ||
-      confirmPrompt == "Eliminar"
+      confirmPrompt === "ELIMINAR" ||
+      confirmPrompt === "eliminar" ||
+      confirmPrompt === "Eliminar"
     ) {
       console.log(`Eliminando animal con id ${e.target.value}`);
       const animal_id = e.target.value;

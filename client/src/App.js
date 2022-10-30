@@ -1,9 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CreateNewAnimal } from "./components/CreateNewAnimal/CreateNewAnimal";
-import { LandingPage, SignUp, Home, Profile } from "./views";
-
-
-import { Management } from "./components/Management/Management";
+import { LandingPage, SignUp, Home, Profile, Management } from "./views";
 
 function App() {
   return (

@@ -2,12 +2,10 @@ import React from "react";
 //eslint-disable-next-line
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { cleanNewAnimal } from "../../redux/actions/actions";
 import { NavBar } from "../../components/NavBar/NavBar";
 import axios from "axios";
 import { USER_EXISTS } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
-import { SearchBar } from "../../components/SearchBar/SearchBar";
 export function Home() {
   // const dispatch = useDispatch();
   // React.useEffect(() => {
@@ -15,7 +13,7 @@ export function Home() {
   //   dispatch(cleanNewAnimal());
   // }, []);
 
-  const { user, isAuthenticated, getAccessTokenSilently, isLoading, logout } =
+  const { user, isAuthenticated, getAccessTokenSilently, isLoading} =
     useAuth0();
 
   const navigate = useNavigate();

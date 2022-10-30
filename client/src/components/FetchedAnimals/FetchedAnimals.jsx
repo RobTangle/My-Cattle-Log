@@ -1,4 +1,5 @@
 import React from "react";
+//eslint-disable-next-line
 import { useDispatch, useSelector } from "react-redux";
 import { AnimalCard } from "../AnimalCard/AnimalCard";
 import { PropsColumns } from "../PropsColumns/PropsColumns";

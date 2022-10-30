@@ -14,6 +14,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../Login/LoginButton";
 
 export function NavBar() {
+  //eslint-disable-next-line
   const dispatch = useDispatch();
   const [openMenu, setOpenMenu] = useState(false);
   const {isLoading, isAuthenticated} = useAuth0();

@@ -1,10 +1,9 @@
 import React from "react";
-import { CardContainer } from "../CardContainer/CardContainer";
-import { SearchBar } from "../SearchBar/SearchBar";
-import { Form } from "../Form/Form";
-import { Modal } from "../Modal/Modal";
-import "./management.css";
-import { FetchedAnimals } from "../FetchedAnimals/FetchedAnimals";
+import { CardContainer } from "../../components/CardContainer/CardContainer";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
+import { Form } from "../../components/Form/Form";
+import { Modal } from "../../components/Modal/Modal";
+import { FetchedAnimals } from "../../components/FetchedAnimals/FetchedAnimals";
 
 export function Management() {
   const [showValue, setShowValue] = React.useState(false);

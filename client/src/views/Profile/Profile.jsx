@@ -15,7 +15,7 @@ export const Profile = () => {
 
   React.useEffect(() => {
     dispatch(getUserInfo(token));
-  }, [ dispatch, token]);
+  }, [dispatch, token, userInfoState]);
 
   function handleGoToLogin(e) {
     console.log(`handleGoToLogin disparada. Navegando a "/"...`);
@@ -42,7 +42,7 @@ export const Profile = () => {
                     ? userInfoState.profile_img
                     : "https://thumbs.dreamstime.com/t/farmer-icon-badge-style-one-farm-collection-icon-can-be-used-ui-ux-farmer-icon-badge-style-one-farm-collection-124009969.jpg"
                 }
-                alt={user?.name}
+                alt="Profile"
               />
               <div className="flex items-center gap-3">
                 <p className="text-gray font-semibold">Nombre</p>
