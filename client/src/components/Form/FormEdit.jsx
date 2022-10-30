@@ -11,17 +11,32 @@ export function FormEdit(props) {
   const [localState, setLocalState] = React.useState({
     id_senasa: props.animal.id_senasa,
     type_of_animal: props.animal.type_of_animal,
+    breed_name: props.animal.breed_name || "",
+    location: props.animal.location || "",
     weight_kg: props.animal.weight_kg,
     name: props.animal.name,
     device_type: props.animal.device_type,
     device_number: props.animal.device_number,
-    image: props.animal.image,
-    comments: props.animal.comments,
-    birthday: props.animal.birthday,
+    image_1: props.animal.image_1 || "",
+    image_2: props.animal.image_2 || "",
+    image_3: props.animal.image_3 || "",
+    comments: props.animal.comments || "",
+    birthday: props.animal.birthday || "",
+    is_pregnant: props.animal.is_pregnant || "",
+    delivery_date: props.animal.delivery_date || "",
   });
 
+  console.log("localState", localState);
+
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(actions.getTypesOfAnimalsAllowed());
+  }, []);
+
+  const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
   const accessToken = localStorage.getItem("tokenCattleTracker");
+
   // HANDLE FUNCTIONS:
   function handleOnChange(e) {
     setLocalState({ ...localState, [e.target.name]: e.target.value });
@@ -54,7 +69,7 @@ export function FormEdit(props) {
     const dataNew = await response.json();
     setLocalState({
       ...localState,
-      image: dataNew.secure_url,
+      [e.target.name]: dataNew.secure_url,
     });
     // reemplazar con un mensaje de éxito o la acción deseada
   };
@@ -89,8 +104,35 @@ export function FormEdit(props) {
             />
           </div>
           <div>
+            <label htmlFor="breed_name">Raza</label>
+            <input
+              type="text"
+              name="breed_name"
+              id="breed_name"
+              value={localState.breed_name}
+              placeholder="Ej: Angus / Holstein / Criolla "
+              onChange={handleOnChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="location">Localización</label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              value={localState.location}
+              placeholder="Ej: Lote 21 / Sección 3"
+              onChange={handleOnChange}
+            />
+          </div>
+          <div>
             <label htmlFor="birthday">Fecha de nacimiento </label>
-            <input type="date" name="birthday" onChange={handleOnChange} />
+            <input
+              type="date"
+              name="birthday"
+              onChange={handleOnChange}
+              value={localState.birthday}
+            />
           </div>
           <div className="form-weight_kg">
             <label htmlFor="weight_kg">Peso</label>
@@ -104,7 +146,7 @@ export function FormEdit(props) {
             />
           </div>
           <div className="form-name">
-            <label htmlFor="name">Nombre *</label>
+            <label htmlFor="name">Nombre </label>
             <input
               id="name"
               type="text"
@@ -150,14 +192,72 @@ export function FormEdit(props) {
             />
           </div>
           <div>
-            <label htmlFor="photo">Imagen </label>
+            <label htmlFor="photo">Imagen 1 </label>
             <input
               type="file"
               accept=".png, .jpg, .jpeg"
-              name="image"
+              name="image_1"
               placeholder="Imagen"
+              // value={localState.image_1}
               onChange={upload}
             ></input>
+          </div>
+          <div>
+            <label htmlFor="photo">Imagen 2 </label>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="image_2"
+              placeholder="Imagen"
+              // value={localState.image_2}
+              onChange={upload}
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="photo">Imagen 3 </label>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="image_3"
+              placeholder="Imagen"
+              // value={localState.image_3}
+              onChange={upload}
+            ></input>
+          </div>
+          <div>
+            <fieldset>
+              <legend>Preñada </legend>
+              <div>
+                <input
+                  type="radio"
+                  id="is_pregant-no"
+                  name="is_pregnant"
+                  value={false}
+                  onChange={handleOnChange}
+                />
+                <label htmlFor="is_pregnant">No </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="is_pregnant-sí"
+                  name="is_pregnant"
+                  value={true}
+                  onChange={handleOnChange}
+                />
+                <label htmlFor="is_pregnant-sí">Sí</label>
+              </div>
+            </fieldset>
+          </div>
+          <div>
+            <label htmlFor="delivery_date">Fecha estimada de parto </label>
+            <input
+              type="date"
+              name="delivery_date"
+              id="delivery_date"
+              value={localState.delivery_date}
+              onChange={handleOnChange}
+            />
           </div>
           <button>Confirmar</button>
           <button onClick={props.closeModal}>X</button>
