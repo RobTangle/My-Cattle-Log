@@ -7,7 +7,9 @@ Repository meant to be just a practice exercise through the creation of a simple
 
 From the main directory, follow this commands:
 cd client/
+
 npm install
+
 npm start
 
 ## How to run de back-end:
