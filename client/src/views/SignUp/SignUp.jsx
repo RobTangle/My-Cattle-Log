@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useState} from "react";
+
+import { Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { header } from "../../constants/token";
 import axios from "axios";
@@ -9,7 +9,7 @@ import OkSVG from "../../assets/icons8-ok.svg";
 
 export const SignUp = () => {
   const tokenAccess = localStorage.getItem("tokenCattleTracker");
-  const { user, isAuthenticated, isLoading, logout } = useAuth0();
+  const { user } = useAuth0();
 
   // INPUT STATE:
   const [input, setInput] = useState({
