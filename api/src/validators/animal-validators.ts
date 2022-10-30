@@ -144,6 +144,12 @@ function checkIsPregnant(isPregnantFromReq: any): boolean | undefined {
   if (isPregnantFromReq === true || isPregnantFromReq === false) {
     return isPregnantFromReq;
   }
+  if (isPregnantFromReq === "true") {
+    return true;
+  }
+  if (isPregnantFromReq === "false") {
+    return false;
+  }
   throw new Error(
     `El dato ingresado como 'isPregnant' es inválido. Ingrese undefined | null, o un valor booleano.`
   );
