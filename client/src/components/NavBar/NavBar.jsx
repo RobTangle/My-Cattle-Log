@@ -4,7 +4,6 @@
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 //eslint-disable-next-line
 import { cleanNewAnimal } from "../../redux/actions/actions";
 import LogoutButton from "../Logout/LogoutButton";
@@ -47,28 +46,36 @@ export function NavBar() {
       </div>
       {openMenu ? (
         <div className="flex flex-col w-full h-screen z-30 pt-8 px-5 gap-3 absolute top-0 bg-white text-gray">
-          <div className="navbar-div">
-            <Link to="/home">Home</Link>
-          </div>
-          <div className="navbar-div">
-            <Link to="/home/newAnimal">Create new animal</Link>
-          </div>
-          <div className="navbar-div">
-            <Link to="/home/management">Animal Management</Link>
-          </div>
-          <div className="navbar-div">
-            <Link to="/home/profile">Profile</Link>
-          </div>
+          <NavbarLink path="/home" text="Inicio" />
+          <NavbarLink path="/home/newAnimal" text="Agregar animal" />
+          <NavbarLink path="/home/management" text="Administrar animales" />
+          <NavbarLink path="/home/profile" text="Perfil" />
           <div>
             <LogoutButton />
           </div>
         </div>
       ) : null}
       <div className="hidden  md:flex md:w-full md:h-20 md:justify-around md:py-5 md:px-5 md:gap-8 md:bg-white md:text-gray">
-        <NavbarLink path="/home" text="Inicio" />
-        <NavbarLink path="/home/newAnimal" text="Agregar animal" />
-        <NavbarLink path="/home/management" text="Administrar animales" />
-        <NavbarLink path="/home/profile" text="Perfil" />
+        <NavbarLink
+          path="/home"
+          text="Inicio"
+          divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
+        />
+        <NavbarLink
+          path="/home/newAnimal"
+          divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
+          text="Agregar animal"
+        />
+        <NavbarLink
+          path="/home/management"
+          divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
+          text="Administrar animales"
+        />
+        <NavbarLink
+          path="/home/profile"
+          divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
+          text="Perfil"
+        />
         <div>
           <LogoutButton />
         </div>
