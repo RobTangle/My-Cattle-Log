@@ -13,11 +13,15 @@ function checkAnimal(bodyFromReq) {
         const checkedAnimal = {
             id_senasa: checkId(bodyFromReq.id_senasa),
             type_of_animal: checkTypeOfAnimal(bodyFromReq.type_of_animal),
+            breed_name: checkBreedName(bodyFromReq.breed_name),
+            location: checkLocation(bodyFromReq.location),
             weight_kg: checkWeight(bodyFromReq.weight_kg),
             name: checkName(bodyFromReq.name),
             device_type: checkDeviceType(bodyFromReq.device_type),
             device_number: checkDeviceNumber(bodyFromReq.device_number),
-            image: checkImage(bodyFromReq.image),
+            image_1: checkImage(bodyFromReq.image_1),
+            image_2: checkImage(bodyFromReq.image_2),
+            image_3: checkImage(bodyFromReq.image_3),
             comments: checkComments(bodyFromReq.comments),
             birthday: checkBirthday(bodyFromReq.birthday),
             is_pregnant: checkIsPregnant(bodyFromReq.is_pregnant),
@@ -37,7 +41,7 @@ function checkDeviceType(argFromReq) {
         return argFromReq;
     }
     else {
-        throw new Error(`The device_type "${argFromReq}" is invalid.`);
+        throw new Error(`El tipo de dispositivo "${argFromReq}" es inválido.`);
     }
 }
 // CHECK DEVICE_NUMBER :
@@ -46,7 +50,7 @@ function checkDeviceNumber(argFromReq) {
         return argFromReq;
     }
     else {
-        throw new Error(`The device_number "${argFromReq}" is invalid.`);
+        throw new Error(`El código de dispositivo "${argFromReq}" es inválido.`);
     }
 }
 // CHECK ID_SENASA :
@@ -55,7 +59,7 @@ function checkId(idFromReq) {
         return idFromReq;
     }
     else {
-        throw new Error(`The id_senasa "${idFromReq}" is invalid.`);
+        throw new Error(`El id "${idFromReq}" ingresado es inválido.`);
     }
 }
 // CHECK TYPE OF ANIMAL:
@@ -68,8 +72,28 @@ function checkTypeOfAnimal(argFromReq) {
         return argFromReq;
     }
     else {
-        throw new Error(`The type_of_animal "${argFromReq}" is invalid.`);
+        throw new Error(`El tipo de animal "${argFromReq}" ingresado es inválido.`);
     }
+}
+// CHECK BREED NAME :
+function checkBreedName(breedNameFromReq) {
+    if ((0, generic_validators_1.isFalsyArgument)(breedNameFromReq)) {
+        return undefined;
+    }
+    if ((0, generic_validators_1.isStringBetween1And50CharsLong)(breedNameFromReq)) {
+        return breedNameFromReq.toLowerCase();
+    }
+    throw new Error(`El valor ingresado como raza (breed name) no es válido. Ingrese una cadena de texto o deje el valor vacío.`);
+}
+// CHECK LOCATION :
+function checkLocation(locationFromReq) {
+    if ((0, generic_validators_1.isFalsyArgument)(locationFromReq)) {
+        return undefined;
+    }
+    if ((0, generic_validators_1.isStringBetween1And50CharsLong)(locationFromReq)) {
+        return locationFromReq.toLowerCase();
+    }
+    throw new Error(`El valor ingresado '${locationFromReq}' como location es inválido.`);
 }
 // CHECK WEIGHT_KG :
 function checkWeight(argFromReq) {
@@ -131,6 +155,12 @@ function checkIsPregnant(isPregnantFromReq) {
     }
     if (isPregnantFromReq === true || isPregnantFromReq === false) {
         return isPregnantFromReq;
+    }
+    if (isPregnantFromReq === "true") {
+        return true;
+    }
+    if (isPregnantFromReq === "false") {
+        return false;
     }
     throw new Error(`El dato ingresado como 'isPregnant' es inválido. Ingrese undefined | null, o un valor booleano.`);
 }
