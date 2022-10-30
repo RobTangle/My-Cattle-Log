@@ -34,3 +34,22 @@ export async function userIsRegisteredInDB(reqAuthSub: any): Promise<boolean> {
     return false;
   }
 }
+
+export async function throwErrorIfUserIsNotRegisteredInDB(
+  reqAuthSub: any
+): Promise<void> {
+  if (!reqAuthSub) {
+    throw new Error(`El req.auth.sub no puede ser falso.`);
+  }
+  if (typeof reqAuthSub !== "string") {
+    throw new Error(`El req.auth.sub debe ser un string`);
+  }
+  const foundUserInDB = await db.User.findByPk(reqAuthSub);
+  if (foundUserInDB) {
+    return;
+  } else {
+    throw new Error(
+      `El usuario con id '${reqAuthSub}' no existe en la database.`
+    );
+  }
+}
