@@ -8,6 +8,8 @@ export function Form(props) {
   const [localState, setLocalState] = React.useState({
     id_senasa: "",
     type_of_animal: "",
+    breed_name: "",
+    location: "",
     weight_kg: "",
     name: "",
     device_type: "",
@@ -132,6 +134,26 @@ export function Form(props) {
                 </div>
               </fieldset>
             )}
+          </div>
+          <div>
+            <label htmlFor="breed_name">Raza</label>
+            <input
+              type="text"
+              name="breed_name"
+              id="breed_name"
+              placeholder="Ej: Angus / Holstein / Criolla "
+              onChange={handleOnChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="location">Localización</label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              placeholder="Ej: Lote 21 / Sección 3"
+              onChange={handleOnChange}
+            />
           </div>
           <div>
             <label htmlFor="birthday">Fecha de nacimiento </label>
