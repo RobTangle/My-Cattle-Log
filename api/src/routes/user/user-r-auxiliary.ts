@@ -48,6 +48,9 @@ export async function throwErrorIfUserIsNotRegisteredInDB(
   if (foundUserInDB) {
     return;
   } else {
+    console.log(
+      `Error! Usuario no encontrado en la DB en fn aux throwErrorIfUserIsNotRegisteredInDB`
+    );
     throw new Error(
       `El usuario con id '${reqAuthSub}' no existe en la database.`
     );
