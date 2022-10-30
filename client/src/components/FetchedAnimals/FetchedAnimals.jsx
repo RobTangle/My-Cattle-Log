@@ -4,11 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { AnimalCard } from "../AnimalCard/AnimalCard";
 import { PropsColumns } from "../PropsColumns/PropsColumns";
 import loading from "../../assets/loading.gif";
-import "./fetchedAnimals.css";
+import { useEffect } from "react";
+import { getAllAnimals } from "../../redux/actions/actions";
 
 export function FetchedAnimals() {
   const fetchedAnimalsState = useSelector((state) => state.fetchedAnimals);
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("tokenCattleTracker");
+  console.log(
+    "🚀 ~ file: FetchedAnimals.jsx ~ line 11 ~ FetchedAnimals ~ fetchedAnimalsState",
+    fetchedAnimalsState
+  );
 
+  useEffect(() => {
+    dispatch(getAllAnimals(token));
+  }, [dispatch, token]);
   return (
     <div>
       {fetchedAnimalsState?.status?.pure && null}
