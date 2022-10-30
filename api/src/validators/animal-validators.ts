@@ -25,6 +25,8 @@ export function checkAnimal(bodyFromReq: any): IAnimal {
       image: checkImage(bodyFromReq.image),
       comments: checkComments(bodyFromReq.comments),
       birthday: checkBirthday(bodyFromReq.birthday),
+      is_pregnant: checkIsPregnant(bodyFromReq.is_pregnant),
+      delivery_date: checkDeliveryDate(bodyFromReq.delivery_date),
     };
     return checkedAnimal;
   } catch (error: any) {
@@ -87,7 +89,10 @@ function checkWeight(argFromReq: any): number | undefined {
 }
 
 // CHECK NAME: (algo forces lower cases)
-function checkName(argFromReq: any): string {
+function checkName(argFromReq: any): string | undefined {
+  if (isFalsyArgument(argFromReq)) {
+    return undefined;
+  }
   if (isStringBetween1AndXCharsLong(200, argFromReq)) {
     return argFromReq.toLowerCase();
   } else {
@@ -119,7 +124,7 @@ function checkComments(commentsFromReq: any): string | undefined {
   );
 }
 
-// CHECK BIRTHDAY :
+//! CHECK BIRTHDAY : (corregir validación de Date con librería externa)
 function checkBirthday(birthdayFromReq: any): string | undefined {
   if (isFalsyArgument(birthdayFromReq)) {
     return undefined;
@@ -128,4 +133,28 @@ function checkBirthday(birthdayFromReq: any): string | undefined {
     return birthdayFromReq;
   }
   throw new Error(`Error al validar el birthday.`);
+}
+
+// CHECK IS PREGNANT :
+function checkIsPregnant(isPregnantFromReq: any): boolean | undefined {
+  if (isFalsyArgument(isPregnantFromReq)) {
+    return undefined;
+  }
+  if (isPregnantFromReq === true || isPregnantFromReq === false) {
+    return isPregnantFromReq;
+  }
+  throw new Error(
+    `El dato ingresado como 'isPregnant' es inválido. Ingrese undefined | null, o un valor booleano.`
+  );
+}
+
+//! CHECK DELIVERY DATE : (corregir validación de Date con librería externa)
+function checkDeliveryDate(deliveryDateFromReq: any): string | undefined {
+  if (isFalsyArgument(deliveryDateFromReq)) {
+    return undefined;
+  }
+  if (isStringBetween1AndXCharsLong(10, deliveryDateFromReq)) {
+    return deliveryDateFromReq;
+  }
+  throw new Error(`La fecha de parto '${deliveryDateFromReq} no es válida.`);
 }

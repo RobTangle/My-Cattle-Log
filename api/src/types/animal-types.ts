@@ -2,12 +2,14 @@ export interface IAnimal {
   id_senasa: string;
   type_of_animal: ITypeOfAnimal;
   weight_kg?: number;
-  name: string;
+  name?: string;
   device_type: string;
   device_number: string;
   comments?: string;
   image?: string;
   birthday?: string;
+  is_pregnant?: boolean;
+  delivery_date?: string;
 }
 
 export enum ITypeOfAnimal {
