@@ -15,6 +15,8 @@ export function Form(props) {
     image: "",
     comments: "",
     birthday: "",
+    is_pregnant: "",
+    delivery_date: "",
   });
 
   const dispatch = useDispatch();
@@ -96,7 +98,7 @@ export function Form(props) {
             />
           </div>
           <div className="form-name">
-            <label htmlFor="name">Nombre *</label>
+            <label htmlFor="name">Nombre </label>
             <input
               type="text"
               name="name"
@@ -144,6 +146,40 @@ export function Form(props) {
               placeholder="Imagen"
               onChange={upload}
             ></input>
+          </div>
+          <div>
+            <fieldset>
+              <legend>Preñada </legend>
+              <div>
+                <input
+                  type="radio"
+                  id="is_pregant-no"
+                  name="is_pregnant"
+                  value={false}
+                  onChange={handleOnChange}
+                />
+                <label htmlFor="is_pregnant">No </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="is_pregnant-sí"
+                  name="is_pregnant"
+                  value={true}
+                  onChange={handleOnChange}
+                />
+                <label htmlFor="is_pregnant-sí">Sí</label>
+              </div>
+            </fieldset>
+          </div>
+          <div>
+            <label htmlFor="delivery_date">Fecha estimada de parto </label>
+            <input
+              type="date"
+              name="delivery_date"
+              id="delivery_date"
+              onChange={handleOnChange}
+            />
           </div>
           <button>Registrar animal</button>
           <button onClick={props.closeModal}>Cerrar</button>
