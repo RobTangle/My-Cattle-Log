@@ -29,7 +29,7 @@ export const Profile = () => {
   console.log("userInfoState = ", userInfoState);
   console.log(user);
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <NavBar />
       <div className="w-full mx-auto max-w-7xl px-8 mt-16 md:mt-5">
         {isAuthenticated && (
