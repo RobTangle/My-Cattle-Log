@@ -6,3 +6,4 @@ export const SEARCH_QUERY = URL + "animal/search";
 // la búsqueda por query debe realizarse de la siguiente manera:
 // - se debe ingresar un nombre (name) o un id_senasa. No deben introducirse valor mezclados
 export const URL_GET_USER_INFO = URL + "user/userInfo";
+export const URL_GET_TYPES_OF_ANIMALS = URL + "animal/typesAllowed";
