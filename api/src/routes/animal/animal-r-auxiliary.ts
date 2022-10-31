@@ -67,8 +67,8 @@ export async function getAndParseIsPregnantQuery(
 
 const stats = {
   numberOfTotalAnimals: 211,
-  pregnants: { total: 11, list: [{}, {}] },
-  notPregnants: { total: 76, list: [{}, {}, {}] },
+  pregnant: { total: 11, list: [{}, {}] },
+  notPregnant: { total: 76, list: [{}, {}, {}] },
   races: {
     ["Angus"]: { listLength: 3, list: [{}, {}, {}, {}] },
     ["Criolla"]: { listLength: 2, list: [{}, {}] },
