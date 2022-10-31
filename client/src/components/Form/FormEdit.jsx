@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch,useSelector } from "react-redux";
 import * as actions from "../../redux/actions/actions";
-import "./form.css";
+
 
 
 export function FormEdit(props) {

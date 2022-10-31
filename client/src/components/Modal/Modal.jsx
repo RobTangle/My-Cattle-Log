@@ -4,8 +4,6 @@ import { Form } from "../Form/Form";
 import loading from "../../assets/loading.gif";
 import { cleanNewAnimal } from "../../redux/actions/actions";
 
-import "./modal.css";
-
 export function Modal(props) {
   const newAnimalState = useSelector((state) => state.newAnimal);
   const dispatch = useDispatch();
