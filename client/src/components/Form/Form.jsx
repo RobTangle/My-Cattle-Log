@@ -73,7 +73,7 @@ export function Form(props) {
   };
 
   return (
-    <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit ">
+    <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
       <h2 className="text-green font-sans text-xl">Nuevo animal</h2>
       <form action="" onSubmit={handleSubmit}>
         <div className="inside-form-container">
@@ -238,14 +238,14 @@ export function Form(props) {
               </div>
             </fieldset>
           </div>
-          {localState.is_pregnant && (
+          {localState.is_pregnant === 'true' ? (
             <InputForm
               handleOnChange={handleOnChange}
               type="date"
               name="delivery_date"
               text="Fecha estimada de parto"
             />
-          )}
+          ): null}
          <div className="flex items-center gap-5 justify-center w-full my-5">
 
           <button className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500">
