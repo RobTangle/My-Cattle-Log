@@ -9,7 +9,11 @@ import {
   userIsRegisteredInDB,
 } from "../user/user-r-auxiliary";
 import { Op } from "sequelize";
-import { typesOfAnimalsToArray } from "./animal-r-auxiliary";
+import {
+  getAndParseIsPregnantQuery,
+  typesOfAnimalsToArray,
+} from "./animal-r-auxiliary";
+import { stringToBoolean } from "../../validators/generic-validators";
 const router = Router();
 
 // ------- RUTAS : ---------
@@ -184,6 +188,33 @@ router.get("/typesAllowed", async (req, res) => {
     return res.status(200).send(typesOfAnimalsArray);
   } catch (error: any) {
     console.log(`Error en GET 'animal/typesAllowed. ${error.message}`);
+    return res.status(400).send({ error: error.message });
+  }
+});
+
+//! PARSED FOR STATS: ------------------
+// GET ALL IS PREGNANT TRUE || FALSE & ORDERED BY DELIVERY DATE :
+//Ruta de ejemplo:  localhost:3001/animal/isPregnant?status=true&order=ASC
+router.get("/isPregnant", async (req: any, res) => {
+  try {
+    // espero req.query.status = true || false
+    //URL Ej:  /animal/isPregnant?status=true || false
+    console.log(req.query);
+    console.log("req.query.status = ", req.query.status);
+    // const reqAuth: IReqAuth = req.auth;
+    // const userId = reqAuth.sub;
+    let status = req.query.status;
+    let statusParsed: boolean = stringToBoolean(status);
+    let order = req.query.order; // ASC || DESC || NULLS FIRST
+
+    const querySearchResult = await getAndParseIsPregnantQuery(
+      undefined,
+      statusParsed,
+      order
+    );
+    return res.status(200).send(querySearchResult);
+  } catch (error: any) {
+    console.log(`Error en '/animal/isPregnant. ${error.message}`);
     return res.status(400).send({ error: error.message });
   }
 });
