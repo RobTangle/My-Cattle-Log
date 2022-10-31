@@ -8,7 +8,7 @@ db.sequelize.sync({ alter: true }).then(() => {
     console.log(
       "**** **** **** **** **** **** **** **** **** **** **** **** **** **** **** "
     );
-    console.log(`App listening on post ${PORT}`);
+    console.log(`App listening on port ${PORT}`);
     console.log(
       "**** **** **** **** **** **** **** **** **** **** **** **** **** **** **** "
     );
