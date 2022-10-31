@@ -11,7 +11,7 @@ export function Modal(props) {
   React.useEffect(() => {
     console.log(`Me desmontéo desmonté????`);
     dispatch(cleanNewAnimal());
-  }, [ dispatch]);
+  }, [dispatch]);
 
   if (!props.show) {
     return null;
@@ -25,35 +25,34 @@ export function Modal(props) {
 
   return (
     <div className="modal-container">
-      <div>
-        {newAnimalState.pure ? <Form closeModal={closeModal} /> : null}
-        {newAnimalState.loading ? (
+      {newAnimalState.pure ? <Form closeModal={closeModal} /> : null}
+      {newAnimalState.loading ? (
+        <div>
+          <img src={loading} alt="loading gif" />
+        </div>
+      ) : null}
+      {newAnimalState.msg ? (
+        <div className="modal-response">
+          {newAnimalState.msg}{" "}
           <div>
-            <img src={loading} alt="loading gif" />
+            <button onClick={closeModal}>X</button>
           </div>
-        ) : null}
-        {newAnimalState.msg ? (
-          <div className="modal-response">
-            {newAnimalState.msg}{" "}
-            <div>
-              <button onClick={closeModal}>X</button>
-            </div>
-          </div>
-        ) : null}
-        {newAnimalState.error ? (
-          <div className="modal-response-container">
-            <div className="modal-response-error">
+        </div>
+      ) : null}
+      {newAnimalState.error ? (
+        <div className="modal-response-container">
+          <div className="modal-response-error">
+            {" "}
+            <p>Oops! Hubo un error: {newAnimalState.error} </p>{" "}
+            <p>
               {" "}
-              <p>Oops! Hubo un error: {newAnimalState.error} </p>{" "}
-              <p>
-                {" "}
-                Si es un error de conexión, por favor chequee que tiene una
-                correcta conexión a internet y vuelta a internarlo.
-              </p>
-            </div>
+              Si es un error de conexión, por favor chequee que tiene una
+              correcta conexión a internet y vuelta a internarlo.
+            </p>
           </div>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
+
       <div className="modal-footer">
         <button onClick={closeModal}>X</button>
       </div>

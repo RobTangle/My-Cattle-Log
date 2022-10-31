@@ -27,13 +27,14 @@ export function Form(props) {
 
   React.useEffect(() => {
     dispatch(actions.getTypesOfAnimalsAllowed());
-  }, [ dispatch ]);
+  }, [dispatch]);
 
   const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
   const accessToken = localStorage.getItem("tokenCattleTracker");
 
   // HANDLE FUNCTIONS:
   function handleOnChange(e) {
+    console.log(e.target.name, e.target.value);
     setLocalState({ ...localState, [e.target.name]: e.target.value });
   }
 
@@ -70,15 +71,19 @@ export function Form(props) {
   };
 
   return (
-    <div className="form-modal">
-      <h2>Nuevo animal...</h2>
+    <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5 mx-5 my-8 drop-shadow-lg h-fit ">
+      <h2 className="text-green font-sans">Nuevo animal</h2>
       <form action="" onSubmit={handleSubmit}>
-        {/* <fieldset className="form-fieldset"> */}
-
         <div className="inside-form-container">
-          <div className="form-id">
-            <label htmlFor="id_senasa">Identificador SENASA *</label>
+          <div className="flex items-center gap-3 mb-3 w-full">
+            <label
+              htmlFor="id_senasa"
+              className="text-gray font-semibold w-[120px] md:w-[130px] text-sm after:content-['*'] after:ml-0.5 after:text-red-500"
+            >
+              Identificador SENASA
+            </label>
             <input
+              className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
               type="text"
               name="id_senasa"
               placeholder="id de 16 caracteres"
@@ -86,52 +91,26 @@ export function Form(props) {
               onChange={handleOnChange}
             />
           </div>
-          <div className="form-type-of-animal">
-            <label htmlFor="type_of_animal">Tipo de animal *</label>
-            <input
-              type="text"
-              name="type_of_animal"
-              placeholder="Ej: Vaquillona / Novillo / Toro"
-              onChange={handleOnChange}
-            />
-          </div>
-          <div>
+
+          <legend className="text-gray font-semibold w-[120px] md:w-[130px] text-sm text-sm after:content-['*'] after:ml-0.5 after:text-red-500 ">
+            Tipo de animal
+          </legend>
+          <div onChange={handleOnChange} >
             {Array.isArray(typesOfAnimalsState) && (
-              <fieldset>
+              <fieldset className="flex  gap-3">
                 {" "}
-                <legend>Tipo de animal</legend>
                 {typesOfAnimalsState?.map((type) => (
-                  <div key={Math.random()}>
-                    <label htmlFor={type} key={Math.random()}>
-                      <input
-                        type="radio"
-                        id={type}
-                        name="type_of_animal"
-                        value={`${type}`}
-                        onChange={handleOnChange}
-                      />
-                      {type}
-                    </label>
-                    <label htmlFor="">
-                      <input
-                        type="radio"
-                        name="type_of_animal"
-                        // onChange={handleOnChange}
-                      />
-                      Tester 2
-                    </label>
-                  </div>
+                  <>
+                    <input
+                      type="radio"
+                      id={type}
+                      name="type_of_animal"
+                      value={`${type}`}
+                      className="checked:bg-green"
+                    />{" "}
+                    {type}
+                  </>
                 ))}
-                <div>
-                  <input
-                    type="radio"
-                    id="test"
-                    name="type_of_animal"
-                    value={typesOfAnimalsState[1]}
-                    onChange={handleOnChange}
-                  />{" "}
-                  <label htmlFor={typesOfAnimalsState[1]}>test</label>
-                </div>
               </fieldset>
             )}
           </div>
