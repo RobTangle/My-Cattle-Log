@@ -4,7 +4,6 @@ import { FormEdit } from "../Form/FormEdit";
 import loading from "../../assets/loading.gif";
 import { cleanUpdateAnimal } from "../../redux/actions/actions";
 
-import "./modal.css";
 
 export function ModalEdit(props) {
   const updatedAnimal = useSelector((state) => state.updatedAnimal);

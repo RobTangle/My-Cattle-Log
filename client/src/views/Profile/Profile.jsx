@@ -59,7 +59,7 @@ export const Profile = () => {
             </div>
           </div>
         )}
-        {!isAuthenticated ? (
+        {!isLoading && !isAuthenticated ? (
           <div>
             <div>Debes loguearte para ver tu perfíl.</div>
             <div>

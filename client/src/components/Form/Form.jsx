@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions/actions";
-import "./form.css";
+import InputForm from "./InputForm";
+
 // import loadingGIF from "../assets";
 
 export function Form(props) {
@@ -22,18 +23,20 @@ export function Form(props) {
     is_pregnant: "",
     delivery_date: "",
   });
+  console.log("🚀 ~ file: Form.jsx ~ line 26 ~ Form ~ localState", localState);
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(actions.getTypesOfAnimalsAllowed());
-  }, [ dispatch ]);
+  }, [dispatch]);
 
   const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
   const accessToken = localStorage.getItem("tokenCattleTracker");
 
   // HANDLE FUNCTIONS:
   function handleOnChange(e) {
+    console.log(e.target.name, e.target.value);
     setLocalState({ ...localState, [e.target.name]: e.target.value });
   }
 
@@ -70,15 +73,19 @@ export function Form(props) {
   };
 
   return (
-    <div className="form-modal">
-      <h2>Nuevo animal...</h2>
+    <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
+      <h2 className="text-green font-sans text-xl">Nuevo animal</h2>
       <form action="" onSubmit={handleSubmit}>
-        {/* <fieldset className="form-fieldset"> */}
-
         <div className="inside-form-container">
-          <div className="form-id">
-            <label htmlFor="id_senasa">Identificador SENASA *</label>
+          <div className="flex items-center gap-3 mb-3 w-full">
+            <label
+              htmlFor="id_senasa"
+              className="text-gray font-semibold w-[120px] md:w-[130px] text-sm after:content-['*'] after:ml-0.5 after:text-red-500"
+            >
+              Identificador SENASA
+            </label>
             <input
+              className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
               type="text"
               name="id_senasa"
               placeholder="id de 16 caracteres"
@@ -86,118 +93,86 @@ export function Form(props) {
               onChange={handleOnChange}
             />
           </div>
-          <div className="form-type-of-animal">
-            <label htmlFor="type_of_animal">Tipo de animal *</label>
-            <input
-              type="text"
-              name="type_of_animal"
-              placeholder="Ej: Vaquillona / Novillo / Toro"
-              onChange={handleOnChange}
-            />
-          </div>
-          <div>
+
+          <legend className="text-gray font-semibold w-[120px] md:w-[130px] text-sm text-sm after:content-['*'] after:ml-0.5 after:text-red-500 ">
+            Tipo de animal
+          </legend>
+          <div onChange={handleOnChange} className="mb-3">
             {Array.isArray(typesOfAnimalsState) && (
-              <fieldset>
+              <fieldset className="flex  gap-3 my-2 ">
                 {" "}
-                <legend>Tipo de animal</legend>
                 {typesOfAnimalsState?.map((type) => (
-                  <div key={Math.random()}>
-                    <label htmlFor={type} key={Math.random()}>
-                      <input
-                        type="radio"
-                        id={type}
-                        name="type_of_animal"
-                        value={`${type}`}
-                        onChange={handleOnChange}
-                      />
-                      {type}
-                    </label>
-                    <label htmlFor="">
-                      <input
-                        type="radio"
-                        name="type_of_animal"
-                        // onChange={handleOnChange}
-                      />
-                      Tester 2
-                    </label>
-                  </div>
+                  <>
+                    <input
+                      type="radio"
+                      id={type}
+                      name="type_of_animal"
+                      value={`${type}`}
+                      className="checked:bg-green"
+                    />{" "}
+                    {type}
+                  </>
                 ))}
-                <div>
-                  <input
-                    type="radio"
-                    id="test"
-                    name="type_of_animal"
-                    value={typesOfAnimalsState[1]}
-                    onChange={handleOnChange}
-                  />{" "}
-                  <label htmlFor={typesOfAnimalsState[1]}>test</label>
-                </div>
               </fieldset>
             )}
           </div>
-          <div>
-            <label htmlFor="breed_name">Raza</label>
-            <input
-              type="text"
-              name="breed_name"
-              id="breed_name"
-              placeholder="Ej: Angus / Holstein / Criolla "
-              onChange={handleOnChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="location">Localización</label>
-            <input
-              type="text"
-              name="location"
-              id="location"
-              placeholder="Ej: Lote 21 / Sección 3"
-              onChange={handleOnChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="birthday">Fecha de nacimiento </label>
-            <input type="date" name="birthday" onChange={handleOnChange} />
-          </div>
-          <div className="form-weight_kg">
-            <label htmlFor="weight_kg">Peso</label>
-            <input
-              type="number"
-              name="weight_kg"
-              placeholder="kilogramos, sin comas"
-              onChange={handleOnChange}
-            />
-          </div>
-          <div className="form-name">
-            <label htmlFor="name">Nombre </label>
-            <input
-              type="text"
-              name="name"
-              placeholder="nombre del animal"
-              onChange={handleOnChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="device_type">Tipo de dispositivo * </label>
-            <input
-              type="text"
-              name="device_type"
-              onChange={handleOnChange}
-              placeholder="Ej: Collar / Ear tag"
-            />
-          </div>
-          <div>
-            <label htmlFor="device_number">Número de dispositivo * </label>
-            <input
-              type="text"
-              name="device_number"
-              onChange={handleOnChange}
-              placeholder="código de 8 caracteres"
-              maxLength={8}
-            />
-          </div>
-          <div>
-            <label htmlFor="comments">Comentarios </label>
+
+          <InputForm
+            handleOnChange={handleOnChange}
+            type="text"
+            name="breed_name"
+            text="Raza"
+            placeholder="Ej: Angus / Holstein / Criolla "
+          />
+          <InputForm
+            handleOnChange={handleOnChange}
+            type="text"
+            name="location"
+            text="Localización"
+            placeholder="Ej: Lote 21 / Sección 3"
+          />
+          <InputForm
+            handleOnChange={handleOnChange}
+            type="date"
+            name="location"
+            text="Fecha de nacimiento"
+          />
+          <InputForm
+            handleOnChange={handleOnChange}
+            type="number"
+            name="weight_kg"
+            text="Peso"
+            placeholder="kilogramos, sin comas "
+          />
+          <InputForm
+            handleOnChange={handleOnChange}
+            type="text"
+            name="name"
+            text="Nombre"
+            placeholder="nombre del animal "
+          />
+          <InputForm
+            handleOnChange={handleOnChange}
+            type="text"
+            name="device_type"
+            text="Tipo de dispositivo"
+            placeholder="Ej: Collar / Ear tag "
+          />
+          <InputForm
+            handleOnChange={handleOnChange}
+            type="text"
+            name="device_number"
+            text="Número de dispositivo"
+            placeholder="Código de 8 caracteres"
+          />
+
+          <div className="flex flex-col  gap-3 mb-3 w-full my-5">
+            <label
+              htmlFor="comments"
+              className="text-gray font-semibold w-[120px] md:w-[130px] text-sm "
+            >
+              Comentarios{" "}
+            </label>
             <textarea
               id="comments"
               type="textarea"
@@ -206,74 +181,83 @@ export function Form(props) {
               placeholder="comentarios"
               value={localState.comments}
               maxLength={3000}
+              className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
             />
           </div>
-          <div>
-            <label htmlFor="photo">Imagen 1 </label>
-            <input
-              type="file"
-              accept=".png, .jpg, .jpeg"
-              name="image_1"
-              placeholder="Imagen"
-              onChange={upload}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="photo">Imagen 2 </label>
-            <input
-              type="file"
-              accept=".png, .jpg, .jpeg"
-              name="image_2"
-              placeholder="Imagen"
-              onChange={upload}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="photo">Imagen 3 </label>
-            <input
-              type="file"
-              accept=".png, .jpg, .jpeg"
-              name="image_3"
-              placeholder="Imagen"
-              onChange={upload}
-            ></input>
-          </div>
-          <div>
+          <InputForm
+            handleOnChange={upload}
+            type="file"
+            name="image_1"
+            text="Imagen 1"
+            placeholder="Imagen"
+            accept=".png, .jpg, .jpeg"
+          />
+          <InputForm
+            handleOnChange={upload}
+            type="file"
+            name="image_2"
+            text="Imagen 2"
+            placeholder="Imagen"
+            accept=".png, .jpg, .jpeg"
+          />
+          <InputForm
+            handleOnChange={upload}
+            type="file"
+            name="image_3"
+            text="Imagen 3"
+            placeholder="Imagen"
+            accept=".png, .jpg, .jpeg"
+          />
+
+          <div className="my-3">
             <fieldset>
-              <legend>Preñada </legend>
-              <div>
-                <input
-                  type="radio"
-                  id="is_pregant-no"
-                  name="is_pregnant"
-                  value={false}
-                  onChange={handleOnChange}
-                />
-                <label htmlFor="is_pregnant">No </label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  id="is_pregnant-sí"
-                  name="is_pregnant"
-                  value={true}
-                  onChange={handleOnChange}
-                />
-                <label htmlFor="is_pregnant-sí">Sí</label>
+              <legend className="text-gray font-semibold w-[120px] md:w-[130px] text-sm ">
+                Preñada{" "}
+              </legend>
+              <div className="flex gap-3">
+                <div>
+                  <input
+                    type="radio"
+                    id="is_pregant-no"
+                    name="is_pregnant"
+                    value={false}
+                    onChange={handleOnChange}
+                  />
+                  <label htmlFor="is_pregnant">No </label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="is_pregnant-sí"
+                    name="is_pregnant"
+                    value={true}
+                    onChange={handleOnChange}
+                  />
+                  <label htmlFor="is_pregnant-sí">Sí</label>
+                </div>
               </div>
             </fieldset>
           </div>
-          <div>
-            <label htmlFor="delivery_date">Fecha estimada de parto </label>
-            <input
+          {localState.is_pregnant === 'true' ? (
+            <InputForm
+              handleOnChange={handleOnChange}
               type="date"
               name="delivery_date"
-              id="delivery_date"
-              onChange={handleOnChange}
+              text="Fecha estimada de parto"
             />
-          </div>
-          <button>Registrar animal</button>
-          <button onClick={props.closeModal}>Cerrar</button>
+          ): null}
+         <div className="flex items-center gap-5 justify-center w-full my-5">
+
+          <button className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500">
+            Registrar animal
+          </button>
+          <button
+            onClick={props.closeModal}
+            className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
+            >
+            Cerrar
+          </button>
+            </div>
         </div>
         {/* </fieldset> */}
       </form>
