@@ -135,3 +135,14 @@ export function isValidURLImage(argumento: any): boolean {
     null
   );
 }
+
+// PARSE STRING TO BOOLEAN :
+export function stringToBoolean(argumento: any): boolean {
+  if (argumento === "true") {
+    return true;
+  }
+  if (argumento === "false") {
+    return false;
+  }
+  throw new Error(`El argumento '${argumento}' es inválido.`);
+}
