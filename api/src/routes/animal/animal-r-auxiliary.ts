@@ -26,7 +26,7 @@ export async function getAndParseIsPregnantQuery(
         },
       });
       return {
-        total: listOfAnimalsNotPregnant.length,
+        listLength: listOfAnimalsNotPregnant.length,
         list: listOfAnimalsNotPregnant,
       };
     }
@@ -40,7 +40,7 @@ export async function getAndParseIsPregnantQuery(
         order: [["delivery_date", order]],
       });
       return {
-        total: listOfAnimalsOrdered.length,
+        listLength: listOfAnimalsOrdered.length,
         list: listOfAnimalsOrdered,
       };
     }
@@ -53,7 +53,7 @@ export async function getAndParseIsPregnantQuery(
         },
       });
       return {
-        total: listOfAnimalsPregnant.length,
+        listLength: listOfAnimalsPregnant.length,
         list: listOfAnimalsPregnant,
       };
     }
@@ -64,3 +64,32 @@ export async function getAndParseIsPregnantQuery(
     );
   }
 }
+
+const stats = {
+  numberOfTotalAnimals: 211,
+  pregnants: { total: 11, list: [{}, {}] },
+  notPregnants: { total: 76, list: [{}, {}, {}] },
+  races: {
+    ["Angus"]: { listLength: 3, list: [{}, {}, {}, {}] },
+    ["Criolla"]: { listLength: 2, list: [{}, {}] },
+    ["Sin especificar"]: { listLength: 2, list: [{}, {}] },
+  },
+  types: {
+    ["Vaquillona"]: {
+      listLength: 53,
+      list: [{}, {}, {}, {}, {}],
+      pregnants: 11,
+    },
+    ["Toro"]: { listLength: 8, list: [{}, {}] },
+    ["Novillo"]: { listLength: 13, list: [{}, {}, {}] },
+  },
+  location: {
+    ["Sector 2"]: { listLength: 7, list: [{}, {}, {}] },
+    ["Lote-4"]: { listLength: 2, list: [{}, {}] },
+    ["Sin especificar"]: { listLength: 4, list: [{}, {}] },
+  },
+  deviceType: {
+    ["Ear Tag"]: { listLength: 34, list: [{}, {}, {}, {}] },
+    ["Collar"]: { listLength: 9, list: [{}, {}] },
+  },
+};
