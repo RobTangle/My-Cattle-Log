@@ -2,6 +2,7 @@ import sequelize, { Op } from "sequelize";
 import db from "../../models";
 import { IAnimal, ITypeOfAnimal } from "../../types/animal-types";
 
+// TYPES OF ANIMALS TO ARRAY :
 export function typesOfAnimalsToArray(): string[] {
   try {
     let typesParsedToArray: string[] = Object.values(ITypeOfAnimal);
@@ -12,8 +13,9 @@ export function typesOfAnimalsToArray(): string[] {
   }
 }
 
+// GET AND PARSE IS PREGNANT QUERY
 export async function getAndParseIsPregnantQuery(
-  userId: any, //! cambiar a STRING
+  userId: string,
   status: boolean,
   order: string
 ) {
@@ -23,7 +25,7 @@ export async function getAndParseIsPregnantQuery(
       const listOfAnimalsNotPregnant: IAnimal[] = await db.Animal.findAll({
         where: {
           is_pregnant: false,
-          // UserId: userId,
+          UserId: userId,
         },
       });
       return {
@@ -36,7 +38,7 @@ export async function getAndParseIsPregnantQuery(
       const listOfAnimalsOrdered: IAnimal[] = await db.Animal.findAll({
         where: {
           is_pregnant: true,
-          // UserId: userId,
+          UserId: userId,
         },
         order: [["delivery_date", order]],
       });
@@ -50,7 +52,7 @@ export async function getAndParseIsPregnantQuery(
       const listOfAnimalsPregnant: IAnimal[] = await db.Animal.findAll({
         where: {
           is_pregnant: status,
-          // UserId: userId,
+          UserId: userId,
         },
       });
       return {
@@ -66,6 +68,9 @@ export async function getAndParseIsPregnantQuery(
   }
 }
 
+// --------------AUX FNS PARA STATS : --------------------------
+
+// GET OBJ OF ANIMALS BY RACE :
 export async function getObjOfAnimalsByRace(userId: string) {
   try {
     const breedNamesArrObjs = await db.Animal.findAll({
@@ -74,6 +79,9 @@ export async function getObjOfAnimalsByRace(userId: string) {
         [sequelize.fn("count", sequelize.col("breed_name")), "cnt"],
       ],
       group: ["breed_name"],
+      where: {
+        UserId: userId,
+      },
     });
 
     let arrayOfRaces: any[] = [];
@@ -90,7 +98,7 @@ export async function getObjOfAnimalsByRace(userId: string) {
         [arrayOfRaces[i]]: await db.Animal.findAndCountAll({
           where: {
             breed_name: arrayOfRaces[i],
-            // UserId: userId
+            UserId: userId,
           },
         }),
       };
@@ -103,6 +111,7 @@ export async function getObjOfAnimalsByRace(userId: string) {
   }
 }
 
+// GET OBJ OF ANIMALS BY LOCATION :
 export async function getObjOfAnimalsByLocation(userId: string) {
   try {
     let objOfAnimalsByLocation = {};
@@ -113,6 +122,9 @@ export async function getObjOfAnimalsByLocation(userId: string) {
         [sequelize.fn("count", sequelize.col("location")), "cnt"],
       ],
       group: ["location"],
+      where: {
+        UserId: userId,
+      },
     });
     // console.log(locationsArrObjs);
 
@@ -129,7 +141,7 @@ export async function getObjOfAnimalsByLocation(userId: string) {
         [element]: await db.Animal.findAndCountAll({
           where: {
             location: element,
-            // UserId: userId
+            UserId: userId,
           },
         }),
       };
@@ -141,6 +153,7 @@ export async function getObjOfAnimalsByLocation(userId: string) {
   }
 }
 
+// GET OBJ OF ANIMALS BY DEVICE TYPE :
 export async function getObjOfAnimalsByDeviceType(userId: string) {
   try {
     let objOfAnimalsByDeviceType = {};
@@ -150,6 +163,9 @@ export async function getObjOfAnimalsByDeviceType(userId: string) {
         [sequelize.fn("count", sequelize.col("device_type")), "cnt"],
       ],
       group: "device_type",
+      where: {
+        UserId: userId,
+      },
     });
     const deviceTypesArray: any[] = [];
     deviceTypesArrObjs.forEach((type: any) => {
@@ -164,7 +180,7 @@ export async function getObjOfAnimalsByDeviceType(userId: string) {
         [element]: await db.Animal.findAndCountAll({
           where: {
             device_type: element,
-            // UserId: userId
+            UserId: userId,
           },
         }),
       };
@@ -180,10 +196,14 @@ export async function getObjOfAnimalsByDeviceType(userId: string) {
   }
 }
 
-// GET ALL AND COUNT :
+// GET OBJ OF ALL ANIMALS AND COUNT :
 export async function getObjOfAllAnimalsAndCount(userId: string) {
   try {
-    const allAnimalsAndCount = await db.Animal.findAndCountAll();
+    const allAnimalsAndCount = await db.Animal.findAndCountAll({
+      where: {
+        UserId: userId,
+      },
+    });
     return allAnimalsAndCount;
   } catch (error: any) {
     console.log(
@@ -192,13 +212,13 @@ export async function getObjOfAllAnimalsAndCount(userId: string) {
   }
 }
 
-//! AUX FUNCTION GET OBJ OF ANIMALS PREGNANT :
+// GET OBJ OF ANIMALS PREGNANT :
 export async function getObjOfAnimalsPregnant(userId: string) {
   try {
     let objOfAnimalsPregnant = await db.Animal.findAndCountAll({
       where: {
         is_pregnant: true,
-        // UserId: userId
+        UserId: userId,
       },
     });
     return objOfAnimalsPregnant;
@@ -210,13 +230,13 @@ export async function getObjOfAnimalsPregnant(userId: string) {
   }
 }
 
-//! AUX FUNCTION GET OBJ OF ANIMALS NOT PREGNANT :
+// GET OBJ OF ANIMALS NOT PREGNANT :
 export async function getObjOfAnimalsNotPregnant(userId: string) {
   try {
     let objOfAnimalsNotPregnant = await db.Animal.findAndCountAll({
       where: {
         [Op.or]: [{ is_pregnant: false }, { is_pregnant: null }],
-        // UserId: userId
+        UserId: userId,
       },
     });
     return objOfAnimalsNotPregnant;
@@ -228,7 +248,7 @@ export async function getObjOfAnimalsNotPregnant(userId: string) {
   }
 }
 
-//! AUX FUNCTION GET OBJ OF ANIMALS BY DEVICE TYPE :
+// GET OBJ OF ANIMALS BY TYPE OF ANIMAL :
 export async function getObjOfAnimalsByTypeOfAnimal(userId: string) {
   try {
     let objOfAnimalsByType: any = {};
@@ -242,7 +262,7 @@ export async function getObjOfAnimalsByTypeOfAnimal(userId: string) {
         [element]: await db.Animal.findAndCountAll({
           where: {
             type_of_animal: element,
-            // UserId: userId
+            UserId: userId,
           },
         }),
       };
@@ -254,6 +274,7 @@ export async function getObjOfAnimalsByTypeOfAnimal(userId: string) {
           where: {
             is_pregnant: true,
             type_of_animal: element,
+            UserId: userId,
           },
           order: [["delivery_date", "ASC"]],
         });
@@ -269,31 +290,32 @@ export async function getObjOfAnimalsByTypeOfAnimal(userId: string) {
   }
 }
 
+//! ------------------------------
 const stats = {
   numberOfTotalAnimals: 211,
-  pregnant: { total: 11, list: [{}, {}] },
-  notPregnant: { total: 76, list: [{}, {}, {}] },
+  pregnant: { count: 11, rows: [{}, {}] },
+  notPregnant: { count: 76, rows: [{}, {}, {}] },
   races: {
-    ["Angus"]: { listLength: 3, list: [{}, {}, {}, {}] },
-    ["Criolla"]: { listLength: 2, list: [{}, {}] },
-    ["Sin especificar"]: { listLength: 2, list: [{}, {}] },
+    ["Angus"]: { count: 3, rows: [{}, {}, {}, {}] },
+    ["Criolla"]: { count: 2, rows: [{}, {}] },
+    ["Sin especificar"]: { count: 2, rows: [{}, {}] },
   },
   types: {
     ["Vaquillona"]: {
-      listLength: 53,
-      list: [{}, {}, {}, {}, {}],
+      count: 53,
+      rows: [{}, {}, {}, {}, {}],
       pregnants: 11,
     },
-    ["Toro"]: { listLength: 8, list: [{}, {}] },
-    ["Novillo"]: { listLength: 13, list: [{}, {}, {}] },
+    ["Toro"]: { count: 8, rows: [{}, {}] },
+    ["Novillo"]: { count: 13, rows: [{}, {}, {}] },
   },
   location: {
-    ["Sector 2"]: { listLength: 7, list: [{}, {}, {}] },
-    ["Lote-4"]: { listLength: 2, list: [{}, {}] },
-    ["Sin especificar"]: { listLength: 4, list: [{}, {}] },
+    ["Sector 2"]: { count: 7, rows: [{}, {}, {}] },
+    ["Lote-4"]: { count: 2, rows: [{}, {}] },
+    ["Sin especificar"]: { count: 4, rows: [{}, {}] },
   },
   deviceType: {
-    ["Ear Tag"]: { listLength: 34, list: [{}, {}, {}, {}] },
-    ["Collar"]: { listLength: 9, list: [{}, {}] },
+    ["Ear Tag"]: { count: 34, rows: [{}, {}, {}, {}] },
+    ["Collar"]: { count: 9, rows: [{}, {}] },
   },
 };
