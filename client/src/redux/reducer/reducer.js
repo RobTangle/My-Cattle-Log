@@ -14,6 +14,8 @@ import {
   GET_USER_INFO,
   GET_TYPES_OF_ANIMALS,
   GET_STATS,
+  SET_STATS_TO_LOADING,
+  CLEAN_STATS,
 } from "../actions/types";
 
 const initialState = {
@@ -27,7 +29,7 @@ const initialState = {
   deletedAnimal: { pure: true },
   updatedAnimal: { pure: true },
   typesOfAnimals: [],
-  stats: {},
+  stats: { pure: true },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -103,6 +105,16 @@ const rootReducer = (state = initialState, action) => {
         typesOfAnimals: action.payload,
       };
     case GET_STATS:
+      return {
+        ...state,
+        stats: action.payload,
+      };
+    case SET_STATS_TO_LOADING:
+      return {
+        ...state,
+        stats: action.payload,
+      };
+    case CLEAN_STATS:
       return {
         ...state,
         stats: action.payload,
