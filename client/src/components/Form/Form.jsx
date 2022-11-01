@@ -134,7 +134,7 @@ export function Form(props) {
           <InputForm
             handleOnChange={handleOnChange}
             type="date"
-            name="location"
+            name="birthday"
             text="Fecha de nacimiento"
           />
           <InputForm
@@ -238,26 +238,25 @@ export function Form(props) {
               </div>
             </fieldset>
           </div>
-          {localState.is_pregnant === 'true' ? (
+          {localState.is_pregnant === "true" ? (
             <InputForm
               handleOnChange={handleOnChange}
               type="date"
               name="delivery_date"
               text="Fecha estimada de parto"
             />
-          ): null}
-         <div className="flex items-center gap-5 justify-center w-full my-5">
-
-          <button className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500">
-            Registrar animal
-          </button>
-          <button
-            onClick={props.closeModal}
-            className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
+          ) : null}
+          <div className="flex items-center gap-5 justify-center w-full my-5">
+            <button className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500">
+              Registrar animal
+            </button>
+            <button
+              onClick={props.closeModal}
+              className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
             >
-            Cerrar
-          </button>
-            </div>
+              Cerrar
+            </button>
+          </div>
         </div>
         {/* </fieldset> */}
       </form>
