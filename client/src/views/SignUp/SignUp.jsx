@@ -1,6 +1,6 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { header } from "../../constants/token";
 import axios from "axios";
@@ -11,6 +11,7 @@ export const SignUp = () => {
   const tokenAccess = localStorage.getItem("tokenCattleTracker");
   const { user } = useAuth0();
 
+  const navegar = useNavigate();
   // INPUT STATE:
   const [input, setInput] = useState({
     name: "",
@@ -18,8 +19,11 @@ export const SignUp = () => {
   });
   console.log(input);
   const redirectToHome = () => {
-    Navigate("/home");
+    navegar("/home");
   };
+
+  // WAS REGISTERED STATE :
+  const [isRegistered, setIsRegistered] = useState({ pure: true });
 
   // HANDLE SUBMIT:
   const handleSubmit = async (e) => {
@@ -30,16 +34,12 @@ export const SignUp = () => {
         input,
         header(tokenAccess)
       );
-      if (response.status === 200) {
-        return (
-          <div className="submit-OK">
-            <img src={OkSVG} alt="ok message" />
-            <h2>Usuario creado exitosamente. Graciar por usar Cattle Log.</h2>
-            <button onClick={redirectToHome}>Continuar al home</button>
-          </div>
-        );
+      console.log("response.status = ", response.status);
+      if (response.status === 200 || response.status === 204) {
+        setIsRegistered({ status: true });
       }
     } catch (error) {
+      setIsRegistered({ error: error.response?.data?.error });
       console.log(`Error en handleSubmit de SignUp. ${error.message}`);
     }
   };
@@ -59,7 +59,7 @@ export const SignUp = () => {
     <div className="flex flex-col items-center min-h-screen h-full max-w-7xl mx-auto">
       <div className="bg-landing bg-cover bg-center w-full h-52 flex items-center justify-center mb-8">
         <h1 className="text-white font-bold font-sans text-2xl text-center px-5 uppercase drop-shadow-2xl [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:text-3xl">
-          Registra tu usuario en Cattle Log
+          Registrá tu usuario en My Cattle Log
         </h1>
       </div>
       <p className="text-gray  text-justify  md:text-xl w-[90%] md:w-1/2 ">
@@ -108,9 +108,28 @@ export const SignUp = () => {
           type="submit"
           className="bg-green px-8 py-2 text-white font-bold rounded-sm my-5 border border-transparent border-solid hover:bg-transparent hover:text-green  hover:border-green  transition duration-300 "
         >
-          Finalizar
+          Registrarme
         </button>
       </form>
+      {isRegistered.error && (
+        <div>Oops! Algo salió mal. {isRegistered.error}</div>
+      )}
+      {isRegistered.status && (
+        <div className="submit-OK">
+          <img src={OkSVG} alt="ok message" />
+          <h2>
+            ¡Has sido registrado exitosamente! Esperamos que disfrutes de My
+            Cattle Log y te sea de utilidad.
+          </h2>
+
+          <button
+            className="bg-green px-8 py-2 text-white font-bold rounded-sm my-5 border border-transparent border-solid hover:bg-transparent hover:text-green  hover:border-green  transition duration-300 "
+            onClick={redirectToHome}
+          >
+            Continuar al home
+          </button>
+        </div>
+      )}
     </div>
   );
 };
