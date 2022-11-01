@@ -1,6 +1,6 @@
 import db from "../../models";
 import { checkAnimal } from "../../validators/animal-validators";
-import { IAnimal } from "../../types/animal-types";
+import { IAnimal, ITypeOfAnimal } from "../../types/animal-types";
 import jwtCheck from "../../config/jwtMiddleware";
 import { Router } from "express";
 import { IReqAuth } from "../../types/user-types";
@@ -11,9 +11,17 @@ import {
 import { Op } from "sequelize";
 import {
   getAndParseIsPregnantQuery,
+  getObjOfAllAnimalsAndCount,
+  getObjOfAnimalsByDeviceType,
+  getObjOfAnimalsByLocation,
+  getObjOfAnimalsByRace,
+  getObjOfAnimalsByTypeOfAnimal,
+  getObjOfAnimalsNotPregnant,
+  getObjOfAnimalsPregnant,
   typesOfAnimalsToArray,
 } from "./animal-r-auxiliary";
 import { stringToBoolean } from "../../validators/generic-validators";
+import sequelize from "sequelize";
 const router = Router();
 
 // ------- RUTAS : ---------
@@ -218,5 +226,128 @@ router.get("/isPregnant", async (req: any, res) => {
     return res.status(400).send({ error: error.message });
   }
 });
+
+router.get("/testing5", async (req, res) => {
+  try {
+    // let arrayDeTiposDeAnimales = Object.values(ITypeOfAnimal);
+    // console.log(arrayDeTiposDeAnimales);
+
+    // let typesObjParsed: any = {};
+    // let pregnant = {};
+    // let notPregnantAnimals = await db.Animal.findAndCountAll({
+    //   where: {
+    //     [Op.or]: [{ is_pregnant: false }, { is_pregnant: null }],
+    //   },
+    // });
+    // for (let i = 0; i < arrayDeTiposDeAnimales.length; i++) {
+    //   typesObjParsed = {
+    //     ...typesObjParsed,
+    //     [arrayDeTiposDeAnimales[i]]: await db.Animal.findAndCountAll({
+    //       where: {
+    //         type_of_animal: arrayDeTiposDeAnimales[i],
+    //       },
+    //     }),
+    //   };
+    //   if (arrayDeTiposDeAnimales[i] == "Vaquillona") {
+    //     let numberOfPregnants = await db.Animal.findAndCountAll({
+    //       where: {
+    //         is_pregnant: true,
+    //       },
+    //       order: [["delivery_date", "ASC"]],
+    //     });
+
+    //     typesObjParsed[arrayDeTiposDeAnimales[i]].pregnants = numberOfPregnants;
+    //     pregnant = numberOfPregnants;
+    //     // podría usar este mismo obj para "pregnant".
+    //   }
+    // }
+
+    // const allAnimalsAndCount = await db.Animal.findAndCountAll();
+    let stats = {
+      allFoundAndCount: await getObjOfAllAnimalsAndCount("userId"),
+      deviceType: await getObjOfAnimalsByDeviceType("userId"),
+      location: await getObjOfAnimalsByLocation("userId"),
+      races: await getObjOfAnimalsByRace("userId"),
+      pregnant: await getObjOfAnimalsPregnant("userId"),
+      notPregnant: await getObjOfAnimalsNotPregnant("userId"),
+      types: await getObjOfAnimalsByTypeOfAnimal("userId"),
+    };
+    return res.status(200).send(stats);
+  } catch (error: any) {
+    return res.send({ error: error.message });
+  }
+});
+
+//! ---- TESTING SEQUELIZE RESULTS: ----------------
+
+router.get("/testing", async (req, res) => {
+  try {
+    const grouped = await db.Animal.findAll({
+      attributes: [
+        "breed_name",
+        [sequelize.fn("count", sequelize.col("breed_name")), "cnt"],
+      ],
+      group: ["breed_name"],
+    });
+    return res.status(200).send(grouped);
+  } catch (error: any) {
+    return res.send({ error: error.message });
+  }
+});
+
+router.get("/testing2", async (req, res) => {
+  try {
+    const resultados = await db.Animal.findAndCountAll({
+      where: {
+        type_of_animal: "Novillo",
+      },
+    });
+    return res.status(200).send(resultados);
+  } catch (error: any) {
+    return res.send({ error: error.message });
+  }
+});
+
+router.get("/testing3", async (req, res) => {
+  try {
+    let booleano = true;
+    const resultados = await db.Animal.findAndCountAll({
+      where: {
+        is_pregnant: booleano,
+      },
+    });
+    return res.status(200).send(resultados);
+  } catch (error: any) {
+    return res.send({ error: error.message });
+  }
+});
+
+router.get("/testing4", async (req, res) => {
+  try {
+    let arrayDeTiposDeAnimales = Object.values(ITypeOfAnimal);
+    console.log(arrayDeTiposDeAnimales);
+    let booleano = true;
+    let objParsed: any = {};
+    let arrayDePromesas = arrayDeTiposDeAnimales.map(
+      async (tipo) =>
+        await db.Animal.findAndCountAll({
+          where: {
+            type_of_animal: tipo,
+          },
+        })
+    );
+    const arregloCumplido = await Promise.all(arrayDePromesas);
+    // const resultados = await db.Animal.findAndCountAll({
+    //   where: {
+    //     is_pregnant: booleano,
+    //   },
+    // });
+    return res.status(200).send(arregloCumplido);
+  } catch (error: any) {
+    return res.send({ error: error.message });
+  }
+});
+
+//! ------------
 
 export default router;

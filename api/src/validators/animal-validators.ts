@@ -42,7 +42,7 @@ export function checkAnimal(bodyFromReq: any): IAnimal {
 // CHECK DEVICE_TYPE :
 function checkDeviceType(argFromReq: any): string {
   if (isStringBetween1And50CharsLong(argFromReq)) {
-    return argFromReq;
+    return argFromReq.toLowerCase();
   } else {
     throw new Error(`El tipo de dispositivo "${argFromReq}" es inválido.`);
   }
