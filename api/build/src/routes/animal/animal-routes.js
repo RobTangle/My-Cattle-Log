@@ -19,6 +19,7 @@ const express_1 = require("express");
 const user_r_auxiliary_1 = require("../user/user-r-auxiliary");
 const sequelize_1 = require("sequelize");
 const animal_r_auxiliary_1 = require("./animal-r-auxiliary");
+const generic_validators_1 = require("../../validators/generic-validators");
 const router = (0, express_1.Router)();
 // ------- RUTAS : ---------
 // GET ALL FROM ANIMALS :
@@ -186,4 +187,116 @@ router.get("/typesAllowed", (req, res) => __awaiter(void 0, void 0, void 0, func
         return res.status(400).send({ error: error.message });
     }
 }));
+//! PARSED FOR STATS: ------------------
+// GET ALL IS PREGNANT TRUE || FALSE & ORDERED BY DELIVERY DATE :
+//Ruta de ejemplo:  localhost:3001/animal/isPregnant?status=true&order=ASC
+router.get("/isPregnant", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        // espero req.query.status = true || false
+        //URL Ej:  /animal/isPregnant?status=true || false
+        console.log(req.query);
+        console.log("req.query.status = ", req.query.status);
+        const reqAuth = req.auth;
+        const userId = reqAuth.sub;
+        let status = req.query.status;
+        let statusParsed = (0, generic_validators_1.stringToBoolean)(status);
+        let order = req.query.order; // ASC || DESC || NULLS FIRST
+        const querySearchResult = yield (0, animal_r_auxiliary_1.getAndParseIsPregnantQuery)(userId, statusParsed, order);
+        return res.status(200).send(querySearchResult);
+    }
+    catch (error) {
+        console.log(`Error en '/animal/isPregnant. ${error.message}`);
+        return res.status(400).send({ error: error.message });
+    }
+}));
+router.get("/stats", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const reqAuth = req.auth;
+        const userId = reqAuth.sub;
+        let stats = {
+            allFoundAndCount: yield (0, animal_r_auxiliary_1.getObjOfAllAnimalsAndCount)(userId),
+            deviceType: yield (0, animal_r_auxiliary_1.getObjOfAnimalsByDeviceType)(userId),
+            location: yield (0, animal_r_auxiliary_1.getObjOfAnimalsByLocation)(userId),
+            races: yield (0, animal_r_auxiliary_1.getObjOfAnimalsByRace)(userId),
+            pregnant: yield (0, animal_r_auxiliary_1.getObjOfAnimalsPregnant)(userId),
+            notPregnant: yield (0, animal_r_auxiliary_1.getObjOfAnimalsNotPregnant)(userId),
+            types: yield (0, animal_r_auxiliary_1.getObjOfAnimalsByTypeOfAnimal)(userId),
+        };
+        console.log(`Devolviendo objeto stats...`);
+        return res.status(200).send(stats);
+    }
+    catch (error) {
+        console.log(`Error en GET 'animal/stats'. ${error.message}`);
+        return res.status(400).send({ error: error.message });
+    }
+}));
+//! ---- TESTING SEQUELIZE RESULTS: ----------------
+// router.get("/testing", async (req, res) => {
+//   try {
+//     const grouped = await db.Animal.findAll({
+//       attributes: [
+//         "breed_name",
+//         [sequelize.fn("count", sequelize.col("breed_name")), "cnt"],
+//       ],
+//       group: ["breed_name"],
+//       where: {
+//         UserId: "google-oauth2|111388821393357414643",
+//       },
+//     });
+//     return res.status(200).send(grouped);
+//   } catch (error: any) {
+//     return res.send({ error: error.message });
+//   }
+// });
+// router.get("/testing2", async (req, res) => {
+//   try {
+//     const resultados = await db.Animal.findAndCountAll({
+//       where: {
+//         type_of_animal: "Novillo",
+//       },
+//     });
+//     return res.status(200).send(resultados);
+//   } catch (error: any) {
+//     return res.send({ error: error.message });
+//   }
+// });
+// router.get("/testing3", async (req, res) => {
+//   try {
+//     let booleano = true;
+//     const resultados = await db.Animal.findAndCountAll({
+//       where: {
+//         is_pregnant: booleano,
+//       },
+//     });
+//     return res.status(200).send(resultados);
+//   } catch (error: any) {
+//     return res.send({ error: error.message });
+//   }
+// });
+// router.get("/testing4", async (req, res) => {
+//   try {
+//     let arrayDeTiposDeAnimales = Object.values(ITypeOfAnimal);
+//     console.log(arrayDeTiposDeAnimales);
+//     let booleano = true;
+//     let objParsed: any = {};
+//     let arrayDePromesas = arrayDeTiposDeAnimales.map(
+//       async (tipo) =>
+//         await db.Animal.findAndCountAll({
+//           where: {
+//             type_of_animal: tipo,
+//           },
+//         })
+//     );
+//     const arregloCumplido = await Promise.all(arrayDePromesas);
+//     // const resultados = await db.Animal.findAndCountAll({
+//     //   where: {
+//     //     is_pregnant: booleano,
+//     //   },
+//     // });
+//     return res.status(200).send(arregloCumplido);
+//   } catch (error: any) {
+//     return res.send({ error: error.message });
+//   }
+// });
+//! ------------
 exports.default = router;
