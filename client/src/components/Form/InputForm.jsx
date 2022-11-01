@@ -7,6 +7,7 @@ export default function InputForm({
   type,
   text,
   placeholder,
+  value,
 }) {
   return (
     <div className="flex items-center gap-3 mb-3 w-full">
@@ -24,6 +25,7 @@ export default function InputForm({
         onChange={handleOnChange}
         placeholder={placeholder}
         accept={accept}
+        value={value}
       />
     </div>
   );
