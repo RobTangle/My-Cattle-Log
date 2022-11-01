@@ -88,9 +88,11 @@ export function Form(props) {
               className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
               type="text"
               name="id_senasa"
-              placeholder="id de 16 caracteres"
+              placeholder="Id de 16 caracteres"
+              id="id_senasa"
               maxLength={16}
               onChange={handleOnChange}
+              required="true"
             />
           </div>
 
@@ -102,21 +104,57 @@ export function Form(props) {
               <fieldset className="flex  gap-3 my-2 ">
                 {" "}
                 {typesOfAnimalsState?.map((type) => (
-                  <>
+                  <React.Fragment key={type}>
                     <input
                       type="radio"
                       id={type}
                       name="type_of_animal"
+                      required="true"
                       value={`${type}`}
                       className="checked:bg-green"
                     />{" "}
                     {type}
-                  </>
+                  </React.Fragment>
                 ))}
               </fieldset>
             )}
           </div>
-
+          <div className="flex items-center gap-3 mb-3 w-full">
+            <label
+              htmlFor="device_type"
+              className="text-gray font-semibold w-[120px] md:w-[130px] text-sm after:content-['*'] after:ml-0.5 after:text-red-500"
+            >
+              Tipo de dispositivo
+            </label>
+            <input
+              id="device_type"
+              className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
+              type="text"
+              name="device_type"
+              placeholder="Ej: Collar / Ear Tag "
+              maxLength={35}
+              onChange={handleOnChange}
+              required="true"
+            />
+          </div>
+          <div className="flex items-center gap-3 mb-3 w-full">
+            <label
+              htmlFor="device_number"
+              className="text-gray font-semibold w-[120px] md:w-[130px] text-sm after:content-['*'] after:ml-0.5 after:text-red-500"
+            >
+              Código de dispositivo
+            </label>
+            <input
+              className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
+              type="text"
+              name="device_number"
+              id="device_number"
+              placeholder="Código de 8 caracteres"
+              maxLength={8}
+              onChange={handleOnChange}
+              required="true"
+            />
+          </div>
           <InputForm
             handleOnChange={handleOnChange}
             type="text"
@@ -150,20 +188,6 @@ export function Form(props) {
             name="name"
             text="Nombre"
             placeholder="nombre del animal "
-          />
-          <InputForm
-            handleOnChange={handleOnChange}
-            type="text"
-            name="device_type"
-            text="Tipo de dispositivo"
-            placeholder="Ej: Collar / Ear tag "
-          />
-          <InputForm
-            handleOnChange={handleOnChange}
-            type="text"
-            name="device_number"
-            text="Número de dispositivo"
-            placeholder="Código de 8 caracteres"
           />
 
           <div className="flex flex-col  gap-3 mb-3 w-full my-5">
