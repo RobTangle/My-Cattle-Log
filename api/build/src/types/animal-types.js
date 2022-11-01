@@ -6,4 +6,5 @@ var ITypeOfAnimal;
     ITypeOfAnimal["Novillo"] = "Novillo";
     ITypeOfAnimal["Toro"] = "Toro";
     ITypeOfAnimal["Vaquillona"] = "Vaquillona";
+    ITypeOfAnimal["Vaca"] = "Vaca";
 })(ITypeOfAnimal = exports.ITypeOfAnimal || (exports.ITypeOfAnimal = {}));

@@ -38,7 +38,7 @@ exports.checkAnimal = checkAnimal;
 // CHECK DEVICE_TYPE :
 function checkDeviceType(argFromReq) {
     if ((0, generic_validators_1.isStringBetween1And50CharsLong)(argFromReq)) {
-        return argFromReq;
+        return argFromReq.toLowerCase();
     }
     else {
         throw new Error(`El tipo de dispositivo "${argFromReq}" es inválido.`);
@@ -162,7 +162,7 @@ function checkIsPregnant(isPregnantFromReq) {
     if (isPregnantFromReq === "false") {
         return false;
     }
-    throw new Error(`El dato ingresado como 'isPregnant' es inválido. Ingrese undefined | null, o un valor booleano.`);
+    throw new Error(`El dato ingresado '${isPregnantFromReq}' como 'isPregnant' es inválido.`);
 }
 //! CHECK DELIVERY DATE : (corregir validación de Date con librería externa)
 function checkDeliveryDate(deliveryDateFromReq) {
