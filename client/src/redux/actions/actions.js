@@ -6,6 +6,7 @@ import {
   SEARCH_QUERY,
   URL_GET_USER_INFO,
   URL_GET_TYPES_OF_ANIMALS,
+  URL_GET_STATS,
 } from "../../constants/urls";
 import {
   SET_NEW_ANIMAL_TO_LOADING,
@@ -21,6 +22,9 @@ import {
   CLEAR_FETCHED_ANIMALS,
   GET_USER_INFO,
   GET_TYPES_OF_ANIMALS,
+  GET_STATS,
+  SET_STATS_TO_LOADING,
+  CLEAN_STATS,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -259,6 +263,58 @@ export function getTypesOfAnimalsAllowed() {
       return dispatch({
         type: GET_TYPES_OF_ANIMALS,
         payload: { error: error?.response?.data?.error },
+      });
+    }
+  };
+}
+
+export function getStats(token) {
+  return async function (dispatch) {
+    try {
+      console.log(`Despachando getStats...`);
+      const response = await axios.get(URL_GET_STATS, header(token));
+      return dispatch({
+        type: GET_STATS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(`Error en la action creator de getStatus. ${error.message}`);
+      return dispatch({
+        type: GET_STATS,
+        payload: { error: error.response?.data?.error },
+      });
+    }
+  };
+}
+
+export function setStatsToLoading() {
+  return async function (dispatch) {
+    try {
+      console.log(`Setting stats to loading...`);
+      return dispatch({
+        type: SET_STATS_TO_LOADING,
+        payload: { loading: true },
+      });
+    } catch (error) {
+      return dispatch({
+        type: SET_STATS_TO_LOADING,
+        payload: { error: error.message },
+      });
+    }
+  };
+}
+
+export function cleanStats() {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: CLEAN_STATS,
+        payload: { pure: true },
+      });
+    } catch (error) {
+      return dispatch({
+        type: CLEAN_STATS,
+        payload: { error: error.message },
       });
     }
   };
