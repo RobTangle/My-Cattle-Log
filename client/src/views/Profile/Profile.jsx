@@ -73,6 +73,27 @@ export const Profile = () => {
             >
               Ver estadísticas
             </button>
+            <div>
+              <br />
+              <h2 className="text-green text-2xl font-semibold">
+                Notas personales:
+              </h2>
+              <div>
+                <h3>Nueva nota</h3>
+                <label
+                  htmlFor="new-note"
+                  className="text-gray font-semibold w-[120px] md:w-[130px] text-sm "
+                >
+                  nota:{" "}
+                </label>
+                <textarea
+                  type="textarea"
+                  id="new_note"
+                  className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
+                  placeholder="nota personal..."
+                />
+              </div>
+            </div>
           </div>
         )}
         {!isLoading && !isAuthenticated ? (
