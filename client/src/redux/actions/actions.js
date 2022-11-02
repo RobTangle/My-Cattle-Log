@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   URL,
   POST_ANIMAL,
+  // eslint-disable-next-line
   REGISTER_NEW_USER,
   SEARCH_QUERY,
   URL_GET_USER_INFO,
