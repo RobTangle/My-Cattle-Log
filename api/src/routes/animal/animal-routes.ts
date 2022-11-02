@@ -239,6 +239,7 @@ router.get("/stats", jwtCheck, async (req: any, res) => {
       pregnant: await getObjOfAnimalsPregnant(userId),
       notPregnant: await getObjOfAnimalsNotPregnant(userId),
       types: await getObjOfAnimalsByTypeOfAnimal(userId),
+      fetched: true,
     };
     console.log(`Devolviendo objeto stats...`);
     return res.status(200).send(stats);
@@ -249,6 +250,24 @@ router.get("/stats", jwtCheck, async (req: any, res) => {
 });
 
 //! ---- TESTING SEQUELIZE RESULTS: ----------------
+
+router.get("/ts1", async (req, res) => {
+  try {
+    let initialTime = new Date().getTime();
+    console.log(initialTime);
+    console.log(new Date().getTime());
+
+    let finalTime = new Date().getTime();
+    console.log(finalTime);
+    console.log(new Date().getTime());
+
+    let totalTime = finalTime - initialTime;
+    totalTime = totalTime * 1000;
+    return res.status(200).send({ msg: totalTime });
+  } catch (error: any) {
+    return res.status(400).send({ error: error.message });
+  }
+});
 
 // router.get("/testing", async (req, res) => {
 //   try {
