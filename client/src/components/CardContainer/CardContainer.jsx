@@ -8,7 +8,6 @@ import loading from "../../assets/loading.gif";
 import { Pagination } from "../Pagination/Pagination";
 import { PropsColumns } from "../PropsColumns/PropsColumns";
 
-
 export function CardContainer(props) {
   const userAnimalsState = useSelector((state) => state.userAnimals);
   const dispatch = useDispatch();
