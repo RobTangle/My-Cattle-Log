@@ -25,7 +25,8 @@ export function VerticalBarChartPreg({
   title,
   by,
 }) {
-  const labels = ["Pregnant", "Not pregnant"];
+  const labels = ["Positivo", "Negativo"];
+  const labelPositivo = ["Positivo"];
   // const labels = ["Estado de embarazo"];
   console.log("statsObjNotPreg", statsObjNotPreg);
   let dataArrayParsed = [];
@@ -36,7 +37,7 @@ export function VerticalBarChartPreg({
   //   }
   // }
   dataArrayParsed.push(statsObjPreg?.count);
-  dataArrayParsed.push(statsObjNotPreg?.count);
+  // dataArrayParsed.push(statsObjNotPreg?.count);
 
   // for (const key in statsObjNotPreg) {
   //   if (Object.hasOwnProperty.call(statsObjNotPreg, key)) {
@@ -46,7 +47,8 @@ export function VerticalBarChartPreg({
   // }
 
   const data = {
-    labels: labels,
+    // labels: labels,
+    labels: [""],
     datasets: [
       {
         label: `Positivo`,
@@ -63,11 +65,11 @@ export function VerticalBarChartPreg({
           "rgba(35, 192, 192, 0.4)",
         ],
       },
-      // {
-      //   label: "Negativo",
-      //   data: [statsObjNotPreg?.count],
-      //   backgroundColor: "rgba(53, 162, 235, 0.5)",
-      // },
+      {
+        label: "Negativo",
+        data: [statsObjNotPreg?.count],
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
     ],
   };
 

@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavBar } from "../NavBar/NavBar";
+import { CardStatistics } from "../CardContainer/CardStatistics";
 import { getStats } from "../../redux/actions/actions";
 import { DoughnutChart } from "../../charts/DoughnutChart";
 import "./statistics.css";
@@ -18,11 +20,12 @@ export function Statistics(props) {
 
   return (
     <>
-      <div>
-        <h1>Estadísticas</h1>
+      <div className="max-w-7xl mx-auto ">
+        <NavBar />
+        <h1 className="text-green text-3xl my-5">Estadísticas</h1>
         <br />
         <div>
-          <h2>Razas</h2>
+          <h2 className="text-green text-2xl my-5">Razas</h2>
           <div className="graph400">
             {statsState.races && (
               <DoughnutChart
@@ -40,7 +43,7 @@ export function Statistics(props) {
         </div>
         <br />
         <div>
-          <h2>Localizaciones</h2>
+          <h2 className="text-green text-2xl my-5">Localizaciones</h2>
           <div className="graph400">
             {statsState.location && (
               <PieChart
@@ -58,7 +61,7 @@ export function Statistics(props) {
         </div>
         <br />
         <div>
-          <h2>Tipos</h2>
+          <h2 className="text-green text-2xl my-5">Tipos</h2>
           <div className="graph400">
             {statsState.types && (
               <PieChart
@@ -97,8 +100,8 @@ export function Statistics(props) {
         </div>
         <br />
         <div>
-          <h2>Estado de embarazo</h2>
-          <div>
+          <h2 className="text-green text-2xl my-5">Estado de embarazo</h2>
+          <div className="graph600">
             {statsState.pregnant && (
               <VerticalBarChartPreg
                 statsObjPreg={statsState?.pregnant}
@@ -114,15 +117,22 @@ export function Statistics(props) {
         </div>
         <br />
         <div>
-          <h2>Próximos partos esperados</h2>
+          <h2 className="text-green text-2xl my-5">
+            Próximos partos esperados
+          </h2>
           <div>Botón de ordenamiento ASC o DESC</div>
           <div>
             Renderizado de cards de animales embarazados. Array listo en
             stats.pregnant.rows
           </div>
+          <div>
+            {statsState.pregnant && (
+              <CardStatistics animalsToRender={statsState?.pregnant?.rows} />
+            )}
+          </div>
         </div>
         <br />
-        <div>
+        {/* <div>
           <h2>Tipo de dispositivo</h2>
           <div>CHART</div>
           <div>Botones de filtrado según tipo de dispositivo</div>
@@ -130,7 +140,7 @@ export function Statistics(props) {
             Renderizado de cards segúin el filtrado de tipo de dispositivo.
             Array listos en stats.deviceType[type].rows
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
