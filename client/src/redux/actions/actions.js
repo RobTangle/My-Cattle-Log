@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   URL,
   POST_ANIMAL,
+  // eslint-disable-next-line
   REGISTER_NEW_USER,
   SEARCH_QUERY,
   URL_GET_USER_INFO,
@@ -25,6 +26,9 @@ import {
   GET_STATS,
   SET_STATS_TO_LOADING,
   CLEAN_STATS,
+  GET_PREGNANT_ASC,
+  CLEAN_PREGNANT_ASC,
+  SET_PREGNANT_ASC_TO_LOADING,
 } from "./types";
 import { header } from "../../constants/token";
 
@@ -316,6 +320,53 @@ export function cleanStats() {
         type: CLEAN_STATS,
         payload: { error: error.message },
       });
+    }
+  };
+}
+
+export function getPregnantAsc(token) {
+  console.log(`Accionando getPregnantAsc`);
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        URL + "animal/isPregnant?status=true&order=ASC",
+        header(token)
+      );
+      return dispatch({
+        type: GET_PREGNANT_ASC,
+        payload: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: GET_PREGNANT_ASC,
+        payload: { error: error.message },
+      });
+    }
+  };
+}
+
+export function setPregnantAscToLoading() {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: SET_PREGNANT_ASC_TO_LOADING,
+        payload: { loading: true },
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_PREGNANT_ASC_TO_LOADING,
+        payload: { error: error.message },
+      });
+    }
+  };
+}
+
+export function cleanPregnantAsc() {
+  return async function (dispatch) {
+    try {
+      dispatch({ type: CLEAN_PREGNANT_ASC, payload: { pure: true } });
+    } catch (error) {
+      dispatch({ type: CLEAN_PREGNANT_ASC, payload: { error: error.message } });
     }
   };
 }

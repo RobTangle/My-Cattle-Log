@@ -248,6 +248,63 @@ export async function getObjOfAnimalsNotPregnant(userId: string) {
   }
 }
 
+// GET OBJ OF ANIMALS BY SEX :
+
+export async function getObjOfAnimalsBySex(userId: string) {
+  try {
+    const [femalePregnant, femaleNotPregnant, male, female] = await Promise.all(
+      [
+        db.Animal.findAndCountAll({
+          where: {
+            is_pregnant: true,
+            UserId: userId,
+          },
+          order: [["delivery_date", "ASC"]],
+        }),
+        db.Animal.findAndCountAll({
+          where: {
+            [Op.or]: [
+              { type_of_animal: ITypeOfAnimal.Vaca },
+              { type_of_animal: ITypeOfAnimal.Vaquillona },
+            ],
+            is_pregnant: false,
+            UserId: userId,
+          },
+        }),
+        db.Animal.findAndCountAll({
+          where: {
+            [Op.or]: [
+              { type_of_animal: ITypeOfAnimal.Toro },
+              { type_of_animal: ITypeOfAnimal.Novillo },
+            ],
+            UserId: userId,
+          },
+        }),
+        db.Animal.findAndCountAll({
+          where: {
+            [Op.or]: [
+              { type_of_animal: ITypeOfAnimal.Vaca },
+              { type_of_animal: ITypeOfAnimal.Vaquillona },
+            ],
+            UserId: userId,
+          },
+        }),
+      ]
+    );
+
+    let objOfAnimalsBySex: any = {
+      male: male,
+      female: female,
+      femalePregnant: femalePregnant,
+      femaleNotPregnant: femaleNotPregnant,
+    };
+
+    return objOfAnimalsBySex;
+  } catch (error: any) {
+    console.log(`Error en fn aux getObjOfAnimalsBySex. ${error.message}`);
+  }
+}
+
 // GET OBJ OF ANIMALS BY TYPE OF ANIMAL :
 export async function getObjOfAnimalsByTypeOfAnimal(userId: string) {
   try {

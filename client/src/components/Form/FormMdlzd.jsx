@@ -46,8 +46,8 @@ export function FormMdlzd({ closeModal, animal }) {
   function handlePregnantRadioChange(e) {
     console.log(e.target.name, e.target.value);
     if (
-      e.target.name == "is_pregnant" &&
-      (e.target.value == "false" || !e.target.value)
+      e.target.name === "is_pregnant" &&
+      (e.target.value === "false" || !e.target.value)
     ) {
       console.log(
         `El target value es falso y el target name es 'is_pregnant'. Seteando delivery_date a "" `

@@ -231,6 +231,18 @@ router.get("/stats", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, vo
     }
 }));
 //! ---- TESTING SEQUELIZE RESULTS: ----------------
+router.get("/ts1", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let initialTime = new Date().getTime();
+        let finalTime = new Date().getTime();
+        let totalTime = finalTime - initialTime;
+        console.log(totalTime);
+        return res.status(200).send(totalTime);
+    }
+    catch (error) {
+        return res.status(400).send({ error: error.message });
+    }
+}));
 // router.get("/testing", async (req, res) => {
 //   try {
 //     const grouped = await db.Animal.findAll({

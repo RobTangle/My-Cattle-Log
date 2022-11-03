@@ -15,6 +15,7 @@ import {
   getObjOfAnimalsByDeviceType,
   getObjOfAnimalsByLocation,
   getObjOfAnimalsByRace,
+  getObjOfAnimalsBySex,
   getObjOfAnimalsByTypeOfAnimal,
   getObjOfAnimalsNotPregnant,
   getObjOfAnimalsPregnant,
@@ -22,6 +23,8 @@ import {
 } from "./animal-r-auxiliary";
 import { stringToBoolean } from "../../validators/generic-validators";
 import sequelize from "sequelize";
+require("dotenv").config();
+const USER_ID_FER_AZU = process.env.USER_ID_FER_AZU;
 const router = Router();
 
 // ------- RUTAS : ---------
@@ -239,6 +242,8 @@ router.get("/stats", jwtCheck, async (req: any, res) => {
       pregnant: await getObjOfAnimalsPregnant(userId),
       notPregnant: await getObjOfAnimalsNotPregnant(userId),
       types: await getObjOfAnimalsByTypeOfAnimal(userId),
+      sex: await getObjOfAnimalsBySex(userId),
+      fetched: true,
     };
     console.log(`Devolviendo objeto stats...`);
     return res.status(200).send(stats);
@@ -248,7 +253,104 @@ router.get("/stats", jwtCheck, async (req: any, res) => {
   }
 });
 
+//! RUTA DE TESTEO DE VELOCIDAD ENTRE PROMISE.ALL y AWAITS.
+// PARECE SER QUE AWAIT ES MÁS RÁPIDO.... inesperadamente! Y más prolijo también.
+router.get("/stats2", async (req: any, res) => {
+  // jwtCheck,
+  try {
+    const reqAuth: IReqAuth = req.auth;
+    // const userId = reqAuth.sub;
+    const userId: any = USER_ID_FER_AZU;
+
+    let initialTime = new Date().getTime();
+
+    const [
+      allFoundAndCount,
+      deviceType,
+      location,
+      races,
+      pregnant,
+      notPregnant,
+      types,
+      sex,
+    ] = await Promise.all([
+      getObjOfAllAnimalsAndCount(userId),
+      getObjOfAnimalsByDeviceType(userId),
+      getObjOfAnimalsByLocation(userId),
+      getObjOfAnimalsByRace(userId),
+      getObjOfAnimalsPregnant(userId),
+      getObjOfAnimalsNotPregnant(userId),
+      getObjOfAnimalsByTypeOfAnimal(userId),
+      getObjOfAnimalsBySex(userId),
+    ]);
+    let stats2 = {
+      allFoundAndCount,
+      deviceType,
+      location,
+      races,
+      pregnant,
+      notPregnant,
+      types,
+      sex,
+      fetched: true,
+    };
+
+    let finalTime = new Date().getTime();
+    let totalTime = finalTime - initialTime;
+    totalTime = totalTime * 1;
+    console.log("TotalTime con Promise.all() = ", totalTime);
+
+    // CON AWAITS (PARECE SER MÁS RÁPIDO QUE CON PROMISE.ALL!!!!)
+    let initialTimeAwaits = new Date().getTime();
+    let stats = {
+      allFoundAndCount: await getObjOfAllAnimalsAndCount(userId),
+      deviceType: await getObjOfAnimalsByDeviceType(userId),
+      location: await getObjOfAnimalsByLocation(userId),
+      races: await getObjOfAnimalsByRace(userId),
+      pregnant: await getObjOfAnimalsPregnant(userId),
+      notPregnant: await getObjOfAnimalsNotPregnant(userId),
+      types: await getObjOfAnimalsByTypeOfAnimal(userId),
+      sex: await getObjOfAnimalsBySex(userId),
+      fetched: true,
+    };
+
+    let finalTimeAwaits = new Date().getTime();
+
+    let totalTimeAwaits = finalTimeAwaits - initialTimeAwaits;
+    totalTimeAwaits = totalTimeAwaits * 1;
+    console.log("Total time Awaits = ", totalTimeAwaits);
+
+    return res.status(200).send({
+      statsPAll: stats2,
+      statsAwait: stats,
+      tPA: totalTime,
+      tAwaits: totalTimeAwaits,
+    });
+  } catch (error: any) {
+    console.log(`Error en GET 'animal/stats'. ${error.message}`);
+    return res.status(400).send({ error: error.message });
+  }
+});
+
 //! ---- TESTING SEQUELIZE RESULTS: ----------------
+
+router.get("/ts1", async (req, res) => {
+  try {
+    let initialTime = new Date().getTime();
+    console.log(initialTime);
+    console.log(new Date().getTime());
+
+    let finalTime = new Date().getTime();
+    console.log(finalTime);
+    console.log(new Date().getTime());
+
+    let totalTime = finalTime - initialTime;
+    totalTime = totalTime * 1000;
+    return res.status(200).send({ msg: totalTime });
+  } catch (error: any) {
+    return res.status(400).send({ error: error.message });
+  }
+});
 
 // router.get("/testing", async (req, res) => {
 //   try {
