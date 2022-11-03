@@ -65,4 +65,29 @@ router.delete("/:id", jwtCheck, async (req: any, res) => {
   }
 });
 
+router.put("/", jwtCheck, async (req: any, res) => {
+  try {
+    const reqAuth: IReqAuth = req.auth;
+    const userId: string = reqAuth.sub;
+    await throwErrorIfUserIsNotRegisteredInDB(userId);
+    const validatedNote: INote = validateNewNote(req.body);
+    let updatedNote = await db.Note.update(
+      { ...validatedNote },
+      {
+        where: {
+          id: validatedNote.id,
+          UserId: userId,
+        },
+      }
+    );
+    return res.status(200).send({
+      updated: Number(updatedNote[0]),
+      msg: `${updatedNote[0]} nota ha sido actualizada exitosamente.`,
+    });
+  } catch (error: any) {
+    console.log(`Error en ruta PUT 'note/:id'. ${error.message}`);
+    return res.status(400).send({ error: error.message });
+  }
+});
+
 export default router;
