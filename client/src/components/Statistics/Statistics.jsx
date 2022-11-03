@@ -10,6 +10,7 @@ import { PieChart } from "../../charts/PieChart";
 import { VerticalBarChartPreg } from "../../charts/VerticalBarChartPreg";
 import { VerticalBarChart } from "../../charts/VerticalBarChart";
 import { CardFilterContainer } from "../CardContainer/CardFilterContainer";
+import { PieChartTwoObj } from "../../charts/PieChartTwoObj";
 
 export function Statistics(props) {
   const token = localStorage.getItem("tokenCattleTracker");
@@ -21,6 +22,7 @@ export function Statistics(props) {
     location: "",
     type_of_animal: "",
     pregnant: "",
+    sex: "",
   });
 
   function renderPregnant(arg) {
@@ -104,6 +106,33 @@ export function Statistics(props) {
           </div>
           <br />
           <div className="lg:flex flex-col justify-center items-center">
+            <h2 className="text-green text-2xl my-5">Sexo</h2>
+            <div className="graph400">
+              {statsState.sex && (
+                <PieChartTwoObj
+                  statsObjOne={statsState.sex.male}
+                  statsObjTwo={statsState.sex.female}
+                  by="sexo"
+                  title="Sexo del animal"
+                  labels={["Macho", "Hembra"]}
+                />
+              )}
+            </div>
+            <div>
+              {statsState.sex && (
+                <FilterButtons
+                  // filtersArray={Object.keys(statsState.sex)}
+                  filtersArray={["Macho", "Hembra"]}
+                  filters={filters}
+                  setFilters={setFilters}
+                  prop="type_of_animal"
+                />
+              )}
+            </div>
+            {/* {statsState.sex && <PieChartTwoObj.jsx />} */}
+          </div>
+
+          <div className="lg:flex flex-col justify-center items-center">
             <h2 className="text-green text-2xl my-5">Tipos de animales</h2>
             <div className="graph400">
               {statsState.types && (
@@ -158,19 +187,28 @@ export function Statistics(props) {
             <div className="flex items-center gap-5 justify-left w-full my-5">
               <button
                 className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
-                onClick={() => renderPregnant("positive")}
+                value={"positive"}
+                name="pregnant"
+                // onClick={() => renderPregnant("positive")}
+                onClick={renderPregnant}
               >
                 Ver preñadas
               </button>
               <button
                 className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
-                onClick={() => renderPregnant("negative")}
+                value="negative"
+                name="pregnant"
+                // onClick={() => renderPregnant("negative")}
+                onClick={renderPregnant}
               >
                 Ver no preñadas
               </button>
               <button
                 className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
-                onClick={() => renderPregnant("")}
+                value={""}
+                name="pregnant"
+                // onClick={() => renderPregnant("")}
+                onClick={renderPregnant}
               >
                 Limpiar
               </button>
