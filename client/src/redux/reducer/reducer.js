@@ -1,4 +1,3 @@
-import { SEARCH_QUERY } from "../../constants/urls";
 import {
   CLEAN_NEW_ANIMAL,
   CREATE_NEW_ANIMAL,
@@ -19,6 +18,7 @@ import {
   GET_PREGNANT_ASC,
   SET_PREGNANT_ASC_TO_LOADING,
   CLEAN_PREGNANT_ASC,
+  SEARCH_QUERY,
 } from "../actions/types";
 
 const initialState = {

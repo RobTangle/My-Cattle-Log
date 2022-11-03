@@ -21,3 +21,4 @@ export const GET_NOTES_FROM_USER = "GET_NOTES_FROM_USER";
 export const POST_NEW_NOTE = "POST_NEW_NOTE";
 export const DELETE_NOTE = "DELETE_NOTE";
 export const UPDATE_NOTE = "UPDATE_NOTE";
+export const SEARCH_QUERY = "SEARCH_QUERY";
