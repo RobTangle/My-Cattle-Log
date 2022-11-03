@@ -19,7 +19,8 @@ router.post("/newNote", jwtCheck, async (req: any, res) => {
     throwErrorIfUserIsNotRegisteredInDB(userId);
     let checkedNoteObj = validateNewNote(req.body);
     const newNote = await db.Note.create(checkedNoteObj);
-    console.log("Nueva nota creada: ", newNote.toJSON());
+    await newNote.setUser(userId);
+    console.log("Nueva nota asociada y creada: ", newNote.toJSON());
     return res.status(200).send(newNote);
   } catch (error: any) {
     console.log(`Eror en ruta  POST 'note/newNote'. ${error.message}`);
@@ -39,3 +40,29 @@ router.get("/all", jwtCheck, async (req: any, res) => {
     return res.status(400).send({ error: error.message });
   }
 });
+
+router.delete("/:id", jwtCheck, async (req: any, res) => {
+  try {
+    const noteIdFromParams = req.params.id;
+    if (!noteIdFromParams) {
+      throw new Error(`Error. Debe ingresar un id por params.`);
+    }
+    const reqAuth: IReqAuth = req.auth;
+    const userId: string = reqAuth.sub;
+    let deletedNote = await db.Note.destroy({
+      where: {
+        id: noteIdFromParams,
+        UserId: userId,
+      },
+    });
+    console.log("DELETED NOTE = ", deletedNote);
+    return res
+      .status(200)
+      .send({ msg: "Nota eliminada exitosamente", status: true });
+  } catch (error: any) {
+    console.log(`Error en ruta DELETE '/note/:id. ${error.message}`);
+    return res.status(400).send({ error: error.message });
+  }
+});
+
+export default router;
