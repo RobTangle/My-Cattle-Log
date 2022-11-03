@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-    class User extends sequelize_1.Model {
+    class Note extends sequelize_1.Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -10,36 +10,38 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            User.hasMany(models.Animal);
-            User.hasMany(models.Note);
+            Note.belongsTo(models.User);
         }
     }
-    User.init({
+    Note.init({
         id: {
             type: DataTypes.STRING,
             primaryKey: true,
-            allowNull: false,
+            defaultValue: sequelize_1.UUIDV4,
+            allowNull: true,
         },
-        name: {
+        title: {
             type: DataTypes.STRING(50),
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len: [1, 50],
             },
         },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+        theme: {
+            type: DataTypes.STRING(30),
+            allowNull: true,
         },
-        profile_img: {
+        comment: {
+            type: DataTypes.STRING(900),
+            allowNull: false,
+        },
+        importance: {
             type: DataTypes.STRING,
-            defaultValue: "https://thumbs.dreamstime.com/t/farmer-icon-badge-style-one-farm-collection-icon-can-be-used-ui-ux-farmer-icon-badge-style-one-farm-collection-124009969.jpg",
             allowNull: true,
         },
     }, {
         sequelize,
-        modelName: "User",
+        modelName: "Note",
     });
-    return User;
+    return Note;
 };
