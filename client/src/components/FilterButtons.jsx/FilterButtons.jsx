@@ -1,6 +1,4 @@
 import React from "react";
-// import { CardPregnantStatistics } from "../CardContainer/CardPregnantStatistics";
-
 export function FilterButtons({ filtersArray, filters, setFilters, prop }) {
   function handleFilterOnClick(e) {
     setFilters({
