@@ -11,8 +11,9 @@ import { VerticalBarChartPreg } from "../../charts/VerticalBarChartPreg";
 import { VerticalBarChart } from "../../charts/VerticalBarChart";
 import { CardFilterContainer } from "../CardContainer/CardFilterContainer";
 import { PieChartTwoObj } from "../../charts/PieChartTwoObj";
+import { FilterCustomBtn } from "../FilterButtons.jsx/FilterCustomBtn";
 
-export function Statistics(props) {
+export function Statistics() {
   const token = localStorage.getItem("tokenCattleTracker");
   const dispatch = useDispatch();
   const statsState = useSelector((state) => state.stats);
@@ -25,10 +26,10 @@ export function Statistics(props) {
     sex: "",
   });
 
-  function renderPregnant(arg) {
+  function handleFilterChange(e) {
     setFilters({
       ...filters,
-      pregnant: arg,
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -85,7 +86,6 @@ export function Statistics(props) {
                 />
               )}
             </div>
-
             <div>
               {statsState?.location && (
                 <FilterButtons
@@ -118,34 +118,50 @@ export function Statistics(props) {
                 />
               )}
             </div>
-            <div>
-              {statsState.sex && (
-                <FilterButtons
-                  // filtersArray={Object.keys(statsState.sex)}
-                  filtersArray={["Macho", "Hembra"]}
-                  filters={filters}
-                  setFilters={setFilters}
-                  prop="type_of_animal"
-                />
-              )}
+            <div className="flex items-center gap-5 justify-center w-full my-5">
+              <FilterCustomBtn
+                tag="Machos"
+                value={"male"}
+                name="sex"
+                onClick={handleFilterChange}
+              />
+              <FilterCustomBtn
+                tag="Hembras"
+                value="female"
+                name="sex"
+                onClick={handleFilterChange}
+              />
+              <FilterCustomBtn
+                tag={"Limpiar"}
+                value={""}
+                name="sex"
+                onClick={handleFilterChange}
+              />
             </div>
-            {/* {statsState.sex && <PieChartTwoObj.jsx />} */}
+          </div>
+          <div>
+            {filters.sex && statsState.sex && (
+              <CardFilterContainer
+                animalsToRender={statsState.sex[filters.sex].rows}
+              />
+            )}
           </div>
 
           <div className="lg:flex flex-col justify-center items-center">
             <h2 className="text-green text-2xl my-5">Tipos de animales</h2>
-            <div className="graph400">
+
+            <div className="graph600">
               {statsState.types && (
-                <PieChart
+                <VerticalBarChart
                   statsObj={statsState.types}
                   by="tipo"
                   title="Tipo de animal"
                 />
               )}
             </div>
-            <div className="graph600">
+            <div className="graph400">
               {statsState.types && (
-                <VerticalBarChart
+                <PieChart
                   statsObj={statsState.types}
                   by="tipo"
                   title="Tipo de animal"
@@ -183,50 +199,33 @@ export function Statistics(props) {
                 />
               )}
             </div>
-
-            <div className="flex items-center gap-5 justify-left w-full my-5">
-              <button
-                className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
-                value={"positive"}
+            <div className="flex items-center gap-5 justify-center w-full my-5">
+              <FilterCustomBtn
+                tag={"Preñadas"}
+                value={"femalePregnant"}
                 name="pregnant"
-                // onClick={() => renderPregnant("positive")}
-                onClick={renderPregnant}
-              >
-                Ver preñadas
-              </button>
-              <button
-                className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
-                value="negative"
+                onClick={handleFilterChange}
+              />
+              <FilterCustomBtn
+                tag={"No preñadas"}
+                value={"femaleNotPregnant"}
                 name="pregnant"
-                // onClick={() => renderPregnant("negative")}
-                onClick={renderPregnant}
-              >
-                Ver no preñadas
-              </button>
-              <button
-                className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
+                onClick={handleFilterChange}
+              />
+              <FilterCustomBtn
+                tag={"Limpiar"}
                 value={""}
                 name="pregnant"
-                // onClick={() => renderPregnant("")}
-                onClick={renderPregnant}
-              >
-                Limpiar
-              </button>
+                onClick={handleFilterChange}
+              />
             </div>
           </div>
           <div>
-            {filters.pregnant === "positive" &&
-              statsState?.sex?.femalePregnant && (
-                <CardFilterContainer
-                  animalsToRender={statsState.sex.femalePregnant.rows}
-                />
-              )}
-            {filters.pregnant === "negative" &&
-              statsState?.sex?.femalePregnant && (
-                <CardFilterContainer
-                  animalsToRender={statsState.sex.femaleNotPregnant.rows}
-                />
-              )}
+            {filters.pregnant && statsState?.sex[filters.pregnant] && (
+              <CardFilterContainer
+                animalsToRender={statsState.sex[filters.pregnant].rows}
+              />
+            )}
           </div>
           <br />
           <div className="lg:flex flex-col justify-center items-center">
