@@ -10,9 +10,9 @@ import { header } from "../../constants/token";
 // } from "../../redux/actions/actions";
 // import loading from "../../assets/loading.gif";
 import { Pagination } from "../Pagination/Pagination";
-import { PropsStatistics } from "../PropsColumns/PropsStatistics";
+import { PropsPregnantStatistics } from "../PropsColumns/PropsPregnantStatistics";
 
-export function CardStatistics({ animalsToRender }) {
+export function CardPregnantStatistics({ animalsToRender }) {
   // const userAnimalsState = useSelector((state) => state.userAnimals);
   // const dispatch = useDispatch();
   const tokenAccess = localStorage.getItem("tokenCattleTracker");
@@ -37,7 +37,7 @@ export function CardStatistics({ animalsToRender }) {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
-        Lista de animales preñados
+        Lista de hembras preñadas
       </div>
       {/* {userAnimalsState?.loading === true ? (
         <div>
@@ -49,7 +49,7 @@ export function CardStatistics({ animalsToRender }) {
       ) : null}
       {Array.isArray(pregnant?.list) ? (
         <div className="list-animals-grid">
-          <PropsStatistics animals={pregnant.list} />{" "}
+          <PropsPregnantStatistics animals={pregnant.list} />{" "}
         </div>
       ) : null}
       {pregnant.error ? (

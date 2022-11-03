@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavBar } from "../NavBar/NavBar";
-import { CardStatistics } from "../CardContainer/CardStatistics";
+import { CardPregnantStatistics } from "../CardContainer/CardPregnantStatistics";
+import { FilterButtons } from "../FilterButtons.jsx/FilterButtons";
 import { getStats } from "../../redux/actions/actions";
 import { DoughnutChart } from "../../charts/DoughnutChart";
 import "./statistics.css";
 import { PieChart } from "../../charts/PieChart";
-import { RadarChart } from "../../charts/RadarChart";
 import { VerticalBarChartPreg } from "../../charts/VerticalBarChartPreg";
 import { VerticalBarChart } from "../../charts/VerticalBarChart";
+import { CardFilterContainer } from "../CardContainer/CardFilterContainer";
 
 export function Statistics(props) {
   const token = localStorage.getItem("tokenCattleTracker");
   const dispatch = useDispatch();
   const statsState = useSelector((state) => state.stats);
+
+  const [filters, setFilters] = useState({
+    races: "",
+    location: "",
+    type_of_animal: "",
+    pregnant: "",
+  });
+
+  function renderPregnant(arg) {
+    setFilters({
+      ...filters,
+      pregnant: arg,
+    });
+  }
+
   React.useEffect(() => {
     dispatch(getStats(token));
   }, [dispatch, token]);
@@ -37,8 +53,21 @@ export function Statistics(props) {
           </div>
           <div>Botones de filtrado de razas</div>
           <div>
-            Renderizado de cards filtrados por razas. Tengo el array listo para
-            mapear en el stats.races["raza"].rows
+            {statsState.races && (
+              <FilterButtons
+                filtersArray={Object.keys(statsState?.races)}
+                filters={filters}
+                setFilters={setFilters}
+                prop="races"
+              />
+            )}
+          </div>
+          <div>
+            {filters.races && (
+              <CardFilterContainer
+                animalsToRender={statsState.races[filters.races]?.rows}
+              />
+            )}
           </div>
         </div>
         <br />
@@ -55,8 +84,21 @@ export function Statistics(props) {
           </div>
           <div>Botones de filtrado segun localizaciones</div>
           <div>
-            Renderizado de cards filtrados por locations. Tengo el array listo
-            para mapear en el stats.location["localización"].rows
+            {statsState?.location && (
+              <FilterButtons
+                filtersArray={Object.keys(statsState?.location)}
+                filters={filters}
+                setFilters={setFilters}
+                prop="location"
+              />
+            )}
+          </div>
+          <div>
+            {filters.location && (
+              <CardFilterContainer
+                animalsToRender={statsState.location[filters.location]?.rows}
+              />
+            )}
           </div>
         </div>
         <br />
@@ -65,15 +107,6 @@ export function Statistics(props) {
           <div className="graph400">
             {statsState.types && (
               <PieChart
-                statsObj={statsState.types}
-                by="tipo"
-                title="Tipo de animal"
-              />
-            )}
-          </div>
-          <div className="graph400">
-            {statsState.types && (
-              <RadarChart
                 statsObj={statsState.types}
                 by="tipo"
                 title="Tipo de animal"
@@ -90,29 +123,70 @@ export function Statistics(props) {
             )}
           </div>
           <div>
-            Botones de filtrado según type_of_animal -Vaca, Toro, Novillo,
-            Vaquillona-
+            {statsState.types && (
+              <FilterButtons
+                filtersArray={Object.keys(statsState.types)}
+                filters={filters}
+                setFilters={setFilters}
+                prop="type_of_animal"
+              />
+            )}
           </div>
           <div>
-            Renderizado de cards filtrados por locations. Tengo el array listo
-            para mapear en el stats.types["tipo"].rows
+            {filters.type_of_animal && statsState.types && (
+              <CardFilterContainer
+                animalsToRender={statsState.types[filters.type_of_animal].rows}
+              />
+            )}
           </div>
         </div>
         <br />
         <div>
-          <h2 className="text-green text-2xl my-5">Estado de embarazo</h2>
+          <h2 className="text-green text-2xl my-5">
+            Estado de embarazo de hembras
+          </h2>
           <div className="graph600">
             {statsState.pregnant && (
               <VerticalBarChartPreg
-                statsObjPreg={statsState?.pregnant}
-                statsObjNotPreg={statsState.notPregnant}
+                statsObjPreg={statsState?.sex?.femalePregnant}
+                statsObjNotPreg={statsState?.sex?.femaleNotPregnant}
               />
             )}
           </div>
           <div>Botón Animales preñados - No preñados </div>
+          <div className="flex items-center gap-5 justify-left w-full my-5">
+            <button
+              className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
+              onClick={() => renderPregnant("positive")}
+            >
+              Ver preñadas
+            </button>
+            <button
+              className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
+              onClick={() => renderPregnant("negative")}
+            >
+              Ver no preñadas
+            </button>
+            <button
+              className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
+              onClick={() => renderPregnant("")}
+            >
+              Limpiar
+            </button>
+          </div>
           <div>
-            Renderizado de cards de animales embarazados. Array listo en
-            stats.pregnant.rows
+            {filters.pregnant === "positive" &&
+              statsState?.sex?.femalePregnant && (
+                <CardFilterContainer
+                  animalsToRender={statsState.sex.femalePregnant.rows}
+                />
+              )}
+            {filters.pregnant === "negative" &&
+              statsState?.sex?.femalePregnant && (
+                <CardFilterContainer
+                  animalsToRender={statsState.sex.femaleNotPregnant.rows}
+                />
+              )}
           </div>
         </div>
         <br />
@@ -120,27 +194,14 @@ export function Statistics(props) {
           <h2 className="text-green text-2xl my-5">
             Próximos partos esperados
           </h2>
-          <div>Botón de ordenamiento ASC o DESC</div>
-          <div>
-            Renderizado de cards de animales embarazados. Array listo en
-            stats.pregnant.rows
-          </div>
           <div>
             {statsState.pregnant && (
-              <CardStatistics animalsToRender={statsState?.pregnant?.rows} />
+              <CardPregnantStatistics
+                animalsToRender={statsState?.pregnant?.rows}
+              />
             )}
           </div>
         </div>
-        <br />
-        {/* <div>
-          <h2>Tipo de dispositivo</h2>
-          <div>CHART</div>
-          <div>Botones de filtrado según tipo de dispositivo</div>
-          <div>
-            Renderizado de cards segúin el filtrado de tipo de dispositivo.
-            Array listos en stats.deviceType[type].rows
-          </div>
-        </div> */}
       </div>
     </>
   );
