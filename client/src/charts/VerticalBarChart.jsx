@@ -37,6 +37,25 @@ export function VerticalBarChart({ statsObj, title, by }) {
         label: `# por ${by}`,
         data: dataArrayParsed,
         backgroundColor: [
+          //novillo:
+          "rgba(145, 204, 239, 0.4)",
+          // toro:
+          "rgba(25, 68, 222, 0.4)",
+          // vaquillona :
+          "rgba(219, 245, 17, 0.55)",
+          // "rgba(216, 47, 25, 0.4)",
+          // vaca :
+          "rgba(255, 0, 70, 0.4)",
+          "rgba(255, 159, 64, 0.4)",
+          //----
+          "rgba(153, 102, 255, 0.4)",
+          "rgba(54, 162, 235, 0.4)",
+          "rgb(255, 165, 0.4)",
+          "rgba(155, 99, 132, 0.4)",
+          "rgba(54, 162, 235, 0.4)",
+          "rgba(255, 106, 86, 0.4)",
+          "rgba(75, 192, 192, 0.4)",
+          "rgba(153, 102, 255, 0.4)",
           "rgba(255, 99, 132, 0.5)",
           "rgba(54, 162, 235, 0.4)",
           "rgba(255, 206, 86, 0.4)",
@@ -47,6 +66,11 @@ export function VerticalBarChart({ statsObj, title, by }) {
           "rgba(205, 206, 86, 0.4)",
           "rgba(35, 192, 192, 0.4)",
         ],
+        borderColor: [
+          "grey",
+          // "rgba(21, 135, 34, 0.8)",
+        ],
+        borderWidth: 1,
       },
     ],
   };
