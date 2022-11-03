@@ -1,40 +1,32 @@
 import axios from "axios";
 import {
-  URL,
-  POST_ANIMAL,
-  // eslint-disable-next-line
-  REGISTER_NEW_USER,
-  SEARCH_QUERY,
-  URL_GET_USER_INFO,
-  URL_GET_TYPES_OF_ANIMALS,
-  URL_GET_STATS,
-} from "../../constants/urls";
-import {
-  SET_NEW_ANIMAL_TO_LOADING,
-  CREATE_NEW_ANIMAL,
   GET_ALL_ANIMALS,
-  CLEAN_NEW_ANIMAL,
-  SET_FETCHED_ANIMALS_TO_LOADING,
-  SET_USER_ANIMALS_TO_LOADING,
-  DELETED_ANIMAL,
+  CREATE_NEW_ANIMAL,
   UPDATE_ANIMAL,
   CLEAN_UPDATE_ANIMAL,
-  SET_UPDATE_ANIMAL_TO_LOADING,
+  CLEAN_NEW_ANIMAL,
+  CLEAN_PREGNANT_ASC,
+  CLEAN_STATS,
   CLEAR_FETCHED_ANIMALS,
-  GET_USER_INFO,
+  DELETED_ANIMAL,
+  SET_FETCHED_ANIMALS_TO_LOADING,
+  SET_UPDATE_ANIMAL_TO_LOADING,
   GET_TYPES_OF_ANIMALS,
   GET_STATS,
   SET_STATS_TO_LOADING,
-  CLEAN_STATS,
   GET_PREGNANT_ASC,
-  CLEAN_PREGNANT_ASC,
   SET_PREGNANT_ASC_TO_LOADING,
-  GET_NOTES_FROM_USER,
-  POST_NEW_NOTE,
-  DELETE_NOTE,
-  UPDATE_NOTE,
-} from "./types";
-import { header } from "../../constants/token";
+  SET_NEW_ANIMAL_TO_LOADING,
+  SET_USER_ANIMALS_TO_LOADING,
+} from "../types";
+import {
+  POST_ANIMAL,
+  URL,
+  URL_GET_TYPES_OF_ANIMALS,
+  URL_GET_STATS,
+  SEARCH_QUERY,
+} from "../../../constants/urls";
+import { header } from "../../../constants/token";
 
 export const createNewAnimal = (obj, token) => {
   return async function (dispatch) {
@@ -233,23 +225,10 @@ export function setUpdateAnimalToLoading() {
         type: SET_UPDATE_ANIMAL_TO_LOADING,
         payload: { loading: true },
       });
-    } catch (error) {}
-  };
-}
-
-export function getUserInfo(token) {
-  return async function (dispatch) {
-    try {
-      let response = await axios.get(URL_GET_USER_INFO, header(token));
-
-      return dispatch({
-        type: GET_USER_INFO,
-        payload: response.data,
-      });
     } catch (error) {
       return dispatch({
-        type: GET_USER_INFO,
-        payload: { error: error.response?.data?.error },
+        type: SET_UPDATE_ANIMAL_TO_LOADING,
+        payload: { error: error.message },
       });
     }
   };
@@ -368,83 +347,14 @@ export function setPregnantAscToLoading() {
 export function cleanPregnantAsc() {
   return async function (dispatch) {
     try {
-      dispatch({ type: CLEAN_PREGNANT_ASC, payload: { pure: true } });
-    } catch (error) {
-      dispatch({ type: CLEAN_PREGNANT_ASC, payload: { error: error.message } });
-    }
-  };
-}
-
-export function getNotesFromUser(token) {
-  return async function (dispatch) {
-    try {
-      const response = await axios.get(URL + "note/all", header(token));
       dispatch({
-        type: GET_NOTES_FROM_USER,
-        payload: response.data,
+        type: CLEAN_PREGNANT_ASC,
+        payload: { pure: true },
       });
     } catch (error) {
       dispatch({
-        type: GET_NOTES_FROM_USER,
+        type: CLEAN_PREGNANT_ASC,
         payload: { error: error.message },
-      });
-    }
-  };
-}
-
-export function postNewNote(newNoteObj, token) {
-  return async function (dispatch) {
-    try {
-      const response = await axios.post(
-        URL + "note/newNote",
-        newNoteObj,
-        header(token)
-      );
-      dispatch({
-        type: POST_NEW_NOTE,
-        payload: response.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: POST_NEW_NOTE,
-        payload: { error: error.message },
-      });
-    }
-  };
-}
-
-export function deleteNote(noteId, token) {
-  return async function (dispatch) {
-    try {
-      const response = await axios.delete(
-        URL + `note/${noteId}`,
-        header(token)
-      );
-      dispatch({
-        type: DELETE_NOTE,
-        payload: response.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: DELETE_NOTE,
-        payload: { error: error.message },
-      });
-    }
-  };
-}
-
-export function updateNote(noteObj, token) {
-  return async function (dispatch) {
-    try {
-      const response = await axios.put(URL + "note/", noteObj, header(token));
-      dispatch({
-        type: UPDATE_NOTE,
-        action: response.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: UPDATE_NOTE,
-        action: { error: error.message },
       });
     }
   };

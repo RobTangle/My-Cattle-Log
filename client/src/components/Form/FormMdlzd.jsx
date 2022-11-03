@@ -1,8 +1,8 @@
 import React from "react";
-// eslint-disable-next-line
-import { useRef } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../redux/actions/actions";
+import * as animalActions from "../../redux/actions/animal-actions/animal-actions";
+
 import InputForm from "./InputForm";
 
 // import loadingGIF from "../assets";
@@ -30,7 +30,7 @@ export function FormMdlzd({ closeModal, animal }) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(actions.getTypesOfAnimalsAllowed());
+    dispatch(animalActions.getTypesOfAnimalsAllowed());
   }, [dispatch]);
 
   const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
@@ -76,10 +76,10 @@ export function FormMdlzd({ closeModal, animal }) {
       console.log(`handleSubmitNewAnimal invocado. localState: `, localState);
       e.preventDefault();
       //HACER JS VALIDATIONS...
-      dispatch(actions.setNewAnimalToLoading());
-      dispatch(actions.createNewAnimal(localState, accessToken));
+      dispatch(animalActions.setNewAnimalToLoading());
+      dispatch(animalActions.createNewAnimal(localState, accessToken));
       setTimeout(() => {
-        dispatch(actions.getAllAnimals(accessToken));
+        dispatch(animalActions.getAllAnimals(accessToken));
       }, 500);
     }
     handleSubmit = handleSubmitNewAnimal;
@@ -93,10 +93,10 @@ export function FormMdlzd({ closeModal, animal }) {
         console.log(`handleSubmit invocado. localState: `, localState);
         e.preventDefault();
         //HACER JS VALIDATIONS...
-        dispatch(actions.setUpdateAnimalToLoading());
-        dispatch(actions.updateAnimal(localState, accessToken));
+        dispatch(animalActions.setUpdateAnimalToLoading());
+        dispatch(animalActions.updateAnimal(localState, accessToken));
         setTimeout(() => {
-          dispatch(actions.getAllAnimals(accessToken));
+          dispatch(animalActions.getAllAnimals(accessToken));
         }, 500);
       }
       handleSubmit = handleSubmitEditAnimal;

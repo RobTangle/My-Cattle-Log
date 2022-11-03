@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FormEdit } from "../Form/FormEdit";
 import { FormMdlzd } from "../Form/FormMdlzd";
 import loading from "../../assets/loading.gif";
-import { cleanUpdateAnimal } from "../../redux/actions/actions";
+import { cleanUpdateAnimal } from "../../redux/actions/animal-actions/animal-actions";
 
 export function ModalEdit(props) {
   const updatedAnimal = useSelector((state) => state.updatedAnimal);
