@@ -252,45 +252,51 @@ export async function getObjOfAnimalsNotPregnant(userId: string) {
 
 export async function getObjOfAnimalsBySex(userId: string) {
   try {
-    const [pregnant, notPregnant, male, female] = await Promise.all([
-      db.Animal.findAndCountAll({
-        where: {
-          is_pregnant: true,
-          UserId: userId,
-        },
-        order: [["delivery_date", "ASC"]],
-      }),
-      db.Animal.findAndCountAll({
-        where: {
-          is_pregnant: false,
-          UserId: userId,
-        },
-      }),
-      db.Animal.findAndCountAll({
-        where: {
-          [Op.or]: [
-            { type_of_animal: ITypeOfAnimal.Toro },
-            { type_of_animal: ITypeOfAnimal.Novillo },
-          ],
-          UserId: userId,
-        },
-      }),
-      db.Animal.findAndCountAll({
-        where: {
-          [Op.or]: [
-            { type_of_animal: ITypeOfAnimal.Vaca },
-            { type_of_animal: ITypeOfAnimal.Vaquillona },
-          ],
-          UserId: userId,
-        },
-      }),
-    ]);
+    const [femalePregnant, femaleNotPregnant, male, female] = await Promise.all(
+      [
+        db.Animal.findAndCountAll({
+          where: {
+            is_pregnant: true,
+            UserId: userId,
+          },
+          order: [["delivery_date", "ASC"]],
+        }),
+        db.Animal.findAndCountAll({
+          where: {
+            [Op.or]: [
+              { type_of_animal: ITypeOfAnimal.Vaca },
+              { type_of_animal: ITypeOfAnimal.Vaquillona },
+            ],
+            is_pregnant: false,
+            UserId: userId,
+          },
+        }),
+        db.Animal.findAndCountAll({
+          where: {
+            [Op.or]: [
+              { type_of_animal: ITypeOfAnimal.Toro },
+              { type_of_animal: ITypeOfAnimal.Novillo },
+            ],
+            UserId: userId,
+          },
+        }),
+        db.Animal.findAndCountAll({
+          where: {
+            [Op.or]: [
+              { type_of_animal: ITypeOfAnimal.Vaca },
+              { type_of_animal: ITypeOfAnimal.Vaquillona },
+            ],
+            UserId: userId,
+          },
+        }),
+      ]
+    );
 
     let objOfAnimalsBySex: any = {
       male: male,
       female: female,
-      pregnant: pregnant,
-      notPregnant: notPregnant,
+      femalePregnant: femalePregnant,
+      femaleNotPregnant: femaleNotPregnant,
     };
 
     return objOfAnimalsBySex;
