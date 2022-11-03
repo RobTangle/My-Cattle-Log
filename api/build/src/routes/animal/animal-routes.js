@@ -20,6 +20,8 @@ const user_r_auxiliary_1 = require("../user/user-r-auxiliary");
 const sequelize_1 = require("sequelize");
 const animal_r_auxiliary_1 = require("./animal-r-auxiliary");
 const generic_validators_1 = require("../../validators/generic-validators");
+require("dotenv").config();
+const USER_ID_FER_AZU = process.env.USER_ID_FER_AZU;
 const router = (0, express_1.Router)();
 // ------- RUTAS : ---------
 // GET ALL FROM ANIMALS :
@@ -221,9 +223,74 @@ router.get("/stats", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, vo
             pregnant: yield (0, animal_r_auxiliary_1.getObjOfAnimalsPregnant)(userId),
             notPregnant: yield (0, animal_r_auxiliary_1.getObjOfAnimalsNotPregnant)(userId),
             types: yield (0, animal_r_auxiliary_1.getObjOfAnimalsByTypeOfAnimal)(userId),
+            sex: yield (0, animal_r_auxiliary_1.getObjOfAnimalsBySex)(userId),
+            fetched: true,
         };
         console.log(`Devolviendo objeto stats...`);
         return res.status(200).send(stats);
+    }
+    catch (error) {
+        console.log(`Error en GET 'animal/stats'. ${error.message}`);
+        return res.status(400).send({ error: error.message });
+    }
+}));
+//! RUTA DE TESTEO DE VELOCIDAD ENTRE PROMISE.ALL y AWAITS.
+// PARECE SER QUE AWAIT ES MÁS RÁPIDO.... inesperadamente! Y más prolijo también.
+router.get("/stats2", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // jwtCheck,
+    try {
+        const reqAuth = req.auth;
+        // const userId = reqAuth.sub;
+        const userId = USER_ID_FER_AZU;
+        let initialTime = new Date().getTime();
+        const [allFoundAndCount, deviceType, location, races, pregnant, notPregnant, types, sex,] = yield Promise.all([
+            (0, animal_r_auxiliary_1.getObjOfAllAnimalsAndCount)(userId),
+            (0, animal_r_auxiliary_1.getObjOfAnimalsByDeviceType)(userId),
+            (0, animal_r_auxiliary_1.getObjOfAnimalsByLocation)(userId),
+            (0, animal_r_auxiliary_1.getObjOfAnimalsByRace)(userId),
+            (0, animal_r_auxiliary_1.getObjOfAnimalsPregnant)(userId),
+            (0, animal_r_auxiliary_1.getObjOfAnimalsNotPregnant)(userId),
+            (0, animal_r_auxiliary_1.getObjOfAnimalsByTypeOfAnimal)(userId),
+            (0, animal_r_auxiliary_1.getObjOfAnimalsBySex)(userId),
+        ]);
+        let stats2 = {
+            allFoundAndCount,
+            deviceType,
+            location,
+            races,
+            pregnant,
+            notPregnant,
+            types,
+            sex,
+            fetched: true,
+        };
+        let finalTime = new Date().getTime();
+        let totalTime = finalTime - initialTime;
+        totalTime = totalTime * 1;
+        console.log("TotalTime con Promise.all() = ", totalTime);
+        // CON AWAITS (PARECE SER MÁS RÁPIDO QUE CON PROMISE.ALL!!!!)
+        let initialTimeAwaits = new Date().getTime();
+        let stats = {
+            allFoundAndCount: yield (0, animal_r_auxiliary_1.getObjOfAllAnimalsAndCount)(userId),
+            deviceType: yield (0, animal_r_auxiliary_1.getObjOfAnimalsByDeviceType)(userId),
+            location: yield (0, animal_r_auxiliary_1.getObjOfAnimalsByLocation)(userId),
+            races: yield (0, animal_r_auxiliary_1.getObjOfAnimalsByRace)(userId),
+            pregnant: yield (0, animal_r_auxiliary_1.getObjOfAnimalsPregnant)(userId),
+            notPregnant: yield (0, animal_r_auxiliary_1.getObjOfAnimalsNotPregnant)(userId),
+            types: yield (0, animal_r_auxiliary_1.getObjOfAnimalsByTypeOfAnimal)(userId),
+            sex: yield (0, animal_r_auxiliary_1.getObjOfAnimalsBySex)(userId),
+            fetched: true,
+        };
+        let finalTimeAwaits = new Date().getTime();
+        let totalTimeAwaits = finalTimeAwaits - initialTimeAwaits;
+        totalTimeAwaits = totalTimeAwaits * 1;
+        console.log("Total time Awaits = ", totalTimeAwaits);
+        return res.status(200).send({
+            statsPAll: stats2,
+            statsAwait: stats,
+            tPA: totalTime,
+            tAwaits: totalTimeAwaits,
+        });
     }
     catch (error) {
         console.log(`Error en GET 'animal/stats'. ${error.message}`);
@@ -234,10 +301,14 @@ router.get("/stats", jwtMiddleware_1.default, (req, res) => __awaiter(void 0, vo
 router.get("/ts1", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let initialTime = new Date().getTime();
+        console.log(initialTime);
+        console.log(new Date().getTime());
         let finalTime = new Date().getTime();
+        console.log(finalTime);
+        console.log(new Date().getTime());
         let totalTime = finalTime - initialTime;
-        console.log(totalTime);
-        return res.status(200).send(totalTime);
+        totalTime = totalTime * 1000;
+        return res.status(200).send({ msg: totalTime });
     }
     catch (error) {
         return res.status(400).send({ error: error.message });

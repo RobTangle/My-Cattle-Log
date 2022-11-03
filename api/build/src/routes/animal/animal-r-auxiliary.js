@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getObjOfAnimalsByTypeOfAnimal = exports.getObjOfAnimalsNotPregnant = exports.getObjOfAnimalsPregnant = exports.getObjOfAllAnimalsAndCount = exports.getObjOfAnimalsByDeviceType = exports.getObjOfAnimalsByLocation = exports.getObjOfAnimalsByRace = exports.getAndParseIsPregnantQuery = exports.typesOfAnimalsToArray = void 0;
+exports.getObjOfAnimalsByTypeOfAnimal = exports.getObjOfAnimalsBySex = exports.getObjOfAnimalsNotPregnant = exports.getObjOfAnimalsPregnant = exports.getObjOfAllAnimalsAndCount = exports.getObjOfAnimalsByDeviceType = exports.getObjOfAnimalsByLocation = exports.getObjOfAnimalsByRace = exports.getAndParseIsPregnantQuery = exports.typesOfAnimalsToArray = void 0;
 const sequelize_1 = __importStar(require("sequelize"));
 const models_1 = __importDefault(require("../../models"));
 const animal_types_1 = require("../../types/animal-types");
@@ -274,6 +274,61 @@ function getObjOfAnimalsNotPregnant(userId) {
     });
 }
 exports.getObjOfAnimalsNotPregnant = getObjOfAnimalsNotPregnant;
+// GET OBJ OF ANIMALS BY SEX :
+function getObjOfAnimalsBySex(userId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const [femalePregnant, femaleNotPregnant, male, female] = yield Promise.all([
+                models_1.default.Animal.findAndCountAll({
+                    where: {
+                        is_pregnant: true,
+                        UserId: userId,
+                    },
+                    order: [["delivery_date", "ASC"]],
+                }),
+                models_1.default.Animal.findAndCountAll({
+                    where: {
+                        [sequelize_1.Op.or]: [
+                            { type_of_animal: animal_types_1.ITypeOfAnimal.Vaca },
+                            { type_of_animal: animal_types_1.ITypeOfAnimal.Vaquillona },
+                        ],
+                        is_pregnant: false,
+                        UserId: userId,
+                    },
+                }),
+                models_1.default.Animal.findAndCountAll({
+                    where: {
+                        [sequelize_1.Op.or]: [
+                            { type_of_animal: animal_types_1.ITypeOfAnimal.Toro },
+                            { type_of_animal: animal_types_1.ITypeOfAnimal.Novillo },
+                        ],
+                        UserId: userId,
+                    },
+                }),
+                models_1.default.Animal.findAndCountAll({
+                    where: {
+                        [sequelize_1.Op.or]: [
+                            { type_of_animal: animal_types_1.ITypeOfAnimal.Vaca },
+                            { type_of_animal: animal_types_1.ITypeOfAnimal.Vaquillona },
+                        ],
+                        UserId: userId,
+                    },
+                }),
+            ]);
+            let objOfAnimalsBySex = {
+                male: male,
+                female: female,
+                femalePregnant: femalePregnant,
+                femaleNotPregnant: femaleNotPregnant,
+            };
+            return objOfAnimalsBySex;
+        }
+        catch (error) {
+            console.log(`Error en fn aux getObjOfAnimalsBySex. ${error.message}`);
+        }
+    });
+}
+exports.getObjOfAnimalsBySex = getObjOfAnimalsBySex;
 // GET OBJ OF ANIMALS BY TYPE OF ANIMAL :
 function getObjOfAnimalsByTypeOfAnimal(userId) {
     return __awaiter(this, void 0, void 0, function* () {
