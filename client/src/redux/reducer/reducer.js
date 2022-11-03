@@ -16,6 +16,9 @@ import {
   GET_STATS,
   SET_STATS_TO_LOADING,
   CLEAN_STATS,
+  GET_PREGNANT_ASC,
+  SET_PREGNANT_ASC_TO_LOADING,
+  CLEAN_PREGNANT_ASC,
 } from "../actions/types";
 
 const initialState = {
@@ -30,6 +33,7 @@ const initialState = {
   updatedAnimal: { pure: true },
   typesOfAnimals: [],
   stats: { pure: true },
+  pregnant: { pure: true },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -118,6 +122,21 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         stats: action.payload,
+      };
+    case GET_PREGNANT_ASC:
+      return {
+        ...state,
+        pregnant: action.payload,
+      };
+    case SET_PREGNANT_ASC_TO_LOADING:
+      return {
+        ...state,
+        pregnant: action.payload,
+      };
+    case CLEAN_PREGNANT_ASC:
+      return {
+        ...state,
+        pregnant: action.payload,
       };
     default:
       return state;
