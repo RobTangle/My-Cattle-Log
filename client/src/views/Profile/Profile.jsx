@@ -2,7 +2,8 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserInfo, getStats } from "../../redux/actions/actions";
+import { getStats } from "../../redux/actions/animal-actions/animal-actions";
+import { getUserInfo } from "../../redux/actions/user-actions/user-actions";
 import { useNavigate } from "react-router-dom";
 
 export const Profile = () => {

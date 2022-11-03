@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavBar } from "../NavBar/NavBar";
 import { CardPregnantStatistics } from "../CardContainer/CardPregnantStatistics";
 import { FilterButtons } from "../FilterButtons.jsx/FilterButtons";
-import { getStats } from "../../redux/actions/actions";
+import { getStats } from "../../redux/actions/animal-actions/animal-actions";
 import { DoughnutChart } from "../../charts/DoughnutChart";
 import "./statistics.css";
 import { PieChart } from "../../charts/PieChart";

@@ -5,7 +5,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 //eslint-disable-next-line
-import { cleanNewAnimal } from "../../redux/actions/actions";
 import LogoutButton from "../Logout/LogoutButton";
 import { BiMenu } from "react-icons/bi";
 import { VscClose } from "react-icons/vsc";
@@ -19,10 +18,6 @@ export function NavBar() {
   const [openMenu, setOpenMenu] = useState(false);
   const { isLoading, isAuthenticated } = useAuth0();
 
-  // React.useEffect(() => {
-  //   console.log(`Limpiando new animal...`);
-  //   dispatch(cleanNewAnimal());
-  // }, []);
   const handleMenu = () => {
     setOpenMenu(!openMenu);
   };

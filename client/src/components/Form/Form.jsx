@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../redux/actions/actions";
+import * as animalActions from "../../redux/actions/animal-actions/animal-actions";
 import InputForm from "./InputForm";
 
 // import loadingGIF from "../assets";
@@ -28,7 +28,7 @@ export function Form(props) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(actions.getTypesOfAnimalsAllowed());
+    dispatch(animalActions.getTypesOfAnimalsAllowed());
   }, [dispatch]);
 
   const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
@@ -44,10 +44,10 @@ export function Form(props) {
     console.log(`handleSubmit invocado. localState: `, localState);
     e.preventDefault();
     //HACER JS VALIDATIONS...
-    dispatch(actions.setNewAnimalToLoading());
-    dispatch(actions.createNewAnimal(localState, accessToken));
+    dispatch(animalActions.setNewAnimalToLoading());
+    dispatch(animalActions.createNewAnimal(localState, accessToken));
     setTimeout(() => {
-      dispatch(actions.getAllAnimals(accessToken));
+      dispatch(animalActions.getAllAnimals(accessToken));
     }, 500);
   }
 

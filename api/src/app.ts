@@ -5,6 +5,7 @@ import cors from "cors";
 import testRouter from "./routes/test";
 import animalRouter from "./routes/animal/animal-routes";
 import userRouter from "./routes/user/user-routes";
+import noteRouter from "./routes/note/note-routes";
 import jwtCheck from "./config/jwtMiddleware";
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/test", testRouter);
 app.use("/animal", animalRouter);
 app.use("/user", userRouter);
+app.use("/note", noteRouter);
 
 // for testing:
 app.get("/", (req, res) => {
