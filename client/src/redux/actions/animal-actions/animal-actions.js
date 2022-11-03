@@ -8,7 +8,7 @@ import {
   CLEAN_PREGNANT_ASC,
   CLEAN_STATS,
   CLEAR_FETCHED_ANIMALS,
-  DELETED_ANIMAL,
+  DELETE_ANIMAL,
   SET_FETCHED_ANIMALS_TO_LOADING,
   SET_UPDATE_ANIMAL_TO_LOADING,
   GET_TYPES_OF_ANIMALS,
@@ -18,13 +18,14 @@ import {
   SET_PREGNANT_ASC_TO_LOADING,
   SET_NEW_ANIMAL_TO_LOADING,
   SET_USER_ANIMALS_TO_LOADING,
+  SEARCH_QUERY,
 } from "../types";
 import {
   POST_ANIMAL,
   URL,
   URL_GET_TYPES_OF_ANIMALS,
   URL_GET_STATS,
-  SEARCH_QUERY,
+  URL_SEARCH_QUERY,
 } from "../../../constants/urls";
 import { header } from "../../../constants/token";
 
@@ -150,7 +151,7 @@ export function searchQuery(value, token) {
       console.log("disparando get a la query.");
       console.log("value = ", value);
       const response = await axios.get(
-        URL + `animal/search?value=${value}`,
+        URL_SEARCH_QUERY + `?value=${value}`,
         header(token)
       );
       return dispatch({
@@ -205,13 +206,13 @@ export function deleteAnimal(id, token) {
         header(token)
       );
       return dispatch({
-        type: DELETED_ANIMAL,
+        type: DELETE_ANIMAL,
         payload: response.data,
       });
     } catch (error) {
       console.log(`Error en action creator deleteAnimal`);
       return dispatch({
-        type: DELETED_ANIMAL,
+        type: DELETE_ANIMAL,
         payload: { error: error.message },
       });
     }
