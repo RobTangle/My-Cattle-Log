@@ -47,7 +47,7 @@ export function Statistics() {
           <div className="lg:flex flex-col justify-center items-center">
             <h2 className="text-green text-2xl my-5">Razas</h2>
             <div className="graph400">
-              {statsState.races && (
+              {statsState?.races && (
                 <DoughnutChart
                   statsObj={statsState.races}
                   by="raza"
@@ -57,7 +57,7 @@ export function Statistics() {
             </div>
 
             <div>
-              {statsState.races && (
+              {statsState?.races && (
                 <FilterButtons
                   filtersArray={Object.keys(statsState?.races)}
                   filters={filters}
@@ -68,7 +68,7 @@ export function Statistics() {
             </div>
           </div>
           <div>
-            {filters.races && (
+            {filters?.races && statsState?.races && (
               <CardFilterContainer
                 animalsToRender={statsState.races[filters.races]?.rows}
               />
@@ -78,7 +78,7 @@ export function Statistics() {
           <div className="lg:flex flex-col justify-center items-center">
             <h2 className="text-green text-2xl my-5">Localizaciones</h2>
             <div className="graph400">
-              {statsState.location && (
+              {statsState?.location && (
                 <PieChart
                   statsObj={statsState.location}
                   by="localización"
@@ -98,7 +98,7 @@ export function Statistics() {
             </div>
           </div>
           <div>
-            {filters.location && (
+            {filters?.location && statsState?.location && (
               <CardFilterContainer
                 animalsToRender={statsState.location[filters.location]?.rows}
               />
@@ -108,7 +108,7 @@ export function Statistics() {
           <div className="lg:flex flex-col justify-center items-center">
             <h2 className="text-green text-2xl my-5">Sexo</h2>
             <div className="graph400">
-              {statsState.sex && (
+              {statsState?.sex && (
                 <PieChartTwoObj
                   statsObjOne={statsState.sex.male}
                   statsObjTwo={statsState.sex.female}
@@ -140,7 +140,7 @@ export function Statistics() {
             </div>
           </div>
           <div>
-            {filters.sex && statsState.sex && (
+            {filters?.sex && statsState?.sex && (
               <CardFilterContainer
                 animalsToRender={statsState.sex[filters.sex].rows}
               />
@@ -151,7 +151,7 @@ export function Statistics() {
             <h2 className="text-green text-2xl my-5">Tipos de animales</h2>
 
             <div className="graph600">
-              {statsState.types && (
+              {statsState?.types && (
                 <VerticalBarChart
                   statsObj={statsState.types}
                   by="tipo"
@@ -160,7 +160,7 @@ export function Statistics() {
               )}
             </div>
             <div className="graph400">
-              {statsState.types && (
+              {statsState?.types && (
                 <PieChart
                   statsObj={statsState.types}
                   by="tipo"
@@ -169,7 +169,7 @@ export function Statistics() {
               )}
             </div>
             <div>
-              {statsState.types && (
+              {statsState?.types && (
                 <FilterButtons
                   filtersArray={Object.keys(statsState.types)}
                   filters={filters}
@@ -180,7 +180,7 @@ export function Statistics() {
             </div>
           </div>
           <div>
-            {filters.type_of_animal && statsState.types && (
+            {filters?.type_of_animal && statsState?.types && (
               <CardFilterContainer
                 animalsToRender={statsState.types[filters.type_of_animal].rows}
               />
@@ -192,7 +192,7 @@ export function Statistics() {
               Estado de embarazo de hembras
             </h2>
             <div className="graph600">
-              {statsState.pregnant && (
+              {statsState?.sex && (
                 <VerticalBarChartPreg
                   statsObjPreg={statsState?.sex?.femalePregnant}
                   statsObjNotPreg={statsState?.sex?.femaleNotPregnant}
@@ -221,9 +221,9 @@ export function Statistics() {
             </div>
           </div>
           <div>
-            {filters.pregnant && statsState?.sex[filters.pregnant] && (
+            {filters?.pregnant && statsState?.sex?.[filters.pregnant] && (
               <CardFilterContainer
-                animalsToRender={statsState.sex[filters.pregnant].rows}
+                animalsToRender={statsState?.sex[filters.pregnant].rows}
               />
             )}
           </div>
@@ -233,7 +233,7 @@ export function Statistics() {
               Próximos partos esperados
             </h2>
             <div>
-              {statsState.pregnant && (
+              {statsState?.pregnant && (
                 <CardPregnantStatistics
                   animalsToRender={statsState?.pregnant?.rows}
                 />
