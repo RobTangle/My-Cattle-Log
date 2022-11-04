@@ -1,19 +1,23 @@
-import React from 'react'
+import React from "react";
+import DetailDiv from "./DetailDiv";
 
-export default function DetailCard({animal }) {
+export default function DetailCard({ animal }) {
   return (
-    <div>
-      <p>Nombre {animal.name}</p>
-      <p>ID Senasa {animal.id_senasa}</p>
-      <p>Raza {animal.breed_name}</p>
-      <p>Tipo de animal {animal.type_of_animal}</p>
-      <p>Peso {animal.weight_kg} kg</p>
-      <p>Nacimiento {animal.birthday} kg</p>
-      <p>Ubicación {animal.location}</p>
-      <p>Tipo de dispositivo {animal.device_type}</p>
-      <p>Número de dispositivo {animal.device_number}</p>
-      {animal.comments ? <p>Comentarios {animal.comments}</p> : null}
-      {animal.is_pregnant ? <p>Fecha estimada de parto {animal.delivery_date}</p> : null}
+    <div className="text-gray">
+      <DetailDiv text="Nombre" value={animal.name} />
+      <DetailDiv text="ID Senasa " value={animal.id_senasa} />
+      <DetailDiv text="Raza" value={animal.breed_name} />
+      <DetailDiv text="Tipo de animal" value={animal.type_of_animal} />
+      <DetailDiv text="Peso" value={animal.weight_kg + "kg"} />
+      <DetailDiv text="Nacimiento" value={animal.birthday} />
+      <DetailDiv text="Ubicación" value={animal.location} />
+      <DetailDiv text="Tipo de dispositivo " value={animal.device_type} />
+      <DetailDiv text="Número de dispositivo " value={animal.device_number} />
+
+      {animal.comments ? <DetailCard text="Comentarios" value={animal.comments} /> : null}
+      {animal.is_pregnant ? (
+        <DetailCard text="Fecha de parto" value={animal.delivery_date} />
+      ) : null}
     </div>
   );
 }
