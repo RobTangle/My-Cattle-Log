@@ -50,6 +50,7 @@ export function Form(props) {
       dispatch(animalActions.getAllAnimals(accessToken));
     }, 500);
   }
+  console.log("mirar aqui", localState.is_pregnant === "true");
 
   // UPLOAD PHOTOS/IMAGES TO CLOUDINARY:
   const CLOUD_NAME = "imagenes";
