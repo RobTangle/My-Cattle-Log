@@ -19,6 +19,10 @@ import {
   SET_PREGNANT_ASC_TO_LOADING,
   CLEAN_PREGNANT_ASC,
   SEARCH_QUERY,
+  POST_NEW_NOTE,
+  CLEAN_NEW_NOTE,
+  SET_NOTES_FROM_USER_TO_LOADING,
+  GET_NOTES_FROM_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -34,6 +38,7 @@ const initialState = {
   typesOfAnimals: [],
   stats: { pure: true },
   pregnant: { pure: true },
+  notes: { newNote: { pure: true }, allNotes: { pure: true } },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -147,6 +152,27 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pregnant: action.payload,
+      };
+    // NOTES :
+    case POST_NEW_NOTE:
+      return {
+        ...state,
+        notes: { ...state.notes, newNote: action.payload },
+      };
+    case CLEAN_NEW_NOTE:
+      return {
+        ...state,
+        notes: { ...state.notes, newNote: { pure: true } },
+      };
+    case GET_NOTES_FROM_USER:
+      return {
+        ...state,
+        notes: { ...state.notes, allNotes: action.payload },
+      };
+    case SET_NOTES_FROM_USER_TO_LOADING:
+      return {
+        ...state,
+        notes: { ...state.notes, allNotes: action.payload },
       };
     default:
       return state;
