@@ -70,24 +70,30 @@ export function NavBar() {
           text="Inicio"
           divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
         />
-
-        <NavbarLink
-          path="/home/management"
-          divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
-          text="Administrar animales"
-        />
-        <NavbarLink
-          path="/home/statistics"
-          divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
-          text="Dashboard"
-        />
-        <NavbarLink
-          path="/home/profile"
-          divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
-          text="Perfil & Notas"
-        />
-        <div>
-          <LogoutButton />
+        {!isLoading && isAuthenticated ? (
+          <>
+            <NavbarLink
+              path="/home/management"
+              divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
+              text="Administrar animales"
+            />
+            <NavbarLink
+              path="/home/statistics"
+              divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
+              text="Dashboard"
+            />
+            <NavbarLink
+              path="/home/profile"
+              divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
+              text="Perfil & Notas"
+            />
+            <div>
+              <LogoutButton />
+            </div>
+          </>
+        ) : null}
+        <div className="flex items-center">
+          {!isLoading && !isAuthenticated && <LoginButton />}
         </div>
       </div>
     </div>
