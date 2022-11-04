@@ -62,7 +62,11 @@ router.get("/search", jwtCheck, async (req: any, res) => {
     }
     const searchedResults: IAnimal[] = await db.Animal.findAll({
       where: {
-        [Op.or]: [{ id_senasa: queryValue }, { name: queryValue }],
+        [Op.or]: [
+          { id_senasa: queryValue },
+          { name: queryValue },
+          { device_number: queryValue },
+        ],
         UserId: userId,
       },
     });
