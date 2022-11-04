@@ -23,6 +23,8 @@ import {
   CLEAN_NEW_NOTE,
   SET_NOTES_FROM_USER_TO_LOADING,
   GET_NOTES_FROM_USER,
+  GET_DETAILS,
+  RESET_DETAIL,
 } from "../actions/types";
 
 const initialState = {
@@ -39,6 +41,7 @@ const initialState = {
   stats: { pure: true },
   pregnant: { pure: true },
   notes: { newNote: { pure: true }, allNotes: { pure: true } },
+  detail: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -173,6 +176,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         notes: { ...state.notes, allNotes: action.payload },
+      };
+    case GET_DETAILS:
+      return {
+        ...state,
+        detail: action.payload,
+      };
+    case RESET_DETAIL:
+      return {
+        ...state,
+        detail: {},
       };
     default:
       return state;

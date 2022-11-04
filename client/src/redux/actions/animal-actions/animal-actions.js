@@ -20,6 +20,7 @@ import {
   SET_USER_ANIMALS_TO_LOADING,
   SEARCH_QUERY,
   GET_DETAILS,
+  RESET_DETAIL,
 } from "../types";
 import {
   POST_ANIMAL,
@@ -366,13 +367,26 @@ export const getAnimalDetail = (id, token) => async (dispatch) => {
   try {
     const response = await axios.get(URL + "animal/id/" + id, header(token));
     return dispatch({
-      type: GET_DETAILS ,
+      type: GET_DETAILS,
       payload: response.data,
     });
   } catch (error) {
     return dispatch({
-      type: GET_DETAILS ,
+      type: GET_DETAILS,
       payload: { error: error.message },
     });
   }
-}
+};
+
+export const resetDetail = () => async (dispatch) => {
+  try {
+    return dispatch({
+      type: RESET_DETAIL,
+    });
+  } catch (error) {
+    return dispatch({
+      type: RESET_DETAIL,
+      payload: { error: error.message },
+    });
+  }
+};
