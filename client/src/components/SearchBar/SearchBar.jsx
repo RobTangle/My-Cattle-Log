@@ -5,6 +5,7 @@ import {
   setFetchedAnimalsToLoading,
   clearFetchedAnimals,
 } from "../../redux/actions/animal-actions/animal-actions";
+import { PropsColumns } from "../PropsColumns/PropsColumns";
 
 export function SearchBar() {
   const dispatch = useDispatch();
@@ -71,15 +72,22 @@ export function SearchBar() {
       </div>
       {fetchedAnimalsState?.status?.fetched &&
       fetchedAnimalsState?.result?.length === 0 ? (
-        <div>No se encontraron coincidencias</div>
+        <div className="text-green text-xl border-solid  border-b-2 border-green mb-14 mx-3">
+          Coincidencias encontradas: {fetchedAnimalsState.result?.length}
+        </div>
       ) : null}
       {fetchedAnimalsState?.status?.error ? (
         <div>{fetchedAnimalsState?.status?.error}</div>
       ) : null}
       {fetchedAnimalsState?.status?.fetched &&
-      fetchedAnimalsState.result.length > 0 ? (
+      Array.isArray(fetchedAnimalsState?.result) &&
+      fetchedAnimalsState.result?.length > 0 ? (
         <div>
-          COINCIDENCIAS ENCONTRADAS: {fetchedAnimalsState.results.length}
+          <div className="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
+            Coincidencias encontradas: {fetchedAnimalsState.result?.length}
+          </div>
+
+          <PropsColumns animals={fetchedAnimalsState.result} />
         </div>
       ) : null}
     </>
