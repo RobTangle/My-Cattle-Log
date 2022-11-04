@@ -382,6 +382,7 @@ export const resetDetail = () => async (dispatch) => {
   try {
     return dispatch({
       type: RESET_DETAIL,
+      payload: { pure: true },
     });
   } catch (error) {
     return dispatch({

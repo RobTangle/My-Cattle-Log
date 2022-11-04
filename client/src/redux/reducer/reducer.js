@@ -41,7 +41,7 @@ const initialState = {
   stats: { pure: true },
   pregnant: { pure: true },
   notes: { newNote: { pure: true }, allNotes: { pure: true } },
-  detail: {},
+  detail: { pure: true },
 };
 
 const rootReducer = (state = initialState, action) => {
