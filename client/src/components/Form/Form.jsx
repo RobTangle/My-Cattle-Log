@@ -73,8 +73,8 @@ export function Form(props) {
   };
 
   return (
-    <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
-      <h2 className="text-green font-sans text-xl">Nuevo animal</h2>
+    <div className="w-full z-50 bg-white border border-solid  border-green absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
+      <h2 className="text-green font-sans text-xl my-5">Nuevo animal</h2>
       <form action="" onSubmit={handleSubmit}>
         <div className="inside-form-container">
           <div className="flex items-center gap-3 mb-3 w-full">
@@ -137,20 +137,26 @@ export function Form(props) {
             name="location"
             text="Fecha de nacimiento"
           />
-          <InputForm
-            handleOnChange={handleOnChange}
-            type="number"
-            name="weight_kg"
-            text="Peso"
-            placeholder="kilogramos, sin comas "
-          />
-          <InputForm
-            handleOnChange={handleOnChange}
-            type="text"
-            name="name"
-            text="Nombre"
-            placeholder="nombre del animal "
-          />
+
+          <div className="flex">
+            <InputForm
+              styleText="w-[90px] md:w-[90px]"
+              handleOnChange={handleOnChange}
+              type="text"
+              name="name"
+              text="Nombre"
+              placeholder="nombre del animal "
+            />
+            <InputForm
+              styleText="w-[90px] md:w-[90px]"
+              handleOnChange={handleOnChange}
+              type="number"
+              name="weight_kg"
+              text="Peso"
+              placeholder="kilogramos, sin comas "
+            />
+          </div>
+
           <InputForm
             handleOnChange={handleOnChange}
             type="text"
@@ -184,6 +190,7 @@ export function Form(props) {
               className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
             />
           </div>
+
           <InputForm
             handleOnChange={upload}
             type="file"
@@ -238,26 +245,25 @@ export function Form(props) {
               </div>
             </fieldset>
           </div>
-          {localState.is_pregnant === 'true' ? (
+          {localState.is_pregnant === "true" ? (
             <InputForm
               handleOnChange={handleOnChange}
               type="date"
               name="delivery_date"
               text="Fecha estimada de parto"
             />
-          ): null}
-         <div className="flex items-center gap-5 justify-center w-full my-5">
-
-          <button className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500">
-            Registrar animal
-          </button>
-          <button
-            onClick={props.closeModal}
-            className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
+          ) : null}
+          <div className="flex items-center gap-5 justify-center w-full my-5">
+            <button className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500">
+              Registrar animal
+            </button>
+            <button
+              onClick={props.closeModal}
+              className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
             >
-            Cerrar
-          </button>
-            </div>
+              Cerrar
+            </button>
+          </div>
         </div>
         {/* </fieldset> */}
       </form>
