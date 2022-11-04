@@ -1,4 +1,4 @@
-import { INote, EImportance } from "../../types/note-types";
+import { INote } from "../../types/note-types";
 import db from "../../models";
 import jwtCheck from "../../config/jwtMiddleware";
 import { Router } from "express";
@@ -7,7 +7,7 @@ import {
   throwErrorIfUserIsNotRegisteredInDB,
   userIsRegisteredInDB,
 } from "../user/user-r-auxiliary";
-import { validateNewNote } from "../../validators/note.validators";
+import { validateNewNote } from "../../validators/note-validators";
 import { getAllNotesFromUser } from "./note-r-auxiliary";
 const router = Router();
 
@@ -18,7 +18,11 @@ router.post("/newNote", jwtCheck, async (req: any, res) => {
     const userId = reqAuth.sub;
     throwErrorIfUserIsNotRegisteredInDB(userId);
     let checkedNoteObj = validateNewNote(req.body);
+    console.log("Nota validada...");
+
     const newNote = await db.Note.create(checkedNoteObj);
+    console.log("Nota creada.");
+
     await newNote.setUser(userId);
     console.log("Nueva nota asociada y creada: ", newNote.toJSON());
     return res.status(200).send(newNote);
