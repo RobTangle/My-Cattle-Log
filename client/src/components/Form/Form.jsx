@@ -50,6 +50,7 @@ export function Form(props) {
       dispatch(animalActions.getAllAnimals(accessToken));
     }, 500);
   }
+  console.log("mirar aqui", localState.is_pregnant === "true");
 
   // UPLOAD PHOTOS/IMAGES TO CLOUDINARY:
   const CLOUD_NAME = "imagenes";
@@ -73,8 +74,8 @@ export function Form(props) {
   };
 
   return (
-    <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
-      <h2 className="text-green font-sans text-xl">Nuevo animal</h2>
+    <div className="w-full z-50 bg-white border border-solid  border-green absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
+      <h2 className="text-green font-sans text-xl my-5">Nuevo animal</h2>
       <form action="" onSubmit={handleSubmit}>
         <div className="inside-form-container">
           <div className="flex items-center gap-3 mb-3 w-full">
@@ -208,6 +209,7 @@ export function Form(props) {
               className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
             />
           </div>
+
           <InputForm
             handleOnChange={upload}
             type="file"

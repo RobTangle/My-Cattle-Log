@@ -9,6 +9,7 @@ export default function InputForm({
   placeholder,
   value,
   required,
+  styleText,
 }) {
   let divClassName = "flex items-center gap-3 mb-3 w-full";
   let labelClassName =
@@ -43,10 +44,15 @@ export default function InputForm({
     );
   }
   return (
-    <div className="flex items-center gap-3 mb-3 w-full">
+    <div
+      className="flex items-center gap-3 mb-3 w-full
+    "
+    >
       <label
         htmlFor={name}
-        className="text-gray font-semibold w-[120px] md:w-[130px] text-sm "
+        className={
+          "text-gray font-semibold w-[120px] md:w-[130px] text-sm " + styleText
+        }
       >
         {text}
       </label>

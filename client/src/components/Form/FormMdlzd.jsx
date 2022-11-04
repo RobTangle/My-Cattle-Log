@@ -324,7 +324,7 @@ export function FormMdlzd({ closeModal, animal }) {
                 <div>
                   {localState.is_pregnant === "true" ||
                   localState.is_pregnant === true ? (
-                    <div>
+                    <div className="flex gap-3">
                       <div>
                         <input
                           type="radio"
@@ -348,7 +348,7 @@ export function FormMdlzd({ closeModal, animal }) {
                       </div>
                     </div>
                   ) : (
-                    <div>
+                    <div className="flex gap-3">
                       <div>
                         <input
                           type="radio"
@@ -376,23 +376,14 @@ export function FormMdlzd({ closeModal, animal }) {
               </div>
             </fieldset>
           </div>
-          {/* {localState.is_pregnant === "true" ||
-          localState.is_pregnant === true ? (
+          {localState.is_pregnant === "true" ? (
             <InputForm
               handleOnChange={handleOnChange}
               type="date"
               name="delivery_date"
               text="Fecha estimada de parto"
-              value={localState.delivery_date}
             />
-          ) : null} */}
-          <InputForm
-            handleOnChange={handleOnChange}
-            type="date"
-            name="delivery_date"
-            text="Fecha estimada de parto"
-            value={localState.delivery_date}
-          />
+          ) : null}
           <div className="flex items-center gap-5 justify-center w-full my-5">
             <button className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500">
               Registrar animal
