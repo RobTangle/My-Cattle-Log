@@ -5,6 +5,8 @@ import {
 } from "./generic-validators";
 
 export function validateNewNote(bodyFromReq: any): INote {
+  console.log("Validando nota con contenido del req.body");
+
   let newNoteObj: INote = {
     title: checkTitle(bodyFromReq.title),
     theme: checkTheme(bodyFromReq.theme),
