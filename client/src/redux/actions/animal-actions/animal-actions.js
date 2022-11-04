@@ -163,7 +163,7 @@ export function searchQuery(value, token) {
     } catch (error) {
       return dispatch({
         type: SEARCH_QUERY,
-        payload: { result: [], status: { error: error.response?.data?.error } },
+        payload: { result: [], status: { error: error.message } },
       });
     }
   };
@@ -196,7 +196,15 @@ export function clearFetchedAnimals() {
           status: { pure: true },
         },
       });
-    } catch (error) {}
+    } catch (error) {
+      return dispatch({
+        type: SET_FETCHED_ANIMALS_TO_LOADING,
+        payload: {
+          result: [],
+          status: { error: error.message },
+        },
+      });
+    }
   };
 }
 
