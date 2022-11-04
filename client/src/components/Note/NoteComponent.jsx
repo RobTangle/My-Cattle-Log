@@ -42,7 +42,7 @@ export function NoteComponent() {
         </button>
       </div>
       <div>{showNoteForm && <NoteForm />}</div>
-      <div class="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
+      <div class="text-green text-xl border-solid  border-b-2 border-green my-3 ">
         Mis notas
       </div>
       {notesState?.allNotes?.loading && (
