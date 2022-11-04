@@ -4,7 +4,10 @@ import {
   POST_NEW_NOTE,
   DELETE_NOTE,
   UPDATE_NOTE,
+  SET_NOTES_FROM_USER_TO_LOADING,
 } from "../types";
+import { header } from "../../../constants/token";
+import { URL } from "../../../constants/urls";
 
 export function getNotesFromUser(token) {
   return async function (dispatch) {
@@ -17,6 +20,22 @@ export function getNotesFromUser(token) {
     } catch (error) {
       dispatch({
         type: GET_NOTES_FROM_USER,
+        payload: { error: error.message },
+      });
+    }
+  };
+}
+
+export function setNotesFromUserToLoading() {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: SET_NOTES_FROM_USER_TO_LOADING,
+        payload: { loading: true },
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_NOTES_FROM_USER_TO_LOADING,
         payload: { error: error.message },
       });
     }

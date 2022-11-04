@@ -83,8 +83,11 @@ export function Home() {
       }
     } catch (error) {
       console.log(error);
-      console.log(`Regresando al "/" para que se pueda loguear`);
-      navigate("/");
+      console.log(
+        "Sucedió un error en la función handleValidation del componente Home. "
+      );
+      // console.log(`Regresando al "/" para que se pueda loguear`);
+      // navigate("/");
     }
   }
 
