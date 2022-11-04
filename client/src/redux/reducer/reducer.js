@@ -25,6 +25,9 @@ import {
   GET_NOTES_FROM_USER,
   GET_DETAILS,
   RESET_DETAIL,
+  UPDATE_NOTE,
+  SET_UPDATED_NOTE_TO_LOADING,
+  CLEAN_UPDATED_NOTE,
 } from "../actions/types";
 
 const initialState = {
@@ -37,6 +40,7 @@ const initialState = {
   },
   deletedAnimal: { pure: true },
   updatedAnimal: { pure: true },
+  updatedNote: { pure: true },
   typesOfAnimals: [],
   stats: { pure: true },
   pregnant: { pure: true },
@@ -176,6 +180,21 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         notes: { ...state.notes, allNotes: action.payload },
+      };
+    case UPDATE_NOTE:
+      return {
+        ...state,
+        updatedNote: action.payload,
+      };
+    case CLEAN_UPDATED_NOTE:
+      return {
+        ...state,
+        updatedNote: action.payload,
+      };
+    case SET_UPDATED_NOTE_TO_LOADING:
+      return {
+        ...state,
+        updatedNote: action.payload,
       };
     // DETAILS :
     case GET_DETAILS:
