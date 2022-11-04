@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import InputForm from "../Form/InputForm";
 import axios from "axios";
 import { URL } from "../../constants/urls";
@@ -102,7 +101,6 @@ export function NoteForm() {
               value={input.theme}
             />
             <button className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500 text-green flex items-center gap-3">
-              {/* <IoMdAddCircleOutline /> */}
               Guardar{" "}
             </button>
           </div>
