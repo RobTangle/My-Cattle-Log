@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isValidURLImage = exports.isEmail = exports.isTypeofNumber = exports.isValidSenasaId = exports.isUndefinedOrNull = exports.isFalsyArgument = exports.isStringBetween1AndXCharsLong = exports.isStringBetween1And50CharsLong = exports.isStringBetween1And101CharsLong = exports.isEmptyString = exports.isValidString = exports.isStringXCharsLong = exports.isString = void 0;
+exports.stringToBoolean = exports.isValidURLImage = exports.isEmail = exports.isTypeofNumber = exports.isValidSenasaId = exports.isUndefinedOrNull = exports.isFalsyArgument = exports.isStringBetween1AndXCharsLong = exports.isStringBetween1And50CharsLong = exports.isStringBetween1And101CharsLong = exports.isEmptyString = exports.isValidString = exports.isStringXCharsLong = exports.isString = void 0;
 // IS STRING:
 function isString(argumento) {
     if (typeof argumento !== "string") {
@@ -133,3 +133,14 @@ function isValidURLImage(argumento) {
         null);
 }
 exports.isValidURLImage = isValidURLImage;
+// PARSE STRING TO BOOLEAN :
+function stringToBoolean(argumento) {
+    if (argumento === "true") {
+        return true;
+    }
+    if (argumento === "false") {
+        return false;
+    }
+    throw new Error(`El argumento '${argumento}' es inválido.`);
+}
+exports.stringToBoolean = stringToBoolean;

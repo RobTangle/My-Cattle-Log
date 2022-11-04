@@ -4,7 +4,7 @@ import {
   searchQuery,
   setFetchedAnimalsToLoading,
   clearFetchedAnimals,
-} from "../../redux/actions/actions";
+} from "../../redux/actions/animal-actions/animal-actions";
 
 export function SearchBar() {
   const dispatch = useDispatch();

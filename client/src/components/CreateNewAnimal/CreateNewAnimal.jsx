@@ -2,7 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../Form/Form";
 import loading from "../../assets/loading.gif";
-import { NavBar } from "../NavBar/NavBar";
+// eslint-disable-next-line
+// import { NavBar } from "../NavBar/NavBar";
 import { cleanNewAnimal } from "../../redux/actions/actions";
 import "./createNewAnimal.css";
 

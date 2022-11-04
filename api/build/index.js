@@ -10,7 +10,7 @@ const app = require("./src/app");
 models_1.default.sequelize.sync({ alter: true }).then(() => {
     app.listen(PORT, () => {
         console.log("**** **** **** **** **** **** **** **** **** **** **** **** **** **** **** ");
-        console.log(`App listening on post ${PORT}`);
+        console.log(`App listening on port ${PORT}`);
         console.log("**** **** **** **** **** **** **** **** **** **** **** **** **** **** **** ");
     });
 });

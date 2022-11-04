@@ -5,7 +5,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 //eslint-disable-next-line
-import { cleanNewAnimal } from "../../redux/actions/actions";
 import LogoutButton from "../Logout/LogoutButton";
 import { BiMenu } from "react-icons/bi";
 import { VscClose } from "react-icons/vsc";
@@ -19,10 +18,6 @@ export function NavBar() {
   const [openMenu, setOpenMenu] = useState(false);
   const { isLoading, isAuthenticated } = useAuth0();
 
-  // React.useEffect(() => {
-  //   console.log(`Limpiando new animal...`);
-  //   dispatch(cleanNewAnimal());
-  // }, []);
   const handleMenu = () => {
     setOpenMenu(!openMenu);
   };
@@ -51,10 +46,13 @@ export function NavBar() {
       {openMenu ? (
         <div className="flex flex-col w-full h-screen z-30 pt-8 px-5 gap-3 absolute top-0 bg-white text-gray">
           <NavbarLink path="/home" text="Inicio" />
-          <NavbarLink path="/home/management" text="Administrar animales" />
+
           {!isLoading && isAuthenticated ? (
             <>
-              <NavbarLink path="/home/profile" text="Perfil" />
+              <NavbarLink path="/home/profile" text="Perfil & Notas" />
+              <NavbarLink path="/home/management" text="Administrar animales" />
+              <NavbarLink path="/home/statistics" text="Dashboard" />
+
               <div>
                 <LogoutButton />
               </div>
@@ -79,9 +77,14 @@ export function NavBar() {
           text="Administrar animales"
         />
         <NavbarLink
+          path="/home/statistics"
+          divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
+          text="Dashboard"
+        />
+        <NavbarLink
           path="/home/profile"
           divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
-          text="Perfil"
+          text="Perfil & Notas"
         />
         <div>
           <LogoutButton />

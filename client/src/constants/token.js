@@ -5,3 +5,5 @@ export const header = (token) => {
     },
   };
 };
+
+export const TOKEN_NAME = "TokenMyCattleLog";

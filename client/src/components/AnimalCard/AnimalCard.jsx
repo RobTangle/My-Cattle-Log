@@ -1,14 +1,18 @@
 // import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getAllAnimals, deleteAnimal } from "../../redux/actions/actions";
+import {
+  getAllAnimals,
+  deleteAnimal,
+} from "../../redux/actions/animal-actions/animal-actions";
+
 import { ModalEdit } from "../Modal/ModalEdit";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 import { BiEditAlt } from "react-icons/bi";
-import {MdDeleteOutline} from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 
-export function AnimalCard({animal}) {
+export function AnimalCard({ animal }) {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("tokenCattleTracker");
   const [showValue, setShowValue] = React.useState(false);
@@ -71,7 +75,7 @@ export function AnimalCard({animal}) {
         value={animal?.id_senasa}
         onClick={handleDeleteWithPrompt}
       >
-        <MdDeleteOutline/>
+        <MdDeleteOutline />
       </button>
       <ModalEdit show={showValue} setShowValue={setShowValue} animal={animal} />
     </div>

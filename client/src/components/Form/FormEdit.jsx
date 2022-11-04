@@ -1,8 +1,6 @@
 import React from "react";
-import { useDispatch,useSelector } from "react-redux";
-import * as actions from "../../redux/actions/actions";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import * as animalActions from "../../redux/actions/animal-actions/animal-actions";
 
 export function FormEdit(props) {
   console.log(props);
@@ -31,7 +29,7 @@ export function FormEdit(props) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(actions.getTypesOfAnimalsAllowed());
+    dispatch(animalActions.getTypesOfAnimalsAllowed());
   }, []);
 
   const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
@@ -46,10 +44,10 @@ export function FormEdit(props) {
     console.log(`handleSubmit invocado. localState: `, localState);
     e.preventDefault();
     //HACER JS VALIDATIONS...
-    dispatch(actions.setUpdateAnimalToLoading());
-    dispatch(actions.updateAnimal(localState, accessToken));
+    dispatch(animalActions.setUpdateAnimalToLoading());
+    dispatch(animalActions.updateAnimal(localState, accessToken));
     setTimeout(() => {
-      dispatch(actions.getAllAnimals(accessToken));
+      dispatch(animalActions.getAllAnimals(accessToken));
     }, 500);
   }
 

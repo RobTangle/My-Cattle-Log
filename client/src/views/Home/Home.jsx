@@ -13,7 +13,7 @@ export function Home() {
   //   dispatch(cleanNewAnimal());
   // }, []);
 
-  const { user, isAuthenticated, getAccessTokenSilently, isLoading} =
+  const { user, isAuthenticated, getAccessTokenSilently, isLoading } =
     useAuth0();
 
   const navigate = useNavigate();
@@ -51,11 +51,9 @@ export function Home() {
     console.log("isAuthenticated = ", isAuthenticated);
     console.log("isLoading = ", isLoading);
     if (!isLoading && !isAuthenticated) {
-      console.log(
-        `Terminó de cargar y no está autenticado. Navegandolo a "/".`
-      );
+      console.log(`Terminó de cargar y no está autenticado.`);
       //Si no está autenticado, lo mando al landing para que haga el login.
-      navigate("/");
+      // navigate("/");
     }
   }, [isLoading, isAuthenticated, navigate, user]);
 
@@ -85,8 +83,11 @@ export function Home() {
       }
     } catch (error) {
       console.log(error);
-      console.log(`Regresando al "/" para que se pueda loguear`);
-      navigate("/");
+      console.log(
+        "Sucedió un error en la función handleValidation del componente Home. "
+      );
+      // console.log(`Regresando al "/" para que se pueda loguear`);
+      // navigate("/");
     }
   }
 

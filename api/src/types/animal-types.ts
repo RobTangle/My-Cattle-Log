@@ -20,4 +20,5 @@ export enum ITypeOfAnimal {
   Novillo = "Novillo",
   Toro = "Toro",
   Vaquillona = "Vaquillona",
+  Vaca = "Vaca",
 }

@@ -42,7 +42,7 @@ export function checkAnimal(bodyFromReq: any): IAnimal {
 // CHECK DEVICE_TYPE :
 function checkDeviceType(argFromReq: any): string {
   if (isStringBetween1And50CharsLong(argFromReq)) {
-    return argFromReq;
+    return argFromReq.toLowerCase();
   } else {
     throw new Error(`El tipo de dispositivo "${argFromReq}" es inválido.`);
   }
@@ -181,7 +181,7 @@ function checkIsPregnant(isPregnantFromReq: any): boolean | undefined {
     return false;
   }
   throw new Error(
-    `El dato ingresado como 'isPregnant' es inválido. Ingrese undefined | null, o un valor booleano.`
+    `El dato ingresado '${isPregnantFromReq}' como 'isPregnant' es inválido.`
   );
 }
 

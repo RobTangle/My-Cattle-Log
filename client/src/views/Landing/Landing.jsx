@@ -1,5 +1,6 @@
 import React from "react";
 import LoginButton from "../../components/Login/LoginButton";
+import { GoHomeBtn } from "../../components/GoHomeBtn/GoHomeBtn";
 
 export function LandingPage() {
   return (
@@ -20,7 +21,14 @@ export function LandingPage() {
           permite digitalizar el campo, donde podrás registrar tus animales, sus
           movimientos, y mucho más.
         </h3>
-        <LoginButton />
+        <div>
+          <span className="mx-4">
+            <LoginButton />
+          </span>{" "}
+          <span className="mx-4">
+            <GoHomeBtn />
+          </span>
+        </div>
       </div>
     </div>
   );

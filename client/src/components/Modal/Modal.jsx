@@ -1,15 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+// eslint-disable-next-line
 import { Form } from "../Form/Form";
+import { FormMdlzd } from "../Form/FormMdlzd";
 import loading from "../../assets/loading.gif";
-import { cleanNewAnimal } from "../../redux/actions/actions";
+import { cleanNewAnimal } from "../../redux/actions/animal-actions/animal-actions";
 
 export function Modal(props) {
   const newAnimalState = useSelector((state) => state.newAnimal);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    console.log(`Me desmontéo desmonté????`);
+    console.log(`Componente Modal montado`);
     dispatch(cleanNewAnimal());
   }, [dispatch]);
 
@@ -25,7 +27,7 @@ export function Modal(props) {
 
   return (
     <div className="modal-container">
-      {newAnimalState.pure ? <Form closeModal={closeModal} /> : null}
+      {newAnimalState.pure ? <FormMdlzd closeModal={closeModal} /> : null}
       {newAnimalState.loading ? (
         <div>
           <img src={loading} alt="loading gif" />

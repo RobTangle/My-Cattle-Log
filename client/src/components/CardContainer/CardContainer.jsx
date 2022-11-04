@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllAnimals,
   setUserAnimalsToLoading,
-} from "../../redux/actions/actions";
+} from "../../redux/actions/animal-actions/animal-actions";
 import loading from "../../assets/loading.gif";
 import { Pagination } from "../Pagination/Pagination";
 import { PropsColumns } from "../PropsColumns/PropsColumns";
-
 
 export function CardContainer(props) {
   const userAnimalsState = useSelector((state) => state.userAnimals);

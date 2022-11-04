@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CreateNewAnimal } from "./components/CreateNewAnimal/CreateNewAnimal";
+
 import { LandingPage, SignUp, Home, Profile, Management } from "./views";
+import { Details } from "./components/Details/Details";
+import { Statistics } from "./components/Statistics/Statistics";
 
 function App() {
   return (
@@ -12,8 +14,10 @@ function App() {
           {/* <Route path="/home" element={<NavBar />} /> */}
           <Route path="/home" element={<Home />} />
           <Route exact path="/home/management" element={<Management />} />
-          <Route exact path="/home/newanimal" element={<CreateNewAnimal />} />
+
+          <Route exact path="/home/statistics" element={<Statistics />} />
           <Route exact path="/home/profile" element={<Profile />} />
+          <Route exact path="/home/details" element={<Details />} />
         </Routes>
       </BrowserRouter>
     </div>

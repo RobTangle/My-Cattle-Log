@@ -1,16 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+// eslint-disable-next-line
 import { FormEdit } from "../Form/FormEdit";
+import { FormMdlzd } from "../Form/FormMdlzd";
 import loading from "../../assets/loading.gif";
-import { cleanUpdateAnimal } from "../../redux/actions/actions";
-
+import { cleanUpdateAnimal } from "../../redux/actions/animal-actions/animal-actions";
 
 export function ModalEdit(props) {
   const updatedAnimal = useSelector((state) => state.updatedAnimal);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    console.log(`Me desmontéo desmonté????`);
+    console.log(`useEffect de ModalEdit...`);
     // dispatch(cleanUpdateAnimal());
   }, []);
 
@@ -28,7 +29,7 @@ export function ModalEdit(props) {
     <div>
       <div>
         {updatedAnimal.pure ? (
-          <FormEdit animal={props.animal} closeModal={closeModal} />
+          <FormMdlzd animal={props.animal} closeModal={closeModal} />
         ) : null}
         {updatedAnimal.loading ? (
           <div className="modal-response">
