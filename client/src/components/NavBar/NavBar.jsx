@@ -51,7 +51,7 @@ export function NavBar() {
             <>
               <NavbarLink path="/home/profile" text="Perfil" />
               <NavbarLink path="/home/management" text="Administrar animales" />
-              <NavbarLink path="/home/statistics" text="Estadísticas" />
+              <NavbarLink path="/home/statistics" text="Dashboard" />
 
               <div>
                 <LogoutButton />
@@ -79,7 +79,7 @@ export function NavBar() {
         <NavbarLink
           path="/home/statistics"
           divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
-          text="Estadísticas"
+          text="Dashboard"
         />
         <NavbarLink
           path="/home/profile"
