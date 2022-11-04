@@ -58,11 +58,10 @@ export function AnimalCard({ animal }) {
 
   return (
     <div className="flex gap-3">
-      <button className="btn-details" value={animal?.id_senasa}>
-        <Link to="/home/details">
-          <TbListDetails />
-        </Link>
-      </button>
+      <Link to={`/details/${animal?.id_senasa}`}>
+        <TbListDetails />
+      </Link>
+
       <button
         className="btn-edit"
         value={animal?.id_senasa}

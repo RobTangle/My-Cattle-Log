@@ -17,7 +17,7 @@ function App() {
 
           <Route exact path="/home/statistics" element={<Statistics />} />
           <Route exact path="/home/profile" element={<Profile />} />
-          <Route exact path="/home/details" element={<Details />} />
+          <Route exact path="/details/:id" element={<Details />} />
         </Routes>
       </BrowserRouter>
     </div>
