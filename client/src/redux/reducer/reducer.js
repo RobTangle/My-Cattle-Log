@@ -41,7 +41,7 @@ const initialState = {
   stats: { pure: true },
   pregnant: { pure: true },
   notes: { newNote: { pure: true }, allNotes: { pure: true } },
-  detail: {},
+  detail: { pure: true },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -177,6 +177,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         notes: { ...state.notes, allNotes: action.payload },
       };
+    // DETAILS :
     case GET_DETAILS:
       return {
         ...state,
@@ -185,7 +186,7 @@ const rootReducer = (state = initialState, action) => {
     case RESET_DETAIL:
       return {
         ...state,
-        detail: {},
+        detail: { pure: true },
       };
     default:
       return state;
