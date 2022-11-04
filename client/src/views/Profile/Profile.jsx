@@ -5,14 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStats } from "../../redux/actions/animal-actions/animal-actions";
 import { getUserInfo } from "../../redux/actions/user-actions/user-actions";
 import { useNavigate } from "react-router-dom";
+import { NoteComponent } from "../../components/Note/NoteComponent";
 
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userInfoState = useSelector((state) => state.userInfo);
-
   const token = localStorage.getItem("tokenCattleTracker");
+
+  // const [showNoteForm, setShowNoteForm] = React.useState({
+  //   status: true,
+  // });
 
   React.useEffect(() => {
     dispatch(getUserInfo(token));
@@ -67,36 +71,16 @@ export const Profile = () => {
               <p className="text-gray font-semibold">User Id </p>
               <p>{userInfoState.id}</p>
             </div>
-            <button
+            {/* <button
               type="button"
               onClick={dispatchGetStats}
               className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
             >
               Ver estadísticas
-            </button>
-            <div>
-              <br />
-              <h2 className="text-green text-2xl font-semibold">
-                Notas personales:
-              </h2>
-              <div>
-                <h3>Nueva nota</h3>
-                <label
-                  htmlFor="new-note"
-                  className="text-gray font-semibold w-[120px] md:w-[130px] text-sm "
-                >
-                  nota:{" "}
-                </label>
-                <textarea
-                  type="textarea"
-                  id="new_note"
-                  className="bg-gray/10 border border-solid border-gray/10 rounded-sm px-3 py-1  w-full"
-                  placeholder="nota personal..."
-                />
-              </div>
-            </div>
+            </button> */}
           </div>
         )}
+        <NoteComponent />
         {!isLoading && !isAuthenticated ? (
           <div>
             <div>Debes loguearte para ver tu perfíl.</div>
