@@ -49,7 +49,7 @@ export function NavBar() {
 
           {!isLoading && isAuthenticated ? (
             <>
-              <NavbarLink path="/home/profile" text="Perfil" />
+              <NavbarLink path="/home/profile" text="Perfil & Notas" />
               <NavbarLink path="/home/management" text="Administrar animales" />
               <NavbarLink path="/home/statistics" text="Dashboard" />
 
@@ -84,7 +84,7 @@ export function NavBar() {
         <NavbarLink
           path="/home/profile"
           divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
-          text="Perfil"
+          text="Perfil & Notas"
         />
         <div>
           <LogoutButton />
