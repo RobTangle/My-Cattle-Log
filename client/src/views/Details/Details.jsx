@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import DetailCard from "../../components/DetailCard/DetailCard";
+import { NavBar } from "../../components/NavBar/NavBar";
 import { getAnimalDetail, resetDetail } from "../../redux/actions/animal-actions/animal-actions";
 
 
@@ -19,10 +21,10 @@ export function Details() {
   }, [  id, token ]);
 
   return (
-    <div>
-      <h1>DETAILS</h1>
-      <div></div>
-      <div></div>
+    <div className="max-w-7xl mx-auto">
+      <NavBar />
+      <h1 className="text-green text-2xl my-5">Detalle </h1>
+      <DetailCard animal={animal} />
     </div>
   );
 }
