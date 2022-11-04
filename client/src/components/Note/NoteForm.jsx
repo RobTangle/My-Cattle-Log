@@ -28,12 +28,12 @@ export function NoteForm() {
   }
 
   return (
-    <div className=" ">
+    <div>
       <div class="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
         Nueva nota
       </div>
-      <form action="">
-        <div className="inside-form-container flex">
+      <form action="" onSubmit={handleSubmit}>
+        <div className="inside-form-container flex mx-3">
           <div className="comentario-input">
             <div className="flex items-center gap-3 mb-3 w-full">
               <label
@@ -49,14 +49,14 @@ export function NoteForm() {
                 id="comment"
                 maxLength={900}
                 onChange={handleOnChange}
-                required="true"
+                required={true}
                 rows={5}
                 cols={23}
                 value={input.comment}
               />
             </div>
           </div>
-          <div className="otros-inputs">
+          <div className="otros-inputs mx-3">
             <InputForm
               handleOnChange={handleOnChange}
               type="text"
@@ -79,12 +79,9 @@ export function NoteForm() {
               text="Tema"
               value={input.theme}
             />
-            <button
-              className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500 text-green flex items-center gap-3"
-              onClick={handleSubmit}
-            >
-              <IoMdAddCircleOutline />
-              Crear nota{" "}
+            <button className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500 text-green flex items-center gap-3">
+              {/* <IoMdAddCircleOutline /> */}
+              Guardar{" "}
             </button>
           </div>
         </div>

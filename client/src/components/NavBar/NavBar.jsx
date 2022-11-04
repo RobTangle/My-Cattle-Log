@@ -46,11 +46,13 @@ export function NavBar() {
       {openMenu ? (
         <div className="flex flex-col w-full h-screen z-30 pt-8 px-5 gap-3 absolute top-0 bg-white text-gray">
           <NavbarLink path="/home" text="Inicio" />
-          <NavbarLink path="/home/management" text="Administrar animales" />
+
           {!isLoading && isAuthenticated ? (
             <>
-              <NavbarLink path="/home/profile" text="Perfil" />
-              <NavbarLink path="/home/statistics" text="Estadísticas" />
+              <NavbarLink path="/home/profile" text="Perfil & Notas" />
+              <NavbarLink path="/home/management" text="Administrar animales" />
+              <NavbarLink path="/home/statistics" text="Dashboard" />
+
               <div>
                 <LogoutButton />
               </div>
@@ -77,12 +79,12 @@ export function NavBar() {
         <NavbarLink
           path="/home/statistics"
           divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
-          text="Estadísticas"
+          text="Dashboard"
         />
         <NavbarLink
           path="/home/profile"
           divStyle=" w-fit border-solid border-b-2 border-transparent hover:border-green ease-in-out  hover:text-green  hover:cursor-pointer transition-all duration-300 "
-          text="Perfil"
+          text="Perfil & Notas"
         />
         <div>
           <LogoutButton />

@@ -42,7 +42,7 @@ export function Statistics() {
       <div className="max-w-7xl mx-auto ">
         <NavBar />
         <div className="lg:flex flex-col justify-center items-center">
-          <h1 className="text-green text-3xl my-5">Estadísticas</h1>
+          <h1 className="text-green text-3xl my-5">Dashboard</h1>
           <br />
           <div className="lg:flex flex-col justify-center items-center">
             <h2 className="text-green text-2xl my-5">Razas</h2>

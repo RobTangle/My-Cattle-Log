@@ -28,8 +28,10 @@ export function NoteComponent() {
     setShowNoteForm(!showNoteForm);
   }
   return (
-    <div className="note-comp-container">
-      <h2 className="text-green text-2xl font-semibold">Notas personales</h2>
+    <div className="max-w-7xl mx-auto">
+      <h2 className="text-green text-2xl font-semibold my-3">
+        Notas personales
+      </h2>
       <div>
         <button
           className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500 text-green flex items-center gap-3"
@@ -39,7 +41,7 @@ export function NoteComponent() {
           Crear nota{" "}
         </button>
       </div>
-      {showNoteForm && <NoteForm />}
+      <div>{showNoteForm && <NoteForm />}</div>
       <div class="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
         Mis notas
       </div>
