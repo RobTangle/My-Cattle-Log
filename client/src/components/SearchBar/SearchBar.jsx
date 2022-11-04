@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   searchQuery,
   setFetchedAnimalsToLoading,
@@ -12,6 +12,8 @@ export function SearchBar() {
   const [input, setInput] = React.useState({
     inputValue: "",
   });
+
+  const fetchedAnimalsState = useSelector((state) => state.fetchedAnimals);
 
   function handleChange(e) {
     setInput({
@@ -31,40 +33,55 @@ export function SearchBar() {
     dispatch(searchQuery(input.inputValue, accessToken));
   }
   return (
-    <div className="w-full flex flex-col text-gray px-3 py-5 my-5 bg-gray/10">
-      <form
-        action=""
-        onSubmit={handleSubmit}
-        className="flex flex-col items-start w-full"
-      >
-        <label className="px-3 font-semibold" htmlFor="inputValue">
-          Nombre / ID SENASA
-        </label>
-        <input
-          className=" mt-1  py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-green focus:ring-light_green block w-full rounded-md sm:text-sm focus:ring-1  px-2"
-          type="text"
-          name="inputValue"
-          value={input.inputValue}
-          onChange={handleChange}
-          placeholder="Ingrese nombre o código de identificación."
-        />
-        <div className="flex items-center gap-5 justify-center w-full my-5">
-          <button
-            type="submit"
-            className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
-          >
-            Buscar
-          </button>
-          <button
-            type="button"
-            className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
-            onClick={dispatchClearFetchedAnimals}
-          >
-            {" "}
-            Limpiar resultados{" "}
-          </button>
+    <>
+      <div className="w-full flex flex-col text-gray px-3 py-5 my-5 bg-gray/10">
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className="flex flex-col items-start w-full"
+        >
+          <label className="px-3 font-semibold" htmlFor="inputValue">
+            Nombre / ID SENASA
+          </label>
+          <input
+            className=" mt-1  py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-green focus:ring-light_green block w-full rounded-md sm:text-sm focus:ring-1  px-2"
+            type="text"
+            name="inputValue"
+            value={input.inputValue}
+            onChange={handleChange}
+            placeholder="Ingrese nombre o código de identificación."
+          />
+          <div className="flex items-center gap-5 justify-center w-full my-5">
+            <button
+              type="submit"
+              className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
+            >
+              Buscar
+            </button>
+            <button
+              type="button"
+              className=" bg-white border border-solid border-green px-3 py-1 rounded-sm text-green hover:bg-green hover:text-white hover:border-green transition-all ease-in-out duration-500"
+              onClick={dispatchClearFetchedAnimals}
+            >
+              {" "}
+              Limpiar resultados{" "}
+            </button>
+          </div>
+        </form>
+      </div>
+      {fetchedAnimalsState?.status?.fetched &&
+      fetchedAnimalsState?.result?.length === 0 ? (
+        <div>No se encontraron coincidencias</div>
+      ) : null}
+      {fetchedAnimalsState?.status?.error ? (
+        <div>{fetchedAnimalsState?.status?.error}</div>
+      ) : null}
+      {fetchedAnimalsState?.status?.fetched &&
+      fetchedAnimalsState.result.length > 0 ? (
+        <div>
+          COINCIDENCIAS ENCONTRADAS: {fetchedAnimalsState.results.length}
         </div>
-      </form>
-    </div>
+      ) : null}
+    </>
   );
 }
