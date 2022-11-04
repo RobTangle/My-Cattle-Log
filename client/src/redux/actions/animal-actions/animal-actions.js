@@ -250,7 +250,7 @@ export function getTypesOfAnimalsAllowed() {
       console.log(error.message);
       return dispatch({
         type: GET_TYPES_OF_ANIMALS,
-        payload: { error: error?.response?.data?.error },
+        payload: { error: error.message },
       });
     }
   };
@@ -269,7 +269,7 @@ export function getStats(token) {
       console.log(`Error en la action creator de getStatus. ${error.message}`);
       return dispatch({
         type: GET_STATS,
-        payload: { error: error.response?.data?.error },
+        payload: { error: error.message },
       });
     }
   };
