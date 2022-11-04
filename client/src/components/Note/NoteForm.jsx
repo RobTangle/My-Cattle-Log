@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { postNewNote } from "../../redux/actions/note-actions/note-actions";
 import InputForm from "../Form/InputForm";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import axios from "axios";
+import { URL } from "../../constants/urls";
+import { header } from "../../constants/token";
 
 export function NoteForm() {
   const [input, setInput] = React.useState({
@@ -12,7 +13,6 @@ export function NoteForm() {
     importance: "",
   });
   const accessToken = localStorage.getItem("tokenCattleTracker");
-  const dispatch = useDispatch();
 
   function handleOnChange(e) {
     setInput({
@@ -21,10 +21,32 @@ export function NoteForm() {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    dispatch(postNewNote(input, accessToken));
     console.log("Nueva nota despachada...");
+    try {
+      // dispatch(postNewNote(input, accessToken));
+      const response = await axios.post(
+        URL + "note/newNote",
+        input,
+        header(accessToken)
+      );
+      if (response.status >= 200 && response.status < 210) {
+        alert("Nota creada exitosamente");
+        setInput({
+          title: "",
+          theme: "",
+          comment: "",
+          importance: "",
+        });
+      }
+    } catch (error) {
+      console.log(`Error en el handleSubmit`);
+      console.log(`ERROR = `, error);
+      alert(
+        `Hubo un error al intentar crear la nota. ${error.response?.data?.error}`
+      );
+    }
   }
 
   return (
