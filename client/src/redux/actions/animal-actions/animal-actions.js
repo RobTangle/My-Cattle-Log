@@ -19,6 +19,7 @@ import {
   SET_NEW_ANIMAL_TO_LOADING,
   SET_USER_ANIMALS_TO_LOADING,
   SEARCH_QUERY,
+  GET_DETAILS,
 } from "../types";
 import {
   POST_ANIMAL,
@@ -359,4 +360,19 @@ export function cleanPregnantAsc() {
       });
     }
   };
+}
+
+export const getAnimalDetail = (id, token) => async (dispatch) => {
+  try {
+    const response = await axios.get(URL + "animal/id/" + id, header(token));
+    return dispatch({
+      type: GET_DETAILS ,
+      payload: response.data,
+    });
+  } catch (error) {
+    return dispatch({
+      type: GET_DETAILS ,
+      payload: { error: error.message },
+    });
+  }
 }

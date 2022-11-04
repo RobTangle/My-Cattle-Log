@@ -24,3 +24,4 @@ export const DELETE_NOTE = "DELETE_NOTE";
 export const UPDATE_NOTE = "UPDATE_NOTE";
 export const SEARCH_QUERY = "SEARCH_QUERY";
 export const CLEAN_NEW_NOTE = "CLEAN_NEW_NOTE";
+export const GET_DETAILS = "GET_DETAILS";
