@@ -24,7 +24,6 @@ export function NoteForm() {
     e.preventDefault();
     console.log("Nueva nota despachada...");
     try {
-      // dispatch(postNewNote(input, accessToken));
       const response = await axios.post(
         URL + "note/newNote",
         input,
