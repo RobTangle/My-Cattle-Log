@@ -41,9 +41,11 @@ export function NoteForm() {
     } catch (error) {
       console.log(`Error en el handleSubmit`);
       console.log(`ERROR = `, error);
-      alert(
-        `Hubo un error al intentar crear la nota. ${error.response?.data?.error}`
-      );
+      let errorMessage = error.message;
+      if (error.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      }
+      alert(`Hubo un error al intentar crear la nota. ${errorMessage}`);
     }
   }
 

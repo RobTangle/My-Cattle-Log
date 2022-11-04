@@ -14,12 +14,12 @@ export function LandingPage() {
           />
         </div>
         <h1 className="text-3xl text-center mb-5 font-semibold md:text-4xl uppercase">
-          Bienvenido a Cattle Log
+          Bienvenido a My Cattle Log
         </h1>
         <h3 className="text-gray text-justify md:text-2xl">
-          Cattle Log es una nueva plataforma para la ganadería del futuro, que
-          permite digitalizar el campo, donde podrás registrar tus animales, sus
-          movimientos, y mucho más.
+          My Cattle Log es una nueva plataforma para la ganadería del futuro,
+          que permite digitalizar el campo, donde podrás registrar tus animales,
+          sus movimientos, y mucho más.
         </h3>
         <div>
           <span className="mx-4">

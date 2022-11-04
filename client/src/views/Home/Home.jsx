@@ -105,16 +105,16 @@ export function Home() {
       <NavBar />
       <div className="w-full mt-16 md:mt-3 h-44 md:h-80 bg-home bg-cover bg-center text-right flex flex-col justify-end px-5 py-3 md:py-8 items-end ">
         <p className="text-white text-2xl font-semibold font-sans [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:text-4xl">
-          Cattle Log{" "}
+          My Cattle Log{" "}
         </p>
         <p className="text-white md:text-2xl font-semibold [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:w-3/4">
-          ¿Está utilizando papel y lápiz o Microsoft Excel? ¡Deje que Cattle Log
-          le ayude a organizar sus registros de ganado!
+          ¿Está utilizando papel y lápiz o Microsoft Excel? ¡Deje que My Cattle
+          Log le ayude a organizar sus registros de ganado!
         </p>
       </div>
       <div className="w-full my-8 h-full cursor-pointer">
         <p className="text-4xl text-center my-12 text-gray cursor-pointer">
-          ¿Qué es Cattle Log?
+          ¿Qué es My Cattle Log?
         </p>
 
         <div className="flex flex-col  md:grid md:grid-cols-3 max-w-5xl mx-auto gap-3">
