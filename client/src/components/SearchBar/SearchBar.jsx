@@ -42,7 +42,7 @@ export function SearchBar() {
           className="flex flex-col items-start w-full"
         >
           <label className="px-3 font-semibold" htmlFor="inputValue">
-            Nombre / ID SENASA
+            ID SENASA / Nombre / Número de dispositivo
           </label>
           <input
             className=" mt-1  py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-green focus:ring-light_green block w-full rounded-md sm:text-sm focus:ring-1  px-2"
