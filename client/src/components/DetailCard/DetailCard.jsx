@@ -98,12 +98,11 @@ export default function DetailCard({ animal }) {
           text="Número de dispositivo "
           value={animal?.device_number}
         />
-
         {animal?.comments ? (
-          <DetailCard text="Comentarios" value={animal.comments} />
+          <DetailDiv text="Comentarios" value={animal.comments} />
         ) : null}
         {animal?.is_pregnant ? (
-          <DetailCard text="Fecha de parto" value={animal.delivery_date} />
+          <DetailDiv text="Fecha de parto" value={animal.delivery_date} />
         ) : null}
       </div>
     </div>
