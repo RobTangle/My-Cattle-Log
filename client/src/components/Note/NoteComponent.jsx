@@ -8,12 +8,21 @@ import { NoteForm } from "./NoteForm";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { NoteCardContainer } from "./NoteCardContainer";
 import loadingGif from "../../assets/loading.gif";
+import { NoteFormEdit } from "./NoteFormEdit";
 
 export function NoteComponent() {
   const accessToken = localStorage.getItem("tokenCattleTracker");
   const [showNoteForm, setShowNoteForm] = React.useState(false);
   const notesState = useSelector((state) => state.notes);
   const dispatch = useDispatch();
+  const [showEditForm, setShowEditForm] = React.useState(false);
+  const [noteToEdit, setNoteToEdit] = React.useState({
+    id: "",
+    title: "",
+    theme: "",
+    comment: "",
+    importance: "",
+  });
 
   React.useEffect(() => {
     console.log("UseEffect de NoteComponent");
@@ -21,7 +30,11 @@ export function NoteComponent() {
     setTimeout(() => {
       dispatch(getNotesFromUser(accessToken));
     }, 50);
-  }, []);
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    console.log(`Renderizando otra vez en el useEffect`);
+  }, [notesState]);
 
   function toggleNoteForm(e) {
     e.preventDefault();
@@ -42,9 +55,10 @@ export function NoteComponent() {
         </button>
       </div>
       <div>{showNoteForm && <NoteForm />}</div>
-      <div class="text-green text-xl border-solid  border-b-2 border-green my-3 ">
+      <div className="text-green text-xl border-solid  border-b-2 border-green my-3 ">
         Mis notas
       </div>
+      {showEditForm && <NoteFormEdit note={noteToEdit} />}
       {notesState?.allNotes?.loading && (
         <img src={loadingGif} alt="loading gif" />
       )}

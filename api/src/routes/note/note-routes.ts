@@ -71,15 +71,17 @@ router.delete("/:id", jwtCheck, async (req: any, res) => {
 
 router.put("/", jwtCheck, async (req: any, res) => {
   try {
+    console.log(req.body);
+    const noteId = req.body.id;
     const reqAuth: IReqAuth = req.auth;
     const userId: string = reqAuth.sub;
     await throwErrorIfUserIsNotRegisteredInDB(userId);
     const validatedNote: INote = validateNewNote(req.body);
     let updatedNote = await db.Note.update(
-      { ...validatedNote },
+      { ...validatedNote, id: noteId },
       {
         where: {
-          id: validatedNote.id,
+          id: noteId,
           UserId: userId,
         },
       }

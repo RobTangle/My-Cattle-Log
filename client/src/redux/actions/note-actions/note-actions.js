@@ -5,6 +5,8 @@ import {
   DELETE_NOTE,
   UPDATE_NOTE,
   SET_NOTES_FROM_USER_TO_LOADING,
+  SET_UPDATED_NOTE_TO_LOADING,
+  CLEAN_UPDATED_NOTE,
 } from "../types";
 import { header } from "../../../constants/token";
 import { URL } from "../../../constants/urls";
@@ -89,12 +91,44 @@ export function updateNote(noteObj, token) {
       const response = await axios.put(URL + "note/", noteObj, header(token));
       dispatch({
         type: UPDATE_NOTE,
-        action: response.data,
+        payload: response.data,
       });
     } catch (error) {
       dispatch({
         type: UPDATE_NOTE,
-        action: { error: error.message },
+        payload: { error: "Ha habido un error" },
+      });
+    }
+  };
+}
+
+export function setUpdatedNoteToLoading() {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: SET_UPDATED_NOTE_TO_LOADING,
+        payload: { loading: true },
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_UPDATED_NOTE_TO_LOADING,
+        payload: { error: error.message },
+      });
+    }
+  };
+}
+
+export function cleanUpdatedNote() {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: CLEAN_UPDATED_NOTE,
+        payload: { pure: true },
+      });
+    } catch (error) {
+      dispatch({
+        type: CLEAN_UPDATED_NOTE,
+        payload: { error: error.message },
       });
     }
   };
