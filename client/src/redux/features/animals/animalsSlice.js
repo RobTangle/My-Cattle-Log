@@ -37,7 +37,7 @@ export const animalsSlice = createSlice({
     setAllAnimals: (state, action) => {
       state.userAnimals = action.payload;
     },
-    setAllAnimalsToLoading: (state) => {
+    setUserAnimalsToLoading: (state) => {
       state.userAnimals = { loading: true };
     },
     searchedAnimal: (state, action) => {
@@ -92,7 +92,7 @@ export const {
   setNewAnimalToLoading,
   cleanNewAnimal,
   setAllAnimals,
-  setAllAnimalsToLoading,
+  setUserAnimalsToLoading,
   searchedAnimal,
   setFetchedAnimalsToLoading,
   clearFetchedAnimals,
@@ -105,6 +105,7 @@ export const {
   setPregnant,
   setPregnantAscToLoading,
   setDetail,
+  resetDetail,
 } = animalsSlice.actions;
 
 export default animalsSlice.reducer;

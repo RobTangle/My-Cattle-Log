@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import DetailCard from "../../components/DetailCard/DetailCard";
 import { NavBar } from "../../components/NavBar/NavBar";
-import { getAnimalDetail, resetDetail } from "../../redux/actions/animal-actions/animal-actions";
+import { getAnimalDetail, resetDetail } from "../../redux/features/animals";
 
 
 export function Details() {

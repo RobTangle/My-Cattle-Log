@@ -4,7 +4,7 @@ import {
   searchQuery,
   setFetchedAnimalsToLoading,
   clearFetchedAnimals,
-} from "../../redux/actions/animal-actions/animal-actions";
+} from "../../redux/features/animals";
 import { PropsColumns } from "../PropsColumns/PropsColumns";
 
 export function SearchBar() {

@@ -6,7 +6,7 @@ import { FilterButtons } from "../FilterButtons.jsx/FilterButtons";
 import {
   getStats,
   setStatsToLoading,
-} from "../../redux/actions/animal-actions/animal-actions";
+} from "../../redux/features/animals";
 import { DoughnutChart } from "../../charts/DoughnutChart";
 import "./statistics.css";
 import { PieChart } from "../../charts/PieChart";

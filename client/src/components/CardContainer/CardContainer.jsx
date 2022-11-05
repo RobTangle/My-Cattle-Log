@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllAnimals,
   setUserAnimalsToLoading,
-} from "../../redux/actions/animal-actions/animal-actions";
+} from "../../redux/features/animals";
 import loading from "../../assets/loading.gif";
-import { Pagination } from "../Pagination/Pagination";
+// import { Pagination } from "../Pagination/Pagination";
 import { PropsColumns } from "../PropsColumns/PropsColumns";
 
 export function CardContainer(props) {

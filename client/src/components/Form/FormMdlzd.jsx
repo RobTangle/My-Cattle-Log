@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { URL_UPDATE_ANIMAL, URL_POST_ANIMAL } from "../../constants/urls";
 import { useDispatch, useSelector } from "react-redux";
-import * as animalActions from "../../redux/actions/animal-actions/animal-actions";
+import * as animalActions from "../../redux/features/animals";
 
 import InputForm from "./InputForm";
 import { header } from "../../constants/token";
