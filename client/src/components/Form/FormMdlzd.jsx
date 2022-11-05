@@ -66,12 +66,15 @@ export function FormMdlzd({ closeModal, animal }) {
 
   // ADAPTAR FUNCIONES DEPENDIENDO SI RECIBE UN ANIMAL POR PROPS (EDICIÓN) O NO ( CREAR NUEVO ANIMAL):
   let formAdaptativeTitle = "";
+  let formAdaptativeSubmitButton = "";
   let handleSubmit; // Esta variable va a tomar el valor de una de dos funciones... para crear nuevo animal o para editar animal.
+
   if (!animal) {
     console.log(
       `No se detectó un animal por props. Se asume que es formulario para creación de nuevo animal...`
     );
     formAdaptativeTitle = "Nuevo animal";
+    formAdaptativeSubmitButton = "Registrar animal";
     function handleSubmitNewAnimal(e) {
       console.log(`handleSubmitNewAnimal invocado. localState: `, localState);
       e.preventDefault();
@@ -89,6 +92,7 @@ export function FormMdlzd({ closeModal, animal }) {
         `Se detectó un animal por props. Se asume que es un formulario para edición...`
       );
       formAdaptativeTitle = "Editar animal";
+      formAdaptativeSubmitButton = "Guardar";
       function handleSubmitEditAnimal(e) {
         console.log(`handleSubmit invocado. localState: `, localState);
         e.preventDefault();
@@ -126,7 +130,9 @@ export function FormMdlzd({ closeModal, animal }) {
   };
 
   return (
-    <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
+    // <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
+    // <div className={classNameAdaptable}>
+    <div>
       <h2 className="text-green font-sans text-xl">{formAdaptativeTitle}</h2>
       <form action="" onSubmit={handleSubmit}>
         <div className="inside-form-container">
@@ -386,7 +392,7 @@ export function FormMdlzd({ closeModal, animal }) {
           ) : null}
           <div className="flex items-center gap-5 justify-center w-full my-5">
             <button className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500">
-              Registrar animal
+              {formAdaptativeSubmitButton}
             </button>
             <button
               onClick={closeModal}
