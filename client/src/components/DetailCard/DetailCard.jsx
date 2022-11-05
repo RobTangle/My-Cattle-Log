@@ -101,8 +101,21 @@ export default function DetailCard({ animal }) {
         {animal?.comments ? (
           <DetailDiv text="Comentarios" value={animal.comments} />
         ) : null}
-        {animal?.is_pregnant ? (
-          <DetailDiv text="Fecha de parto" value={animal.delivery_date} />
+        {animal?.type_of_animal === "Vaca" ||
+        animal?.type_of_animal === "Vaquillona" ? (
+          <>
+            {animal?.is_pregnant ? (
+              <>
+                <DetailDiv text="Estado de embarazo" value={"Positivo"} />
+                <DetailDiv
+                  text="Fecha de parto estimada"
+                  value={animal.delivery_date}
+                />
+              </>
+            ) : (
+              <DetailDiv text="Estado de embarazo" value={"Negativo"} />
+            )}
+          </>
         ) : null}
       </div>
     </div>
