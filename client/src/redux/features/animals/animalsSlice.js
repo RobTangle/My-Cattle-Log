@@ -13,9 +13,19 @@ const initialState = {
 export const animalsSlice = createSlice({
   name: "animals",
   initialState,
-  reducers: {},
+  reducers: {
+    newAnimal: (state, action) => {
+      state.newAnimal = action.payload;
+    },
+    update: (state, action) => {
+      state.updatedAnimal = action.payload;
+    },
+    cleanUpdateAnimal: (state) => {
+      state.updatedAnimal = { pure: true };
+    }
+  },
 });
 // Action creators are generated for each case reducer function
-export const {  } = animalsSlice.actions;
+export const { newAnimal, update, cleanUpdateAnimal } = animalsSlice.actions;
 
 export default animalsSlice.reducer;

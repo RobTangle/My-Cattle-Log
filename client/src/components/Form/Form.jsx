@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as animalActions from "../../redux/actions/animal-actions/animal-actions";
+import * as animalActions from "../../redux/features/animals";
 import InputForm from "./InputForm";
 
 // import loadingGIF from "../assets";

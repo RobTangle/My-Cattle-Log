@@ -1,8 +1,6 @@
 import axios from "axios";
 import {
   GET_ALL_ANIMALS,
-  CREATE_NEW_ANIMAL,
-  UPDATE_ANIMAL,
   CLEAN_UPDATE_ANIMAL,
   CLEAN_NEW_ANIMAL,
   CLEAN_PREGNANT_ASC,
@@ -23,7 +21,7 @@ import {
   RESET_DETAIL,
 } from "../types";
 import {
-  URL_POST_ANIMAL,
+
   URL,
   URL_GET_TYPES_OF_ANIMALS,
   URL_GET_STATS,
@@ -31,56 +29,6 @@ import {
 } from "../../../constants/urls";
 import { header } from "../../../constants/token";
 
-export const createNewAnimal = (obj, token) => {
-  return async function (dispatch) {
-    try {
-      let response = await axios.post(URL_POST_ANIMAL, obj, header(token));
-      return dispatch({ type: CREATE_NEW_ANIMAL, payload: response.data });
-    } catch (error) {
-      console.log(`Error en action createAnimal. ${error.message}`);
-      console.log(error);
-      console.log(error.response?.data?.error);
-      return dispatch({
-        type: CREATE_NEW_ANIMAL,
-        payload: { error: error.response?.data?.error },
-      });
-    }
-  };
-};
-
-export const updateAnimal = (obj, token) => {
-  return async function (dispatch) {
-    try {
-      const respuesta = await axios.put(URL + "animal/", obj, header(token));
-      return dispatch({
-        type: UPDATE_ANIMAL,
-        payload: respuesta.data,
-      });
-    } catch (error) {
-      console.log(`Error en updateAnimal creation creator. ${error.message}`);
-      dispatch({
-        type: UPDATE_ANIMAL,
-        payload: { error: "Error: " + error.response?.data?.error },
-      });
-    }
-  };
-};
-
-export const cleanUpdateAnimal = () => {
-  return async function (dispatch) {
-    try {
-      dispatch({
-        type: CLEAN_UPDATE_ANIMAL,
-        payload: { pure: true },
-      });
-    } catch (error) {
-      dispatch({
-        type: CLEAN_UPDATE_ANIMAL,
-        payload: { error: error.message },
-      });
-    }
-  };
-};
 
 export const setNewAnimalToLoading = () => {
   return async function (dispatch) {
