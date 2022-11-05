@@ -1,13 +1,21 @@
 import React from "react";
 import { useState } from "react";
-import { AnimalCard } from "../AnimalCard/AnimalCard";
+import { useSelector } from "react-redux";
+import { NoteAcciones } from "./NoteAcciones";
 import { Pagination } from "../Pagination/Pagination";
-export function PropsColumns({ animals }) {
+export function PropsNotes({ notes }) {
   const [page, setPage] = useState(1);
   const showPerPage = 4;
   const lastOnPage = page * showPerPage;
   const firstOnPage = lastOnPage - showPerPage;
-  const currentAnimals = animals.slice(firstOnPage, lastOnPage);
+  const currentNotes = notes.slice(firstOnPage, lastOnPage);
+
+  const notesState = useSelector((state) => state.notes?.allNotes);
+
+  React.useEffect(() => {
+    console.log("PropsNotes useEffect");
+  }, [notesState]);
+
   function pagination(pageNumber) {
     setPage(pageNumber);
   }
@@ -18,24 +26,27 @@ export function PropsColumns({ animals }) {
           <table className="w-full leading-normal">
             <thead>
               <tr>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase ">
-                  Id SENASA
+                {/* <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase ">
+                  Id
+                </th> */}
+                <th className="px-5 py-3 w-fit border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Título
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Tipo de animal
+                  Comentario
                 </th>
 
-                <th className="px-5 py-3 w-fit border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Peso (kg)
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Tema
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Nombre
+                  Importancia
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Dispositivo
+                  Fecha de creación
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Nro. de dispositivo
+                  Última fecha de edición
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Acciones
@@ -43,45 +54,50 @@ export function PropsColumns({ animals }) {
               </tr>
             </thead>
             <tbody className="text-gray">
-              {currentAnimals?.map((animal) => (
+              {currentNotes?.map((note) => (
                 <tr key={Math.random()} className="text-left">
+                  {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <div className="flex items-center">
+                      <p className="text-gray-900 whitespace-no-wrap capitalize">
+                        {note?.id}
+                      </p>
+                    </div>
+                  </td> */}
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap capitalize">
+                      {note?.title}
+                    </p>
+                  </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <div className="flex items-center">
                       <p className="text-gray-900 whitespace-no-wrap capitalize">
-                        {animal?.id_senasa}
+                        {note?.comment}
                       </p>
                     </div>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <div className="flex items-center">
-                      <p className="text-gray-900 whitespace-no-wrap capitalize">
-                        {animal?.type_of_animal}
-                      </p>
-                    </div>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap capitalize">
-                      {animal?.weight_kg}
+                      {note?.theme}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap capitalize">
-                      {animal?.name}
+                      {note?.importance}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap capitalize">
-                      {animal?.device_type}
+                      {note?.createdAt}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap capitalize">
-                      {animal?.device_number}
+                      {note?.updatedAt}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <div className="text-gray-900 whitespace-no-wrap capitalize">
-                      <AnimalCard animal={animal} />
+                      <NoteAcciones note={note} />
                     </div>
                   </td>
                 </tr>
@@ -89,7 +105,7 @@ export function PropsColumns({ animals }) {
             </tbody>
           </table>
           <Pagination
-            animals={animals?.length}
+            animals={notes?.length}
             showPerPage={showPerPage}
             page={page}
             pagination={pagination}

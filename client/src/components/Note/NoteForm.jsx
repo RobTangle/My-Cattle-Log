@@ -3,6 +3,8 @@ import InputForm from "../Form/InputForm";
 import axios from "axios";
 import { URL } from "../../constants/urls";
 import { header } from "../../constants/token";
+import { useDispatch } from "react-redux";
+import { getNotesFromUser } from "../../redux/actions/note-actions/note-actions";
 
 export function NoteForm() {
   const [input, setInput] = React.useState({
@@ -12,7 +14,7 @@ export function NoteForm() {
     importance: "",
   });
   const accessToken = localStorage.getItem("tokenCattleTracker");
-
+  const dispatch = useDispatch();
   function handleOnChange(e) {
     setInput({
       ...input,
@@ -37,6 +39,7 @@ export function NoteForm() {
           comment: "",
           importance: "",
         });
+        dispatch(getNotesFromUser(accessToken));
       }
     } catch (error) {
       console.log(`Error en el handleSubmit`);
@@ -69,7 +72,7 @@ export function NoteForm() {
                 type="text"
                 name="comment"
                 id="comment"
-                maxLength={900}
+                maxLength={250}
                 onChange={handleOnChange}
                 required={true}
                 rows={5}
@@ -84,6 +87,7 @@ export function NoteForm() {
               type="text"
               name="title"
               text="Título"
+              maxLength={40}
               value={input.title}
             />
             <InputForm
