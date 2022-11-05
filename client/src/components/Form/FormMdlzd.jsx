@@ -218,7 +218,7 @@ export function FormMdlzd({ closeModal, animal }) {
             />
           </div>
 
-          <legend className="text-gray font-semibold w-[120px] md:w-[130px] text-sm text-sm after:content-['*'] after:ml-0.5 after:text-red-500 ">
+          <legend className="text-gray font-semibold w-[120px] md:w-[130px] text-sm after:content-['*'] after:ml-0.5 after:text-red-500 ">
             Tipo de animal
           </legend>
           <div onChange={handleOnChange} className="mb-3">

@@ -33,6 +33,7 @@ export function FormEdit(props) {
 
   React.useEffect(() => {
     dispatch(animalActions.getTypesOfAnimalsAllowed());
+    //eslint-disable-next-line
   }, []);
 //eslint-disable-next-line
   const typesOfAnimalsState = useSelector((state) => state.animals.typesOfAnimals);

@@ -14,6 +14,7 @@ export default function DetailCard({ animal }) {
       dispatch(resetDetail());
     }
     return cleanDetailState();
+    //eslint-disable-next-line
   }, []);
 
   const imagesParsed = [];

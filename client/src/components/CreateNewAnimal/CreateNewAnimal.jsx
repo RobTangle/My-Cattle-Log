@@ -14,6 +14,7 @@ export function CreateNewAnimal() {
   React.useEffect(() => {
     console.log(`Me desmonté????`);
     dispatch(cleanNewAnimal());
+    //eslint-disable-next-line
   }, []);
 
   return (

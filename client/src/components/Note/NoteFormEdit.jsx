@@ -118,7 +118,7 @@ export function NoteFormEdit({ note, closeModal }) {
               value={input.theme}
             />
             <div className="">
-              <button className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500 text-green flex items-center gap-3">
+              <button className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500  flex items-center gap-3">
                 Guardar{" "}
               </button>
               <button
