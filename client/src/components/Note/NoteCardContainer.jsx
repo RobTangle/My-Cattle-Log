@@ -1,5 +1,5 @@
 import React from "react";
-import { PropsNotes } from "../PropsColumns/PropsNotes";
+import { PropsNotes } from "./PropsNotes";
 
 export function NoteCardContainer({ notesToRender, setNoteToEdit }) {
   if (Array.isArray(notesToRender) && notesToRender.length === 0) {

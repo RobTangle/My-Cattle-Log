@@ -28,15 +28,19 @@ export function NoteFormEdit({ note, closeModal }) {
     });
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmitWithNoDispatch(e) {
     e.preventDefault();
     console.log("Nueva nota despachada...");
     try {
-      dispatch(updateNote(input, accessToken));
-
-      setTimeout(() => {
+      const response = await axios.put(
+        URL + "note/",
+        input,
+        header(accessToken)
+      );
+      if (response.status >= 200 && response.status < 210) {
+        alert("Nota actualizada exitosamente.");
         dispatch(getNotesFromUser(accessToken));
-      }, 100);
+      }
     } catch (error) {
       let errorMessage = error.message;
       if (error.response?.data?.error) {
@@ -46,13 +50,31 @@ export function NoteFormEdit({ note, closeModal }) {
     }
   }
 
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+  //   console.log("Nueva nota despachada...");
+  //   try {
+  //     dispatch(updateNote(input, accessToken));
+
+  //     setTimeout(() => {
+  //       dispatch(getNotesFromUser(accessToken));
+  //     }, 100);
+  //   } catch (error) {
+  //     let errorMessage = error.message;
+  //     if (error.response?.data?.error) {
+  //       errorMessage = error.response.data.error;
+  //     }
+  //     alert(`Hubo un error al intentar editar la nota. ${errorMessage}`);
+  //   }
+  // }
+
   return (
     // <div className="fixed inset-20 bg-slate-200 shadow-lg shadow-slate-500/50">
     <div>
       <div className="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
         Editar nota
       </div>
-      <form action="" onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmitWithNoDispatch}>
         <div className="inside-form-container flex-col mx-3">
           <div className="comentario-input">
             <div className="flex items-center gap-3 mb-3 w-full">

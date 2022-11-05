@@ -35,11 +35,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
         },
       },
       theme: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(40),
         allowNull: true,
       },
       comment: {
-        type: DataTypes.STRING(900),
+        type: DataTypes.STRING(250),
         allowNull: false,
       },
       importance: {
