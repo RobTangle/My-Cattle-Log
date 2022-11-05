@@ -3,7 +3,6 @@ import { header } from "../../../constants/token";
 import { URL_GET_USER_INFO } from "../../../constants/urls";
 import { setUserInfo } from "./userSlice";
 
-
 export function getUserInfo(token) {
   return async function (dispatch) {
     try {

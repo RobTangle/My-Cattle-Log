@@ -6,7 +6,7 @@ import userSlice from "../features/user/userSlice";
 export const store = configureStore({
   reducer: {
     notes: notesReducer,
-    animals: animalsSlice.reducer,
-    user: userSlice.reducer,
+    animals: animalsSlice,
+    user: userSlice,
   },
 });
