@@ -32,7 +32,12 @@ export const animalsSlice = createSlice({
   },
 });
 // Action creators are generated for each case reducer function
-export const { newAnimal, update, cleanUpdateAnimal, setNewAnimalToLoading } =
-  animalsSlice.actions;
+export const {
+  newAnimal,
+  update,
+  cleanUpdateAnimal,
+  setNewAnimalToLoading,
+  cleanNewAnimal,
+} = animalsSlice.actions;
 
 export default animalsSlice.reducer;
