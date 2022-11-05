@@ -4,7 +4,7 @@ import axios from "axios";
 import { URL } from "../../constants/urls";
 import { header } from "../../constants/token";
 import { useDispatch } from "react-redux";
-import { getNotesFromUser } from "../../redux/actions/note-actions/note-actions";
+import { getNotesFromUser } from "../../redux/features/notes";
 
 export function NoteForm() {
   const [input, setInput] = React.useState({

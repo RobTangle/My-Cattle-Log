@@ -8,7 +8,7 @@ import {
   cleanUpdatedNote,
   getNotesFromUser,
   updateNote,
-} from "../../redux/actions/note-actions/note-actions";
+} from "../../redux/features/notes";
 
 export function NoteFormEdit({ note, closeModal }) {
   const [input, setInput] = React.useState({
