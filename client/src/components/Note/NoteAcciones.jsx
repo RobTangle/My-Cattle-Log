@@ -2,11 +2,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { ModalEdit } from "../Modal/ModalEdit";
+import { NoteModalEdit } from "./NoteModalEdit";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 import { BiEditAlt } from "react-icons/bi";
-import { MdDeleteOutline } from "react-icons/md";
 import {
   deleteNote,
   getNotesFromUser,
@@ -70,7 +69,7 @@ export function NoteAcciones({ note }) {
       >
         {/* <MdDeleteOutline /> */} X
       </button>
-      <ModalEdit show={showValue} setShowValue={setShowValue} animal={note} />
+      <NoteModalEdit show={showValue} setShowValue={setShowValue} note={note} />
     </div>
   );
 }
