@@ -8,7 +8,7 @@ import { cleanNewAnimal } from "../../redux/actions/actions";
 import "./createNewAnimal.css";
 
 export function CreateNewAnimal() {
-  const newAnimalState = useSelector((state) => state.newAnimal);
+  const newAnimalState = useSelector((state) => state.animals.newAnimal);
   const dispatch = useDispatch();
 
   React.useEffect(() => {

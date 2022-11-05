@@ -6,7 +6,7 @@ import loading from "../../assets/loading.gif";
 import { cleanUpdatedNote } from "../../redux/features/notes";
 
 export function NoteModalEdit(props) {
-  const updatedNote = useSelector((state) => state.updatedNote);
+  const updatedNote = useSelector((state) => state.notes.updatedNote);
   const dispatch = useDispatch();
 
   React.useEffect(() => {

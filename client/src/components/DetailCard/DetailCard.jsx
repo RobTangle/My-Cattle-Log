@@ -22,12 +22,7 @@ export default function DetailCard({ animal }) {
       imagesParsed.push(image);
     }
   });
-  console.log("IMAGES PARSED = ", imagesParsed);
 
-  console.log(
-    "🚀 ~ file: DetailCard.jsx ~ line 7 ~ DetailCard ~ images",
-    images
-  );
   const [index, setIndex] = React.useState(0);
   const img = imagesParsed[index];
 

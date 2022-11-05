@@ -14,7 +14,7 @@ export function SearchBar() {
     inputValue: "",
   });
 
-  const fetchedAnimalsState = useSelector((state) => state.fetchedAnimals);
+  const fetchedAnimalsState = useSelector((state) => state.animals.fetchedAnimals);
 
   function handleChange(e) {
     setInput({

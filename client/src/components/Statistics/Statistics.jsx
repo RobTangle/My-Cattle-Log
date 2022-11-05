@@ -20,7 +20,7 @@ import loadingGif from "../../assets/loading.gif";
 export function Statistics() {
   const token = localStorage.getItem("tokenCattleTracker");
   const dispatch = useDispatch();
-  const statsState = useSelector((state) => state.stats);
+  const statsState = useSelector((state) => state.animals.stats);
 
   const [filters, setFilters] = useState({
     races: "",

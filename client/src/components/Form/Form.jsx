@@ -31,7 +31,7 @@ export function Form(props) {
     dispatch(animalActions.getTypesOfAnimalsAllowed());
   }, [dispatch]);
 
-  const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
+  const typesOfAnimalsState = useSelector((state) => state.animals.typesOfAnimals);
   const accessToken = localStorage.getItem("tokenCattleTracker");
 
   // HANDLE FUNCTIONS:

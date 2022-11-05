@@ -4,11 +4,7 @@ import axios from "axios";
 import { URL } from "../../constants/urls";
 import { header } from "../../constants/token";
 import { useDispatch } from "react-redux";
-import {
-  cleanUpdatedNote,
-  getNotesFromUser,
-  updateNote,
-} from "../../redux/features/notes";
+import { getNotesFromUser } from "../../redux/features/notes";
 
 export function NoteFormEdit({ note, closeModal }) {
   const [input, setInput] = React.useState({
