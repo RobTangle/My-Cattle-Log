@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { header } from "../../constants/token";
+import { URL_UPDATE_ANIMAL } from "../../constants/urls";
 import * as animalActions from "../../redux/actions/animal-actions/animal-actions";
 
 export function FormEdit(props) {
@@ -40,6 +42,35 @@ export function FormEdit(props) {
     setLocalState({ ...localState, [e.target.name]: e.target.value });
   }
 
+  async function handleSubmitWithNoDispatch(e) {
+    e.preventDefault();
+    console.log(
+      `handleSubmitWithNoDispatch invocado. localState: `,
+      localState
+    );
+    //HACER JS VALIDATIONS...
+    try {
+      const response = await axios.put(
+        URL_UPDATE_ANIMAL,
+        localState,
+        header(accessToken)
+      );
+      if (response.status >= 200 && response.status < 210) {
+        alert("Animal editado correctamente.");
+        // setLocalState({
+        // })
+        dispatch(animalActions.getAllAnimals(accessToken));
+      }
+    } catch (error) {
+      console.log(`Error en el handleSubmitWithNoDispatch`, error);
+      let errorMessage = error.message;
+      if (error.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      }
+      alert(`Hubo un error al intentar crear la nota. ${errorMessage}`);
+    }
+  }
+
   function handleSubmit(e) {
     console.log(`handleSubmit invocado. localState: `, localState);
     e.preventDefault();
@@ -74,7 +105,7 @@ export function FormEdit(props) {
   return (
     <div className="form-modal">
       <h2>Editar animal...</h2>
-      <form action="" onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmitWithNoDispatch}>
         {/* <fieldset className="form-fieldset"> */}
 
         <div className="inside-form-container">

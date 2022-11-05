@@ -1,9 +1,11 @@
 import React from "react";
-
+import axios from "axios";
+import { URL_UPDATE_ANIMAL, URL_POST_ANIMAL } from "../../constants/urls";
 import { useDispatch, useSelector } from "react-redux";
 import * as animalActions from "../../redux/actions/animal-actions/animal-actions";
 
 import InputForm from "./InputForm";
+import { header } from "../../constants/token";
 
 // import loadingGIF from "../assets";
 
@@ -25,7 +27,6 @@ export function FormMdlzd({ closeModal, animal }) {
     is_pregnant: animal?.is_pregnant || "",
     delivery_date: animal?.delivery_date || "",
   });
-  console.log("🚀 ~ file: Form.jsx ~ line 26 ~ Form ~ localState", localState);
 
   const dispatch = useDispatch();
 
@@ -75,17 +76,47 @@ export function FormMdlzd({ closeModal, animal }) {
     );
     formAdaptativeTitle = "Nuevo animal";
     formAdaptativeSubmitButton = "Registrar animal";
-    function handleSubmitNewAnimal(e) {
-      console.log(`handleSubmitNewAnimal invocado. localState: `, localState);
+
+    async function handleSubmitNewAnimalWithNoDispatch(e) {
       e.preventDefault();
+      console.log(
+        `handleSubmitNewAnimalWithNoDispatch invocado. localState: `,
+        localState
+      );
       //HACER JS VALIDATIONS...
-      dispatch(animalActions.setNewAnimalToLoading());
-      dispatch(animalActions.createNewAnimal(localState, accessToken));
-      setTimeout(() => {
-        dispatch(animalActions.getAllAnimals(accessToken));
-      }, 500);
+      try {
+        const response = await axios.post(
+          URL_POST_ANIMAL,
+          localState,
+          header(accessToken)
+        );
+        if (response.status >= 200 && response.status < 210) {
+          alert(`Animal con ID ${localState?.id_senasa} creado exitosamente.`);
+          // setLocalState({
+          // })
+          dispatch(animalActions.getAllAnimals(accessToken));
+        }
+      } catch (error) {
+        console.log(`Error en el handleSubmitNewAnimalWithNoDispatch`, error);
+        let errorMessage = error.message;
+        if (error.response?.data?.error) {
+          errorMessage = error.response.data.error;
+        }
+        alert(`Hubo un error al intentar registrar el animal. ${errorMessage}`);
+      }
     }
-    handleSubmit = handleSubmitNewAnimal;
+    handleSubmit = handleSubmitNewAnimalWithNoDispatch;
+    // function handleSubmitNewAnimal(e) {
+    //   console.log(`handleSubmitNewAnimal invocado. localState: `, localState);
+    //   e.preventDefault();
+    //   //HACER JS VALIDATIONS...
+    //   dispatch(animalActions.setNewAnimalToLoading());
+    //   dispatch(animalActions.createNewAnimal(localState, accessToken));
+    //   setTimeout(() => {
+    //     dispatch(animalActions.getAllAnimals(accessToken));
+    //   }, 500);
+    // }
+    // handleSubmit = handleSubmitNewAnimal;
   } else {
     if (animal) {
       console.log(
@@ -93,17 +124,47 @@ export function FormMdlzd({ closeModal, animal }) {
       );
       formAdaptativeTitle = "Editar animal";
       formAdaptativeSubmitButton = "Guardar";
-      function handleSubmitEditAnimal(e) {
-        console.log(`handleSubmit invocado. localState: `, localState);
+      // function handleSubmitEditAnimal(e) {
+      //   console.log(`handleSubmit invocado. localState: `, localState);
+      //   e.preventDefault();
+      //   //HACER JS VALIDATIONS...
+      //   dispatch(animalActions.setUpdateAnimalToLoading());
+      //   dispatch(animalActions.updateAnimal(localState, accessToken));
+      //   setTimeout(() => {
+      //     dispatch(animalActions.getAllAnimals(accessToken));
+      //   }, 500);
+      // }
+      async function handleSubmitWithNoDispatch(e) {
         e.preventDefault();
+        console.log(
+          `handleSubmitWithNoDispatch invocado. localState: `,
+          localState
+        );
         //HACER JS VALIDATIONS...
-        dispatch(animalActions.setUpdateAnimalToLoading());
-        dispatch(animalActions.updateAnimal(localState, accessToken));
-        setTimeout(() => {
-          dispatch(animalActions.getAllAnimals(accessToken));
-        }, 500);
+        try {
+          const response = await axios.put(
+            URL_UPDATE_ANIMAL,
+            localState,
+            header(accessToken)
+          );
+          if (response.status >= 200 && response.status < 210) {
+            alert("Animal editado correctamente.");
+            // setLocalState({
+            // })
+            dispatch(animalActions.getAllAnimals(accessToken));
+          }
+        } catch (error) {
+          console.log(`Error en el handleSubmitWithNoDispatch`, error);
+          let errorMessage = error.message;
+          if (error.response?.data?.error) {
+            errorMessage = error.response.data.error;
+          }
+          alert(
+            `Hubo un error al intentar editar el registro. ${errorMessage}`
+          );
+        }
       }
-      handleSubmit = handleSubmitEditAnimal;
+      handleSubmit = handleSubmitWithNoDispatch;
     }
   }
 
