@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   GET_ALL_ANIMALS,
 
-  CLEAN_NEW_ANIMAL,
   CLEAN_PREGNANT_ASC,
   CLEAN_STATS,
   CLEAR_FETCHED_ANIMALS,
@@ -31,18 +30,6 @@ import { header } from "../../../constants/token";
 
 
 
-export const cleanNewAnimal = () => {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: CLEAN_NEW_ANIMAL,
-        payload: { pure: true },
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
 
 export const getAllAnimals = (token) => {
   return async function (dispatch) {

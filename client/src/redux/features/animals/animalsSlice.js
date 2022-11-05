@@ -26,6 +26,9 @@ export const animalsSlice = createSlice({
     setNewAnimalToLoading: (state) => {
       state.newAnimal = { loading: true };
     },
+    cleanNewAnimal: (state) => {
+      state.newAnimal = { pure: true };
+    }
   },
 });
 // Action creators are generated for each case reducer function
