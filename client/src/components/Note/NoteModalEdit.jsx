@@ -10,8 +10,8 @@ export function NoteModalEdit(props) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    console.log(`useEffect de ModalEdit...`);
-    // dispatch(cleanUpdateAnimal());
+    console.log(`useEffect de NoteModalEdit...`);
+    // dispatch(cleanUpdateNote());
   }, []);
 
   if (!props.show) {
