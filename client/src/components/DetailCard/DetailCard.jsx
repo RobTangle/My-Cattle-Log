@@ -1,9 +1,20 @@
 import React from "react";
 import DetailDiv from "./DetailDiv";
 import ImgDetail from "./ImgDetail";
+import { useDispatch } from "react-redux";
+import { resetDetail } from "../../redux/actions/animal-actions/animal-actions";
 
 export default function DetailCard({ animal }) {
   const images = [animal?.image_1, animal?.image_2, animal?.image_3];
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    function cleanDetailState() {
+      dispatch(resetDetail());
+    }
+    return cleanDetailState();
+  }, []);
 
   const imagesParsed = [];
   images.forEach((image) => {
