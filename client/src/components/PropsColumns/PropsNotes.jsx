@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { AnimalCard } from "../AnimalCard/AnimalCard";
 import { NoteAcciones } from "../Note/NoteAcciones";
 import { Pagination } from "../Pagination/Pagination";
@@ -9,6 +10,13 @@ export function PropsNotes({ notes }) {
   const lastOnPage = page * showPerPage;
   const firstOnPage = lastOnPage - showPerPage;
   const currentNotes = notes.slice(firstOnPage, lastOnPage);
+
+  const notesState = useSelector((state) => state.notes?.allNotes);
+
+  React.useEffect(() => {
+    console.log("PropsNotes useEffect");
+  }, [notesState]);
+
   function pagination(pageNumber) {
     setPage(pageNumber);
   }
