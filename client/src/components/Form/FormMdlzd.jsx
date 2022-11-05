@@ -193,7 +193,7 @@ export function FormMdlzd({ closeModal, animal }) {
   return (
     // <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
     // <div className={classNameAdaptable}>
-    <div>
+    <div className="overflow-auto">
       <h2 className="text-green font-sans text-xl">{formAdaptativeTitle}</h2>
       <form action="" onSubmit={handleSubmit}>
         <div className="inside-form-container">
