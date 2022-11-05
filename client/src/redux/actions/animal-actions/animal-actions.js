@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
   GET_ALL_ANIMALS,
-  CLEAN_UPDATE_ANIMAL,
+
   CLEAN_NEW_ANIMAL,
   CLEAN_PREGNANT_ASC,
   CLEAN_STATS,
@@ -14,7 +14,7 @@ import {
   SET_STATS_TO_LOADING,
   GET_PREGNANT_ASC,
   SET_PREGNANT_ASC_TO_LOADING,
-  SET_NEW_ANIMAL_TO_LOADING,
+
   SET_USER_ANIMALS_TO_LOADING,
   SEARCH_QUERY,
   GET_DETAILS,
@@ -30,22 +30,6 @@ import {
 import { header } from "../../../constants/token";
 
 
-export const setNewAnimalToLoading = () => {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: SET_NEW_ANIMAL_TO_LOADING,
-        payload: { loading: true },
-      });
-    } catch (error) {
-      console.log(`Error en setNewAnimalToLoading. ${error.message}`);
-      return dispatch({
-        type: SET_NEW_ANIMAL_TO_LOADING,
-        payload: { error: error.message },
-      });
-    }
-  };
-};
 
 export const cleanNewAnimal = () => {
   return async function (dispatch) {

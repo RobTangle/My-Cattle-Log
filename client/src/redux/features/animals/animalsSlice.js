@@ -22,10 +22,14 @@ export const animalsSlice = createSlice({
     },
     cleanUpdateAnimal: (state) => {
       state.updatedAnimal = { pure: true };
-    }
+    },
+    setNewAnimalToLoading: (state) => {
+      state.newAnimal = { loading: true };
+    },
   },
 });
 // Action creators are generated for each case reducer function
-export const { newAnimal, update, cleanUpdateAnimal } = animalsSlice.actions;
+export const { newAnimal, update, cleanUpdateAnimal, setNewAnimalToLoading } =
+  animalsSlice.actions;
 
 export default animalsSlice.reducer;
