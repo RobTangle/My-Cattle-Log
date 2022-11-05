@@ -30,7 +30,7 @@ function checkTheme(themeFromReq: any): string | undefined {
   if (isFalsyArgument(themeFromReq)) {
     return undefined;
   }
-  if (isStringBetween1AndXCharsLong(30, themeFromReq)) {
+  if (isStringBetween1AndXCharsLong(40, themeFromReq)) {
     return themeFromReq;
   }
   throw new Error(`Error en aux fn checkTheme.`);
@@ -42,7 +42,7 @@ function checkComment(commentFromReq: any): string {
       `Error en fn aux checkComment. El comentario no puede ser falsy.`
     );
   }
-  if (isStringBetween1AndXCharsLong(900, commentFromReq)) {
+  if (isStringBetween1AndXCharsLong(250, commentFromReq)) {
     return commentFromReq;
   }
   throw new Error(`Error en aux fn checkComment`);
