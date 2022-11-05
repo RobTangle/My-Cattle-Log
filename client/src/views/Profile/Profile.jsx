@@ -49,15 +49,6 @@ export const Profile = () => {
             </h1>
             <div>
               <img
-                // src={
-                //   userInfoState?.profile_img
-                //     ? userInfoState.profile_img
-                //     : "https://thumbs.dreamstime.com/t/farmer-icon-badge-style-one-farm-collection-icon-can-be-used-ui-ux-farmer-icon-badge-style-one-farm-collection-124009969.jpg"
-                // }
-                // src={
-                //   user?.picture ||
-                //   "https://thumbs.dreamstime.com/t/farmer-icon-badge-style-one-farm-collection-icon-can-be-used-ui-ux-farmer-icon-badge-style-one-farm-collection-124009969.jpg"
-                // }
                 src={
                   "https://thumbs.dreamstime.com/t/farmer-icon-badge-style-one-farm-collection-icon-can-be-used-ui-ux-farmer-icon-badge-style-one-farm-collection-124009969.jpg"
                 }
