@@ -23,7 +23,7 @@ import {
   RESET_DETAIL,
 } from "../types";
 import {
-  POST_ANIMAL,
+  URL_POST_ANIMAL,
   URL,
   URL_GET_TYPES_OF_ANIMALS,
   URL_GET_STATS,
@@ -34,7 +34,7 @@ import { header } from "../../../constants/token";
 export const createNewAnimal = (obj, token) => {
   return async function (dispatch) {
     try {
-      let response = await axios.post(POST_ANIMAL, obj, header(token));
+      let response = await axios.post(URL_POST_ANIMAL, obj, header(token));
       return dispatch({ type: CREATE_NEW_ANIMAL, payload: response.data });
     } catch (error) {
       console.log(`Error en action createAnimal. ${error.message}`);
