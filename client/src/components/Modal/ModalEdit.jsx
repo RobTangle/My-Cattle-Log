@@ -24,7 +24,7 @@ export function ModalEdit(props) {
   }
 
   return (
-    <div className="w-full z-50 bg-white fixed inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto overflow-auto">
+    <div className="w-full z-50 bg-white fixed inset-0 px-3 py-5  my-3 drop-shadow-lg  max-w-xl mx-auto overflow-auto">
       {updatedAnimal.pure ? (
         <FormMdlzd animal={props.animal} closeModal={closeModal} />
       ) : null}
