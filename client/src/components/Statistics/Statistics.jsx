@@ -52,7 +52,7 @@ export function Statistics() {
         <NavBar />
         <div className="px-2 mt-12 font-sans text-gray">
           <h1 className="text-green text-3xl font-semibold my-3">Dashboard</h1>
-          <div>
+          <div className="lg:flex flex-col justify-center items-center">
             <img src={loadingGif} alt="loading gif" />
           </div>
         </div>
