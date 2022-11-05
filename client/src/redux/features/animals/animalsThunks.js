@@ -1,7 +1,7 @@
 import axios from "axios";
 import { header } from "../../../constants/token";
 import { URL, URL_GET_STATS, URL_GET_TYPES_OF_ANIMALS, URL_POST_ANIMAL, URL_SEARCH_QUERY } from "../../../constants/urls";
-import { newAnimal, searchedAnimal, setAllAnimals, setDeleted, setPregnant, setStats, setTypeOfAnimals, update } from "./animalsSlice";
+import { newAnimal, searchedAnimal, setAllAnimals, setDeleted, setDetail, setPregnant, setStats, setTypeOfAnimals, update } from "./animalsSlice";
 
 export const createNewAnimal = (obj, token) => {
   return async function (dispatch) {
@@ -106,3 +106,12 @@ export function getPregnantAsc(token) {
     }
   };
 }
+
+export const getAnimalDetail = (id, token) => async (dispatch) => {
+  try {
+    const response = await axios.get(URL + "animal/id/" + id, header(token));
+    return dispatch(setDetail(response.data));
+  } catch (error) {
+    return dispatch(setDetail({ error: error.message }));
+  }
+};
