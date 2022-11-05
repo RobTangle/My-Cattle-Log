@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getStats } from "../../redux/features/animals";
-import { getUserInfo } from "../../redux/actions/user-actions/user-actions";
+import { getUserInfo } from "../../redux/features/user";
 import { useNavigate } from "react-router-dom";
 import { NoteComponent } from "../../components/Note/NoteComponent";
 
@@ -11,12 +11,8 @@ export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userInfoState = useSelector((state) => state.userInfo);
+  const userInfoState = useSelector((state) => state.user.userInfo);
   const token = localStorage.getItem("tokenCattleTracker");
-
-  // const [showNoteForm, setShowNoteForm] = React.useState({
-  //   status: true,
-  // });
 
   React.useEffect(() => {
     dispatch(getUserInfo(token));
@@ -26,7 +22,7 @@ export const Profile = () => {
     console.log(`handleGoToLogin disparada. Navegando a "/"...`);
     navigate("/");
   }
-
+  //eslint-disable-next-line
   function dispatchGetStats() {
     console.log(`dispatchGetStats invocada...`);
     dispatch(getStats(token));
@@ -65,7 +61,7 @@ export const Profile = () => {
             </div>
             <div className="flex items-center gap-3">
               <p className="text-gray font-semibold">User Id </p>
-              <p>{userInfoState.id}</p>
+              <p>{userInfoState?.id}</p>
             </div>
             {/* <button
               type="button"
