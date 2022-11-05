@@ -25,7 +25,7 @@ export function NoteModalEdit(props) {
   }
 
   return (
-    <div>
+    <div className="w-full z-50 bg-white fixed inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto">
       {/* <div className="absolute fixed top-10 left-0 right-0 bg-white/95"> */}
       <div>
         {updatedNote.pure ? (

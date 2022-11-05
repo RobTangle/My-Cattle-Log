@@ -48,7 +48,7 @@ export function NoteFormEdit({ note, closeModal }) {
 
   return (
     // <div className="fixed inset-20 bg-slate-200 shadow-lg shadow-slate-500/50">
-    <div className="w-full z-50 bg-white fixed inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto">
+    <div>
       <div className="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
         Editar nota
       </div>
@@ -108,7 +108,7 @@ export function NoteFormEdit({ note, closeModal }) {
                 type="button"
                 onClick={closeModal}
               >
-                Cerrar Modal
+                Cerrar
               </button>
             </div>
           </div>
