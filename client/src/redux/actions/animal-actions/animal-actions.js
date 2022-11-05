@@ -12,8 +12,7 @@ import {
   SET_STATS_TO_LOADING,
   GET_PREGNANT_ASC,
   SET_PREGNANT_ASC_TO_LOADING,
-  SET_USER_ANIMALS_TO_LOADING,
-  SEARCH_QUERY,
+
   GET_DETAILS,
   RESET_DETAIL,
 } from "../types";
@@ -21,72 +20,11 @@ import {
   URL,
   URL_GET_TYPES_OF_ANIMALS,
   URL_GET_STATS,
-  URL_SEARCH_QUERY,
+
 } from "../../../constants/urls";
 import { header } from "../../../constants/token";
 
 
-
-export function searchQuery(value, token) {
-  return async function (dispatch) {
-    try {
-      console.log("disparando get a la query.");
-      console.log("value = ", value);
-      const response = await axios.get(
-        URL_SEARCH_QUERY + `?value=${value}`,
-        header(token)
-      );
-      return dispatch({
-        type: SEARCH_QUERY,
-        payload: { result: [...response.data], status: { fetched: true } },
-      });
-    } catch (error) {
-      return dispatch({
-        type: SEARCH_QUERY,
-        payload: { result: [], status: { error: error.message } },
-      });
-    }
-  };
-}
-
-export function setFetchedAnimalsToLoading() {
-  return async function (dispatch) {
-    try {
-      console.log("Seting fetchedAnimals to loading...");
-      return dispatch({
-        type: SET_FETCHED_ANIMALS_TO_LOADING,
-        payload: { status: { loading: true } },
-      });
-    } catch (error) {
-      return dispatch({
-        type: SET_FETCHED_ANIMALS_TO_LOADING,
-        payload: { result: [], status: { error: error.message } },
-      });
-    }
-  };
-}
-
-export function clearFetchedAnimals() {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: CLEAR_FETCHED_ANIMALS,
-        payload: {
-          result: [],
-          status: { pure: true },
-        },
-      });
-    } catch (error) {
-      return dispatch({
-        type: SET_FETCHED_ANIMALS_TO_LOADING,
-        payload: {
-          result: [],
-          status: { error: error.message },
-        },
-      });
-    }
-  };
-}
 
 export function deleteAnimal(id, token) {
   return async function (dispatch) {

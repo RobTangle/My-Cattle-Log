@@ -9,6 +9,10 @@ const initialState = {
   pregnant: { pure: true },
   detail: { pure: true },
   userAnimals: [],
+  fetchedAnimals: {
+    status: { pure: true },
+    result: [],
+  },
 };
 
 export const animalsSlice = createSlice({
@@ -36,6 +40,18 @@ export const animalsSlice = createSlice({
     setAllAnimalsToLoading: (state) => {
       state.userAnimals = { loading: true };
     },
+    searchedAnimal: (state, action) => {
+      state.fetchedAnimals = action.payload;
+    },
+    setFetchedAnimalsToLoading: (state) => {
+      state.fetchedAnimals = { status: { loading: true } };
+    },
+    clearFetchedAnimals: (state) => {
+      state.fetchedAnimals = { status: { pure: true }, result: [] };
+    },
+    setDeleted: (state, action) => {
+      state.deletedAnimal = action.payload;
+    },
   },
 });
 // Action creators are generated for each case reducer function
@@ -47,6 +63,10 @@ export const {
   cleanNewAnimal,
   setAllAnimals,
   setAllAnimalsToLoading,
+  searchedAnimal,
+  setFetchedAnimalsToLoading,
+  clearFetchedAnimals,
+  setDeleted,
 } = animalsSlice.actions;
 
 export default animalsSlice.reducer;

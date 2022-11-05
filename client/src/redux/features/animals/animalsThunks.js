@@ -1,7 +1,7 @@
 import axios from "axios";
 import { header } from "../../../constants/token";
-import { URL, URL_POST_ANIMAL } from "../../../constants/urls";
-import { newAnimal, setAllAnimals, update } from "./animalsSlice";
+import { URL, URL_POST_ANIMAL, URL_SEARCH_QUERY } from "../../../constants/urls";
+import { newAnimal, searchedAnimal, setAllAnimals, setDeleted, update } from "./animalsSlice";
 
 export const createNewAnimal = (obj, token) => {
   return async function (dispatch) {
@@ -35,3 +35,38 @@ export const getAllAnimals = (token) => {
     }
   };
 };
+
+export function searchQuery(value, token) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        URL_SEARCH_QUERY + `?value=${value}`,
+        header(token)
+      );
+      return dispatch(
+        searchedAnimal({
+          result: [...response.data],
+          status: { fetched: true },
+        })
+      );
+    } catch (error) {
+      return dispatch(
+        searchedAnimal({ result: [], status: { error: error.message } })
+      );
+    }
+  };
+}
+
+export function deleteAnimal(id, token) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        URL + "animal/delete/" + id,
+        header(token)
+      );
+      return dispatch(setDeleted(response.data));
+    } catch (error) {
+      return dispatch(setDeleted({ error: error.message }));
+    }
+  };
+}
