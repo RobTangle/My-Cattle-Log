@@ -11,8 +11,7 @@ export function Details() {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
-  const animal = useSelector((state) => state.detail);
-  console.log("🚀 ~ file: Details.jsx ~ line 13 ~ Details ~ animal", animal)
+  const animal = useSelector((state) => state.animals.detail);
   React.useEffect(() => {
     dispatch(getAnimalDetail(id, token));
     return () => {

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { NoteComponent } from "../../components/Note/NoteComponent";
 
 export const Profile = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const {  isAuthenticated, isLoading } = useAuth0();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userInfoState = useSelector((state) => state.user.userInfo);
@@ -31,8 +31,6 @@ export const Profile = () => {
   if (isLoading) {
     return <div>Loading ...</div>;
   }
-  console.log("user = ", user);
-  console.log("userInfoState = ", userInfoState);
 
   return (
     <div className="max-w-7xl mx-auto">
