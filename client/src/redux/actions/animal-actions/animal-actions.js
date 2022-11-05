@@ -27,44 +27,6 @@ import { header } from "../../../constants/token";
 
 
 
-
-export function getPregnantAsc(token) {
-  console.log(`Accionando getPregnantAsc`);
-  return async function (dispatch) {
-    try {
-      const response = await axios.get(
-        URL + "animal/isPregnant?status=true&order=ASC",
-        header(token)
-      );
-      return dispatch({
-        type: GET_PREGNANT_ASC,
-        payload: response.data,
-      });
-    } catch (error) {
-      return dispatch({
-        type: GET_PREGNANT_ASC,
-        payload: { error: error.message },
-      });
-    }
-  };
-}
-
-export function setPregnantAscToLoading() {
-  return async function (dispatch) {
-    try {
-      dispatch({
-        type: SET_PREGNANT_ASC_TO_LOADING,
-        payload: { loading: true },
-      });
-    } catch (error) {
-      dispatch({
-        type: SET_PREGNANT_ASC_TO_LOADING,
-        payload: { error: error.message },
-      });
-    }
-  };
-}
-
 export function cleanPregnantAsc() {
   return async function (dispatch) {
     try {
