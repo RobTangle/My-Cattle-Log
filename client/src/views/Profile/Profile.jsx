@@ -43,8 +43,10 @@ export const Profile = () => {
       <NavBar />
       <div className="w-full mx-auto max-w-7xl px-8 mt-16 md:mt-5">
         {isAuthenticated && (
-          <div className="font-sans text-gray">
-            <h2 className="text-green text-2xl font-semibold">Mi perfil</h2>
+          <div className="px-0 mt-12 font-sans text-gray">
+            <h1 className="text-green text-3xl font-semibold my-3">
+              Mi perfíl
+            </h1>
             <div>
               <img
                 // src={
