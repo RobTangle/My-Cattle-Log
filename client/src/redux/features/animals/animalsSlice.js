@@ -52,6 +52,12 @@ export const animalsSlice = createSlice({
     setDeleted: (state, action) => {
       state.deletedAnimal = action.payload;
     },
+    setUpdateAnimalToLoading: (state) => {
+      state.updatedAnimal = { loading: true };
+    },
+    setTypeOfAnimals: (state, action) => {
+      state.typesOfAnimals = action.payload;
+    },
   },
 });
 // Action creators are generated for each case reducer function
@@ -67,6 +73,8 @@ export const {
   setFetchedAnimalsToLoading,
   clearFetchedAnimals,
   setDeleted,
+  setUpdateAnimalToLoading,
+  setTypeOfAnimals,
 } = animalsSlice.actions;
 
 export default animalsSlice.reducer;

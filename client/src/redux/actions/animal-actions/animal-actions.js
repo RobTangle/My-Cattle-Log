@@ -26,63 +26,7 @@ import { header } from "../../../constants/token";
 
 
 
-export function deleteAnimal(id, token) {
-  return async function (dispatch) {
-    try {
-      const response = await axios.delete(
-        URL + "animal/delete/" + id,
-        header(token)
-      );
-      return dispatch({
-        type: DELETE_ANIMAL,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.log(`Error en action creator deleteAnimal`);
-      return dispatch({
-        type: DELETE_ANIMAL,
-        payload: { error: error.message },
-      });
-    }
-  };
-}
 
-export function setUpdateAnimalToLoading() {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: SET_UPDATE_ANIMAL_TO_LOADING,
-        payload: { loading: true },
-      });
-    } catch (error) {
-      return dispatch({
-        type: SET_UPDATE_ANIMAL_TO_LOADING,
-        payload: { error: error.message },
-      });
-    }
-  };
-}
-
-export function getTypesOfAnimalsAllowed() {
-  return async function (dispatch) {
-    try {
-      console.log("Buscando tipos de animales permitidos...");
-      const response = await axios.get(URL_GET_TYPES_OF_ANIMALS);
-      const typesOfAnimals = response.data;
-      console.log(`Tipos de animales permitidos: `, typesOfAnimals);
-      return dispatch({
-        type: GET_TYPES_OF_ANIMALS,
-        payload: typesOfAnimals,
-      });
-    } catch (error) {
-      console.log(error.message);
-      return dispatch({
-        type: GET_TYPES_OF_ANIMALS,
-        payload: { error: error.message },
-      });
-    }
-  };
-}
 
 export function getStats(token) {
   return async function (dispatch) {
