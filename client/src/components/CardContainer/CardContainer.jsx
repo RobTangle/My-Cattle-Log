@@ -9,14 +9,11 @@ import loading from "../../assets/loading.gif";
 import { PropsColumns } from "../PropsColumns/PropsColumns";
 
 export function CardContainer(props) {
-  const userAnimalsState = useSelector((state) => state.userAnimals);
+  const userAnimalsState = useSelector((state) => state.animals.userAnimals);
   const dispatch = useDispatch();
   const tokenAccess = localStorage.getItem("tokenCattleTracker");
 
   React.useEffect(() => {
-    console.log(`en el useEffect`);
-    console.log(`TOKEN ACCESS = `);
-    console.log(tokenAccess);
     dispatch(setUserAnimalsToLoading());
     dispatch(getAllAnimals(tokenAccess));
   }, [dispatch, tokenAccess]);
