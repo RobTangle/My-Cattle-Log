@@ -1,9 +1,20 @@
 import React from "react";
 import DetailDiv from "./DetailDiv";
 import ImgDetail from "./ImgDetail";
+import { useDispatch } from "react-redux";
+import { resetDetail } from "../../redux/actions/animal-actions/animal-actions";
 
 export default function DetailCard({ animal }) {
   const images = [animal?.image_1, animal?.image_2, animal?.image_3];
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    function cleanDetailState() {
+      dispatch(resetDetail());
+    }
+    return cleanDetailState();
+  }, []);
 
   const imagesParsed = [];
   images.forEach((image) => {
@@ -101,8 +112,21 @@ export default function DetailCard({ animal }) {
         {animal?.comments ? (
           <DetailDiv text="Comentarios" value={animal.comments} />
         ) : null}
-        {animal?.is_pregnant ? (
-          <DetailDiv text="Fecha de parto" value={animal.delivery_date} />
+        {animal?.type_of_animal === "Vaca" ||
+        animal?.type_of_animal === "Vaquillona" ? (
+          <>
+            {animal?.is_pregnant ? (
+              <>
+                <DetailDiv text="Estado de embarazo" value={"Positivo"} />
+                <DetailDiv
+                  text="Fecha de parto estimada"
+                  value={animal.delivery_date}
+                />
+              </>
+            ) : (
+              <DetailDiv text="Estado de embarazo" value={"Negativo"} />
+            )}
+          </>
         ) : null}
       </div>
     </div>
