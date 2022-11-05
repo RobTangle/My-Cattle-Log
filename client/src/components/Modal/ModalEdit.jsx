@@ -1,7 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// eslint-disable-next-line
-import { FormEdit } from "../Form/FormEdit";
 import { FormMdlzd } from "../Form/FormMdlzd";
 import loading from "../../assets/loading.gif";
 import { cleanUpdateAnimal } from "../../redux/actions/animal-actions/animal-actions";
