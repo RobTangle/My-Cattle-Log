@@ -16,18 +16,10 @@ export function AnimalCard({ animal }) {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("tokenCattleTracker");
   const [showValue, setShowValue] = React.useState(false);
-  //eslint-disable-next-line
-  function handleDelete(e) {
-    // console.log(e);
-    console.log(`Eliminando animal con id ${e.target.value}`);
-    const animal_id = e.target.value;
-    console.log(animal_id);
-    dispatch(deleteAnimal(animal_id, accessToken));
-    dispatch(getAllAnimals(accessToken));
-  }
-  //eslint-disable-next-line
-  function handleClickEdit(e) {
-    console.log(`Editando animal con id ${e.target.value}`);
+
+  function showModal(e) {
+    e.preventDefault();
+    setShowValue(true);
   }
 
   function handleDeleteWithPrompt(e) {
@@ -49,11 +41,6 @@ export function AnimalCard({ animal }) {
         `No se ha eliminado al animal porque confirmPrompt == ${confirmPrompt}`
       );
     }
-  }
-
-  function showModal(e) {
-    e.preventDefault();
-    setShowValue(true);
   }
 
   return (

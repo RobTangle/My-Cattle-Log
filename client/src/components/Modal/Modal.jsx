@@ -26,7 +26,7 @@ export function Modal(props) {
   }
 
   return (
-    <div className="modal-container">
+    <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
       {newAnimalState.pure ? <FormMdlzd closeModal={closeModal} /> : null}
       {newAnimalState.loading ? (
         <div>
@@ -36,9 +36,9 @@ export function Modal(props) {
       {newAnimalState.msg ? (
         <div className="modal-response">
           {newAnimalState.msg}{" "}
-          <div>
+          {/* <div>
             <button onClick={closeModal}>X</button>
-          </div>
+          </div> */}
         </div>
       ) : null}
       {newAnimalState.error ? (
@@ -46,11 +46,6 @@ export function Modal(props) {
           <div className="modal-response-error">
             {" "}
             <p>Oops! Hubo un error: {newAnimalState.error} </p>{" "}
-            <p>
-              {" "}
-              Si es un error de conexión, por favor chequee que tiene una
-              correcta conexión a internet y vuelta a internarlo.
-            </p>
           </div>
         </div>
       ) : null}
