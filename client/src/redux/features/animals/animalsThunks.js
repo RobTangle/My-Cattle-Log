@@ -1,8 +1,7 @@
 import axios from "axios";
 import { header } from "../../../constants/token";
 import { URL, URL_POST_ANIMAL } from "../../../constants/urls";
-import { newAnimal, update } from "./animalsSlice";
-
+import { newAnimal, setAllAnimals, update } from "./animalsSlice";
 
 export const createNewAnimal = (obj, token) => {
   return async function (dispatch) {
@@ -22,6 +21,17 @@ export const updateAnimal = (obj, token) => {
       return dispatch(update(response.data));
     } catch (error) {
       dispatch(update({ error: "Error: " + error.response?.data?.error }));
+    }
+  };
+};
+
+export const getAllAnimals = (token) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(URL + "animal", header(token));
+      return dispatch(setAllAnimals(response.data));
+    } catch (error) {
+      return dispatch(setAllAnimals({ error: error.message }));
     }
   };
 };

@@ -1,6 +1,5 @@
 import axios from "axios";
 import {
-  GET_ALL_ANIMALS,
 
   CLEAN_PREGNANT_ASC,
   CLEAN_STATS,
@@ -13,14 +12,12 @@ import {
   SET_STATS_TO_LOADING,
   GET_PREGNANT_ASC,
   SET_PREGNANT_ASC_TO_LOADING,
-
   SET_USER_ANIMALS_TO_LOADING,
   SEARCH_QUERY,
   GET_DETAILS,
   RESET_DETAIL,
 } from "../types";
 import {
-
   URL,
   URL_GET_TYPES_OF_ANIMALS,
   URL_GET_STATS,
@@ -29,42 +26,6 @@ import {
 import { header } from "../../../constants/token";
 
 
-
-
-export const getAllAnimals = (token) => {
-  return async function (dispatch) {
-    try {
-      const response = await axios.get(URL + "animal", header(token));
-      console.log(header(token));
-      return dispatch({
-        type: GET_ALL_ANIMALS,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.log(`Error en action getAllAnimals. ${error.message}`);
-      return dispatch({
-        type: GET_ALL_ANIMALS,
-        payload: { error: error.response?.data?.error },
-      });
-    }
-  };
-};
-
-export const setUserAnimalsToLoading = () => {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: SET_USER_ANIMALS_TO_LOADING,
-        payload: { loading: true },
-      });
-    } catch (error) {
-      return dispatch({
-        type: SET_USER_ANIMALS_TO_LOADING,
-        payload: { error: error.message },
-      });
-    }
-  };
-};
 
 export function searchQuery(value, token) {
   return async function (dispatch) {

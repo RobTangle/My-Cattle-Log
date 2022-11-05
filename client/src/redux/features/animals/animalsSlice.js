@@ -8,6 +8,7 @@ const initialState = {
   stats: { pure: true },
   pregnant: { pure: true },
   detail: { pure: true },
+  userAnimals: [],
 };
 
 export const animalsSlice = createSlice({
@@ -28,7 +29,13 @@ export const animalsSlice = createSlice({
     },
     cleanNewAnimal: (state) => {
       state.newAnimal = { pure: true };
-    }
+    },
+    setAllAnimals: (state, action) => {
+      state.userAnimals = action.payload;
+    },
+    setAllAnimalsToLoading: (state) => {
+      state.userAnimals = { loading: true };
+    },
   },
 });
 // Action creators are generated for each case reducer function
@@ -38,6 +45,8 @@ export const {
   cleanUpdateAnimal,
   setNewAnimalToLoading,
   cleanNewAnimal,
+  setAllAnimals,
+  setAllAnimalsToLoading,
 } = animalsSlice.actions;
 
 export default animalsSlice.reducer;
