@@ -10,6 +10,7 @@ import { ModalEdit } from "../Modal/ModalEdit";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 import { BiEditAlt } from "react-icons/bi";
+// eslint-disable-next-line
 import { MdDeleteOutline } from "react-icons/md";
 
 export function AnimalCard({ animal }) {
@@ -33,7 +34,6 @@ export function AnimalCard({ animal }) {
     ) {
       console.log(`Eliminando animal con id ${e.target.value}`);
       const animal_id = e.target.value;
-      console.log(animal_id);
       dispatch(deleteAnimal(animal_id, accessToken));
       dispatch(getAllAnimals(accessToken));
     } else {
@@ -61,7 +61,7 @@ export function AnimalCard({ animal }) {
         value={animal?.id_senasa}
         onClick={handleDeleteWithPrompt}
       >
-        <MdDeleteOutline />
+        {/* <MdDeleteOutline value={animal?.id_senasa} /> */}X
       </button>
       <ModalEdit show={showValue} setShowValue={setShowValue} animal={animal} />
     </div>
