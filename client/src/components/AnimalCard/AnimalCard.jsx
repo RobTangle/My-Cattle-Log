@@ -4,14 +4,13 @@ import { useDispatch } from "react-redux";
 import {
   getAllAnimals,
   deleteAnimal,
-} from "../../redux/actions/animal-actions/animal-actions";
+} from "../../redux/features/animals";
 
 import { ModalEdit } from "../Modal/ModalEdit";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 import { BiEditAlt } from "react-icons/bi";
-// eslint-disable-next-line
-import { MdDeleteOutline } from "react-icons/md";
+
 
 export function AnimalCard({ animal }) {
   const dispatch = useDispatch();

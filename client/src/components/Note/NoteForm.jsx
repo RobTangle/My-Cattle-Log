@@ -4,7 +4,7 @@ import axios from "axios";
 import { URL } from "../../constants/urls";
 import { header } from "../../constants/token";
 import { useDispatch } from "react-redux";
-import { getNotesFromUser } from "../../redux/actions/note-actions/note-actions";
+import { getNotesFromUser } from "../../redux/features/notes";
 
 export function NoteForm() {
   const [input, setInput] = React.useState({
@@ -105,7 +105,7 @@ export function NoteForm() {
               text="Tema"
               value={input.theme}
             />
-            <button className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500 text-green flex items-center gap-3">
+            <button className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500  flex items-center gap-3">
               Guardar{" "}
             </button>
           </div>

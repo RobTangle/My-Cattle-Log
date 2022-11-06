@@ -10,7 +10,7 @@ export function PropsNotes({ notes }) {
   const firstOnPage = lastOnPage - showPerPage;
   const currentNotes = notes.slice(firstOnPage, lastOnPage);
 
-  const notesState = useSelector((state) => state.notes?.allNotes);
+  const notesState = useSelector((state) => state.notes.notes?.allNotes);
 
   React.useEffect(() => {
     console.log("PropsNotes useEffect");

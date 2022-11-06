@@ -8,13 +8,9 @@ import { useEffect } from "react";
 import { getAllAnimals } from "../../redux/actions/actions";
 
 export function FetchedAnimals() {
-  const fetchedAnimalsState = useSelector((state) => state.fetchedAnimals);
+  const fetchedAnimalsState = useSelector((state) => state.animals.fetchedAnimals);
   const dispatch = useDispatch();
   const token = localStorage.getItem("tokenCattleTracker");
-  console.log(
-    "🚀 ~ file: FetchedAnimals.jsx ~ line 11 ~ FetchedAnimals ~ fetchedAnimalsState",
-    fetchedAnimalsState
-  );
 
   useEffect(() => {
     dispatch(getAllAnimals(token));

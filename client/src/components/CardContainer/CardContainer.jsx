@@ -3,20 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllAnimals,
   setUserAnimalsToLoading,
-} from "../../redux/actions/animal-actions/animal-actions";
+} from "../../redux/features/animals";
 import loading from "../../assets/loading.gif";
-import { Pagination } from "../Pagination/Pagination";
+// import { Pagination } from "../Pagination/Pagination";
 import { PropsColumns } from "../PropsColumns/PropsColumns";
 
 export function CardContainer(props) {
-  const userAnimalsState = useSelector((state) => state.userAnimals);
+  const userAnimalsState = useSelector((state) => state.animals.userAnimals);
   const dispatch = useDispatch();
   const tokenAccess = localStorage.getItem("tokenCattleTracker");
 
   React.useEffect(() => {
-    console.log(`en el useEffect`);
-    console.log(`TOKEN ACCESS = `);
-    console.log(tokenAccess);
     dispatch(setUserAnimalsToLoading());
     dispatch(getAllAnimals(tokenAccess));
   }, [dispatch, tokenAccess]);

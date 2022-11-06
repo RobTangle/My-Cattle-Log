@@ -4,7 +4,7 @@ import {
   searchQuery,
   setFetchedAnimalsToLoading,
   clearFetchedAnimals,
-} from "../../redux/actions/animal-actions/animal-actions";
+} from "../../redux/features/animals";
 import { PropsColumns } from "../PropsColumns/PropsColumns";
 
 export function SearchBar() {
@@ -14,7 +14,7 @@ export function SearchBar() {
     inputValue: "",
   });
 
-  const fetchedAnimalsState = useSelector((state) => state.fetchedAnimals);
+  const fetchedAnimalsState = useSelector((state) => state.animals.fetchedAnimals);
 
   function handleChange(e) {
     setInput({
