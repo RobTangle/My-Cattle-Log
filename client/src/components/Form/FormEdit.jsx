@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { header } from "../../constants/token";
 import { URL_UPDATE_ANIMAL } from "../../constants/urls";
 import * as animalActions from "../../redux/actions/animal-actions/animal-actions";
+import axios from "axios";
 
 export function FormEdit(props) {
   console.log(props);
@@ -32,9 +33,10 @@ export function FormEdit(props) {
 
   React.useEffect(() => {
     dispatch(animalActions.getTypesOfAnimalsAllowed());
+    //eslint-disable-next-line
   }, []);
-
-  const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
+//eslint-disable-next-line
+  const typesOfAnimalsState = useSelector((state) => state.animals.typesOfAnimals);
   const accessToken = localStorage.getItem("tokenCattleTracker");
 
   // HANDLE FUNCTIONS:
@@ -70,7 +72,7 @@ export function FormEdit(props) {
       alert(`Hubo un error al intentar crear la nota. ${errorMessage}`);
     }
   }
-
+//eslint-disable-next-line
   function handleSubmit(e) {
     console.log(`handleSubmit invocado. localState: `, localState);
     e.preventDefault();

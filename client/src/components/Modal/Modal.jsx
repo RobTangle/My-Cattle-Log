@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../Form/Form";
 import { FormMdlzd } from "../Form/FormMdlzd";
 import loading from "../../assets/loading.gif";
-import { cleanNewAnimal } from "../../redux/actions/animal-actions/animal-actions";
+import { cleanNewAnimal } from "../../redux/features/animals";
 
 export function Modal(props) {
-  const newAnimalState = useSelector((state) => state.newAnimal);
+  const newAnimalState = useSelector((state) => state.animals.newAnimal);
   const dispatch = useDispatch();
 
   React.useEffect(() => {

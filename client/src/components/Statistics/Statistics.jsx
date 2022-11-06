@@ -6,7 +6,7 @@ import { FilterButtons } from "../FilterButtons.jsx/FilterButtons";
 import {
   getStats,
   setStatsToLoading,
-} from "../../redux/actions/animal-actions/animal-actions";
+} from "../../redux/features/animals";
 import { DoughnutChart } from "../../charts/DoughnutChart";
 import "./statistics.css";
 import { PieChart } from "../../charts/PieChart";
@@ -20,7 +20,7 @@ import loadingGif from "../../assets/loading.gif";
 export function Statistics() {
   const token = localStorage.getItem("tokenCattleTracker");
   const dispatch = useDispatch();
-  const statsState = useSelector((state) => state.stats);
+  const statsState = useSelector((state) => state.animals.stats);
 
   const [filters, setFilters] = useState({
     races: "",

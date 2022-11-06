@@ -2,10 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FormMdlzd } from "../Form/FormMdlzd";
 import loading from "../../assets/loading.gif";
-import { cleanUpdateAnimal } from "../../redux/actions/animal-actions/animal-actions";
+import { cleanUpdateAnimal } from "../../redux/features/animals";
 
 export function ModalEdit(props) {
-  const updatedAnimal = useSelector((state) => state.updatedAnimal);
+  const updatedAnimal = useSelector((state) => state.animals.updatedAnimal);
   const dispatch = useDispatch();
 
   React.useEffect(() => {

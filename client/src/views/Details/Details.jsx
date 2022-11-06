@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import DetailCard from "../../components/DetailCard/DetailCard";
 import { NavBar } from "../../components/NavBar/NavBar";
-import { getAnimalDetail, resetDetail } from "../../redux/actions/animal-actions/animal-actions";
+import { getAnimalDetail, resetDetail } from "../../redux/features/animals";
 
 
 export function Details() {
@@ -11,8 +11,7 @@ export function Details() {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
-  const animal = useSelector((state) => state.detail);
-  console.log("🚀 ~ file: Details.jsx ~ line 13 ~ Details ~ animal", animal)
+  const animal = useSelector((state) => state.animals.detail);
   React.useEffect(() => {
     dispatch(getAnimalDetail(id, token));
     return () => {

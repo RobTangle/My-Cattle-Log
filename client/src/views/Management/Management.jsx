@@ -24,7 +24,7 @@ export function Management() {
         {/* <h1 className="text-green text-2xl my-5">Gestión de animales</h1> */}
         <div className="">
           <button
-            className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500 text-green flex items-center gap-3"
+            className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500  flex items-center gap-3"
             onClick={showModal}
           >
             <IoMdAddCircleOutline />

@@ -1,21 +1,21 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getNotesFromUser,
-  setNotesFromUserToLoading,
-} from "../../redux/actions/note-actions/note-actions";
 import { NoteForm } from "./NoteForm";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { NoteCardContainer } from "./NoteCardContainer";
 import loadingGif from "../../assets/loading.gif";
 import { NoteFormEdit } from "./NoteFormEdit";
+import { getNotesFromUser } from "../../redux/features/notes";
 
 export function NoteComponent() {
   const accessToken = localStorage.getItem("tokenCattleTracker");
   const [showNoteForm, setShowNoteForm] = React.useState(false);
-  const notesState = useSelector((state) => state.notes);
+  const notesState = useSelector((state) => state.notes.notes);
+
   const dispatch = useDispatch();
+  //eslint-disable-next-line
   const [showEditForm, setShowEditForm] = React.useState(false);
+  //eslint-disable-next-line
   const [noteToEdit, setNoteToEdit] = React.useState({
     id: "",
     title: "",
@@ -25,11 +25,7 @@ export function NoteComponent() {
   });
 
   React.useEffect(() => {
-    console.log("UseEffect de NoteComponent");
-    dispatch(setNotesFromUserToLoading());
-    setTimeout(() => {
-      dispatch(getNotesFromUser(accessToken));
-    }, 50);
+    dispatch(getNotesFromUser(accessToken));
   }, [dispatch]);
 
   React.useEffect(() => {

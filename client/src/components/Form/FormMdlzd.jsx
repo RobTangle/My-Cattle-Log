@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { URL_UPDATE_ANIMAL, URL_POST_ANIMAL } from "../../constants/urls";
 import { useDispatch, useSelector } from "react-redux";
-import * as animalActions from "../../redux/actions/animal-actions/animal-actions";
+import * as animalActions from "../../redux/features/animals";
 
 import InputForm from "./InputForm";
 import { header } from "../../constants/token";
@@ -34,7 +34,7 @@ export function FormMdlzd({ closeModal, animal }) {
     dispatch(animalActions.getTypesOfAnimalsAllowed());
   }, [dispatch]);
 
-  const typesOfAnimalsState = useSelector((state) => state.typesOfAnimals);
+  const typesOfAnimalsState = useSelector((state) => state.animals.typesOfAnimals);
   const accessToken = localStorage.getItem("tokenCattleTracker");
 
   // HANDLE FUNCTIONS:
@@ -218,7 +218,7 @@ export function FormMdlzd({ closeModal, animal }) {
             />
           </div>
 
-          <legend className="text-gray font-semibold w-[120px] md:w-[130px] text-sm text-sm after:content-['*'] after:ml-0.5 after:text-red-500 ">
+          <legend className="text-gray font-semibold w-[120px] md:w-[130px] text-sm after:content-['*'] after:ml-0.5 after:text-red-500 ">
             Tipo de animal
           </legend>
           <div onChange={handleOnChange} className="mb-3">

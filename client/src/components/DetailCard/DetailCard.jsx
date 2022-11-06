@@ -2,7 +2,7 @@ import React from "react";
 import DetailDiv from "./DetailDiv";
 import ImgDetail from "./ImgDetail";
 import { useDispatch } from "react-redux";
-import { resetDetail } from "../../redux/actions/animal-actions/animal-actions";
+import { resetDetail } from "../../redux/features/animals";
 
 export default function DetailCard({ animal }) {
   const images = [animal?.image_1, animal?.image_2, animal?.image_3];
@@ -14,6 +14,7 @@ export default function DetailCard({ animal }) {
       dispatch(resetDetail());
     }
     return cleanDetailState();
+    //eslint-disable-next-line
   }, []);
 
   const imagesParsed = [];
@@ -22,12 +23,7 @@ export default function DetailCard({ animal }) {
       imagesParsed.push(image);
     }
   });
-  console.log("IMAGES PARSED = ", imagesParsed);
 
-  console.log(
-    "🚀 ~ file: DetailCard.jsx ~ line 7 ~ DetailCard ~ images",
-    images
-  );
   const [index, setIndex] = React.useState(0);
   const img = imagesParsed[index];
 
