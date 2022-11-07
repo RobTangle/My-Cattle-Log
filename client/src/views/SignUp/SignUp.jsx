@@ -5,7 +5,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { header } from "../../constants/token";
 import axios from "axios";
 import { REGISTER_NEW_USER } from "../../constants/urls";
-import OkSVG from "../../assets/icons8-ok.svg";
 
 export const SignUp = () => {
   const tokenAccess = localStorage.getItem("tokenCattleTracker");
@@ -63,8 +62,8 @@ export const SignUp = () => {
         </h1>
       </div>
       <p className="text-gray  text-justify  md:text-xl w-[90%] md:w-1/2 ">
-        Es tu primera vez aquí, te pedimos que completes tu perfil para
-        continuar y accede a todas las funcionalidades de la app!
+        Es tu primera vez acá, por lo que te pedimos que completes tu perfíl
+        para continuar y acceder a todas las funcionalidades de la app!
       </p>{" "}
       <br />
       <form
@@ -112,11 +111,12 @@ export const SignUp = () => {
         </button>
       </form>
       {isRegistered.error && (
-        <div>Oops! Algo salió mal. {isRegistered.error}</div>
+        <div className="flex flex-col items-center md:w-1/2 md:my-0">
+          Oops! Algo salió mal. {isRegistered.error}
+        </div>
       )}
       {isRegistered.status && (
-        <div className="submit-OK">
-          <img src={OkSVG} alt="ok message" />
+        <div className="flex flex-col items-center md:w-1/2 md:my-0">
           <h2>
             ¡Has sido registrado exitosamente! Esperamos que disfrutes de My
             Cattle Log y te sea de utilidad.

@@ -5,24 +5,12 @@ import { NoteModalEdit } from "./NoteModalEdit";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 import { BiEditAlt } from "react-icons/bi";
-import {
-  deleteNote,
-  getNotesFromUser,
-} from "../../redux/features/notes";
+import { deleteNote, getNotesFromUser } from "../../redux/features/notes";
 
 export function NoteAcciones({ note }) {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("tokenCattleTracker");
   const [showValue, setShowValue] = React.useState(false);
-  //eslint-disable-next-line
-  // function handleDelete(e) {
-  //   // console.log(e);
-  //   console.log(`Eliminando animal con id ${e.target.value}`);
-  //   const note_id = e.target.value;
-  //   console.log(note_id);
-  //   dispatch(deleteNote(note_id, accessToken));
-  //   dispatch(getNotesFromUser(accessToken));
-  // }
 
   function handleDeleteWithPrompt(e) {
     console.log(e.target);

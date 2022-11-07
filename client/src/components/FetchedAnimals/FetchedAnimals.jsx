@@ -1,5 +1,4 @@
 import React from "react";
-//eslint-disable-next-line
 import { useDispatch, useSelector } from "react-redux";
 import { AnimalCard } from "../AnimalCard/AnimalCard";
 import { PropsColumns } from "../PropsColumns/PropsColumns";
@@ -8,7 +7,9 @@ import { useEffect } from "react";
 import { getAllAnimals } from "../../redux/actions/actions";
 
 export function FetchedAnimals() {
-  const fetchedAnimalsState = useSelector((state) => state.animals.fetchedAnimals);
+  const fetchedAnimalsState = useSelector(
+    (state) => state.animals.fetchedAnimals
+  );
   const dispatch = useDispatch();
   const token = localStorage.getItem("tokenCattleTracker");
 

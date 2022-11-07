@@ -14,7 +14,6 @@ export function FilterButtons({ filtersArray, filters, setFilters, prop }) {
         ) : null}
         <div>
           {Array.isArray(filtersArray) && filtersArray.length > 0 ? (
-            // <div className="flex items-center gap-5 justify-left w-full my-5">
             <div className="flex items-center gap-5 justify-left w-full my-5 flex-wrap">
               {filtersArray.map((filter) => (
                 <button

@@ -79,21 +79,22 @@ export function Statistics() {
 
   if (statsState?.allFoundAndCount?.count === 0) {
     return (
-      <div className="px-2 mt-12 font-sans text-gray">
-        <h1 className="text-green text-3xl font-semibold my-3">Dashboard</h1>
+      <>
         <div className="max-w-7xl mx-auto ">
           <NavBar />
-          <div className="flex lg:flex flex-col justify-center items-center">
-            <h1 className="text-green text-3xl my-5">Dashboard</h1>
-            <br />
-            <div>
+          <div className="px-2 mt-12 font-sans text-gray">
+            <h1 className="text-green text-3xl font-semibold my-3">
+              Dashboard
+            </h1>
+
+            <div className="lg:flex flex-col justify-center items-center">
               <h2 className="lg:flex flex-col justify-center items-center">
                 Todavía no tienes animales cargados en la base de datos
               </h2>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
   if (statsState?.allFoundAndCount?.count > 0) {

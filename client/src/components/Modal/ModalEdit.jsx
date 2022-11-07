@@ -10,7 +10,6 @@ export function ModalEdit(props) {
 
   React.useEffect(() => {
     console.log(`useEffect de ModalEdit...`);
-    // dispatch(cleanUpdateAnimal());
   }, []);
 
   if (!props.show) {

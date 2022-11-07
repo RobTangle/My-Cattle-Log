@@ -1,8 +1,6 @@
 import React from "react";
 import { CardContainer } from "../../components/CardContainer/CardContainer";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
-// eslint-disable-next-line
-import { Form } from "../../components/Form/Form";
 import { Modal } from "../../components/Modal/Modal";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { NavBar } from "../../components/NavBar/NavBar";
@@ -21,7 +19,6 @@ export function Management() {
         <h1 className="text-green text-3xl font-semibold my-5">
           Gestión de animales
         </h1>
-        {/* <h1 className="text-green text-2xl my-5">Gestión de animales</h1> */}
         <div className="">
           <button
             className="border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500  flex items-center gap-3"

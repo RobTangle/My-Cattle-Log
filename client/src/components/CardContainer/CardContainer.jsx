@@ -29,9 +29,12 @@ export function CardContainer(props) {
         </div>
       ) : null}
       {userAnimalsState?.length === 0 ? (
-        <div>No hay ningún animal para mostrar </div>
+        <div>
+          No tienes animales cargados en la base de datos. ¡Haz click en el
+          botón "Agregar animal" para registrar tu primer animal en segundos!
+        </div>
       ) : null}
-      {Array.isArray(userAnimalsState) ? (
+      {Array.isArray(userAnimalsState) && userAnimalsState?.length > 0 ? (
         <div className="list-animals-grid">
           <PropsColumns animals={userAnimalsState} />{" "}
         </div>
