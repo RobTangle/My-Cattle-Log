@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NoteAcciones } from "./NoteAcciones";
 import { Pagination } from "../Pagination/Pagination";
+
 export function PropsNotes({ notes }) {
   const [page, setPage] = useState(1);
   const showPerPage = 4;
@@ -26,9 +27,6 @@ export function PropsNotes({ notes }) {
           <table className="w-full leading-normal">
             <thead>
               <tr>
-                {/* <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase ">
-                  Id
-                </th> */}
                 <th className="px-5 py-3 w-fit border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Título
                 </th>
@@ -56,13 +54,6 @@ export function PropsNotes({ notes }) {
             <tbody className="text-gray">
               {currentNotes?.map((note) => (
                 <tr key={Math.random()} className="text-left">
-                  {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <div className="flex items-center">
-                      <p className="text-gray-900 whitespace-no-wrap capitalize">
-                        {note?.id}
-                      </p>
-                    </div>
-                  </td> */}
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap capitalize">
                       {note?.title}

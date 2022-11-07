@@ -1,10 +1,4 @@
-// IR AL PERFIL DE USUARIO
-// IR A EL CARD CONTAINER Y MUESTRE TODOS LOS ANIMALES
-// CREAR NEW ANIMAL
-
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-//eslint-disable-next-line
 import LogoutButton from "../Logout/LogoutButton";
 import { BiMenu } from "react-icons/bi";
 import { VscClose } from "react-icons/vsc";
@@ -13,8 +7,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../Login/LoginButton";
 
 export function NavBar() {
-  //eslint-disable-next-line
-  const dispatch = useDispatch();
   const [openMenu, setOpenMenu] = useState(false);
   const { isLoading, isAuthenticated } = useAuth0();
 

@@ -46,24 +46,6 @@ export function NoteFormEdit({ note, closeModal }) {
     }
   }
 
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   console.log("Nueva nota despachada...");
-  //   try {
-  //     dispatch(updateNote(input, accessToken));
-
-  //     setTimeout(() => {
-  //       dispatch(getNotesFromUser(accessToken));
-  //     }, 100);
-  //   } catch (error) {
-  //     let errorMessage = error.message;
-  //     if (error.response?.data?.error) {
-  //       errorMessage = error.response.data.error;
-  //     }
-  //     alert(`Hubo un error al intentar editar la nota. ${errorMessage}`);
-  //   }
-  // }
-
   return (
     // <div className="fixed inset-20 bg-slate-200 shadow-lg shadow-slate-500/50">
     <div>

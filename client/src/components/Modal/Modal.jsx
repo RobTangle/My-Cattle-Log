@@ -1,7 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// eslint-disable-next-line
-import { Form } from "../Form/Form";
 import { FormMdlzd } from "../Form/FormMdlzd";
 import loading from "../../assets/loading.gif";
 import { cleanNewAnimal } from "../../redux/features/animals";
@@ -34,12 +32,7 @@ export function Modal(props) {
         </div>
       ) : null}
       {newAnimalState.msg ? (
-        <div className="modal-response">
-          {newAnimalState.msg}{" "}
-          {/* <div>
-            <button onClick={closeModal}>X</button>
-          </div> */}
-        </div>
+        <div className="modal-response">{newAnimalState.msg} </div>
       ) : null}
       {newAnimalState.error ? (
         <div className="modal-response-container">
