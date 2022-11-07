@@ -109,7 +109,7 @@ export function PropsPregnantStatistics({ animals }) {
                     </div>
                   </td>
                 </tr>
-              ))}{" "}
+              ))}
             </tbody>
           </table>
           <Pagination
