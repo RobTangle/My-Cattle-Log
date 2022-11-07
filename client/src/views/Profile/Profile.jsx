@@ -2,13 +2,12 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { useDispatch, useSelector } from "react-redux";
-import { getStats } from "../../redux/features/animals";
 import { getUserInfo } from "../../redux/features/user";
 import { useNavigate } from "react-router-dom";
 import { NoteComponent } from "../../components/Note/NoteComponent";
 
 export const Profile = () => {
-  const {  isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userInfoState = useSelector((state) => state.user.userInfo);
@@ -21,11 +20,6 @@ export const Profile = () => {
   function handleGoToLogin(e) {
     console.log(`handleGoToLogin disparada. Navegando a "/"...`);
     navigate("/");
-  }
-  //eslint-disable-next-line
-  function dispatchGetStats() {
-    console.log(`dispatchGetStats invocada...`);
-    dispatch(getStats(token));
   }
 
   if (isLoading) {
@@ -61,13 +55,6 @@ export const Profile = () => {
               <p className="text-gray font-semibold">User Id </p>
               <p>{userInfoState?.id}</p>
             </div>
-            {/* <button
-              type="button"
-              onClick={dispatchGetStats}
-              className=" border border-solid border-transparent bg-green px-3 py-1 rounded-sm text-white hover:bg-white hover:text-green hover:border-green transition-all ease-in-out duration-500"
-            >
-              Ver estadísticas
-            </button> */}
           </div>
         )}
         <NoteComponent />

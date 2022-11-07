@@ -5,7 +5,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { header } from "../../constants/token";
 import axios from "axios";
 import { REGISTER_NEW_USER } from "../../constants/urls";
-import OkSVG from "../../assets/icons8-ok.svg";
 
 export const SignUp = () => {
   const tokenAccess = localStorage.getItem("tokenCattleTracker");
@@ -118,7 +117,6 @@ export const SignUp = () => {
       )}
       {isRegistered.status && (
         <div className="flex flex-col items-center md:w-1/2 md:my-0">
-          {/* <img src={OkSVG} alt="ok message" /> */}
           <h2>
             ¡Has sido registrado exitosamente! Esperamos que disfrutes de My
             Cattle Log y te sea de utilidad.
