@@ -10,7 +10,7 @@ import {
 
 // CHECK ANIMAL :
 // This function is the main function that validates the data received in the request for a POST of a new animal or a PUT for updating an Animal.
-// It uses many other auxiliary functions to make sure all the data from the request is valid before trying to store a new instance of Animal in the Data Base.
+// It uses many other auxiliary functions to make sure all the data from the request is valid before trying to store a new Animal instance in the Data Base.
 // This function not only checks de data, but algo parses de name by forcing an toLowerCase() so the names are saved in all lower cases for a couple of different reasons regarding speed, performance and better practices.
 export function checkAnimal(bodyFromReq: any): IAnimal {
   try {
@@ -118,7 +118,7 @@ function checkWeight(argFromReq: any): number | undefined {
   throw new Error(`The weight_kg "${argFromReq}" is invalid.`);
 }
 
-// CHECK NAME: (algo forces lower cases)
+// CHECK NAME: (also forces lower cases)
 function checkName(argFromReq: any): string | undefined {
   if (isFalsyArgument(argFromReq)) {
     return undefined;
