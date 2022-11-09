@@ -85,7 +85,7 @@ export function PropsColumns({ animals }) {
                     </div>
                   </td>
                 </tr>
-              ))}{" "}
+              ))}
             </tbody>
           </table>
           <Pagination

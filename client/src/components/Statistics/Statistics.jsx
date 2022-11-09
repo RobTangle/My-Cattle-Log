@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavBar } from "../NavBar/NavBar";
 import { CardPregnantStatistics } from "../CardContainer/CardPregnantStatistics";
 import { FilterButtons } from "../FilterButtons.jsx/FilterButtons";
-import {
-  getStats,
-  setStatsToLoading,
-} from "../../redux/features/animals";
+import { getStats, setStatsToLoading } from "../../redux/features/animals";
 import { DoughnutChart } from "../../charts/DoughnutChart";
 import "./statistics.css";
 import { PieChart } from "../../charts/PieChart";
@@ -108,7 +105,6 @@ export function Statistics() {
             </h1>
 
             <div className="lg:flex flex-col justify-center items-center">
-              {/* <h1 className="text-green text-3xl my-5">Dashboard</h1> */}
               <br />
               <div className="lg:flex flex-col justify-center items-center">
                 <h2 className="text-green text-2xl my-5">Razas</h2>
