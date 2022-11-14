@@ -5,7 +5,6 @@ import DetailCard from "../../components/DetailCard/DetailCard";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { getAnimalDetail, resetDetail } from "../../redux/features/animals";
 
-
 export function Details() {
   const token = localStorage.getItem("tokenCattleTracker");
   const params = useParams();
@@ -16,13 +15,13 @@ export function Details() {
     dispatch(getAnimalDetail(id, token));
     return () => {
       dispatch(resetDetail());
-    }
-  }, [  id, token ]);
+    };
+  }, [id, token]);
 
   return (
     <div className="max-w-7xl mx-auto">
       <NavBar />
-      <h1 className="text-green text-2xl my-5">Detalle </h1>
+      <h1 className="text-green text-3xl font-semibold my-5">Detalle </h1>
       <DetailCard animal={animal} />
     </div>
   );
