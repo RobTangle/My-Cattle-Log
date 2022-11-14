@@ -1,9 +1,6 @@
-// import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { NoteModalEdit } from "./NoteModalEdit";
-import { Link } from "react-router-dom";
-import { TbListDetails } from "react-icons/tb";
 import { BiEditAlt } from "react-icons/bi";
 import { deleteNote, getNotesFromUser } from "../../redux/features/notes";
 
@@ -41,11 +38,6 @@ export function NoteAcciones({ note }) {
 
   return (
     <div className="flex gap-3">
-      <button className="btn-details" value={note?.id}>
-        <Link to="/home/details">
-          <TbListDetails />
-        </Link>
-      </button>
       <button className="btn-edit" value={note?.id} onClick={showModal}>
         <BiEditAlt />
       </button>
@@ -54,7 +46,7 @@ export function NoteAcciones({ note }) {
         value={note?.id}
         onClick={handleDeleteWithPrompt}
       >
-        {/* <MdDeleteOutline /> */} X
+        X
       </button>
       <NoteModalEdit show={showValue} setShowValue={setShowValue} note={note} />
     </div>
