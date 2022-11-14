@@ -114,7 +114,13 @@ export const SignUp = () => {
       </form>
       {isRegistered.error && (
         <div className="flex flex-col items-center md:w-1/2 md:my-0">
-          Oops! Algo salió mal. {isRegistered.error}
+          <p>Oops! Algo salió mal. {isRegistered.error}</p>
+          <button
+            className="bg-green px-8 py-2 text-white font-bold rounded-sm my-5 border border-transparent border-solid hover:bg-transparent hover:text-green  hover:border-green  transition duration-300 "
+            onClick={redirectToHome}
+          >
+            Continuar al home
+          </button>
         </div>
       )}
       {isRegistered.status && (
