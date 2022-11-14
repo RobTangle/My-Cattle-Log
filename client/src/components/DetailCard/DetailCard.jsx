@@ -3,6 +3,7 @@ import DetailDiv from "./DetailDiv";
 import ImgDetail from "./ImgDetail";
 import { useDispatch } from "react-redux";
 import { resetDetail } from "../../redux/features/animals";
+import { parseDate } from "../../constants/parseDateFn";
 
 export default function DetailCard({ animal }) {
   const images = [animal?.image_1, animal?.image_2, animal?.image_3];
@@ -100,7 +101,15 @@ export default function DetailCard({ animal }) {
         <DetailDiv text="Peso" value={animal?.weight_kg + "kg"} />
         <DetailDiv text="Nacimiento" value={animal?.birthday} />
         <DetailDiv text="Ubicación" value={animal?.location} />
-        <DetailDiv text="Tipo de dispositivo " value={animal?.device_type} />
+        <DetailDiv text="Tipo de dispositivo" value={animal?.device_type} />
+        <DetailDiv
+          text="Fecha de creación"
+          value={parseDate(animal?.createdAt)}
+        />
+        <DetailDiv
+          text="Última fecha de edición"
+          value={parseDate(animal?.updatedAt)}
+        />
         <DetailDiv
           text="Número de dispositivo "
           value={animal?.device_number}

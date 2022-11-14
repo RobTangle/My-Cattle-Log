@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const morgan = require("morgan");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const test_1 = __importDefault(require("./routes/test"));
 const animal_routes_1 = __importDefault(require("./routes/animal/animal-routes"));
 const user_routes_1 = __importDefault(require("./routes/user/user-routes"));
 const note_routes_1 = __importDefault(require("./routes/note/note-routes"));
@@ -18,7 +17,6 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
 // app.use(jwtCheck);
 // routes middlewares:
-app.use("/test", test_1.default);
 app.use("/animal", animal_routes_1.default);
 app.use("/user", user_routes_1.default);
 app.use("/note", note_routes_1.default);
@@ -26,6 +24,7 @@ app.use("/note", note_routes_1.default);
 app.get("/", (req, res) => {
     return res.send("Yep! I'm listening your requests...");
 });
+// for testing JWT:
 app.get("/auth", jwtMiddleware_1.default, (req, res) => {
     try {
         console.log(`En /auth`);

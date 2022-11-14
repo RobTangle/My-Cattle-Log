@@ -2,7 +2,6 @@ const morgan = require("morgan");
 import express from "express";
 import cors from "cors";
 
-import testRouter from "./routes/test";
 import animalRouter from "./routes/animal/animal-routes";
 import userRouter from "./routes/user/user-routes";
 import noteRouter from "./routes/note/note-routes";
@@ -17,7 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // app.use(jwtCheck);
 // routes middlewares:
-app.use("/test", testRouter);
 app.use("/animal", animalRouter);
 app.use("/user", userRouter);
 app.use("/note", noteRouter);
@@ -27,6 +25,7 @@ app.get("/", (req, res) => {
   return res.send("Yep! I'm listening your requests...");
 });
 
+// for testing JWT:
 app.get("/auth", jwtCheck, (req: any, res) => {
   try {
     console.log(`En /auth`);
