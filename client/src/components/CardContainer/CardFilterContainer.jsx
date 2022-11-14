@@ -9,7 +9,7 @@ export function CardFilterContainer({ animalsToRender }) {
         Lista de animales filtrados
       </div>
       {animalsToRender?.length === 0 ? (
-        <div>No hay ningún animal para mostrar </div>
+        <div className="my-3 mx-3">No hay ningún animal para mostrar </div>
       ) : null}
       {Array.isArray(animalsToRender) ? (
         <div className="list-animals-grid">

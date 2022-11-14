@@ -23,12 +23,12 @@ export function CardPregnantStatistics({ animalsToRender }) {
   }, [tokenAccess]);
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto border-solid border-b-2 border-green my-3">
       <div className="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
         Lista de hembras preñadas
       </div>
       {pregnant?.list?.length === 0 ? (
-        <div>No hay ningún animal para mostrar </div>
+        <div className="my-3 mx-3">No hay ningún animal para mostrar </div>
       ) : null}
       {Array.isArray(pregnant?.list) ? (
         <div className="list-animals-grid">
