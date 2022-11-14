@@ -54,7 +54,7 @@ export function NoteForm() {
 
   return (
     <div>
-      <div class="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
+      <div className="text-green text-xl border-solid  border-b-2 border-green my-3 mx-3">
         Nueva nota
       </div>
       <form action="" onSubmit={handleSubmit}>
