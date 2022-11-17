@@ -5,28 +5,15 @@ import jwtCheck from "../../config/jwtMiddleware";
 import { Router } from "express";
 import {
   emailExistsInDataBase,
-  throwErrorIfUserIsNotRegisteredInDB,
+  getUserByPkOrThrowError,
   userIsRegisteredInDB,
 } from "./user-r-auxiliary";
 
 const router = Router();
 
-// GET ALL USERS :
-router.get("/", async (req, res) => {
-  try {
-    const allUserFromDB = await db.User.findAll();
-    return res.status(200).send(allUserFromDB);
-  } catch (error: any) {
-    console.log(`Error en ruta GET "user/". ${error.message}`);
-    return res.status(400).send({ error: error.message });
-  }
-});
-
 // POST NEW USER
 router.post("/register", jwtCheck, async (req: any, res) => {
   try {
-    console.log(`REQ.BODY =`);
-    console.log(req.body);
     const reqAuth: IReqAuth = req.auth;
     const userId = reqAuth.sub;
     const { name, email, profile_img } = req.body;
@@ -63,14 +50,8 @@ router.get("/userInfo", jwtCheck, async (req: any, res) => {
   try {
     const reqAuth: IReqAuth = req.auth;
     const userId: string = reqAuth.sub;
-    // await throwErrorIfUserIsNotRegisteredInDB(userId);
-    const userInfo = await db.User.findByPk(userId);
-    if (!userInfo) {
-      throw new Error(
-        `El usuario con id '${userId}'no fue encontrado en la Data Base`
-      );
-    }
-    return res.status(200).send(userInfo);
+    const userFromDB = await getUserByPkOrThrowError(userId);
+    return res.status(200).send(userFromDB);
   } catch (error: any) {
     console.log(`Error en 'user/userInfo'. ${error.message}`);
     return res.status(400).send({ error: error.message });

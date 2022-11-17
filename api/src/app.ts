@@ -14,15 +14,14 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(jwtCheck);
 // routes middlewares:
 app.use("/animal", animalRouter);
 app.use("/user", userRouter);
 app.use("/note", noteRouter);
 
 // for testing:
-app.get("/", (req, res) => {
-  return res.send("Yep! I'm listening your requests...");
+app.get("/ping", (req, res) => {
+  return res.send("PONG!");
 });
 
 // for testing JWT:

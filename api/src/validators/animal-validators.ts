@@ -154,7 +154,7 @@ function checkComments(commentsFromReq: any): string | undefined {
   );
 }
 
-//! CHECK BIRTHDAY : (corregir validación de Date con librería externa)
+// CHECK BIRTHDAY :
 function checkBirthday(birthdayFromReq: any): string | undefined {
   if (isFalsyArgument(birthdayFromReq)) {
     return undefined;
@@ -185,7 +185,7 @@ function checkIsPregnant(isPregnantFromReq: any): boolean | undefined {
   );
 }
 
-//! CHECK DELIVERY DATE : (corregir validación de Date con librería externa)
+// CHECK DELIVERY DATE :
 function checkDeliveryDate(deliveryDateFromReq: any): string | undefined {
   if (isFalsyArgument(deliveryDateFromReq)) {
     return undefined;

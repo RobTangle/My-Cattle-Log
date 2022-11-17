@@ -107,7 +107,7 @@ export async function getObjOfAnimalsByRace(userId: string) {
     return objWithAnimalsByRaceAndCount;
   } catch (error: any) {
     console.log(`Error en fn aux getObjOfAnimalsByRace. ${error.message}`);
-    // THROW NEW ERROR ?
+    throw new Error(`Error al parsear los animales por raza.`);
   }
 }
 
@@ -149,7 +149,7 @@ export async function getObjOfAnimalsByLocation(userId: string) {
     return objOfAnimalsByLocation;
   } catch (error: any) {
     console.log(`Error en fn aux getObjOfAnimalsByLocation. ${error.message}`);
-    // THROW NEW ERROR ?
+    throw new Error(`Error al parsear los animales por localización.`);
   }
 }
 
@@ -192,7 +192,7 @@ export async function getObjOfAnimalsByDeviceType(userId: string) {
     console.log(
       `Error en aux function getObjOfAnimalsByDeviceType. ${error.message}`
     );
-    // THROW NEW ERROR ?
+    throw new Error(`Error al parsear los animales por tipo de dispositivo.`);
   }
 }
 
@@ -209,6 +209,7 @@ export async function getObjOfAllAnimalsAndCount(userId: string) {
     console.log(
       `Error en aux function getObjOfAllAnimalsAndCount. ${error.message}`
     );
+    throw new Error(`Error al parsear el total de los animales.`);
   }
 }
 
@@ -226,7 +227,7 @@ export async function getObjOfAnimalsPregnant(userId: string) {
     console.log(
       `Error en aux function getObjOfAnimalsPregnant. ${error.message}`
     );
-    // THROW NEW ERROR ?
+    throw new Error(`Error al parsear los animales preñados.`);
   }
 }
 
@@ -244,7 +245,7 @@ export async function getObjOfAnimalsNotPregnant(userId: string) {
     console.log(
       `Error en aux function getObjOfAnimalsNotPregnant. ${error.message}`
     );
-    // THROW NEW ERROR ?
+    throw new Error(`Error al parsear los animales no preñados.`);
   }
 }
 
@@ -302,6 +303,7 @@ export async function getObjOfAnimalsBySex(userId: string) {
     return objOfAnimalsBySex;
   } catch (error: any) {
     console.log(`Error en fn aux getObjOfAnimalsBySex. ${error.message}`);
+    throw new Error(`Error al parsear los animales por sexo.`);
   }
 }
 
@@ -344,35 +346,37 @@ export async function getObjOfAnimalsByTypeOfAnimal(userId: string) {
     console.log(
       `Error en aux function getObjOfAnimalsByDeviceType. ${error.message}`
     );
+    throw new Error(`Error al parsear los animales por tipo de dispositivo.`);
   }
 }
 
 //! ------------------------------
-const stats = {
-  numberOfTotalAnimals: 211,
-  pregnant: { count: 11, rows: [{}, {}] },
-  notPregnant: { count: 76, rows: [{}, {}, {}] },
-  races: {
-    ["Angus"]: { count: 3, rows: [{}, {}, {}, {}] },
-    ["Criolla"]: { count: 2, rows: [{}, {}] },
-    ["Sin especificar"]: { count: 2, rows: [{}, {}] },
-  },
-  types: {
-    ["Vaquillona"]: {
-      count: 53,
-      rows: [{}, {}, {}, {}, {}],
-      pregnants: 11,
-    },
-    ["Toro"]: { count: 8, rows: [{}, {}] },
-    ["Novillo"]: { count: 13, rows: [{}, {}, {}] },
-  },
-  location: {
-    ["Sector 2"]: { count: 7, rows: [{}, {}, {}] },
-    ["Lote-4"]: { count: 2, rows: [{}, {}] },
-    ["Sin especificar"]: { count: 4, rows: [{}, {}] },
-  },
-  deviceType: {
-    ["Ear Tag"]: { count: 34, rows: [{}, {}, {}, {}] },
-    ["Collar"]: { count: 9, rows: [{}, {}] },
-  },
-};
+// Ejemplo aproximado (e incompleto) del objeto que retorna la ruta "/stats":
+// const stats = {
+//   numberOfTotalAnimals: 211,
+//   pregnant: { count: 11, rows: [{}, {}] },
+//   notPregnant: { count: 76, rows: [{}, {}, {}] },
+//   races: {
+//     ["Angus"]: { count: 3, rows: [{}, {}, {}, {}] },
+//     ["Criolla"]: { count: 2, rows: [{}, {}] },
+//     ["Sin especificar"]: { count: 2, rows: [{}, {}] },
+//   },
+//   types: {
+//     ["Vaquillona"]: {
+//       count: 53,
+//       rows: [{}, {}, {}, {}, {}],
+//       pregnants: 11,
+//     },
+//     ["Toro"]: { count: 8, rows: [{}, {}] },
+//     ["Novillo"]: { count: 13, rows: [{}, {}, {}] },
+//   },
+//   location: {
+//     ["Sector 2"]: { count: 7, rows: [{}, {}, {}] },
+//     ["Lote-4"]: { count: 2, rows: [{}, {}] },
+//     ["Sin especificar"]: { count: 4, rows: [{}, {}] },
+//   },
+//   deviceType: {
+//     ["Ear Tag"]: { count: 34, rows: [{}, {}, {}, {}] },
+//     ["Collar"]: { count: 9, rows: [{}, {}] },
+//   },
+// };
