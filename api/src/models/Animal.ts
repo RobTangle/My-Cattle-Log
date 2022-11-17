@@ -38,9 +38,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       type_of_animal: {
         type: DataTypes.STRING,
-        // type: DataTypes.ENUM("Novillo", "Toro", "Vaquillona"),
-        // cuidado acá! También existe el ITypeOfAnimal que se utiliza. Cambiar ambos juntos.
-        // type: DataTypes.ENUM(ITypeOfAnimal),
         allowNull: false,
       },
       breed_name: {

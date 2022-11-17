@@ -2,6 +2,7 @@ import db from "../../models";
 import { IUser } from "../../types/user-types";
 import { isEmail } from "../../validators/generic-validators";
 
+// EMAIL EXISTS IN DATA BASE
 export async function emailExistsInDataBase(emailFromReq: any): Promise<void> {
   if (!isEmail(emailFromReq)) {
     throw new Error(
@@ -20,6 +21,7 @@ export async function emailExistsInDataBase(emailFromReq: any): Promise<void> {
   }
 }
 
+// USER IS REGISTERED IN DATA BASE :
 export async function userIsRegisteredInDB(reqAuthSub: any): Promise<boolean> {
   if (!reqAuthSub) {
     throw new Error(`El req.auth.sub no puede ser falso.`);
@@ -35,6 +37,7 @@ export async function userIsRegisteredInDB(reqAuthSub: any): Promise<boolean> {
   }
 }
 
+// THROW ERROR IF USER IS NOT REGISTERED IN DATA BASE :
 export async function throwErrorIfUserIsNotRegisteredInDB(
   reqAuthSub: any
 ): Promise<void> {
@@ -57,6 +60,7 @@ export async function throwErrorIfUserIsNotRegisteredInDB(
   }
 }
 
+// GET USER BY PK OR THROW ERROR :
 export async function getUserByPkOrThrowError(reqAuthSub: any): Promise<IUser> {
   if (!reqAuthSub) {
     throw new Error(`El req.auth.sub no puede ser falso.`);
