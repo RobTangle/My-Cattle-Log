@@ -1,7 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { LandingPage, SignUp, Home, Profile, Management,Details } from "./views";
-import { Statistics } from "./components/Statistics/Statistics";
+import {
+  LandingPage,
+  SignUp,
+  Home,
+  Profile,
+  Management,
+  Details,
+} from "./views";
+import { Statistics } from "./views/Dashboard/Dashboard";
 
 function App() {
   return (
