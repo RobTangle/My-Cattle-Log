@@ -56,7 +56,7 @@ export function NavBar() {
           )}
         </div>
       ) : null}
-      <div className="hidden  md:flex md:w-full md:h-20 md:justify-around md:py-5 md:px-5 md:gap-8 md:bg-white md:text-gray">
+      <div className="hidden mx-auto md:flex md:w-full md:h-20 md:justify-around md:py-5 md:px-5 md:gap-8 md:bg-white md:text-gray">
         <NavbarLink
           path="/home"
           text="Inicio"
