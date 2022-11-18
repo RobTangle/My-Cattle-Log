@@ -1,6 +1,6 @@
 # My Cattle Log - Livestock App
 
-Repository meant to be just a practice exercise through the creation of a CRUD full-stack app with OAuth2.0 incorporated.
+Repository meant to be just a practice exercise through the creation of a PERN CRUD full-stack app with OAuth2.0 incorporated.
 
 ## How to run de front end:
 
