@@ -23,11 +23,17 @@ export const Team = () => {
           <p className="font-bold text-[#28B0A2]">Full Stack Developer</p>
           <div className="flex gap-3">
             <a
+              target={"_blank"}
               href="https://www.linkedin.com/in/roberto-spinelli-980740244/"
-              className="text-gray-500">
+              className="text-gray-500"
+            >
               <BsLinkedin />
             </a>
-            <a href="https://github.com/RobTangle" className="text-gray-500">
+            <a
+              target={"_blank"}
+              href="https://github.com/RobTangle"
+              className="text-gray-500"
+            >
               <BsGithub />
             </a>
           </div>
@@ -44,13 +50,17 @@ export const Team = () => {
           <p className="font-bold text-[#28B0A2]">Full Stack Developer</p>
           <div className="flex gap-3">
             <a
+              target={"_blank"}
               href="https://www.linkedin.com/in/tamara-frazzetta/"
-              className="text-gray-500">
+              className="text-gray-500"
+            >
               <BsLinkedin />
             </a>
             <a
+              target={"_blank"}
               href="https://github.com/tamaraantonella"
-              className="text-gray-500">
+              className="text-gray-500"
+            >
               <BsGithub />
             </a>
           </div>
