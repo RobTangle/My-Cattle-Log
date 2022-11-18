@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { USER_EXISTS } from "../../constants/urls";
-const LoginButton = () => {
+
+const LoginButton = ({footer}) => {
   const {
     loginWithRedirect,
     user,
@@ -49,9 +50,12 @@ const LoginButton = () => {
 
   return (
     <button
-      className="bg-green px-8 py-2 text-white font-bold rounded-sm my-5 border border-transparent border-solid hover:bg-transparent hover:text-green  hover:border-green  transition duration-300 "
-      onClick={() => loginWithRedirect()}
-    >
+      className={`${
+        footer
+          ? "border-transparent border-solid hover:bg-transparent hover:text-green  hover:border-green  transition duration-300"
+          : "bg-green px-8 py-2 text-white font-bold rounded-sm my-5 border border-transparent border-solid hover:bg-transparent hover:text-green  hover:border-green  transition duration-300 "
+      }`}
+      onClick={() => loginWithRedirect()}>
       Iniciar sesión
     </button>
   );
