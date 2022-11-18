@@ -11,12 +11,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Auth0Provider
-      domain={REACT_APP_DOMAIN}
-      clientId={REACT_APP_CLIENT_ID}
+      domain={process.env.REACT_APP_DOMAIN}
+      clientId={process.env.REACT_APP_CLIENT_ID}
       redirectUri={window.location.origin}
       useRefreshTokens={true}
       cacheLocation="localstorage"
-      audience={REACT_APP_JWT_AUDIENCE}
+      audience={process.env.REACT_APP_JWT_AUDIENCE}
 
       // scope="read:current_user update:current_user_metadata"
     >
