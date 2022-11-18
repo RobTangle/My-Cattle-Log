@@ -5,6 +5,7 @@ import { NavBar } from "../../components/NavBar/NavBar";
 import axios from "axios";
 import { USER_EXISTS } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer/Footer";
 export function Home() {
   const { user, isAuthenticated, getAccessTokenSilently, isLoading } =
     useAuth0();
@@ -48,7 +49,7 @@ export function Home() {
   return (
     <div className="max-w-7xl mx-auto">
       <NavBar />
-      <div className="w-full mt-16 md:mt-3 h-44 md:h-80 bg-home bg-cover bg-center text-right flex flex-col justify-end px-5 py-3 md:py-8 items-end ">
+      <div className="w-full mt-16 md:mt-3 h-44 md:h-96 bg-home bg-cover bg-center text-right flex flex-col justify-end px-5 py-3 md:py-8 items-end ">
         <p className="text-white text-2xl font-semibold font-sans [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:text-4xl">
           My Cattle Log{" "}
         </p>
@@ -57,8 +58,8 @@ export function Home() {
           Log le ayude a organizar sus registros de ganado!
         </p>
       </div>
-      <div className="w-full my-8 h-full cursor-pointer">
-        <p className="text-4xl text-center my-12 text-gray cursor-pointer">
+      <div className="w-full h-full md:my-32 my-8">
+        <p className="text-4xl text-center my-12 text-gray ">
           ¿Qué es My Cattle Log?
         </p>
 
@@ -83,6 +84,19 @@ export function Home() {
           </div>
         </div>
       </div>
+      <div className="w-full h-96 md:my-32 relative bg-home2 bg-center bg-cover flex items-end">
+        <div className="h-full w-full bg-gray/30 absolute"></div>
+        <div className="my-8 text-right w-full mx-8 z-10">
+          <p className="text-white text-2xl font-semibold font-sans [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:text-4xl">
+            Siempre del lado de la gente
+          </p>
+          <p className="text-white md:text-2xl font-semibold [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] ">
+            Para la gestión de granjas y animales para simplificar y mejorar la
+            gestión del ganado.
+          </p>
+        </div>
+      </div>
+      <Footer/>
     </div>
   );
 }
