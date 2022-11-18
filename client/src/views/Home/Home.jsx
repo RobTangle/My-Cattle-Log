@@ -92,7 +92,9 @@ export function Home() {
               alt=""
             />
           </div>
-          <p className="text-2xl font-sans md:mb-3 md:text-3xl">Fácil de usar</p>
+          <p className="text-2xl font-sans md:mb-3 md:text-3xl">
+            Fácil de usar
+          </p>
           <p className="text-center text-xl">
             ¿No eres experto en informática? No te preocupes, el programa es
             intuitivo y fácil de usar.
@@ -106,10 +108,10 @@ export function Home() {
               alt=""
             />
           </div>
-          <p className="text-2xl font-sans md:mb-3 md:text-3xl">Pruébalo</p>
+          <p className="text-2xl font-sans md:mb-3 md:text-3xl">Sin costo</p>
           <p className="text-center text-xl">
-            ¡Es totalmente gratuito! No hay necesidad de pagar por un programa,
-            comience a organizarse hoy!
+            ¡Es totalmente gratuito! No hay necesidad de pagar nada. ¡Comience a
+            organizarse hoy!
           </p>
         </div>
         <div className="md:h-52 w-full rounded-sm py-5 px-2  text-green hover:scale-[1.01] transition-all duration-500] flex flex-col items-center gap-3 ">
@@ -122,7 +124,7 @@ export function Home() {
           </div>
           <p className="text-2xl font-sans md:mb-3 md:text-3xl">Ilimitado</p>
           <p className="text-center text-xl">
-            SIN límite en la cantidad de animales.
+            Sin límite en la cantidad de animales que quiera registrar.
           </p>
         </div>
       </div>
@@ -130,11 +132,13 @@ export function Home() {
         <div className="h-full w-full bg-gray/30 absolute"></div>
         <div className="my-8 text-right w-full mx-8 z-10">
           <p className="text-white text-2xl font-semibold font-sans [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] md:text-4xl">
-            Simplificando el trabajo
+            Organizando y simplificando el trabajo
           </p>
           <p className="text-white md:text-2xl font-semibold [text-shadow:_1px_1px_3px_rgb(0_0_0_/_70%)] ">
-            Para la gestión de granjas y animales para simplificar y mejorar la
-            gestión del ganado.
+            Para la gestión de granjas y animales, una aplicación que ayuda a
+            aumentar la productividad de manera intuitiva al registrar,
+            organizar y generar estadísticas de la información que usted
+            considera relevante.
           </p>
         </div>
       </div>
