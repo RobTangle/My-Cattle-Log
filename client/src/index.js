@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { Auth0Provider } from "@auth0/auth0-react";
-import {store}  from "./redux/app/store";
+import { store } from "./redux/app/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,8 +13,8 @@ root.render(
     <Auth0Provider
       domain="dev-4hixku625rb7v8m8.us.auth0.com"
       clientId="8PW18rqeRhlkuTLpxgtEcLPwEKeO0qwG"
-      // redirectUri={window.location.origin}
-      redirectUri="http://localhost:3000/home"
+      redirectUri={window.location.origin}
+      // redirectUri="http://localhost:3000/home"
       useRefreshTokens={true}
       cacheLocation="localstorage"
       audience="https://cattle-tracker-api.com"
