@@ -12,14 +12,16 @@ export default function Footer() {
         <div className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8">
           <a
             className="inline-block rounded-full bg-green p-2 text-white shadow transition hover:bg-green sm:p-3 lg:p-4"
-            href="#top">
+            href="#top"
+          >
             <span className="sr-only">Back to top</span>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
               viewBox="0 0 20 20"
-              fill="currentColor">
+              fill="currentColor"
+            >
               <path
                 fill-rule="evenodd"
                 d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
@@ -50,11 +52,6 @@ export default function Footer() {
               {!isLoading && isAuthenticated ? (
                 <>
                   <NavbarLink
-                    path="/home/profile"
-                    text="Perfil & Notas"
-                    divStyle="border-transparent border-solid hover:bg-transparent hover:text-green hover:border-green  transition duration-300"
-                  />
-                  <NavbarLink
                     path="/home/management"
                     text="Administrar animales"
                     divStyle="border-transparent border-solid hover:bg-transparent hover:text-green hover:border-green  transition duration-300"
@@ -62,6 +59,11 @@ export default function Footer() {
                   <NavbarLink
                     path="/home/statistics"
                     text="Dashboard"
+                    divStyle="border-transparent border-solid hover:bg-transparent hover:text-green hover:border-green  transition duration-300"
+                  />
+                  <NavbarLink
+                    path="/home/profile"
+                    text="Perfil & Notas"
                     divStyle="border-transparent border-solid hover:bg-transparent hover:text-green hover:border-green  transition duration-300"
                   />
 
