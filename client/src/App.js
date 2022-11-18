@@ -7,8 +7,11 @@ import {
   Profile,
   Management,
   Details,
+  Team,
+  Statistics
 } from "./views";
-import { Statistics } from "./views/Dashboard/Dashboard";
+
+
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
           <Route exact path="/home/statistics" element={<Statistics />} />
           <Route exact path="/home/profile" element={<Profile />} />
           <Route exact path="/details/:id" element={<Details />} />
+          <Route exact path="/team" element={<Team />} />
+          {/* Page 404 */}
+          <Route path="*" element={<h1>404: Not Found</h1>} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -7,7 +7,7 @@ import LogoutButton from "../Logout/LogoutButton";
 export default function Footer() {
   const { isLoading, isAuthenticated } = useAuth0();
   return (
-    <footer aria-label="Site Footer" className="bg-gray-100  mt-5 md:mt-20">
+    <footer aria-label="Site Footer" className="bg-gray-100  mt-5 md:mt-10">
       <div className="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-20">
         <div className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8">
           <a
