@@ -7,12 +7,12 @@ import LogoutButton from "../Logout/LogoutButton";
 export default function Footer() {
   const { isLoading, isAuthenticated } = useAuth0();
   return (
-    <footer aria-label="Site Footer" className="bg-gray-100">
+    <footer aria-label="Site Footer" className="bg-gray-100  mt-5 md:mt-20">
       <div className="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-20">
         <div className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8">
           <a
             className="inline-block rounded-full bg-green p-2 text-white shadow transition hover:bg-green sm:p-3 lg:p-4"
-            href="#MainContent">
+            href="#top">
             <span className="sr-only">Back to top</span>
 
             <svg
