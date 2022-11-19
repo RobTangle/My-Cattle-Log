@@ -28,9 +28,7 @@ export function NoteComponent() {
     dispatch(getNotesFromUser(accessToken));
   }, [dispatch]);
 
-  React.useEffect(() => {
-    console.log(`Renderizando otra vez en el useEffect`);
-  }, [notesState]);
+  React.useEffect(() => {}, [notesState]);
 
   function toggleNoteForm(e) {
     e.preventDefault();
