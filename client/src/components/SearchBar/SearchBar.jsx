@@ -14,7 +14,9 @@ export function SearchBar() {
     inputValue: "",
   });
 
-  const fetchedAnimalsState = useSelector((state) => state.animals.fetchedAnimals);
+  const fetchedAnimalsState = useSelector(
+    (state) => state.animals.fetchedAnimals
+  );
 
   function handleChange(e) {
     setInput({
@@ -23,12 +25,10 @@ export function SearchBar() {
   }
 
   function dispatchClearFetchedAnimals() {
-    console.log(`dispatching clearFetchedAnimals...`);
     dispatch(clearFetchedAnimals());
   }
 
   function handleSubmit(e) {
-    console.log("handleSubmit invoqued!");
     e.preventDefault();
     dispatch(setFetchedAnimalsToLoading());
     dispatch(searchQuery(input.inputValue, accessToken));

@@ -9,7 +9,6 @@ export function Modal(props) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    console.log(`Componente Modal montado`);
     dispatch(cleanNewAnimal());
   }, [dispatch]);
 
