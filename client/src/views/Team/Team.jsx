@@ -24,7 +24,7 @@ export const Team = () => {
           <div className="flex gap-3">
             <a
               target={"_blank"}
-              href="https://www.linkedin.com/in/roberto-spinelli-980740244/"
+              href="https://www.linkedin.com/in/roberto-augusto-spinelli-alcalde-980740244/"
               className="text-gray-500"
             >
               <BsLinkedin />
