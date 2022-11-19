@@ -34,26 +34,21 @@ export function FormMdlzd({ closeModal, animal }) {
     dispatch(animalActions.getTypesOfAnimalsAllowed());
   }, [dispatch]);
 
-  const typesOfAnimalsState = useSelector((state) => state.animals.typesOfAnimals);
+  const typesOfAnimalsState = useSelector(
+    (state) => state.animals.typesOfAnimals
+  );
   const accessToken = localStorage.getItem("tokenCattleTracker");
 
   // HANDLE FUNCTIONS:
   function handleOnChange(e) {
-    console.log(e.target.name, e.target.value);
     setLocalState({ ...localState, [e.target.name]: e.target.value });
-    console.log("EVENTO = ", e);
   }
 
   function handlePregnantRadioChange(e) {
-    console.log(e.target.name, e.target.value);
     if (
       e.target.name === "is_pregnant" &&
       (e.target.value === "false" || !e.target.value)
     ) {
-      console.log(
-        `El target value es falso y el target name es 'is_pregnant'. Seteando delivery_date a "" `
-      );
-
       setLocalState({
         ...localState,
         is_pregnant: false,
@@ -71,19 +66,11 @@ export function FormMdlzd({ closeModal, animal }) {
   let handleSubmit; // Esta variable va a tomar el valor de una de dos funciones... para crear nuevo animal o para editar animal.
 
   if (!animal) {
-    console.log(
-      `No se detectó un animal por props. Se asume que es formulario para creación de nuevo animal...`
-    );
     formAdaptativeTitle = "Nuevo animal";
     formAdaptativeSubmitButton = "Registrar animal";
 
     async function handleSubmitNewAnimalWithNoDispatch(e) {
       e.preventDefault();
-      console.log(
-        `handleSubmitNewAnimalWithNoDispatch invocado. localState: `,
-        localState
-      );
-      //HACER JS VALIDATIONS...
       try {
         const response = await axios.post(
           URL_POST_ANIMAL,
@@ -97,7 +84,6 @@ export function FormMdlzd({ closeModal, animal }) {
           dispatch(animalActions.getAllAnimals(accessToken));
         }
       } catch (error) {
-        console.log(`Error en el handleSubmitNewAnimalWithNoDispatch`, error);
         let errorMessage = error.message;
         if (error.response?.data?.error) {
           errorMessage = error.response.data.error;
@@ -106,41 +92,17 @@ export function FormMdlzd({ closeModal, animal }) {
       }
     }
     handleSubmit = handleSubmitNewAnimalWithNoDispatch;
-    // function handleSubmitNewAnimal(e) {
-    //   console.log(`handleSubmitNewAnimal invocado. localState: `, localState);
-    //   e.preventDefault();
-    //   //HACER JS VALIDATIONS...
-    //   dispatch(animalActions.setNewAnimalToLoading());
-    //   dispatch(animalActions.createNewAnimal(localState, accessToken));
-    //   setTimeout(() => {
-    //     dispatch(animalActions.getAllAnimals(accessToken));
-    //   }, 500);
-    // }
-    // handleSubmit = handleSubmitNewAnimal;
   } else {
     if (animal) {
-      console.log(
-        `Se detectó un animal por props. Se asume que es un formulario para edición...`
-      );
       formAdaptativeTitle = "Editar animal";
       formAdaptativeSubmitButton = "Guardar";
-      // function handleSubmitEditAnimal(e) {
-      //   console.log(`handleSubmit invocado. localState: `, localState);
-      //   e.preventDefault();
-      //   //HACER JS VALIDATIONS...
-      //   dispatch(animalActions.setUpdateAnimalToLoading());
-      //   dispatch(animalActions.updateAnimal(localState, accessToken));
-      //   setTimeout(() => {
-      //     dispatch(animalActions.getAllAnimals(accessToken));
-      //   }, 500);
-      // }
+
       async function handleSubmitWithNoDispatch(e) {
         e.preventDefault();
         console.log(
           `handleSubmitWithNoDispatch invocado. localState: `,
           localState
         );
-        //HACER JS VALIDATIONS...
         try {
           const response = await axios.put(
             URL_UPDATE_ANIMAL,
@@ -149,12 +111,9 @@ export function FormMdlzd({ closeModal, animal }) {
           );
           if (response.status >= 200 && response.status < 210) {
             alert("Animal editado correctamente.");
-            // setLocalState({
-            // })
             dispatch(animalActions.getAllAnimals(accessToken));
           }
         } catch (error) {
-          console.log(`Error en el handleSubmitWithNoDispatch`, error);
           let errorMessage = error.message;
           if (error.response?.data?.error) {
             errorMessage = error.response.data.error;
@@ -191,8 +150,6 @@ export function FormMdlzd({ closeModal, animal }) {
   };
 
   return (
-    // <div className="w-full z-50 bg-white absolute inset-0 px-3 py-5  my-3 drop-shadow-lg h-fit max-w-xl mx-auto ">
-    // <div className={classNameAdaptable}>
     <div className="overflow-auto">
       <h2 className="text-green font-sans text-xl">{formAdaptativeTitle}</h2>
       <form action="" onSubmit={handleSubmit}>
